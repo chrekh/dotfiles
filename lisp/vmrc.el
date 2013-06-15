@@ -7,6 +7,15 @@
 (autoload 'vm-delete-message "vm-delete")
 (autoload 'vm-sort-compare-xxxxxx "vm-sort")
 
+;; gpg
+(load-library "mailcrypt") ; provides "mc-setversion"
+(mc-setversion "gpg")
+(add-hook 'vm-mode-hook 'mc-install-read-mode)
+(add-hook 'vm-summary-mode-hook 'mc-install-read-mode)
+(add-hook 'vm-virtual-mode-hook 'mc-install-read-mode)
+(add-hook 'vm-mail-mode-hook 'mc-install-write-mode)
+
+
 (setq
  vm-move-messages-physically	t
  vm-thread-using-subject	nil
