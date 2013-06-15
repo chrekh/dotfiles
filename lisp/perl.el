@@ -19,18 +19,10 @@
  '(cperl-electic-linefeed t)
  '(cperl-electric-lbrace nil)
  '(cperl-hairy nil)
+
  ;; other
  '(cperl-clobber-lisp-bindings nil)
  )
 
-;(add-hook 'cperl-mode-hook
-;          (lambda ()
-;            (define-abbrev-table 'cperl-mode-abbrev-table
-;              '(
-;                ("for" "formy" cperl-electric-keyword)
-;                ))))
-;
-;
- 
 ;; Insert spaces instead of tabs
 (setq-default indent-tabs-mode nil)
