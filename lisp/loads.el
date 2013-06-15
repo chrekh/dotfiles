@@ -6,9 +6,6 @@
 (load "ext")
 (load "bindings")
 (load "variables")
-;(load "gnusext")
-;(load "dist")
-;(load "filladapt")
 (if using-x
     (progn
       (load "frame")
@@ -17,9 +14,7 @@
 (autoload 'html-helper-mode "html-helper-mode" nil t)
 (autoload 'compile "compile.el" nil t)
 (autoload 'swedish-keys-mode "swedkey.el" nil t)
-(autoload 'tips "tips" "Create random tips." t)
 (autoload 'wormy "wormy" nil t)
-(autoload 'ics "icsext" nil t)
 
 (autoload 'vm "vm" "Start VM on your primary inbox." t)
 (autoload 'vm-other-frame "vm" "Like `vm' but starts in another frame." t)
