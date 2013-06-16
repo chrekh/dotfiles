@@ -30,6 +30,10 @@
  calendar-standard-time-zone-name "MET"
  calendar-daylight-time-zone-name "MET-DST"
  indicate-empty-lines t
+ c-default-style '((c-mode . "linux")
+                   (java-mode . "java")
+                   (awk-mode . "awk")
+                   (other . "gnu"))
  )
 
 (add-hook 'mail-setup-hook
