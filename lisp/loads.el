@@ -6,6 +6,7 @@
 (load "ext")
 (load "bindings")
 (load "variables")
+(condition-case nil (load "clearcase") (error nil))
 (if using-x
     (progn
       (load "frame")

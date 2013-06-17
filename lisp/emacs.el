@@ -1,5 +1,5 @@
 ;(setq debug-on-error t)
-(setq load-path (append '("~che/lisp") load-path))
+(setq load-path (append '("~che/lisp" "~chrekh/lisp" "~chrekh/extern/lisp") load-path))
 
 (defvar using-x (eq window-system 'x) "
 non nil if this emacs uses X ?")
