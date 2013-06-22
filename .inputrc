@@ -1,0 +1,8 @@
+"\C-u":	kill-whole-line
+$if bash
+set show-all-if-ambiguous On
+set completion-query-items 300
+$endif
+set meta-flag On
+set convert-meta Off
+set output-meta On
