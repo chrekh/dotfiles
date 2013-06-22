@@ -20,6 +20,7 @@ if [ -e /etc/gentoo-release ]; then
     alias qpkg='qpkg -nc'
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
-    alias world='sudo emerge -Duav --keep-going --jobs=10 --load-average=30 --reinstall changed-use --with-bdeps y @system @world'
+    alias world='sudo emerge -Duav --keep-going --jobs=10 --load-average=30 \
+                 --reinstall changed-use --with-bdeps y @system @world'
     alias eix='eix -n'
 fi
