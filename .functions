@@ -1,0 +1,10 @@
+if [ x`uname -n` = "xender" ]; then
+    function spam() {
+	for f in $@; do
+            echo -n "$f "
+            mv $f $f.spamtmp
+            sa-learn --spam --mbox $f.spamtmp
+            rm -f $f.spamtmp
+	done
+    }
+fi
