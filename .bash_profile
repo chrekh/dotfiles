@@ -1,7 +1,7 @@
 [ -f ~/.bashrc ] && . ~/.bashrc;
 
-PATH=`setpath ~/bin ~/perl /usr/local/adm/bin ${PATH//:/ } /usr/*/bin /opt/*/bin /opt/*/*/bin /usr/local/*/bin`
-MANPATH=`setpath /usr/local/adm/man ${MANPATH//:/ } /usr/*/man /opt/*/man /usr/local/*/man /usr/*/*/man`
+PATH=`setpath ~/bin ~/perl /usr/local/adm/bin ${PATH//:/ } /usr/local/bin /opt/*/bin /opt/*/*/bin`
+MANPATH=`setpath /usr/local/adm/man ${MANPATH//:/ } /usr/{local,share}/man /opt/*/man /usr/{local,share}/*/man`
 
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
