@@ -1,5 +1,5 @@
 if [ x$host = 'xender' ]; then
-    function spam() {
+    spam() {
 	for f in $@; do
             echo -n "$f "
             mv $f $f.spamtmp
@@ -8,3 +8,19 @@ if [ x$host = 'xender' ]; then
 	done
     }
 fi
+
+setpath() {
+    local -A used
+    local newpath
+    for d in $@; do
+	[ -n "${used[$d]}" ] && continue
+	used[$d]=y
+	[ -d $d ] || continue
+	if [ -z "$newpath" ]; then
+	    newpath=$d
+	else
+	    newpath=$newpath:$d
+	fi
+    done
+    echo $newpath
+}

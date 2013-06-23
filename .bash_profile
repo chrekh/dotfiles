@@ -1,7 +1,8 @@
 [ -f ~/.bashrc ] && . ~/.bashrc;
 
-export PATH=~/bin:/usr/local/perl/bin:/usr/local/adm/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin:~/perl:/usr/X11R6/bin:/usr/local/pgsql/bin:/usr/local/kde/bin:/usr/local/netpbm/bin:/usr/games/bin:/usr/local/arm-elf/bin
-export MANPATH=/usr/man:/usr/local/adm/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/X11R6/man:/usr/local/pgsql/man:/usr/local/netpbm/man:/opt/schily/man
+PATH=`setpath ~/bin ~/perl /usr/local/adm/bin ${PATH//:/ } /usr/*/bin /opt/*/bin /opt/*/*/bin /usr/local/*/bin`
+MANPATH=`setpath /usr/local/adm/man ${MANPATH//:/ } /usr/*/man /opt/*/man /usr/local/*/man /usr/*/*/man`
+
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
 
