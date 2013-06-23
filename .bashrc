@@ -1,3 +1,5 @@
+host=`hostname`
+
 if tty -s; then
 
     # prompt

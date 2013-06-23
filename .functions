@@ -1,4 +1,4 @@
-if [ x`uname -n` = "xender" ]; then
+if [ x$host = 'xender' ]; then
     function spam() {
 	for f in $@; do
             echo -n "$f "
