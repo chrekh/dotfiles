@@ -1,4 +1,17 @@
+os=`uname -s| cut -c 1-2`
 host=`hostname`
+if [ $os = Li ]; then
+    dist=`lsb_release -si > /dev/null 2>&1`
+    if [ -z "$dist" ]; then
+	if [ -f /etc/SuSE-release ]; then
+	    dist=SUSE
+	fi
+    fi
+    domain=`dnsdomainname`
+else
+    dist=unknown
+    domain=unknown
+fi
 
 if tty -s; then
 
@@ -10,20 +23,24 @@ if tty -s; then
     set -m
     set +H
 
+    shopt -s checkwinsize
 
     HISTCONTROL=ignoredups
-    HISTFILE=~/.bash_history/`uname -n``tty | sed -e s:/:_:g`
+    HISTFILE=~/.bash_history/$host`tty | sed -e s:/:_:g`
     HISTSIZE=200
 
     test -r ~/.aliases && . ~/.aliases
     test -r ~/.functions && . ~/.functions
 
     stty kill ^@
-    if [ "$TERM" = "xterm" ]; then
-	stty erase ^?
-    fi
+    case $TERM in
+	vt* | xterm)
+	    stty erase ^?
+	    ;;
+	*)
+	    stty erase ^h
+    esac
 
     # Completion directives
-    complete -A command sudo
-
+    complete -cf command sudo
 fi

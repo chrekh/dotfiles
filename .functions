@@ -9,18 +9,48 @@ if [ x$host = 'xender' ]; then
     }
 fi
 
-setpath() {
-    local -A used
-    local newpath
-    for d in $@; do
-	[ -n "${used[$d]}" ] && continue
-	used[$d]=y
-	[ -d $d ] || continue
-	if [ -z "$newpath" ]; then
-	    newpath=$d
-	else
-	    newpath=$newpath:$d
-	fi
-    done
-    echo $newpath
-}
+if [[ ${BASH_VERSINFO[0]} > 3 ]]; then
+    # bash-4 have hashes
+    setpath() {   
+	local -A used
+	local newpath
+	for d in $@; do
+	    [ -n "${used[$d]}" ] && continue
+	    used[$d]=y
+	    [ -d $d ] || continue
+	    if [ -z "$newpath" ]; then
+		newpath=$d
+	    else
+		newpath=$newpath:$d
+	    fi
+	done
+	echo $newpath
+    }
+else
+    setpath() {   
+	local newpath
+	for d in $@; do
+	    if [ -z "$newpath" ]; then
+		newpath=$d
+	    else
+		[ "${newpath}" = "${d}" ]   && continue # d is exactly $PATH 
+		[ -z "${newpath##$d:*}" ]   && continue # d is first in $PATH
+		[ -z "${newpath%%*:$d}" ]   && continue # d is last in $PATH
+		[ -z "${newpath##*:$d:*}" ] && continue # d is in $PATH
+		[ -d $d ] || continue                   # d is not a directory
+		newpath=$newpath:$d
+	    fi
+	done
+	echo $newpath
+    }
+fi    
+
+if [ -x /vobs/um/umtool/bin/projenv ]; then
+    projenv() {
+	eval `/vobs/um/umtool/bin/projenv`
+    }
+elif [ -x /opt/umtool/bin/projenv ]; then
+    projenv() {
+	eval `/opt/umtool/bin/projenv`
+    }
+fi

@@ -1,10 +1,17 @@
-alias ls='ls -F'
-alias df='df -h'
+if [ $os = Li ]; then
+    alias df='df -h'
+    alias ls='ls -vF'
+    alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
+else
+    alias ls='ls -F'
+    alias ll='ls -al'
+fi
 alias l=less
 alias zl=zless
-alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
 alias llt='ll -tr'
 alias j=jobs
+alias f='finger -m'
+alias h='history'
 
 # COW (Copy-On-Write) on btrfs
 alias cp='cp --reflink=auto'
@@ -29,4 +36,15 @@ if [ -e /etc/gentoo-release ]; then
 	alias world='sudo emerge -Duav --keep-going \
                      --reinstall changed-use --with-bdeps y @system @world'
     fi
+fi
+
+# RPS
+if [ $domain = utv.rps.police.se ]; then
+    alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=chrekh,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
+fi
+
+# ClearCase
+if type cleartool > /dev/null 2>&1; then
+    alias c=cleartool
+    alias sc='sudo cleartool'
 fi
