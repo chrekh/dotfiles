@@ -13,6 +13,8 @@ else
     domain=unknown
 fi
 
+test -r ~/.functions && . ~/.functions
+
 if tty -s; then
 
     # prompt
@@ -30,7 +32,6 @@ if tty -s; then
     HISTSIZE=200
 
     test -r ~/.aliases && . ~/.aliases
-    test -r ~/.functions && . ~/.functions
 
     stty kill ^@
     case $TERM in
