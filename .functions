@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 if [ x$host = 'xender' ]; then
     spam() {
 	for f in $@; do
