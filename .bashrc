@@ -43,5 +43,5 @@ if tty -s; then
     esac
 
     # Completion directives
-    complete -cf command sudo
+    complete -A command -A file sudo
 fi
