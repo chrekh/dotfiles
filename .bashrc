@@ -1,18 +1,3 @@
-os=`uname -s| cut -c 1-2`
-host=`hostname`
-if [ $os = Li ]; then
-    dist=`lsb_release -si 2> /dev/null`
-    if [ -z "$dist" ]; then
-	if [ -f /etc/SuSE-release ]; then
-	    dist=SUSE
-	fi
-    fi
-    domain=`dnsdomainname`
-else
-    dist=unknown
-    domain=unknown
-fi
-
 test -r ~/.functions && . ~/.functions
 
 if tty -s; then

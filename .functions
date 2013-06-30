@@ -1,5 +1,19 @@
 # -*- mode: shell-script -*-
 
+os=`uname -s| cut -c 1-2`
+host=`hostname`
+domain=$(dnsdomainname 2>/dev/null)
+if [ $os = Li ]; then
+    dist=`lsb_release -si 2> /dev/null | tr [:upper:] [:lower:]`
+    if [ -z "$dist" ]; then
+	if [ -f /etc/SuSE-release ]; then
+	    dist=suse
+	elif [ -f /etc/gentoo-release ]; then
+	    dist=gentoo
+	fi
+    fi
+fi
+
 if [ x$host = 'xender' ]; then
     spam() {
 	for f in $@; do

@@ -39,7 +39,7 @@ if [ -e /etc/gentoo-release ]; then
 fi
 
 # RPS
-if [ $domain = utv.rps.police.se ]; then
+if [ "$domain" = utv.rps.police.se ]; then
     alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=chrekh,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
 fi
 
