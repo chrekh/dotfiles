@@ -1,10 +1,10 @@
 # -*- mode: shell-script -*-
 
-os=`uname -s| cut -c 1-2`
-host=`hostname`
+os=$(uname -s| cut -c 1-2)
+host=$(hostname)
 domain=$(dnsdomainname 2>/dev/null)
 if [ $os = Li ]; then
-    dist=`lsb_release -si 2> /dev/null | tr [:upper:] [:lower:]`
+    dist=$(lsb_release -si 2> /dev/null | tr [:upper:] [:lower:])
     if [ -z "$dist" ]; then
 	if [ -f /etc/SuSE-release ]; then
 	    dist=suse
@@ -63,10 +63,10 @@ fi
 
 if [ -x /vobs/um/umtool/bin/projenv ]; then
     projenv() {
-	eval `/vobs/um/umtool/bin/projenv`
+	eval $(/vobs/um/umtool/bin/projenv)
     }
 elif [ -x /opt/umtool/bin/projenv ]; then
     projenv() {
-	eval `/opt/umtool/bin/projenv`
+	eval $(/opt/umtool/bin/projenv)
     }
 fi

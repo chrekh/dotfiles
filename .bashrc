@@ -13,7 +13,7 @@ if tty -s; then
     shopt -s checkwinsize
 
     HISTCONTROL=ignoredups
-    HISTFILE=~/.bash_history/$host`tty | sed -e s:/:_:g`
+    HISTFILE=~/.bash_history/$host$(tty | sed -e s:/:_:g)
     HISTSIZE=200
 
     test -r ~/.aliases && . ~/.aliases
