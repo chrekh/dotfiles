@@ -16,7 +16,7 @@ alias f='finger -m'
 alias h='history'
 
 # COW (Copy-On-Write) on btrfs
-alias cp='cp --reflink=auto'
+[ x$os = xLi ] && alias cp='cp --reflink=auto'
 
 [ x$DISPLAY = x ] && alias x=xstart
 
