@@ -10,6 +10,9 @@ if [ $os = Li ]; then
 	dist=gentoo
     fi
 fi
+if [ -z "$domain" ]; then
+    domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /tmp/resolv.conf)
+fi
 
 if [ x$host = xender ]; then
     spam() {
