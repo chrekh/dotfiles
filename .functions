@@ -11,7 +11,7 @@ if [ $os = Li ]; then
     fi
 fi
 if [ -z "$domain" ]; then
-    domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /tmp/resolv.conf)
+    domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
 fi
 
 if [ x$host = xender ]; then
