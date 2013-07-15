@@ -15,8 +15,10 @@ alias j=jobs
 alias f='finger -m'
 alias h='history'
 
-# COW (Copy-On-Write) on btrfs
-[ x$os = xLi ] && alias cp='cp --reflink=auto'
+# COW (Copy-On-Write) if supported
+if [ x$os = xLi ]; then
+    [[ $coreutil > 7.6 ]] && alias cp='cp --reflink=auto'
+fi
 
 [ x$DISPLAY = x ] && alias x=xstart
 
