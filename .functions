@@ -9,7 +9,9 @@ if [ $os = Li ]; then
     elif [ -f /etc/gentoo-release ]; then
 	dist=gentoo
     fi
+    coreutil=$(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}')
 fi
+
 if [ -z "$domain" ]; then
     domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /tmp/resolv.conf)
 fi
