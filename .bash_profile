@@ -16,7 +16,7 @@ export LC_MESSAGES=C
 [ $host = lx310020 ] && LANG=sv_SE.iso88591
 [ $host = lx310021 ] && LANG=sv_SE.iso88591
 
-export PAGER='less -idQMXs'
+export PAGER='less -idQMXsR'
 export LESS=idQMX
 
 export GZIP='--best'
