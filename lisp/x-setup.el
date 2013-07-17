@@ -6,17 +6,15 @@
 
 ;; fringe TEST-line       sdf                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                     sdf------------------------------
 
-(cond ((x-display-color-p)
-       (modify-face 'highlight nil "turquoise" nil nil nil nil)
-       (modify-face 'mode-line "#fff020" "#583517" nil nil nil nil)
-       (modify-face 'region nil "orange" nil nil nil nil)
-       
-       (setq default-frame-alist
-             (append (list (cons 'foreground-color "#583517")
-                           (cons 'background-color "#f0d8b0")
-                           )
-                     default-frame-alist))
-       ))
+(modify-face 'highlight nil "turquoise" nil nil nil nil)
+(modify-face 'mode-line "#fff020" "#583517" nil nil nil nil)
+(modify-face 'region nil "orange" nil nil nil nil)
+
+(setq default-frame-alist
+      (append (list (cons 'foreground-color "#583517")
+		    (cons 'background-color "#f0d8b0")
+		    )
+	      default-frame-alist))
 
 
 (cond ((>= emacs-major-version 21)
