@@ -1,13 +1,10 @@
 ;(setq debug-on-error t)
 (setq load-path (append '("~che/lisp" "~chrekh/lisp" "~chrekh/extern/lisp") load-path))
 
-(defvar using-x (eq window-system 'x) "
-non nil if this emacs uses X ?")
-
 (load "loads")
 
 (menu-bar-mode -1)
-(if using-x
+(if window-system
     (load "x-setup"))
 
 ;; let - be part of words in emacs-lisp-mode
