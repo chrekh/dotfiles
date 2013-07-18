@@ -18,4 +18,8 @@
 (load-library "server")
 (setq server-window (lambda (buf) (switch-to-buffer-other-frame buf)))
 (add-hook 'server-done-hook (lambda () (delete-frame)))
-(and (fboundp 'server-running-p) (not (server-running-p)) (server-start))
+
+(if (fboundp 'server-running-p)
+    (and (not (server-running-p))
+	 (server-start))
+  (server-start))
