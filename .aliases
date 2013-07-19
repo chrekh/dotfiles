@@ -16,34 +16,34 @@ alias f='finger -m'
 alias h='history'
 
 # COW (Copy-On-Write) if supported
-if [ x$os = xLi ]; then
+if [ $os = Li ]; then
     [[ $coreutil > 7.6 ]] && alias cp='cp --reflink=auto'
 fi
 
-[ x$DISPLAY = x ] && alias x=xstart
+[ $DISPLAY ] || alias x=xstart
 
 if [ -x /usr/local/bin/morse ]; then
     alias morse='time /usr/local/bin/morse -r -C 'qwertyuiopasdfghjklzxcvbnm,.?/}{\\\|' -w 20 -T -q -n 5 -N 100'
 fi
 
 # Gentoo
-if [ x$dist = xgentoo ]; then
+if [ $dist = gentoo ]; then
     alias qpkg='qpkg -nc'
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
     alias eix='eix -n'
-    if [ x$host = 'xjane' ]; then
+    if [ $host = jane ]; then
 	alias world='sudo emerge -Duav --keep-going --jobs=10 --load-average=30 \
                      --reinstall changed-use --with-bdeps y @system @world'
     fi
-    if [ x$host = 'xender' ]; then
+    if [ $host = ender ]; then
 	alias world='sudo emerge -Duav --keep-going \
                      --reinstall changed-use --with-bdeps y @system @world'
     fi
 fi
 
 # RPS
-if [ x$domain = xutv.rps.police.se ]; then
+if [ $domain = utv.rps.police.se ]; then
     alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=chrekh,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
 fi
 
