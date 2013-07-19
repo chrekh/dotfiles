@@ -2,7 +2,6 @@
 
 os=$(uname -s| cut -c 1-2)
 host=$(hostname)
-domain=$(dnsdomainname 2>/dev/null)
 if [ $os = Li ]; then
     if [ -f /etc/SuSE-release ]; then
 	dist=suse
@@ -12,11 +11,12 @@ if [ $os = Li ]; then
     coreutil=$(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}')
 fi
 
-if [ -z "$domain" ]; then
+domain=$(dnsdomainname 2>/dev/null)
+if [ ! $domain ]; then
     domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
 fi
 
-if [ x$host = xender ]; then
+if [ $host = ender ]; then
     spam() {
 	for f in $@; do
             echo -n "$f "
@@ -27,19 +27,19 @@ if [ x$host = xender ]; then
     }
 fi
 
-if [[ ${BASH_VERSINFO[0]} > 3 ]]; then
+if [ ${BASH_VERSINFO[0]} -gt 7 ]; then
     # bash-4 have hashes
     setpath() {   
 	local -A used
 	local newpath
 	for d in $@; do
-	    [ -n "${used[$d]}" ] && continue
+	    [ ${used[$d]} ] && continue
 	    used[$d]=y
 	    [ -d $d ] || continue
-	    if [ -z "$newpath" ]; then
-		newpath=$d
-	    else
+	    if [ $newpath ]; then
 		newpath=$newpath:$d
+	    else
+		newpath=$d
 	    fi
 	done
 	echo $newpath
@@ -48,15 +48,15 @@ else
     setpath() {   
 	local newpath
 	for d in $@; do
-	    if [ -z "$newpath" ]; then
-		newpath=$d
-	    else
-		[ "${newpath}" = "${d}" ]   && continue # d is exactly $PATH 
-		[ -z "${newpath##$d:*}" ]   && continue # d is first in $PATH
-		[ -z "${newpath%%*:$d}" ]   && continue # d is last in $PATH
-		[ -z "${newpath##*:$d:*}" ] && continue # d is in $PATH
+	    if [ $newpath ]; then
+		[ $newpath = ${d} ]    && continue # d is exactly $PATH 
+		[ ${newpath##$d:*} ]   || continue # d is first in $PATH
+		[ ${newpath%%*:$d} ]   || continue # d is last in $PATH
+		[ ${newpath##*:$d:*} ] || continue # d is in $PATH
 		[ -d $d ] || continue                   # d is not a directory
 		newpath=$newpath:$d
+	    else
+		newpath=$d
 	    fi
 	done
 	echo $newpath
