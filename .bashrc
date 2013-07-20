@@ -27,6 +27,4 @@ if tty -s; then
 	    stty erase ^h
     esac
 
-    # Completion directives
-    complete -A command -A file sudo
 fi
