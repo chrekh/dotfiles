@@ -1,4 +1,4 @@
-test -r ~/.functions && . ~/.functions
+[ -r ~/.functions ] && . ~/.functions
 
 if tty -s; then
 
@@ -16,7 +16,7 @@ if tty -s; then
     HISTFILE=~/.bash_history/$host$(tty | sed -e s:/:_:g)
     HISTSIZE=200
 
-    test -r ~/.aliases && . ~/.aliases
+    [ -r ~/.aliases ] && . ~/.aliases
 
     stty kill ^@
     case $TERM in
