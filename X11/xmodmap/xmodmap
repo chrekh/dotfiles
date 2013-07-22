@@ -1,0 +1,65 @@
+! *****************
+! Modifiers
+! ******************
+
+clear lock
+
+clear mod1
+clear mod2
+clear mod3
+clear mod4
+clear mod5
+
+keycode 113 = Mode_switch
+keycode 64 = Alt_L
+keycode 115 = Meta_L
+
+! Meta
+add mod1 = Meta_L
+
+! Alt
+add mod2 = Alt_L
+!add mod3 = Super_R
+!add mod4 = Hyper_R
+
+!
+! ****************
+!
+
+keycode 22 = BackSpace
+keycode 49 = Escape
+
+keycode 48 = braceleft bracketleft adiaeresis Adiaeresis
+keycode 34 = braceright bracketright aring Aring
+keycode 47 = bar backslash odiaeresis Odiaeresis
+keycode 35 = asciitilde asciicircum udiaeresis Udiaeresis
+keycode 21 = grave at eacute Eacute
+keycode 13 = 4 dollar
+keycode 61 = minus underscore
+keycode 19 = 0 equal
+keycode 11 = 2 quotedbl
+keycode 20 = plus question
+keycode 16 = 7 slash
+keycode 15 = 6 ampersand
+keycode 17 = 8 parenleft
+keycode 18 = 9 parenright
+keycode 51 = quoteright asterisk
+keycode 94 = less greater
+keycode 59 = comma semicolon less less
+keycode 60 = period colon greater greater
+
+
+! keypad
+keycode 90 = 0
+keycode 91 = period
+keycode 87 = 1
+keycode 88 = 2
+keycode 89 = 3
+keycode 83 = 4
+keycode 84 = 5
+keycode 85 = 6
+keycode 79 = 7
+keycode 80 = 8
+keycode 81 = 9
+keycode 77 = VoidSymbol
+
