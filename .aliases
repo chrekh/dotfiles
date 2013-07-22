@@ -27,7 +27,7 @@ if [ -x /usr/local/bin/morse ]; then
 fi
 
 # Gentoo
-if [ $dist = gentoo ]; then
+if [ $os = Li ] && [ $dist = gentoo ]; then
     alias qpkg='qpkg -nc'
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
