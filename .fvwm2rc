@@ -1,0 +1,188 @@
+# Fonts
+Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
+#IconFont		 lucidasanstypewriter-12
+
+DeskTopSize 1x4
+EdgeResistance 80 10
+EdgeScroll 100 100
+ClickTime 750
+ColormapFocus FollowsFocus
+OpaqueMoveSize 100
+
+
+Style "*" HilightFore yellow, HilightBack #853f5a
+MenuStyle * Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
+
+Style * SloppyFocus, BorderWidth 5, NoHandles , NoIcon, Color black/#e08020
+Style "FvwmWinList" NoTitle, Sticky, WindowListSkip, NeverFocus
+Style "FvwmIconMan" NoTitle, Sticky, WindowListSkip, NeverFocus
+Style "FvwmPager"   NoTitle, Sticky, NeverFocus
+Style "XDaliClock"  NoTitle, Sticky, NeverFocus
+Style "XClock"	    NoTitle, Sticky, NeverFocus
+Style "dclock"	    NoTitle, Sticky
+Style "XLoad"	    NoTitle, NeverFocus
+Style "xcpustate"   NoTitle, Sticky, NeverFocus
+Style "XBiff"	    NoTitle, Sticky, NeverFocus
+Style "XBuffy"	    NoTitle, Sticky, NeverFocus
+Style "wmpower"	    NoTitle, Sticky, WindowListSkip, NeverFocus, StaysOnTop
+Style "rdesktop"    NoTitle, WindowListSkip, !Borders
+
+# What to do at startup
+AddToFunc InitFunction
++ I Module FvwmWinList
++ I Module FvwmPager
++ I Exec emacs -geometry 115x60-1602-30
++ I Exec urxvt -ls -geometry 100x40+5+5
++ I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
++ I Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
++ I Exec xon ender "xbiff -geometry 83x70+1603+3"
++ I Exec LANG=sv_SE.iso88591 nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -scroll -date "%A %Y-%m-%d" -dateup -geometry 370x130+1700+2
+
+AddToFunc RestartFunction "I" Module FvwmWinList
++			"I" Module FvwmPager 0 0
+
+# Complex functions
+AddToFunc Move-or-Raise		"C" Raise
++				"M" Move
+
+AddToFunc Lower-or-Resize	"C" Lower
++				"M" Resize
+
+AddToMenu modules	"FvwmModules"	Title
++			"FvwmConsole"	Module	FvwmConsole -terminal urxvt
++                       "RootCursor"    Module  FvwmForm RootCursor
++			"Identify"	Module	FvwmIdent
++			"Talk"		Module	FvwmTalk
++			""		Nop
++			"Button-Bar"	Module	FvwmButtons
++			"Pager"		Module	FvwmPager 0 0
++			"Pager (2 desks)" Module  FvwmPager 0 1
++			"WinList"	Module	FvwmWinList
++			""		Nop
++			"Banner"	Module	FvwmBanner
++			"ScrollBar"	Module	FvwmScroll 50 50
++			"Background"	Module	FvwmBacker
++			"AutoRaise"	Module	FvwmAuto 200 Raise Nop
++			"Stop AutoRaise" KillModule FvwmAuto
++			""		Nop
++			"IconBox"	Module	FvwmIconBox
++			"IconMan"	Module	FvwmIconMan
++			""		Nop
++			"Form - Rlogin"	     Module FvwmForm Rlogin
++			"Form - MyFvwmTalk"  Module FvwmForm MyFvwmTalk
++			"Form - QuitVerify"  Module FvwmForm QuitVerify
+
+# Menus
+AddToMenu General	"General"	Title
++			"Modules"	Popup modules
++			"Refresh"	Refresh
++			"Restart fvwm2" Restart fvwm2
++			"xbiff"		Exec xon ender "xbiff -geometry 83x70+1603+3"
++			"Quit X"	Quit
+
+AddToMenu Info	"Info"		Title
++		"xmm"		Exec exec xmm -usedcolor DarkGreen -activecolor Blue -freecolor yellow -swapcolor red -idirtycolor LightBlue -icleancolor Green -nolabel -jumpscroll 10 &
+
+AddToMenu hosts "ender"	       Exec xon ender 'urxvt -bg "#ffdddd" -fg "#544949" -ls -title ender'
++	       "mars"	       Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title mars -e ssh -X -Y mars.init.se
+
+
+AddToMenu misc	"Misc"		Title
++		"Hosts"		Popup hosts
++		"Urxvt"		Exec urxvt -ls&
++	 	"uxterm"		Exec uxterm -ls&
++		"Emacs"		Exec emacs > ${HOME}/log/emacs 2>&1
++		"Firefox"	Exec firefox > ${HOME}/log/firefox 2>&1
++		"Amarok"	Exec amarok > ${HOME}/log/amarok 2>&1
++		"Thunderbird"	Exec thunderbird > ${HOME}/log/thunderbird 2>&1
++		"Pine"		Exec ${HOME}/bin/initpine
++		"Calctool"	Exec calctool
++		"Vm"		Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
++		"Aumix"		Exec aumix
++		"Xboard -tc 30"	Exec xboard -tc 30
++		"Xboard -ncp"	Exec xboard -ncp
++		"Spotify"	Exec spotify
+
+AddToMenu winmenu	"Raise"		Raise
++			"Move"		Move
++			"Resize"	Resize
++			"Iconify"	Iconify
++			"Delete"	Delete
++			"Close"		Close
++			"Destroy"	Destroy
+
+			
+AddToFunc Raise-or-winmenu	C	Raise
++				M	Popup winmenu
+
+AddToFunc MyMove		M	Move
+
+# Mouse bindings
+# title-bar and sides
+Mouse	1	T	N	Function Move-or-Raise
+Mouse	1	T	S	Function Move-or-Raise
+Mouse	3	T	N	Lower
+Mouse	3	T	S	Lower
+
+Mouse	1	S	N	Function Move-or-Raise
+Mouse	3	S	N	Lower
+
+# window
+Mouse	1	W	2	Function Move-or-Raise
+Mouse	2	WI	2	Popup winmenu
+Mouse	3	WI	2	Function Lower-or-Resize
+
+Mouse	1	I	N	Iconify
+
+# root
+Mouse	1	R	N	Menu General
+Mouse	2	R	N	Menu Info
+Mouse	3	R	N	Menu misc
+
+
+
+# The small buttons in the title-bar
+
+Mouse 1		1	A	Menu winmenu
+Mouse 1		2	A	Maximize 100 100
+Mouse 1		3	A	Iconify
+
+# Key bindings
+Key	F12	A	S	exec xscreensaver-command -activate
+
+########################## Icon Manager ####################################
+*FvwmIconMan*background #ffb090
+*FvwmIconMan*foreground Black
+*FvwmIconMan*format "%t"
+*FvwmIconMan*managergeometry +5+5
+*FvwmIconMan*followfocus true
+*FvwmIconMan*focusbutton	  up Yellow #853f5a
+*FvwmIconMan*focusandselectButton down Yellow #853f5a
+
+
+########################## Window-Identifier ###############################
+# Just choose colors and a fonts
+*FvwmIdentBack MidnightBlue
+*FvwmIdentFore Yellow
+*FvwmIdentFont -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+
+########################### Pager #########################################
+*FvwmPagerBack Black
+*FvwmPagerFore Orchid
+*FvwmPagerFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmPagerHilight Black
+*FvwmPagerGeometry -2+2@1
+*FvwmPagerLabel 0 Pager
+*FvwmPagerSmallFont 5x8
+
+##########################FvwmWinList##################################
+*FvwmWinList: Back #e08020
+*FvwmWinList: Fore Black
+*FvwmWinList: FocusBack #853f5a
+*FvwmWinList: FocusFore yellow
+*FvwmWinList: Font -adobe-times-*-r-*-*-17-*-100-100-p-*-iso10646-1
+*FvwmWinList: Action Click1 Iconify
+*FvwmWinList: Action Click2 Iconify -1, Focus
+*FvwmWinList: Action Click3 Iconify -1, Focus
+*FvwmWinList: UseSkipList
+*FvwmWinList: Geometry -2+145@0
