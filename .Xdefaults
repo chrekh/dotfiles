@@ -1,0 +1,86 @@
+*XmTextField*Translations:  #override\n\
+                            <Key>osfDelete: delete-previous-character()\n\
+                            Ctrl<Key>d:  delete-next-character()
+
+xdu.ncol:		6
+
+
+SshAskpass*grabServer:	true
+SshAskpass*grabPointer:	true
+
+wmpower*geometry:		64x64-2-80
+
+XLoad*showGrip:		false
+NCDwm*UseIconBox:	false
+NCDwm*gridMoveIcons: 	on
+NCDwm*KeyboardFocusPolicy: pointer
+NCDwm*IconGridGeometry: 418x769-2-2
+NCDwm*IconPlacement:	'right top'
+
+Emacs*geometry:		100x60
+Emacs*font:             -*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-1
+!Emacs*font:            -*-fixed-medium-r-normal-*-13-*-75-75-c-70-iso8859-1
+!Emacs*font:		-*-fixed-medium-r-normal-*-13-*-*-*-c-*-iso8859-1
+!Emacs*font:		-*-*-medium-r-normal-*-15-*-*-*-c-*-iso8859-1
+!Emacs*font:		-*-courier-medium-r-*-*-14-*-*-*-*-*-iso8859-1
+!Emacs*font:		-b&h-lucidatypewriter-medium-r-normal-sans-18-180-75-75-m-110-iso8859-1
+XClock*background:	#d0ffe0
+XClock*foreground:	#206020
+XClock*geometry:	417x52-8+12
+XClock*font: 		-*-new century schoolbook-*-r-*-*-34-*-*-*-*-*-*-*
+dclock*background:	#d0ffe0
+dclock*foreground:	#206020
+dclock*led_off:		#bbffcc
+dclock*font:            -*-charter-*-r-*-*-17-*-*-*-*-*-iso8859-*
+
+XBiff*background:	#d0ffe0
+XBiff*foreground:	#206020
+/* XBiff*file:		/home/che/Mail/newmail */
+xload*background:	#d0ffe0
+xload*foreground:	#206020
+
+
+/* bug (still) XTerm*geometry:		80x50+10+80 */
+XTerm*reverseWrap:	true
+*saveLines:		100000
+XTerm*scrollBar:	true
+/* XTerm*scrollTtyOutput: 	false */
+XTerm*DeiconifyWarp:	on
+XTerm*TitleFont:	timb14
+XTerm*menuFont:	-a*medium-r*75*110*
+XTerm*background:	#ffffe0
+XTerm*foreground:	#602020
+!XTerm*Font: 		7x14
+XTerm*Font: 		
+
+XTerm*fontMenu.Label:  VT Fonts
+XTerm*fontMenu*fontdefault*Label:       Default
+!XTerm*fontMenu*font1*Label:     small
+!XTerm*VT100*font1:              -*-courier-medium-r-*-*-*-*-*-*-*-*-iso8859-1
+!XTerm*VT100*font1:              7x14
+XTerm*fontMenu*font2*Label:     big
+!XTerm*VT100*font2:              -*-terminal-medium-r-*-*-*-*-*-*-*-*-iso8859-1
+XTerm*VT100*font2:		-b&h-lucidatypewriter-medium-r-normal-sans-18-180-75-75-m-110-iso8859-1
+XTerm*VT100*font3:              
+XTerm*fontMenu*font4*Label:     -
+XTerm*VT100*font4:              
+XTerm*fontMenu*font5*Label:     -
+XTerm*VT100*font5:              
+XTerm*fontMenu*font6*Label:     -
+XTerm*VT100*font6:              
+XTerm*fontMenu*fontescape*Label:        Escape Sequence
+XTerm*fontMenu*fontsel*Label:           Selection
+!fontescape and fontsel overridden by application
+
+Rxvt*font:  		-*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
+Rxvt*background:	#ffffe0
+Rxvt*foreground:	#602020
+Rxvt*geometry:		100x40
+Rxvt*utmpInhibit:       false
+Rxvt*backspacekey:	
+Rxvt*deletekey:		
+!Rxvt*scrollWithBuffer:	false
+!Rxvt*scrollTtyOutput:	false
+Rxvt*cutchars:		#\\`"'&()*,;:<=>?@[]{|}$/	
+!Rxvt*selectstyle:	xterm
+!Rxvt*tripleclickwords:	false
