@@ -37,7 +37,7 @@ AddToFunc InitFunction
 + I Exec emacs -geometry 115x60-1602-30
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
-+ I Exec exec xmodmap ${HOME}/X11/xmodmap/sled
++ I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
 + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
 
 AddToFunc RestartFunction
