@@ -21,7 +21,6 @@ Emacs*font:             -*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-1
 
 XClock*background:	#703000
 XClock*foreground:	#ffff20
-XClock*font: 		-*-*-r-*-*-24-*-*-*-*-*-*-*
 XClock*font: 		-*-new century schoolbook-*-r-*-*-34-*-*-*-*-*-*-*
 XClock*borderWidth:     0
 
@@ -40,17 +39,14 @@ xload*borderWidth:	0
 Rxvt*font:              -*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
 Rxvt*background:        #ffffe0
 Rxvt*foreground:        #602020
-Rxvt*geometry:          120x40
+Rxvt*geometry:          100x40
 Rxvt*backspacekey:      
-!Rxvt*deletekey:         
+Rxvt*deletekey:		
 Rxvt*fading:		10
 Rxvt*saveLines:         100000
-!Rxvt*scrollWithBuffer: false
-!Rxvt*scrollTtyOutput:  false
-Rxvt*cutchars:          #\\\`\"\'&()*,.;:<=>?@[]{|}-$/       
-!Rxvt*selectstyle:      xterm
-!Rxvt*tripleclickwords: false
+Rxvt*cutchars:		"\-#\\`\"''&()*,;:<=>?@[]{|}$/	"
 URxvt.perl-ext-common: default,-selection-popup,-option-popup
+Rxvt*utmpInhibit:       false
 
 
 XTerm*titeInhibit:	false
@@ -83,17 +79,4 @@ XTerm*fontMenu*font6*Label:     -
 XTerm*VT100*font6:              
 XTerm*fontMenu*fontescape*Label:        Escape Sequence
 XTerm*fontMenu*fontsel*Label:           Selection
-!fontescape and fontsel overridden by application
 
-Rxvt*font:  		-*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
-Rxvt*background:	#ffffe0
-Rxvt*foreground:	#602020
-Rxvt*geometry:		100x40
-Rxvt*utmpInhibit:       false
-Rxvt*backspacekey:	
-Rxvt*deletekey:		
-!Rxvt*scrollWithBuffer:	false
-!Rxvt*scrollTtyOutput:	false
-Rxvt*cutchars:		#\\`"'&()*,;:<=>?@[]{|}$/	
-!Rxvt*selectstyle:	xterm
-!Rxvt*tripleclickwords:	false
