@@ -39,6 +39,7 @@ AddToFunc InitFunction
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
 + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
+Test (EnvMatch HOST jane) + I Exec xon ender "xbiff -geometry 83x70+1603+3"
 
 AddToFunc RestartFunction
 + I Module FvwmPager 0 0
@@ -75,33 +76,35 @@ AddToMenu modules	"FvwmModules"   Title
 
 # Menus
 AddToMenu General	"General"	Title
-+	  		"ssh ON"	Exec exec ssh-add -t 2h </dev/null > /dev/null 2>&1
+Test (EnvMatch HOST jane) + "ssh ON"	Exec exec ssh-add </dev/null > /dev/null 2>&1
+Test (EnvMatch HOST lx*)  + "ssh ON"	Exec exec ssh-add -t 2h </dev/null > /dev/null 2>&1
 +	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
 +			"Modules"	Popup modules
-+			"xbiff"		Exec xon ender "xbiff -geometry 83x70+1603+3"
+Test (EnvMatch HOST jane) + "xbiff" Exec xon ender "xbiff -geometry 83x70+1603+3"
 +			"Refresh"	Refresh
 +                       "Restart"       Restart
 +			"Quit X"	Quit
 
-AddToMenu hosts "ender"        Exec xon ender 'urxvt -bg "#ffdddd" -fg "#544949" -ls -title ender'
-+              "Init"          Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Init -e ssh -X -Y ssh.init.se
+AddToMenu hosts
+Test (EnvMatch HOST jane) + "ender"  Exec xon ender 'urxvt -bg "#ffdddd" -fg "#544949" -ls -title ender'
+Test (EnvMatch HOST jane) + "Init"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Init -e ssh -X -Y ssh.init.se
 
 AddToMenu misc	"Misc"		Title
-+		"Xlogin"	Exec exec xlogin.pl
+Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Hosts"		Popup hosts
 +		"Rxvt"		Exec exec urxvt -ls
 +		"Xterm"		Exec exec xterm -ls
 +		"Emacs"		Exec exec emacs > ${HOME}/log/emacs 2>&1
 +		"Firefox"	Exec exec firefox -no-remote -P default > /${HOME}/log/firefox 2>&1
-+		"Amarok"	Exec amarok > ${HOME}/log/amarok 2>&1
-+		"Thunderbird"	Exec thunderbird > ${HOME}/log/thunderbird 2>&1
-+		"UmBasA"	Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
-+		"Snake"		Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
-+		"Vm"		Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
-+		"Aumix"		Exec aumix
-+		"Xboard -tc 30"	Exec xboard -tc 30
-+		"Xboard -ncp"	Exec xboard -ncp
-+		"Spotify"	Exec spotify
+Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
+Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
+Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
+Test (EnvMatch HOST lx*)  + "Snake"	    Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
+Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
+Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
+Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
+Test (EnvMatch HOST jane) + "Xboard -ncp"   Exec xboard -ncp
+Test (EnvMatch HOST jane) + "Spotify"	    Exec spotify
 
 AddToMenu winmenu	"Raise"		Raise
 +	  		"Move"		Move
