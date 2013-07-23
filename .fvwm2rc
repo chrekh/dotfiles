@@ -84,7 +84,7 @@ AddToMenu General	"General"	Title
 +			"Quit X"	Quit
 
 AddToMenu hosts "ender"        Exec xon ender 'urxvt -bg "#ffdddd" -fg "#544949" -ls -title ender'
-+              "mars"          Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title mars -e ssh -X -Y mars.init.se
++              "Init"          Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Init -e ssh -X -Y ssh.init.se
 
 AddToMenu misc	"Misc"		Title
 +		"Xlogin"	Exec exec xlogin.pl
