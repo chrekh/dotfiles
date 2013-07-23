@@ -1,0 +1,82 @@
+/*
+ *  $Header: .Xdefaults,v 1.2 2000/02/28 15:06:25 chrekh Exp $
+ */
+
+*XmTextField*Translations:  #override\n\
+                            <Key>osfDelete: delete-previous-character()\n\
+                            Ctrl<Key>d:  delete-next-character()
+
+
+emacs*geometry:		120x40
+emacs*font:		-adobe-courier-medium-r-normal--12-120-75-75-m-70-iso8859-1
+/* emacs*background:	#f0d8b0
+emacs*foreground: 	#583517
+*/
+
+XClock*background:	#703000
+XClock*foreground:	#ffff20
+XClock*font: 		-*-*-r-*-*-24-*-*-*-*-*-*-*
+XClock*borderWidth:     0
+
+dclock*background:      #d0ffe0
+dclock*foreground:      #206020
+dclock*led_off:         #bbffcc
+dclock*font:            -*-charter-*-r-*-*-17-*-*-*-*-*-iso8859-*
+
+XBiff*background:	#d0ffe0
+XBiff*foreground:	#206020
+/* XBiff*file:		/home/che/Mail/newmail */
+/* xclock*geometry:	417x52-8+12 */
+!xclock*font: 		-*-new century schoolbook-*-r-*-*-60-*-*-*-*-*-*-*
+xload*background:	#b06000
+xload*foreground:	#703000
+xload*borderWidth:	0
+
+
+Rxvt*font:              -*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
+Rxvt*background:        #ffffe0
+Rxvt*foreground:        #602020
+Rxvt*geometry:          120x40
+Rxvt*backspacekey:      
+!Rxvt*deletekey:         
+Rxvt*fading:		10
+Rxvt*saveLines:         100000
+!Rxvt*scrollWithBuffer: false
+!Rxvt*scrollTtyOutput:  false
+Rxvt*cutchars:          #\\\`\"\'&()*,.;:<=>?@[]{|}-$/       
+!Rxvt*selectstyle:      xterm
+!Rxvt*tripleclickwords: false
+URxvt.perl-ext-common: default,-selection-popup,-option-popup
+
+
+XTerm*titeInhibit:	false
+XTerm*reverseWrap:	true
+XTerm*saveLines:	1000
+XTerm*scrollBar:	true
+/* XTerm*scrollTtyOutput: 	false */
+XTerm*DeiconifyWarp:	on
+XTerm*TitleFont:	timb14
+XTerm*menuFont:	-a*medium-r*75*110*
+XTerm*background:	#ffffe0
+XTerm*foreground:	#602020
+XTerm*eightBitInput:    false
+!XTerm*geometry:		100x40
+XTerm*Font: 		-adobe-courier-medium-r-*-*-12-*-*-*-*-*-iso8859-1
+
+XTerm*fontMenu.Label:  VT Fonts
+XTerm*fontMenu*fontdefault*Label:       Default
+XTerm*fontMenu*font1*Label:     small
+XTerm*VT100*font1:              -*-courier-medium-r-*-*-*-*-*-*-*-*-iso8859-1
+XTerm*fontMenu*font2*Label:     big
+XTerm*VT100*font2:              -*-terminal-medium-r-*-*-*-*-*-*-*-*-iso8859-1
+XTerm*fontMenu*font3*Label:     -
+XTerm*VT100*font3:              
+XTerm*fontMenu*font4*Label:     -
+XTerm*VT100*font4:              
+XTerm*fontMenu*font5*Label:     -
+XTerm*VT100*font5:              
+XTerm*fontMenu*font6*Label:     -
+XTerm*VT100*font6:              
+XTerm*fontMenu*fontescape*Label:        Escape Sequence
+XTerm*fontMenu*fontsel*Label:           Selection
+!fontescape and fontsel overridden by application

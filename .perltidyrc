@@ -1,0 +1,17 @@
+-l=100  # Max line width
+-i=4    # Indent level
+-ci=4   # Continuation indent
+-se     # Errors to STDERR
+-vt=2   # Maximal vertical tightness
+-cti=0  # No extra indentation for closing brackets
+-pt=1   # Medium parenthesis tightness
+-bt=1   # Medium brace tightness
+-sbt=1  # Medium square bracket tightness
+-bbt=1  # Medium block brace tightness
+-bar    # opening-brace-always-on-righ
+-nsfs   # No space before semicolons
+-nolq   # Don't outdent long quoted strings
+-nola   # Don't outdent labels
+-wbb="% + - * / x != == >= <= =~ !~ < > | & = **= += *= &= <<= &&= -= /= != >>= ||= //= .= %= ^= x="
+        # Break before all operators
+
