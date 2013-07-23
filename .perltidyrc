@@ -8,6 +8,7 @@
 -bt=1   # Medium brace tightness
 -sbt=1  # Medium square bracket tightness
 -bbt=1  # Medium block brace tightness
+-bar    # opening-brace-allways-on-right
 -nsfs   # No space before semicolons
 -nolq   # Don't outdent long quoted strings
 -nola   # Don't outdent labels
