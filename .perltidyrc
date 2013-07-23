@@ -13,5 +13,3 @@
 -nolq   # Don't outdent long quoted strings
 -nola   # Don't outdent labels
 -wbb="% + - * / x != == >= <= =~ !~ < > | & = **= += *= &= <<= &&= -= /= != >>= ||= //= .= %= ^= x="
-        # Break before all operators
-

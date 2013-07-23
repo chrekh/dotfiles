@@ -1,21 +1,28 @@
-/*
- *  $Header: .Xdefaults,v 1.2 2000/02/28 15:06:25 chrekh Exp $
- */
-
 *XmTextField*Translations:  #override\n\
                             <Key>osfDelete: delete-previous-character()\n\
                             Ctrl<Key>d:  delete-next-character()
 
+xdu.ncol:		6
+XLoad*showGrip:		false
+
+SshAskpass*grabServer:	true
+SshAskpass*grabPointer:	true
+
+wmpower*geometry:	64x64-2-80
 
 emacs*geometry:		120x40
-emacs*font:		-adobe-courier-medium-r-normal--12-120-75-75-m-70-iso8859-1
-/* emacs*background:	#f0d8b0
-emacs*foreground: 	#583517
-*/
+Emacs*font:             -*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-1
+!Emacs*font:		-adobe-courier-medium-r-normal--12-120-75-75-m-70-iso8859-1
+!Emacs*font:            -*-fixed-medium-r-normal-*-13-*-75-75-c-70-iso8859-1
+!Emacs*font:		-*-fixed-medium-r-normal-*-13-*-*-*-c-*-iso8859-1
+!Emacs*font:		-*-*-medium-r-normal-*-15-*-*-*-c-*-iso8859-1
+!Emacs*font:		-*-courier-medium-r-*-*-14-*-*-*-*-*-iso8859-1
+!Emacs*font:		-b&h-lucidatypewriter-medium-r-normal-sans-18-180-75-75-m-110-iso8859-1
 
 XClock*background:	#703000
 XClock*foreground:	#ffff20
 XClock*font: 		-*-*-r-*-*-24-*-*-*-*-*-*-*
+XClock*font: 		-*-new century schoolbook-*-r-*-*-34-*-*-*-*-*-*-*
 XClock*borderWidth:     0
 
 dclock*background:      #d0ffe0
@@ -26,12 +33,9 @@ dclock*font:            -*-charter-*-r-*-*-17-*-*-*-*-*-iso8859-*
 XBiff*background:	#d0ffe0
 XBiff*foreground:	#206020
 /* XBiff*file:		/home/che/Mail/newmail */
-/* xclock*geometry:	417x52-8+12 */
-!xclock*font: 		-*-new century schoolbook-*-r-*-*-60-*-*-*-*-*-*-*
-xload*background:	#b06000
-xload*foreground:	#703000
+xload*background:	#d0ffe0
+xload*foreground:	#206020
 xload*borderWidth:	0
-
 
 Rxvt*font:              -*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
 Rxvt*background:        #ffffe0
@@ -80,3 +84,16 @@ XTerm*VT100*font6:
 XTerm*fontMenu*fontescape*Label:        Escape Sequence
 XTerm*fontMenu*fontsel*Label:           Selection
 !fontescape and fontsel overridden by application
+
+Rxvt*font:  		-*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
+Rxvt*background:	#ffffe0
+Rxvt*foreground:	#602020
+Rxvt*geometry:		100x40
+Rxvt*utmpInhibit:       false
+Rxvt*backspacekey:	
+Rxvt*deletekey:		
+!Rxvt*scrollWithBuffer:	false
+!Rxvt*scrollTtyOutput:	false
+Rxvt*cutchars:		#\\`"'&()*,;:<=>?@[]{|}$/	
+!Rxvt*selectstyle:	xterm
+!Rxvt*tripleclickwords:	false

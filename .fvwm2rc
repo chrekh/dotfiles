@@ -1,10 +1,6 @@
-Style "*" Font -adobe-times-medium-r-normal-*-14-*-*-*-*-*-*-*
-
-DeskTopSize 1x3
-
-#Style * EdgeMoveDelay 250
-#Style * EdgeMoveResistance 2 2
-
+!Style "*" Font -adobe-times-medium-r-normal-*-14-*-*-*-*-*-*-*
+Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
+DeskTopSize 1x4
 EdgeScroll 100 100
 
 ClickTime 750
@@ -14,8 +10,8 @@ OpaqueMoveSize 100
 IgnoreModifiers L2
 
 Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
-#MenuStyle * Font lucidasanstypewriter-12
-MenuStyle * Font -adobe-courier-*-r-normal-*-14-*-*-*-*-*-iso8859-1
+!MenuStyle * Font -adobe-courier-*-r-normal-*-14-*-*-*-*-*-iso8859-1
+MenuStyle * Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 
 Style * SloppyFocus, BorderWidth 5, !Handles , !Icon, Color black/#e08020
 Style * !UsePPosition
@@ -31,14 +27,15 @@ Style "rdesktop"    !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
+Style "wmpower"	    !Title, Sticky, WindowListSkip, NeverFocus, StaysOnTop
 
 # What to do at startup
 AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager
 + I Exec exec xscreensaver -no-capture-stderr -no-splash
++ I Exec emacs -geometry 115x60-1602-30
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
-#+ I Exec exec emacs -geometry 115x60-1602-30
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/sled
 + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
@@ -55,7 +52,8 @@ AddToFunc Lower-or-Resize	"C" Lower
 +	  			"M" Resize
 
 AddToMenu modules	"FvwmModules"   Title
-+			"FvwmConsole"   Module  FvwmConsole
++			"FvwmConsole"   Module  FvwmConsole -terminal urxvt
++                       "RootCursor"    Module  FvwmForm RootCursor
 +                       "Identify"      Module  FvwmIdent
 +                       "Talk"          Module  FvwmTalk
 +                       ""              Nop
@@ -73,8 +71,6 @@ AddToMenu modules	"FvwmModules"   Title
 +                       "IconBox"       Module  FvwmIconBox
 +                       "IconMan"       Module  FvwmIconMan
 +                       ""              Nop
-+                       "Form - Rlogin"      Module FvwmForm Rlogin
-+                       "Form - MyFvwmTalk"  Module FvwmForm MyFvwmTalk
 +                       "Form - QuitVerify"  Module FvwmForm QuitVerify
 
 # Menus
@@ -82,6 +78,7 @@ AddToMenu General	"General"	Title
 +	  		"ssh ON"	Exec exec ssh-add -t 2h </dev/null > /dev/null 2>&1
 +	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
 +			"Modules"	Popup modules
++			"xbiff"		Exec xon ender "xbiff -geometry 83x70+1603+3"
 +			"Refresh"	Refresh
 +                       "Restart"       Restart
 +			"Quit X"	Quit
@@ -93,65 +90,29 @@ AddToMenu misc	"Misc"		Title
 +		"Xterm"		Exec exec xterm -ls
 +		"Emacs"		Exec exec emacs > ${HOME}/log/emacs 2>&1
 +		"Firefox"	Exec exec firefox -no-remote -P default > /${HOME}/log/firefox 2>&1
-+		"UmBasA"	Exec exec vmplayer -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
++		"Amarok"	Exec amarok > ${HOME}/log/amarok 2>&1
++		"Thunderbird"	Exec thunderbird > ${HOME}/log/thunderbird 2>&1
++		"UmBasA"	Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
 +		"Snake"		Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
-
-AddToMenu hosts "HP-UX"    popup Host_hpux
-+               ""              Nop
-+               "EN225500"      popup "Host_en225500"
-+               "EN225270"      popup "Host_en225270"
-+               "EN225260"      popup "Host_en225260"
-+               "EN225320"      popup "Host_en225320"
-+               "EN229600"      popup "Host_en229600"
-+               ""              Nop
-+               "Linux (rack)"  popup "Host_linux_rack"
-+               "Linux (virt)"  popup "Host_linux_V"
-+               "Labb"          popup "Host_linux_Labb"
-
-
-AddToMenu Host_hpux
-PipeRead 'fvwmhostmenu.pl hpux'
-        
-AddToMenu Host_en225500
-PipeRead 'fvwmhostmenu.pl EN225500'
-
-AddToMenu Host_en225270
-PipeRead 'fvwmhostmenu.pl EN225270'
-
-AddToMenu Host_en225260
-PipeRead 'fvwmhostmenu.pl EN225260'
-
-AddToMenu Host_en225320
-PipeRead 'fvwmhostmenu.pl EN225320'
-
-AddToMenu Host_en229600
-PipeRead 'fvwmhostmenu.pl EN229600'
-
-AddToMenu Host_linux_rack
-PipeRead 'fvwmhostmenu.pl rackservrar'
-
-AddToMenu Host_linux_V
-PipeRead 'fvwmhostmenu.pl virtuella'
-
-AddToMenu Host_linux_Labb
-PipeRead 'fvwmhostmenu.pl labb'
++		"Vm"		Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
++		"Aumix"		Exec aumix
++		"Xboard -tc 30"	Exec xboard -tc 30
++		"Xboard -ncp"	Exec xboard -ncp
++		"Spotify"	Exec spotify
 
 AddToMenu winmenu	"Raise"		Raise
 +	  		"Move"		Move
+
 +			"Resize"	Resize
 +			"Iconify"	Iconify
 +			"Delete"	Delete
 +			"Close"		Close
 +			"Destroy"	Destroy
 
-			
 AddToFunc Raise-or-winmenu 	C 	Raise
 +				M	Popup winmenu
 
-# Mouse bindings
-# Mouse Button Context Modifiers Function
-# Context:   T=title, R=root, W=window S=side F=frame I=icon
-# Modifiers: N=no, C=controll, S=shift, M=meta, L=Caps-Lock, A=any 
+AddToFunc MyMove		M	Move
 
 # title-bar and sides
 Mouse	1	T	N	Function Move-or-Raise
@@ -170,19 +131,17 @@ Mouse	3	WI	M	Function Lower-or-Resize
 Mouse	1	I	N	Iconify
 
 # root
-Mouse	1	R	A	Menu General
-Mouse	3	R	A	Menu misc
-
+Mouse	1	R	N	Menu General
+Mouse	3	R	N	Menu misc
 
 # The small buttons in the title-bar
 
-Mouse 1         1       A       Menu winmenu
+Mouse 1		1	A	Menu winmenu
 Mouse 1		2	A	Maximize 100 100
 Mouse 1		3	A	Iconify
 
 # Key bindings
 Key	Pause	A	N	exec xscreensaver-command -lock
-#Key	Pause	A	N	exec xdotool mousemove 500 500
 
 ########################## Icon Manager ####################################
 *FvwmIconMan*background #ffb090
@@ -213,9 +172,9 @@ Key	Pause	A	N	exec xscreensaver-command -lock
 *FvwmWinList: Fore Black
 *FvwmWinList: FocusBack #853f5a
 *FvwmWinList: FocusFore yellow
-*FvwmWinList: Font -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmWinList: Font -adobe-times-*-r-*-*-17-*-100-100-p-*-iso10646-1
 *FvwmWinList: Action Click1 Iconify
 *FvwmWinList: Action Click2 Iconify -1, Focus
 *FvwmWinList: Action Click3 Iconify -1, Focus
 *FvwmWinList: UseSkipList
-*FvwmWinList: Geometry -2+280
+*FvwmWinList: Geometry -2+145@0
