@@ -38,7 +38,8 @@ AddToFunc InitFunction
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
-+ I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
+Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1698+1
+Test (EnvMatch HOST lx*)  + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
 Test (EnvMatch HOST jane) + I Exec xon ender "xbiff -geometry 83x70+1603+3"
 
 AddToFunc RestartFunction
