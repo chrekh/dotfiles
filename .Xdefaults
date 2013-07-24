@@ -10,7 +10,7 @@ SshAskpass*grabPointer:	true
 
 wmpower*geometry:	64x64-2-80
 
-emacs*geometry:		120x40
+emacs*geometry:		120x53
 Emacs*font:             -*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-1
 !Emacs*font:		-adobe-courier-medium-r-normal--12-120-75-75-m-70-iso8859-1
 !Emacs*font:            -*-fixed-medium-r-normal-*-13-*-75-75-c-70-iso8859-1
