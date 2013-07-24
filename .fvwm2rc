@@ -1,5 +1,3 @@
-!Style "*" Font -adobe-times-medium-r-normal-*-14-*-*-*-*-*-*-*
-Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 DeskTopSize 1x4
 EdgeScroll 100 100
 
@@ -9,12 +7,13 @@ OpaqueMoveSize 100
 
 IgnoreModifiers L2
 
-Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
-!MenuStyle * Font -adobe-courier-*-r-normal-*-14-*-*-*-*-*-iso8859-1
+Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 MenuStyle * Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 
+Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
 Style * SloppyFocus, BorderWidth 5, !Handles , !Icon, Color black/#e08020
-Style * !UsePPosition
+Style * UsePPosition
+
 Style "FvwmWinList" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmIconMan" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmPager"   !Title, Sticky, NeverFocus
