@@ -5,8 +5,9 @@
 xdu.ncol:		6
 XLoad*showGrip:		false
 
-SshAskpass*grabServer:	true
-SshAskpass*grabPointer:	true
+SshAskpass*grabServer:	False
+SshAskpass*grabPointer:	True
+SshAskpass*inputTimeout: 60
 
 wmpower*geometry:	64x64-2-80
 
