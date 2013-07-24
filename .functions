@@ -2,6 +2,8 @@
 
 os=$(uname -s| cut -c 1-2)
 host=$(hostname)
+dist=unknown
+
 if [ $os = Li ]; then
     if [ -f /etc/SuSE-release ]; then
 	dist=suse
