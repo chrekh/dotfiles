@@ -34,7 +34,7 @@ AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager
 + I Exec exec xscreensaver -no-capture-stderr -no-splash
-+ I Exec emacs -geometry 115x60-1602-30
++ I Exec emacs -geometry 115x50-1610-50
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
@@ -101,7 +101,7 @@ Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
 Test (EnvMatch HOST lx*)  + "Snake"	    Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
-Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
+Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -geometry 105x50+791+269 -f vm'&
 Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
 Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
 Test (EnvMatch HOST jane) + "Xboard -ncp"   Exec xboard -ncp
