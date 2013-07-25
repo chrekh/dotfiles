@@ -1,5 +1,3 @@
-!Style "*" Font -adobe-times-medium-r-normal-*-14-*-*-*-*-*-*-*
-Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 DeskTopSize 1x4
 EdgeScroll 100 100
 
@@ -9,12 +7,13 @@ OpaqueMoveSize 100
 
 IgnoreModifiers L2
 
-Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
-!MenuStyle * Font -adobe-courier-*-r-normal-*-14-*-*-*-*-*-iso8859-1
+Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 MenuStyle * Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
 
+Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
 Style * SloppyFocus, BorderWidth 5, !Handles , !Icon, Color black/#e08020
-Style * !UsePPosition
+Style * UsePPosition
+
 Style "FvwmWinList" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmIconMan" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmPager"   !Title, Sticky, NeverFocus
@@ -22,7 +21,7 @@ Style "XDaliClock"  !Title, Sticky, NeverFocus
 Style "XClock"      !Title, Sticky, NeverFocus
 Style "Xlogin"      !Title, Sticky, PositionPlacement UnderMouse
 Style "dclock"      !Title, Sticky
-Style "XLoad"	    !Title, Sticky, NeverFocus, !Borders
+Style "XLoad"	    !Title, NeverFocus
 Style "rdesktop"    !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
@@ -34,11 +33,13 @@ AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager
 + I Exec exec xscreensaver -no-capture-stderr -no-splash
-+ I Exec emacs -geometry 115x60-1602-30
++ I Exec emacs -geometry 115x50-1610-50
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
-Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1698+1
+Test (EnvMatch HOST jane) + I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
+Test (EnvMatch HOST jane) + I Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
+Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
 Test (EnvMatch HOST lx*)  + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
 Test (EnvMatch HOST jane) + I Exec xon ender "xbiff -geometry 83x70+1603+3"
 
@@ -101,7 +102,7 @@ Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
 Test (EnvMatch HOST lx*)  + "Snake"	    Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
-Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -fg "#583517" -bg "#f0d8b0" -f vm'&
+Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -geometry 105x50+791+269 -f vm'&
 Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
 Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
 Test (EnvMatch HOST jane) + "Xboard -ncp"   Exec xboard -ncp
