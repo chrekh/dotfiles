@@ -97,7 +97,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Rxvt"		Exec exec urxvt -ls
 +		"Xterm"		Exec exec xterm -ls
 +		"Emacs"		Exec exec emacs > ${HOME}/log/emacs 2>&1
-+		"Firefox"	Exec exec firefox -no-remote -P default > /${HOME}/log/firefox 2>&1
++		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
