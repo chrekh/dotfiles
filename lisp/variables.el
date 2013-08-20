@@ -6,6 +6,7 @@
 
 (setq
  user-mail-address "che@chrekh.se"
+ send-mail-function 'sendmail-send-it
  ispell-program-name "aspell"
  make-backup-files nil
  inhibit-startup-screen t
