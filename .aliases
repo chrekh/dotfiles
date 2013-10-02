@@ -1,7 +1,7 @@
 # -*- mode: shell-script -*-
 
 if [ $os = Li ]; then
-    alias df='df -h'
+    alias df='df -hT'
     alias ls='ls -vF'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
 else
