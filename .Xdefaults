@@ -47,6 +47,8 @@ Rxvt*fading:		10
 Rxvt*saveLines:         100000
 Rxvt*cutchars:		"#\\`\"''&()*,.;:<=>?@[]{|}$/	"
 URxvt.perl-ext-common: default,-selection-popup,-option-popup
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 Rxvt*utmpInhibit:       false
 
 
