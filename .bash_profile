@@ -39,3 +39,9 @@ umask 02
 
 # I don't want man to ask stuipd questions
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
+
+# Set terminal title to my prefered name for this host
+if [ -e ~/.hostname ]; then
+    title=`awk -v host=$host '$1 = host {print $2}' ~/.hostname`
+    [ -z "$title" ] || printf "]2:%s\007]1;%s\007" $title
+fi
