@@ -20,7 +20,7 @@ if tty -s; then
 
     stty kill ^@
     case $TERM in
-	vt* | xterm)
+	vt* | xterm | linux)
 	    stty erase ^?
 	    ;;
 	*)
