@@ -42,6 +42,6 @@ umask 02
 
 # Set terminal title to my prefered name for this host
 if [ -e ~/.hostname ]; then
-    title=`awk -v host=$host '$1 = host {print $2}' ~/.hostname`
+    title=`awk -v host=$host '$1 == host {print $2}' ~/.hostname`
     [ -z "$title" ] || printf "]2:%s\007]1;%s\007" $title
 fi
