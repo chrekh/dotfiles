@@ -36,6 +36,7 @@ fi
 umask 02
 
 [ $domain = utv.rps.police.se ] && export LDAP_BASEDN='dc=utv,dc=rps,dc=police,dc=se';
+[ $domain = utv.polisen.se ] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
 
 # I don't want man to ask stuipd questions
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
