@@ -45,6 +45,11 @@ if [ ! -e ~/.gitconfig ]; then
     cat ~/.gitaliases >> ~/.gitconfig
 fi
 
+# If the homedirectory controlled by git, update it.
+if [ -f ~/.git/config ]; then
+    git pull
+fi
+
 # I don't want man to ask stuipd questions
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
 
