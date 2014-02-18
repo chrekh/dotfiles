@@ -41,7 +41,8 @@ umask 02
 # Create the right .gitconfig depending on where I am. But do that only once
 if [ ! -e ~/.gitconfig ]; then
     [ $domain = utv.rps.police.se ] && cat ~/.gitconfig-rps > ~/.gitconfig
-    [ $domain = utv.polisen.se ]    && cat ~/.gitcontig-home > ~/.gitconfig
+    [ $domain = utv.polisen.se ] && cat ~/.gitconfig-rps > ~/.gitconfig
+    [ $domain = chrekh.se ]    && cat ~/.gitconfig-home > ~/.gitconfig
     cat ~/.gitaliases >> ~/.gitconfig
 fi
 
