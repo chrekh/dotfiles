@@ -38,6 +38,13 @@ umask 02
 [ $domain = utv.rps.police.se ] && export LDAP_BASEDN='dc=utv,dc=rps,dc=police,dc=se';
 [ $domain = utv.polisen.se ] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
 
+# Create the right .gitconfig depending on where I am. But do that only once
+if [ ! -e ~/.gitconfig ]; then
+    [ $domain = utv.rps.police.se ] && cat ~/.gitconfig-rps > ~/.gitconfig
+    [ $domain = utv.polisen.se ]    && cat ~/.gitcontig-home > ~/.gitconfig
+    cat ~/.gitaliases >> ~/.gitconfig
+fi
+
 # I don't want man to ask stuipd questions
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
 
