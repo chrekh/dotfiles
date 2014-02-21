@@ -47,7 +47,7 @@ if [ ! -e ~/.gitconfig ]; then
 fi
 
 # If the homedirectory controlled by git, update it.
-if [ -f ~/.git/config ] && type git > /dev/null 2>&1 ; then
+if [ -f ~/.git/config ] && git --version > /dev/null 2>&1 ; then
     git pull
 fi
 
