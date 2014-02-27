@@ -48,7 +48,7 @@ fi
 
 # If the homedirectory controlled by git, update it.
 if [ -f ~/.git/config ] && git --version > /dev/null 2>&1 ; then
-    git pull
+    ( cd && git pull )
 fi
 
 # I don't want man to ask stuipd questions
