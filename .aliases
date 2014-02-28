@@ -46,6 +46,9 @@ fi
 if [ "$domain" = utv.rps.police.se ]; then
     alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=chrekh,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
 fi
+if [ "$domain" = utv.polisen.se ]; then
+    alias rxvt="urxvt -ls -bg '#ffd0c0' -fg '#000000'"
+fi
 
 # ClearCase
 if type cleartool > /dev/null 2>&1; then
