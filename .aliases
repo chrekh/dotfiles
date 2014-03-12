@@ -32,14 +32,11 @@ if [ $dist = gentoo ]; then
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
     alias eix='eix -n'
+    worldopts='--deep --update --ask --verbose y --keep-going --newuse --with-bdeps y'
     if [ $host = jane ]; then
-	alias world='sudo emerge -Duav --keep-going --jobs=10 --load-average=30 \
-                     --reinstall changed-use --with-bdeps y @system @world'
+	worldopts="$worldopts --jobs=10 --load-average=30"
     fi
-    if [ $host = ender ]; then
-	alias world='sudo emerge -Duav --keep-going \
-                     --reinstall changed-use --with-bdeps y @system @world'
-    fi
+    alias world="sudo emerge $worldopts @system @world"
 fi
 
 # RPS
