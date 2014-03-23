@@ -43,6 +43,7 @@ if [ ! -e ~/.gitconfig ]; then
     [ $domain = utv.rps.police.se ] && cat ~/.gitconfig-rps > ~/.gitconfig
     [ $domain = utv.polisen.se ] && cat ~/.gitconfig-rps > ~/.gitconfig
     [ $domain = chrekh.se ]    && cat ~/.gitconfig-home > ~/.gitconfig
+    [ $domain = init.se ]    && cat ~/.gitconfig-init > ~/.gitconfig
     cat ~/.gitaliases >> ~/.gitconfig
 fi
 
