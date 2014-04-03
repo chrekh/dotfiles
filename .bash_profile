@@ -1,4 +1,4 @@
-echo sourcing .bash_profile
+tty -s && echo sourcing .bash_profile
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
 PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /bin /usr/bin /sbin /usr/sbin ${PATH//:/ } \
     /usr/local/bin /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
