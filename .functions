@@ -1,5 +1,7 @@
 # -*- mode: shell-script -*-
 
+tty -s && echo sourcing .functions
+
 os=$(uname -s| cut -c 1-2)
 host=$(hostname)
 dist=unknown

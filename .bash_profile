@@ -1,4 +1,5 @@
-[ -r ~/.functions ] && . ~/.functions
+tty -s && echo sourcing .bash_profile
+[ -r ~/.functions -a ! "$os" ] && . ~/.functions
 PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /bin /usr/bin /sbin /usr/sbin ${PATH//:/ } \
     /usr/local/bin /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
@@ -7,7 +8,7 @@ MANPATH=$(setpath /usr/local/adm/man ${MANPATH//:/ } \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
 export PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
-[ -f ~/.bashrc ] && . ~/.bashrc;
+[ -f ~/.bashrc -a ! "$bashrc_sourced" ] && . ~/.bashrc;
 
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
