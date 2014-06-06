@@ -39,7 +39,6 @@
    kom-show-footnotes-immediately nil
    kom-show-personal-messages-in-buffer t
    kom-smileys nil
-   kom-url-viewer-preferences '("emacs" "netscape")
    kom-user-prompt-format "%s: %[%c% %m%] -"
    kom-user-prompt-format-executing "%s: %[%c% %m%] ~"
    kom-write-texts-in-window 'other
