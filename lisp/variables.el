@@ -35,6 +35,7 @@
                    (java-mode . "java")
                    (awk-mode . "awk")
                    (other . "gnu"))
+ browse-url-browser-function 'browse-url-chromium
  )
 
 (add-hook 'mail-setup-hook

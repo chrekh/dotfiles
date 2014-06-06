@@ -14,8 +14,6 @@
       gnus-treat-wash-html nil
       gnus-article-wash-function 'w3m
       w3m-goto-article-function 'browse-url
-      browse-url-browser-function 'browse-url-netscape
-      browse-url-netscape-program "firefox"
       )
       
 (setq gnus-face-9 'font-lock-warning-face)
