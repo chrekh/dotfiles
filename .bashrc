@@ -1,11 +1,12 @@
 bashrc_sourced=y
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
+[ -r ~/.git-prompt.sh ] && . ~/.git-prompt.sh
 
 if tty -s; then
     echo sourcing .bashrc
 
     # prompt
-    PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\]'
+    PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\]'
     PROMPT_DIRTRIM=5
     
     set -b
