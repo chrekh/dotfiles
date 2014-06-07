@@ -8,6 +8,8 @@ else
     alias ls='ls -F'
     alias ll='ls -al'
 fi
+
+alias g=git
 alias l=less
 alias zl=zless
 alias llt='ll -tr'
