@@ -6,6 +6,8 @@ if tty -s; then
     echo sourcing .bashrc
 
     # prompt
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_SHOWDIRTYSTATE=1
     PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\]'
     PROMPT_DIRTRIM=5
     
