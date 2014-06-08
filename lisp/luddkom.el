@@ -4,19 +4,28 @@
 (defun my-kom-setvars () ""
   (interactive)
   (setq
+   kom-deferred-printing nil
    kom-read-related-first nil
    kom-read-depth-first nil
+   kom-show-since-and-when t
+   kom-relogin-behaviour nil
    kom-show-sync-messages t
    kom-follow-attachments nil
    kom-audio-player ""
    kom-autowrap nil
    kom-bury-buffers t
-   kom-continuous-scrolling nil
+   kom-continuous-scrolling t
    kom-created-texts-are-read nil
    kom-customize-in-window 'new-frame
    kom-default-language 'sv
    kom-default-mark nil
-   kom-ding-on-personal-messages nil
+   kom-ding-on-personal-messages 0
+   kom-ding-on-group-messages 0
+   kom-ding-on-common-messages 0
+   kom-ding-on-no-subject 0
+   kom-ding-on-wait-done 0
+   kom-ding-on-new-letter 0
+   kom-ding-on-priority-break 0
    kom-do-when-done '(kom-display-time)
    kom-do-when-starting '(kom-list-news)
    kom-emacs-knows-iso-8859-1 t
@@ -24,8 +33,9 @@
    kom-format-html-authors '((t))
    kom-highlight-dashed-lines t
    kom-highlight-text-body t
-   kom-idle-hide 10
+   kom-idle-hide 30
    kom-max-overlays nil
+   kom-membership-default-message-flag t
    kom-membership-default-priority 80
    kom-netscape-command "firefox"
    kom-permissive-completion nil
@@ -84,7 +94,10 @@
 
 (defun lys () ""
   (interactive)
-  (setq-default my-kom-server-priority 250)
+  (setq-default
+   my-kom-server-priority 250
+   kom-friends '(1167 10706 70 6599)
+   )
   (message "starting LysKOM")
   (lyskom "kom.lysator.liu.se" "Christer Ekholm" (plist-get kom-passwd 'lys)))
 
