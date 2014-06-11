@@ -60,15 +60,16 @@
    kom-async-text-body-face 'kom-face--async-text-body-face
    ))
 
-(copy-face 'default 'kom-face--text-body-face)
-(copy-face 'default 'kom-face--dashed-lines-face)
-(copy-face 'default 'kom-face--async-dashed-lines-face)
-(copy-face 'default 'kom-face--async-text-body-face)
-(modify-face 'kom-face--dashed-lines-face nil "#ffe0c0" nil nil nil nil)
-(modify-face 'kom-face--text-body-face nil "#ffe0b8" nil nil nil nil)
-(modify-face 'kom-face--async-dashed-lines-face "#000000" "#ffe8d0" nil nil nil nil)
-(modify-face 'kom-face--async-text-body-face "#006020" "#ffe0d0" nil nil nil nil)
-
+(cond ((not (featurep 'xemacs))
+       (copy-face 'default 'kom-face--text-body-face)
+       (copy-face 'default 'kom-face--dashed-lines-face)
+       (copy-face 'default 'kom-face--async-dashed-lines-face)
+       (copy-face 'default 'kom-face--async-text-body-face)
+       (modify-face 'kom-face--dashed-lines-face nil "#ffe0c0" nil nil nil nil)
+       (modify-face 'kom-face--text-body-face nil "#ffe0b8" nil nil nil nil)
+       (modify-face 'kom-face--async-dashed-lines-face "#000000" "#ffe8d0" nil nil nil nil)
+       (modify-face 'kom-face--async-text-body-face "#006020" "#ffe0d0" nil nil nil nil)
+       ))
 ; Read my passwords
 (load-file "/home/che/hemligt/kom-passwords.el")
 
