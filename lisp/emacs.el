@@ -3,9 +3,17 @@
 
 (load "loads")
 
-(menu-bar-mode -1)
-(if window-system
-    (load "x-setup"))
+(cond ((and window-system (not (featurep 'xemacs))) 
+       (load "x-setup")
+       (load-library "server")
+       (setq server-window (lambda (buf) (switch-to-buffer-other-frame buf)))
+       (add-hook 'server-done-hook (lambda () (delete-frame)))
+       
+       (if (fboundp 'server-running-p)
+	   (and (not (server-running-p))
+		(server-start))
+	 (server-start))
+       ))
 
 ;; let - be part of words in emacs-lisp-mode
 ;(modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table)
@@ -14,12 +22,4 @@
 (put 'set-fill-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'eval-expression 'disabled nil)
-
-(load-library "server")
-(setq server-window (lambda (buf) (switch-to-buffer-other-frame buf)))
-(add-hook 'server-done-hook (lambda () (delete-frame)))
-
-(if (fboundp 'server-running-p)
-    (and (not (server-running-p))
-	 (server-start))
-  (server-start))
+(setq load-home-init-file t) ; don't load init file from ~/.xemacs/init.el
