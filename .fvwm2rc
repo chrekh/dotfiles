@@ -104,6 +104,7 @@ Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
 Test (EnvMatch HOST lx*)  + "Snake"	    Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
+Test (EnvMatch HOST lx*)  + "Vcum"	    Exec exec rdesktop -k sv -g 1280x1024 vcum >/dev/null 2>&1
 Test (EnvMatch HOST jane) + "Vm"	    Exec xon ender 'emacs -geometry 105x50+791+269 -f vm'&
 Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
 Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
