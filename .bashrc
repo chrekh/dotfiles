@@ -18,6 +18,8 @@ if tty -s; then
     shopt -s checkwinsize
 
     HISTCONTROL=ignoredups
+    [ -f ~/.bash_history ] && rm -f ~/.bash_history
+    [ -d ~/.bash_history ] || mkdir ~/.bash_history
     HISTFILE=~/.bash_history/$host$(tty | sed -e s:/:_:g)
     HISTSIZE=200
 
