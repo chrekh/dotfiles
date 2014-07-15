@@ -60,8 +60,7 @@
 
 (require 'lyskom)
 
-(setq
- ;;lyskom-dont-read-user-area t
+(setq-default
  kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
  )
 
@@ -167,10 +166,12 @@
                       (flyspell-mode))))
 
 (add-hook 'lyskom-login-hook
-	  (function (lambda ()
-		      (setq kom-server-priority my-kom-server-priority)
-		      )
-		    ))
+	  (function
+	   (lambda ()
+	     (setq
+	      kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
+	      kom-server-priority my-kom-server-priority
+	      ))))
 
 (add-hook 'lyskom-mode-hook (function (lambda () (swedish-keys-mode 1))))
 (add-hook 'lyskom-mode-hook
