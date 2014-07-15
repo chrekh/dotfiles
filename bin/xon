@@ -1,0 +1,36 @@
+#! /bin/bash -x
+
+remote=$1;
+shift;
+
+# wait for ssh-add in possible other xon
+while ps -ef| grep -q s[s]h-add; do
+    sleep 1;
+done
+
+export SSH_ASKPASS=x11-ssh-askpass
+ssh-add -l > /dev/null 2>&1 || ssh-add
+ssh-add -l > /dev/null 2>&1 || exit
+
+case $DISPLAY in
+    :0*)
+	disp=`hostname`.chrekh.se$DISPLAY
+	;;
+    *)
+	disp=$DISPLAY
+	;;
+esac	
+
+# Put xauth information to remote
+kaka=`xauth list $DISPLAY|awk '{print $NF}'`
+ssh  -f $remote xauth add $disp . $kaka
+
+# execute command remote
+
+#(rsh -n $remote ". .bash_profile;export DISPLAY=$disp;$@&")&
+
+ssh -T -f -o 'ForwardX11 no' $remote ". .bash_profile;export DISPLAY=$disp;$@ >/dev/null 2>&1 &"
+
+#sleep 1
+
+#kill -1 `ps ax | awk '/[r]sh -n .*export DISPLAY/{print $1}'`
