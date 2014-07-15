@@ -1,8 +1,6 @@
-(require 'lyskom)
-(autoload 'lyskom "lyskom" nil t)
-
+;; Set variables before loading lyskom. To prevent them to be loaded from user-area
 (setq-default
-   kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
+   kom-mercial "Starting" ; placeholder until we can set the real value
    kom-remember-password t
    kom-deferred-printing nil
    kom-read-related-first nil
@@ -59,6 +57,13 @@
    kom-async-dashed-lines-face 'kom-face--async-dashed-lines-face
    kom-async-text-body-face 'kom-face--async-text-body-face
    )
+
+(require 'lyskom)
+
+(setq
+ ;;lyskom-dont-read-user-area t
+ kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
+ )
 
 (cond ((not (featurep 'xemacs))
        (copy-face 'default 'kom-face--text-body-face)
