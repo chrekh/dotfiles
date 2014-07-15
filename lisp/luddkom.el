@@ -1,14 +1,14 @@
 (require 'lyskom)
 (autoload 'lyskom "lyskom" nil t)
 
-(defun my-kom-setvars () ""
-  (interactive)
-  (setq
+(setq-default
+   kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
+   kom-remember-password t
    kom-deferred-printing nil
    kom-read-related-first nil
    kom-read-depth-first nil
    kom-show-since-and-when t
-   kom-relogin-behaviour nil
+   kom-relogin-behaviour t
    kom-show-sync-messages t
    kom-follow-attachments nil
    kom-audio-player ""
@@ -58,7 +58,7 @@
    kom-dashed-lines-face 'kom-face--dashed-lines-face
    kom-async-dashed-lines-face 'kom-face--async-dashed-lines-face
    kom-async-text-body-face 'kom-face--async-text-body-face
-   ))
+   )
 
 (cond ((not (featurep 'xemacs))
        (copy-face 'default 'kom-face--text-body-face)
@@ -163,11 +163,7 @@
 
 (add-hook 'lyskom-login-hook
 	  (function (lambda ()
-		      (my-kom-setvars)
 		      (setq kom-server-priority my-kom-server-priority)
-		      (setq kom-mercial
-			    (concat "Kör elispklient " lyskom-clientversion
-				    " i Emacs " emacs-version))
 		      )
 		    ))
 
