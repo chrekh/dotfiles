@@ -66,7 +66,7 @@
 		(match-string 1 lyskom-clientversion))
 	       (t "hej"))))
     (setq
-     kom-mercial (concat "Kör lyskom.el (" ver ") i Emacs " emacs-version))))
+     kom-mercial (concat "KÃ¶r lyskom.el (" ver ") i Emacs " emacs-version))))
 
 (require 'lyskom)
 (set-kom-mercial)
