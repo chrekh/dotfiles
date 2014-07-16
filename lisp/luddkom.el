@@ -56,6 +56,8 @@
    kom-dashed-lines-face 'kom-face--dashed-lines-face
    kom-async-dashed-lines-face 'kom-face--async-dashed-lines-face
    kom-async-text-body-face 'kom-face--async-text-body-face
+   kom-server-aliases '(("city.dll.nu" . "SnoppKOM")
+			("plutten.dnsalias.org" . "PluttenKOM"))
    )
 
 
