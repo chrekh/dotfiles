@@ -1,6 +1,6 @@
 ;; Set variables before loading lyskom. To prevent them to be loaded from user-area
 (setq-default
-   kom-mercial "Starting" ; placeholder until we can set the real value
+   kom-mercial "Starting KOM" ; placeholder until we can set the real value
    kom-remember-password t
    kom-deferred-printing nil
    kom-read-related-first nil
@@ -58,11 +58,18 @@
    kom-async-text-body-face 'kom-face--async-text-body-face
    )
 
-(require 'lyskom)
 
-(setq-default
- kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
- )
+(defun set-kom-mercial ()
+  (interactive)
+  (let ((ver
+	 (cond ((string-match "\\(Git .*\\))" lyskom-clientversion)
+		(match-string 1 lyskom-clientversion))
+	       (t "hej"))))
+    (setq
+     kom-mercial (concat "Kör lyskom.el (" ver ") i Emacs " emacs-version))))
+
+(require 'lyskom)
+(set-kom-mercial)
 
 (cond ((not (featurep 'xemacs))
        (copy-face 'default 'kom-face--text-body-face)
@@ -168,8 +175,8 @@
 (add-hook 'lyskom-login-hook
 	  (function
 	   (lambda ()
+	     (set-kom-mercial)
 	     (setq
-	      kom-mercial (concat "Kör elispklient " lyskom-clientversion " i Emacs " emacs-version)
 	      kom-server-priority my-kom-server-priority
 	      ))))
 
