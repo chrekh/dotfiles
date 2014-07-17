@@ -1,7 +1,11 @@
 #!/bin/sh
 
+[ -r ~/.functions -a ! "$os" ] && . ~/.functions
+
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
+
+[ $os = Da ] && exec quartz-wm
 
 nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
 
