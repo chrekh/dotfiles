@@ -1,6 +1,7 @@
 ;; Set variables before loading lyskom. To prevent them to be loaded from user-area
 (setq-default
    kom-mercial "Starting KOM" ; placeholder until we can set the real value
+   kom-url-viewer-preferences '("emacs" "default")
    kom-remember-password t
    kom-deferred-printing nil
    kom-read-related-first nil
@@ -68,7 +69,7 @@
 		(match-string 1 lyskom-clientversion))
 	       (t "hej"))))
     (setq
-     kom-mercial (concat "Kör lyskom.el (" ver ") i Emacs " emacs-version))))
+     kom-mercial (concat "Kör lyskom.el [" ver "] i Emacs " emacs-version))))
 
 (require 'lyskom)
 (set-kom-mercial)
