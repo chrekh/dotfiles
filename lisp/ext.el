@@ -2,6 +2,7 @@
 (setq auto-mode-alist (append '(
 				("\\(\\.\\|^\\)SCORE$" . emacs-lisp-mode)
                                 ("\\.db$" . zone-mode)
+				("\\.pp$" . ruby-mode)
 				)
 			      auto-mode-alist))
 
