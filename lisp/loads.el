@@ -13,6 +13,7 @@
       ))
 
 (autoload 'html-helper-mode "html-helper-mode" nil t)
+(autoload 'ruby-mode "ruby-mode" nil t)
 (autoload 'compile "compile.el" nil t)
 (autoload 'swedish-keys-mode "swedkey.el" nil t)
 (autoload 'wormy "wormy" nil t)
