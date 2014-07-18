@@ -267,6 +267,8 @@ __git_ps1_colorize_gitstring ()
 # In this mode you can request colored hints using GIT_PS1_SHOWCOLORHINTS=true
 __git_ps1 ()
 {
+        # Give up if git config -local doesn't work. 
+	git config --local -l > /dev/null 2>&1 || return
         # Is this repo configured to use gitprompt?
         [ x$(git config --local --get status.gitprompt) = "xno" ] && exit
 
