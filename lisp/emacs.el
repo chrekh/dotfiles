@@ -1,5 +1,9 @@
 ;(setq debug-on-error t)
-(setq load-path (append '("~che/lisp" "~chrekh/lisp" "~u0043002/lisp" "~u0043002/extern/lisp") load-path))
+(setq load-path (append
+		 '("~che/lisp" "~che/extern/lisp"
+		   "~chrekh/lisp" "~u0043002/lisp"
+		   "~u0043002/extern/lisp")
+		 load-path))
 
 (load "loads")
 
