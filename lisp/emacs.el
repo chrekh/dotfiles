@@ -1,4 +1,3 @@
-;(setq debug-on-error t)
 (setq load-path (append
 		 '("~che/lisp" "~che/extern/lisp"
 		   "~chrekh/lisp" "~u0043002/lisp"
@@ -19,8 +18,6 @@
 	 (server-start))
        ))
 
-;; let - be part of words in emacs-lisp-mode
-;(modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table)
 (modify-syntax-entry ?_ "w")
 
 (put 'set-fill-column 'disabled nil)
