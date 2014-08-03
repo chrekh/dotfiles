@@ -16,6 +16,10 @@
 	   (and (not (server-running-p))
 		(server-start))
 	 (server-start))
+       (when (and (require 'edit-server nil t)
+		  (not (process-status "edit-server")))
+	 (setq edit-server-new-frame t)
+	 (edit-server-start))
        ))
 
 (modify-syntax-entry ?_ "w")
