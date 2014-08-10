@@ -3,7 +3,7 @@
    kom-mercial "Starting KOM" ; placeholder until we can set the real value
    kom-url-viewer-preferences '("emacs" "default")
    kom-remember-password t
-   kom-deferred-printing nil
+   kom-deferred-printing t
    kom-read-related-first nil
    kom-read-depth-first nil
    kom-show-since-and-when t
