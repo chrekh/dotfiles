@@ -101,11 +101,24 @@
   (condition-case nil (plutten) (error nil))
 )
 
+(defun start-or-goto-kom (alias kom user password)
+  (let ((kombuffers lyskom-buffer-list)
+	(buf))
+    (lyskom-clean-all-buffer-lists)
+    (while kombuffers
+      (when (string= kom (buffer-name (car kombuffers)))
+	(setq buf (car kombuffers)
+	      kombuffers nil))
+      (setq kombuffers (cdr kombuffers)))
+    (if buf
+	(lyskom-switch-to-kom-buffer buf)
+      (message (concat "starting " alias))
+      (lyskom kom user password))))
+
 (defun ludd () ""
   (interactive)
   (setq-default my-kom-server-priority 250)
-  (message "starting LuddKOM")
-  (lyskom "kom.ludd.luth.se" "Christer Ekholm" (plist-get kom-passwd 'ludd)))
+  (start-or-goto-kom "LuddKOM" "kom.ludd.luth.se" "Christer Ekholm" (plist-get kom-passwd 'ludd)))
 
 (defun lys () ""
   (interactive)
@@ -113,62 +126,52 @@
    my-kom-server-priority 250
    kom-friends '(1167 10706 70 6599)
    )
-  (message "starting LysKOM")
-  (lyskom "kom.lysator.liu.se" "Christer Ekholm" (plist-get kom-passwd 'lys)))
+  (start-or-goto-kom "LysKOM" "kom.lysator.liu.se" "Christer Ekholm" (plist-get kom-passwd 'lys)))
 
 (defun mys () ""
   (interactive)
   (setq-default my-kom-server-priority 50)
-  (message "starting MysKOM")
-  (lyskom "myskom.kfib.org" "Christer Ekholm" (plist-get kom-passwd 'mys)))
+  (start-or-goto-kom "MysKOM" "myskom.kfib.org" "Christer Ekholm" (plist-get kom-passwd 'mys)))
 
 (defun snopp () ""
   (interactive)
   (setq-default my-kom-server-priority 90)
-  (message "starting SnoppKOM")
-  (lyskom "city.dll.nu" "Christer Ekholm" (plist-get kom-passwd 'snopp)))
+  (start-or-goto-kom "SnoppKOM" "city.dll.nu" "Christer Ekholm" (plist-get kom-passwd 'snopp)))
 
 (defun uppkom () ""
   (interactive)
   (setq-default my-kom-server-priority 90)
-  (message "starting UppKOM")
-  (lyskom "kom.update.uu.se" "Christer Ekholm" (plist-get kom-passwd 'uppkom)))
+  (start-or-goto-kom "uppkom" "kom.update.uu.se" "Christer Ekholm" (plist-get kom-passwd 'uppkom)))
 
 (defun cdkom () ""
   (interactive)
   (setq-default my-kom-server-priority 90)
-  (message "starting CDKOM")
-  (lyskom "kom.cd.chalmers.se" "Christer Ekholm" (plist-get kom-passwd 'cdkom)))
+  (start-or-goto-kom "CDKOM" "kom.cd.chalmers.se" "Christer Ekholm" (plist-get kom-passwd 'cdkom)))
 
 (defun plutten () ""
   (interactive)
   (setq-default my-kom-server-priority 80)
-  (message "starting PluttenKOM")
-  (lyskom "plutten.dnsalias.org" "Christer Ekholm" (plist-get kom-passwd 'plutten)))
+  (start-or-goto-kom "PluttenKOM" "plutten.dnsalias.org" "Christer Ekholm" (plist-get kom-passwd 'plutten)))
 
 (defun rydkom () ""
   (interactive)
   (setq-default my-kom-server-priority 90)
-  (message "starting RydKOM")
-  (lyskom "kom.hem.liu.se" "Christer Ekholm" (plist-get kom-passwd 'rydkom)))
+  (start-or-goto-kom "RydKOM" "kom.hem.liu.se" "Christer Ekholm" (plist-get kom-passwd 'rydkom)))
 
 (defun tokkom () ""
   (interactive)
-  (message "starting TokKOM")
   (setq-default my-kom-server-priority 90)
-  (lyskom "kom.stacken.kth.se" "Christer Ekholm" (plist-get kom-passwd 'tokkom)))
+  (start-or-goto-kom "TokKOM" "kom.stacken.kth.se" "Christer Ekholm" (plist-get kom-passwd 'tokkom)))
 
 (defun dskom () ""
   (interactive)
-  (message "starting DSKOM")
   (setq-default my-kom-server-priority 90)
-  (lyskom "kom.ds.hj.se" "Christer Ekholm" (plist-get kom-passwd 'dskom)))
+  (start-or-goto-kom "DSKOM" "kom.ds.hj.se" "Christer Ekholm" (plist-get kom-passwd 'dskom)))
 
 (defun mdskom () ""
   (interactive)
   (setq-default my-kom-server-priority 90)
-  (message "starting MDSKOM")
-  (lyskom "kom.mds.mdh.se" "Christer Ekholm" (plist-get kom-passwd 'mdskom)))
+  (start-or-goto-kom "MDSKOM" "kom.mds.mdh.se" "Christer Ekholm" (plist-get kom-passwd 'mdskom)))
 
 (add-hook 'lyskom-edit-mode-hook
           (function (lambda ()
