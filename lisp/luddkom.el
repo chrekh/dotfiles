@@ -102,9 +102,9 @@
 )
 
 (defun start-or-goto-kom (alias kom user password)
+  (lyskom-clean-all-buffer-lists)
   (let ((kombuffers lyskom-buffer-list)
 	(buf))
-    (lyskom-clean-all-buffer-lists)
     (while kombuffers
       (when (string= kom (buffer-name (car kombuffers)))
 	(setq buf (car kombuffers)
