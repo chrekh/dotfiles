@@ -51,9 +51,8 @@
 
 (add-hook 'mail-setup-hook 'mail-abbrevs-setup)
 
-(cond ((not (featurep 'xemacs))
-       (global-font-lock-mode 1)
-       ))
+(if (fboundp 'global-font-lock-mode)  (global-font-lock-mode 1))
+(if (fboundp 'global-auto-revert-mode) (global-auto-revert-mode 1))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (fset 'j-or-n-p 'y-or-n-p)
