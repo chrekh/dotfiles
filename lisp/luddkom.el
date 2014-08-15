@@ -71,7 +71,11 @@
     (setq
      kom-mercial (concat "Kör lyskom.el [" ver "] i Emacs " emacs-version))))
 
-(require 'lyskom)
+(let ((lyskom-elc "/usr/local/src/lyskom-elisp-client/src/lyskom.elc"))
+  (if (file-exists-p lyskom-elc)
+      (load-file lyskom-elc)
+    (require 'lyskom)))
+
 (set-kom-mercial)
 
 (cond ((not (featurep 'xemacs))
