@@ -89,7 +89,7 @@
        (modify-face 'kom-face--async-text-body-face "#006020" "#ffe0d0" nil nil nil nil)
        ))
 ; Read my passwords
-(load-file "/home/che/hemligt/kom-passwords.el")
+(load-file "~/hemligt/kom-passwords.el")
 
 (defun koms () ""
   (interactive)
