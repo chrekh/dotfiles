@@ -21,7 +21,9 @@
  vm-folder-directory    	"~/Mail/"
  vm-primary-inbox 		"~/Mail/received"
  vm-crash-box           	"~/Mail/vm.crash"
- 
+
+ vm-mime-alternative-select-method '(favorite "text/plain")
+
  vm-move-messages-physically	t
  vm-thread-using-subject	nil
  vm-auto-displayed-mime-content-types t
