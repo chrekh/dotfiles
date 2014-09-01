@@ -17,11 +17,15 @@
 
 
 (setq
+ vm-spool-files			'("/var/mail/che")
+ vm-folder-directory    	"~/Mail/"
+ vm-primary-inbox 		"~/Mail/received"
+ vm-crash-box           	"~/Mail/vm.crash"
+ 
  vm-move-messages-physically	t
  vm-thread-using-subject	nil
  vm-auto-displayed-mime-content-types t
  vm-skip-deleted-messages	t
- vm-spool-files			'("/var/mail/che")
  vm-crash-box-suffix		"crash"
  vm-delete-empty-folders	nil
  vm-summary-show-threads	t
@@ -29,9 +33,6 @@
  vm-reply-subject-prefix	"Re: "
  vm-frame-per-folder		nil
  vm-imap-expunge-after-retrieving t
- vm-folder-directory    	"~/Mail/"
- vm-primary-inbox 		"~/Mail/received"
- vm-crash-box           	"~/Mail/vm.crash"
  vm-preview-lines       	nil
  vm-delete-after-saving 	t
  vm-circular-folders 		t
