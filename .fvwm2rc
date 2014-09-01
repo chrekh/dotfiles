@@ -83,7 +83,8 @@ Test (EnvMatch HOST jane) + "ssh ON"	Exec exec ssh-add </dev/null > /dev/null 2>
 Test (EnvMatch HOST lx*)  + "ssh ON"	Exec exec ssh-add -t 2h </dev/null > /dev/null 2>&1
 +	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
 +			"Modules"	Popup modules
-Test (EnvMatch HOST jane) + "xbiff" Exec xon ender "xbiff -geometry 83x70+1603+3"
+Test (EnvMatch HOST jane) + "xbiff"       Exec xon ender "xbiff -geometry 83x70+1603+3"
+Test (EnvMatch HOST jane) + "ender xload" Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
 +			"Refresh"	Refresh
 +                       "Restart"       Restart
 +			"Quit X"	Quit
