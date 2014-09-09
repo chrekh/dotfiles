@@ -1,8 +1,13 @@
-(setq load-path (append
-		 '("~che/lisp" "~che/extern/lisp"
-		   "~chrekh/lisp" "~u0043002/lisp"
-		   "~u0043002/extern/lisp")
-		 load-path))
+(let ((dirs '("~/lisp" "~/extern/lisp"
+	      "~che/lisp" "~che/extern/lisp"
+	      "~chrekh/lisp" "~chrekh/extern/lisp"
+	      "~u0043002/lisp" "~u0043002/extern/lisp")))
+  (while dirs
+    (when (file-accessible-directory-p (car dirs))
+      (add-to-list 'load-path (expand-file-name (car dirs)) t))
+    (setq dirs (cdr dirs))))
+
+
 
 (load "loads")
 
