@@ -4,6 +4,7 @@
                                 ("\\.db$" . zone-mode)
 				("\\.pp$" . puppet-mode)
 				("\\.ya?ml$" . yaml-mode)
+				("\\.eml$" . text-mode)
 				)
 			      auto-mode-alist))
 
