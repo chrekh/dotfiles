@@ -4,6 +4,8 @@ if [ $os = Li ]; then
     alias df='df -h'
     alias ls='ls -vF'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
+elif [ $os = Da ]; then
+    alias df='df -h'
 else
     alias ls='ls -F'
     alias ll='ls -al'
