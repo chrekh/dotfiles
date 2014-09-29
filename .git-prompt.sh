@@ -268,7 +268,7 @@ __git_ps1_colorize_gitstring ()
 __git_ps1 ()
 {
         # Is this repo configured to use gitprompt?
-        [ x$(git config --local --get status.gitprompt) = "xyes" ] || exit
+        [ x$(git config --local --get status.gitprompt) = "xno" ] && exit
 
 	local pcmode=no
 	local detached=no
