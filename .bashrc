@@ -1,6 +1,5 @@
 bashrc_sourced=y
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
-[ -r ~/.git-prompt.sh ] && . ~/.git-prompt.sh
 
 if tty -s; then
     echo sourcing .bashrc
@@ -8,7 +7,12 @@ if tty -s; then
     # prompt
     GIT_PS1_SHOWUPSTREAM="auto"
     GIT_PS1_SHOWDIRTYSTATE=1
-    PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\]'
+    if [ -r ~/.git-prompt.sh ] && git --version > /dev/null 2>&1; then
+	. ~/.git-prompt.sh
+	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\]'
+    else
+	PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\]'
+    fi
     PROMPT_DIRTRIM=5
     
     set -b
