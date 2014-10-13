@@ -3,7 +3,7 @@
 tty -s && echo sourcing .functions
 
 os=$(uname -s| cut -c 1-2)
-host=$(hostname)
+host=$(hostname -s)
 dist=unknown
 
 if [ $os = Li ]; then
