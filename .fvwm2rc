@@ -100,7 +100,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Xterm"		Exec exec xterm -ls
 +		"Emacs"		Exec exec emacs > ${HOME}/log/emacs 2>&1
 +		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
-+		"Chromium"	Exec exec chromium > /${HOME}/log/firefox 2>&1
++		"Chromium"	Exec exec chromium --ssl-version-min=tls1.1 > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
