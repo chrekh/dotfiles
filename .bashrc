@@ -15,11 +15,11 @@ if tty -s; then
     fi
     PROMPT_DIRTRIM=5
     
-    set -b
-    set -m
-    set +H
+    set -m # enable job controll
+    set -b # print exit status immeitately
+    set +H # Disable ! history substitution (I never use them)
 
-    shopt -s checkwinsize
+    shopt -s checkwinsize # check window size after each command
 
     HISTCONTROL=ignoredups
     [ -f ~/.bash_history ] && rm -f ~/.bash_history
