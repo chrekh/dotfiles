@@ -12,6 +12,7 @@
  make-backup-files nil
  inhibit-startup-screen t
  initial-scratch-message nil
+ confirm-nonexistent-file-or-buffer nil
  calendar-week-start-day 1
  require-final-newline t
  next-line-add-newlines nil
