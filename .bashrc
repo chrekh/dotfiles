@@ -35,10 +35,10 @@ if tty -s; then
     stty kill ^@
     case $TERM in
 	vt* | xterm | linux)
-	    stty erase ^?
+	    stty erase '^?'
 	    ;;
 	*)
-	    stty erase ^h
+	    stty erase '^h'
     esac
 
 fi
