@@ -7,6 +7,7 @@ PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /opt/puppet/bin/ /bin /usr/bin /s
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )
 MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/man ${MANPATH//:/ } \
+    /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
 export PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
