@@ -21,6 +21,7 @@ alias h='history'
 # BoKS
 if [ -x /opt/boksm/bin/suexec ]; then
     alias sudo=/opt/boksm/bin/suexec
+    alias sbk='sudo /opt/boksm/sbin/boksadm -S'
 fi
 
 # COW (Copy-On-Write) if supported
