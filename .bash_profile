@@ -6,6 +6,7 @@ PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /opt/puppet/bin/ /bin /usr/bin /s
     /usr/local/bin /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )
+MANPATH=$(manpath 2>/dev/null)
 MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/man ${MANPATH//:/ } \
     /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
