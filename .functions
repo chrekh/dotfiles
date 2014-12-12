@@ -38,7 +38,7 @@ if [ $host = ender ]; then
     }
 fi
 
-if [ ${BASH_VERSINFO[0]} -gt 7 ]; then
+if [ ${BASH_VERSINFO[0]} -ge 4 ]; then
     # bash-4 have hashes
     setpath() {   
 	local -A used
