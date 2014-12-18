@@ -64,7 +64,7 @@ else
 		[ ${newpath##$d:*} ]   || continue # d is first in $PATH
 		[ ${newpath%%*:$d} ]   || continue # d is last in $PATH
 		[ ${newpath##*:$d:*} ] || continue # d is in $PATH
-		[ -d $d ] || continue                   # d is not a directory
+		[ -d $d ]              || continue # d is not a directory
 		newpath=$newpath:$d
 	    else
 		newpath=$d
