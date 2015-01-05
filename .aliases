@@ -10,6 +10,7 @@ elif [ $os = Da ]; then
     alias df='df -h'
 fi
 
+alias rootxauth='sudo -H xauth add `xauth list $DISPLAY`'
 alias g=git
 alias l=less
 alias zl=zless
