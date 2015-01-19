@@ -60,6 +60,9 @@ if [ "$domain" = utv.polisen.se ]; then
 	alias rxvt="xterm -ls -bg '#ffd0c0' -fg '#000000'"
     fi
 fi
+if pum < /dev/null > /dev/null 2>&1; then
+    alias last='last|egrep -v ^cmdb|tac|pum'
+fi
 
 # ClearCase
 if type cleartool > /dev/null 2>&1; then
