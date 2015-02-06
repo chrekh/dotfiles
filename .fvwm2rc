@@ -22,7 +22,7 @@ Style "XClock"      !Title, Sticky, NeverFocus
 Style "Xlogin"      !Title, Sticky, PositionPlacement UnderMouse
 Style "dclock"      !Title, Sticky
 Style "XLoad"	    !Title, NeverFocus
-Style "rdesktop"    !Title, !Borders
+#Style "rdesktop"    !Title, !Borders
 Style "Chromium-browser" !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
