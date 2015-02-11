@@ -1,0 +1,14 @@
+#! /bin/sh 
+
+xauth add :0 . $(mcookie)
+
+# Start key agents
+eval $(ssh-agent)
+eval $(gpg-agent --daemon)
+
+HOST=$(hostname) xinit -- /usr/bin/X -listen tcp -auth ${HOME}/.Xauthority > ${HOME}/log/xinit.log 2>&1
+
+# Kill key agents
+info=(${GPG_AGENT_INFO//:/ })
+kill ${info[1]}
+ssh-agent -k
