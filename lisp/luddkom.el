@@ -128,6 +128,7 @@
   (interactive)
   (setq-default
    my-kom-server-priority 250
+   kom-deferred-printing nil
    kom-friends '(1167 10706 70 6599)
    )
   (start-or-goto-kom "LysKOM" "kom.lysator.liu.se" "Christer Ekholm" (plist-get kom-passwd 'lys)))

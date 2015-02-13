@@ -34,7 +34,6 @@ AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager
 + I Exec exec xscreensaver -no-capture-stderr -no-splash
-+ I Exec emacs -geometry 115x50-1610-50
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 + I Exec exec xmodmap ${HOME}/X11/xmodmap/linux
@@ -99,6 +98,8 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Rxvt"		Exec exec urxvt -ls
 +		"Xterm"		Exec exec xterm -ls
 +		"Emacs"		Exec exec emacs > ${HOME}/log/emacs 2>&1
++		"Koms"		Exec exec emacs -f koms -geometry 114x49+739-22 > ${HOME}/log/emacs-koms 2>&1
++		"Gnus"		Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
 +		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
 +		"Chromium"	Exec exec chromium --ssl-version-min=tls1.1 > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
