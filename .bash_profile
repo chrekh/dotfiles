@@ -63,6 +63,8 @@ fi
 
 # Set terminal title to my prefered name for this host
 if [ -e ~/.hostname ]; then
-    title=`awk -v host=$host '$1 == host {print $2}' ~/.hostname`
-    [ -z "$title" ] || printf "]0;%s\007" $title
+    set -x
+    title=$(grep ^$host .hostname | sed -e "s/^$host *//")
+    [ -z "$title" ] || echo $(tput tsl) $title $(tput fsl)
+    set +x
 fi
