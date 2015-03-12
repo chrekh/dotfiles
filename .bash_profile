@@ -63,8 +63,6 @@ fi
 
 # Set terminal title to my prefered name for this host
 if [ -e ~/.hostname ]; then
-    set -x
     title=$(grep ^$host .hostname | sed -e "s/^$host *//")
     [ -z "$title" ] || echo $(tput tsl) $title $(tput fsl)
-    set +x
 fi
