@@ -19,6 +19,11 @@ alias j=jobs
 alias f='finger -m'
 alias h='history'
 
+# Btrfs
+if [ -x /sbin/btrfs ]; then
+    alias b='sudo btrfs'
+fi
+
 # BoKS
 if [ -x /opt/boksm/bin/suexec ]; then
     alias sudo=/opt/boksm/bin/suexec
