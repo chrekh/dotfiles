@@ -8,6 +8,9 @@ clear mod5
 ! AltGr
 keycode 113 = Mode_switch
 
+! § on macbook
+keycode 49 = Escape
+
 ! {|}  дце
 keycode 48 = braceleft bracketleft adiaeresis Adiaeresis
 keycode 47 = bar backslash odiaeresis Odiaeresis
