@@ -1,0 +1,17 @@
+[user]
+	name = Christer Ekholm
+	email = che@chrekh.se
+[alias]
+	lg = log --pretty=oneline --graph
+	stat = status
+[log]
+	abbrevCommit = true
+	decorate = true
+[merge]
+	tool = meld
+[push]
+	default = matching
+[giggle]
+	main-window-maximized = false
+[color]
+	ui = auto
