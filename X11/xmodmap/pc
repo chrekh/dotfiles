@@ -8,7 +8,7 @@ clear mod5
 ! AltGr
 keycode 113 = Mode_switch
 
-! § on macbook
+! §
 keycode 49 = Escape
 
 ! {|}  дце

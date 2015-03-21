@@ -12,6 +12,15 @@ nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc9
 xsetbg /home/che/X11/rainlight.gif
 xrdb /home/che/.Xdefaults 
 
+case $host in
+    bean)
+	xmodmap ~/X11/xmodmap/macbook
+	;;
+    *)
+	xmodmap ~/X11/xmodmap/pc
+	;;
+esac
+
 [ -x /usr/bin/urxvt ] || uxterm &
 
 xscreensaver -no-capture-stderr -no-splash &
