@@ -161,6 +161,7 @@ Mouse 1		3	A	Iconify
 
 # Key bindings
 Key	Pause	A	N	exec xscreensaver-command -lock
+Key	XF86PowerOff A  N	exec xscreensaver-command -lock
 
 ########################## Icon Manager ####################################
 *FvwmIconMan*background #ffb090
