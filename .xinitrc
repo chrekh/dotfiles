@@ -15,6 +15,7 @@ xrdb /home/che/.Xdefaults
 case $host in
     bean)
 	xmodmap ~/X11/xmodmap/macbook
+	xhost +local:0
 	;;
     *)
 	xmodmap ~/X11/xmodmap/pc
