@@ -62,6 +62,7 @@ AddToMenu modules	"FvwmModules"   Title
 +                       "RootCursor"    Module  FvwmForm RootCursor
 +                       "Identify"      Module  FvwmIdent
 +                       "Talk"          Module  FvwmTalk
++			"TaskBar"	Module  FvwmTaskBar
 +                       ""              Nop
 +                       "Button-Bar"    Module  FvwmButtons
 +                       "Pager"         Module  FvwmPager 0 0
