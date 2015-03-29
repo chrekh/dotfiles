@@ -46,7 +46,7 @@ umask 02
 
 # Git configurations depending on where I am
 export GIT_AUTHOR_EMAIL=che@chrekh.se
-export GIT_AUTHOR_NAME=Christer Ekholm
+export GIT_AUTHOR_NAME='Christer Ekholm'
 case $domain in
     *.polisen.se | *.police.se)
 	GIT_AUTHOR_EMAIL=Christer.Ekholm@polisen.se
