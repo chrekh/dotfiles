@@ -30,7 +30,7 @@ Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
 Style "wmpower"	    !Title, Sticky, WindowListSkip, NeverFocus, StaysOnTop
-Style "wmbattery"   !Title, Sticky, WindowListSkip, NeverFocus, StaysOnTop
+Style "wmbattery"   !Title, WindowListSkip, NeverFocus, StaysOnTop
 
 # What to do at startup
 AddToFunc InitFunction
