@@ -110,7 +110,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Gnus"		Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
 +		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Chromium"	Exec exec chromium --ssl-version-min=tls1.1 > /${HOME}/log/chromium 2>&1
-Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --ssl-version-min=tls1.1 > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --start-maximized --ssl-version-min=tls1.1 > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
