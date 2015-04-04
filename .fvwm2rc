@@ -24,6 +24,7 @@ Style "Xlogin"      !Title, Sticky, PositionPlacement UnderMouse
 Style "dclock"      !Title, Sticky
 Style "XLoad"	    !Title, NeverFocus
 #Style "rdesktop"    !Title, !Borders
+Style "Tint2"	    !Title, !Borders
 Style "Chromium-browser" !Title, !Borders
 Style "Google-chrome-stable" !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
