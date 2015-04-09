@@ -62,7 +62,8 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
+title="$host ($dist)"
 if [ -e ~/.hostname ]; then
-    title=$(grep ^$host .hostname | sed -e "s/^$host *//")
-    [ -z "$title" ] || echo $(tput tsl) $title $(tput fsl)
+    title="$title "$(grep ^$host .hostname | sed -e "s/^$host *//")
 fi
+echo $(tput tsl) $title $(tput fsl)
