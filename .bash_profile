@@ -61,9 +61,10 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # I don't want man to ask stuipd questions
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
 
+set -x
 # Set terminal title to my prefered name for this host
-if [ -e ~/.hostname ]; then
-    title="$title "$(grep ^$host ~/.hostname | sed -e "s/^$host *//")
+if [ -e ~/.hostname ] && title=$(grep ^$host ~/.hostname); then
+    title="$title ($dist)"
 elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
     title="$title ($dist)"
@@ -71,3 +72,4 @@ else
     title="$host ($dist)"
 fi
 echo $(tput tsl)${title}$(tput fsl)
+set +x
