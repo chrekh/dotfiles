@@ -64,10 +64,9 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 if [ -e ~/.hostname ] && title=$(grep ^$host ~/.hostname); then
     title="$title ($dist)"
+    echo $(tput tsl)${title}$(tput fsl)
 elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
     title="$title ($dist)"
-else
-    title="$host ($dist)"
+    echo $(tput tsl)${title}$(tput fsl)
 fi
-echo $(tput tsl)${title}$(tput fsl)
