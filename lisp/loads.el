@@ -4,6 +4,9 @@
 (load "perl")
 (load "html")
 (load "ext")
+(condition-case nil
+    (load "50magit.el")
+  (error nil))
 (load "bindings")
 (load "variables")
 (condition-case nil (load "clearcase") (error nil))
