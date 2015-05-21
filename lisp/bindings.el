@@ -16,7 +16,7 @@
 (define-key text-mode-map "\e\t" 'lisp-complete-symbol)
 
 (cond ((fboundp 'magit-status)
-       (define-key global-map "\C-xvv" 'magit-status)))
+       (define-key global-map "\C-xvf" 'magit-status)))
 (cond ((>= emacs-major-version 21)
        (define-key global-map [home] 'beginning-of-buffer)
        (define-key global-map [end] 'end-of-buffer)
