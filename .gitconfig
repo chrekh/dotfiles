@@ -3,6 +3,7 @@
 	email = che@chrekh.se
 [alias]
 	lg = log --pretty=oneline --graph
+	logg = log --graph --stat -M -C
 	stat = status
 [log]
 	abbrevCommit = true
