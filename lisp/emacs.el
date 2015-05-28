@@ -1,7 +1,7 @@
 (dolist (dir '("~u0043002/extern/lisp" "~u0043002/lisp"
 	       "~chrekh/extern/lisp" "~chrekh/lisp"
 	       "~che/extern/lisp" "~che/lisp"
-	       "~/extern/lisp" "~/lisp"))
+	       "~/extern/lisp" "~/extern/lisp/magit" "~/lisp"))
   (when (file-accessible-directory-p dir)
     (add-to-list 'load-path (expand-file-name dir))))
 
