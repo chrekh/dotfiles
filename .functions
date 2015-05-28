@@ -27,10 +27,9 @@ domain=$(dnsdomainname 2>/dev/null)
 if [ ! $domain ]; then
     if [ -f /etc/resolv.conf ]; then
 	domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
-    else
-	domain=none
     fi
 fi
+[ $domain ] || domain=none
 
 if [ $host = ender ]; then
     spam() {
