@@ -1,13 +1,15 @@
 tty -s && echo sourcing .bash_profile
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
-PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /opt/puppet/bin/ /bin /usr/bin /sbin /usr/sbin \
+PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/um/bin /opt/puppet/bin/ \
+    /bin /usr/bin /sbin /usr/sbin \
     ${PATH//:/ } \
     /opt/boksm/bin /opt/boksm/sbin \
     /usr/local/bin /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )
 MANPATH=$(manpath 2>/dev/null)
-MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/man ${MANPATH//:/ } \
+MANPATH=$(setpath /usr/local/adm/man /usr/local/um/man /opt/puppet/share/ma1n \
+    ${MANPATH//:/ } \
     /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
