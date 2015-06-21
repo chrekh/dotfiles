@@ -4,6 +4,10 @@
  case-fold-search t
  )
 
+(custom-set-variables
+ '(js-indent-level 2)
+ )
+
 (setq
  user-mail-address "che@chrekh.se"
  add-log-full-name "Christer Ekholm"
