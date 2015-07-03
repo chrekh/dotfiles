@@ -41,7 +41,7 @@ if tty -s; then
     done
 fi
 
-umask 02
+umask 022
 
 [ $domain = utv.rps.police.se ] && export LDAP_BASEDN='dc=utv,dc=rps,dc=police,dc=se';
 [ $domain = utv.polisen.se ] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
