@@ -41,11 +41,9 @@ AddToFunc InitFunction
 + I Exec exec xsetbg /localhome/chrekh/img/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5+5
 Test (EnvMatch HOST jane) + I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
-Test (EnvMatch HOST jane) + I Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
 Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
 Test (EnvMatch HOST lx*)  + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x140+1436+3
 Test (EnvMatch HOST bean) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
-Test (EnvMatch HOST jane) + I Exec xon ender "xbiff -geometry 83x70+1603+3"
 
 AddToFunc RestartFunction
 + I Module FvwmPager 0 0
