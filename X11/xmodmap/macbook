@@ -8,6 +8,11 @@ clear mod5
 ! Use cmd as Alt_gr
 keycode 134 = Mode_switch
 
+! Make Caps_Lock Control
+keycode 66 = Control_L
+remove Lock = Caps_Lock
+add Control = Control_L
+
 ! §
 keycode 49 = Escape
 
