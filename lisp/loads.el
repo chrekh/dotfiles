@@ -3,6 +3,7 @@
 (load "misc")
 (load "perl")
 (load "html")
+(load "calweek")
 (load "ext")
 (condition-case nil
     (load "50magit.el")
