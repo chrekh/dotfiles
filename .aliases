@@ -6,6 +6,11 @@ if [ $os = Li ]; then
     alias df='df -h'
     alias ls='ls -vF'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
+    if free -V | grep -q procps-ng; then
+	alias free='free -ht'
+    else
+	alias free='free -mt'
+    fi
 elif [ $os = Da ]; then
     alias df='df -h'
 fi
