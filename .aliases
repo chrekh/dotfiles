@@ -72,7 +72,7 @@ if [ "$domain" = utv.polisen.se ]; then
     fi
 fi
 if pum < /dev/null > /dev/null 2>&1; then
-    alias last='last|egrep -v ^cmdb|tac|pum'
+    alias last='last -F|egrep -v ^cmdb|tac|pum'
 fi
 
 # ClearCase
