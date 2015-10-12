@@ -3,6 +3,7 @@
 (menu-bar-mode -1)
 (transient-mark-mode 1)
 (setq mark-even-if-inactive t)
+(global-unset-key "\C-z")
 
 ;; fringe TEST-line       sdf                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                     sdf------------------------------
 
