@@ -1,6 +1,6 @@
 tty -s && echo sourcing .bash_profile
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
-PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/um/bin /opt/puppet/bin/ \
+PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/um/bin /opt/puppet/bin/ /opt/puppetlabs/bin \
     /bin /usr/bin /sbin /usr/sbin \
     ${PATH//:/ } \
     /opt/boksm/bin /opt/boksm/sbin \
