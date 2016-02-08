@@ -74,14 +74,36 @@ elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
     echo $(tput tsl)${title}$(tput fsl)
 fi
 
-ssh-add -l > /dev/null 2>&1
-# 2 means ssh-add is unable to contact the authentication agent.
-if [ $? = 2 ]; then
-    if [ -n "$SSH_AUTH_SOCK" ] && [ -r $SSH_AUTH_SOCK ] && [ -n "$SSH_AGENT_PID" ]; then
-	if kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-	    break;
+if tty -s; then 
+    # Reuse or start new ssh-agent
+    ssh-add -l > /dev/null 2>&1
+    if [ $? -ne 2 ]; then 
+	if [ -n "$SSH_AUTH_SOCK" ] && [ -r $SSH_AUTH_SOCK ]; then
+	    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
+	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+		echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
+	    fi
+	fi
+    else
+	if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	    ssh-agent -k
+	fi
+	if [ -e ~/.ssh-agent ]; then
+	    . ~/.ssh-agent
+	    ssh-add -l > /dev/null 2>&1
+	    if [ $? -eq 2 ]; then
+		if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+		    ssh-agent -k
+		fi
+		echo "Start a new ssh-agent"
+		eval $(ssh-agent)
+		if [ -n "$SSH_AUTH_SOCK" ] && [ -r $SSH_AUTH_SOCK ]; then
+		    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
+		    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+			echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
+		    fi
+		fi
+	    fi
 	fi
     fi
-    echo "Start a new ssh-agent"
-    eval $(ssh-agent)
 fi
