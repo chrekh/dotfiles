@@ -83,4 +83,5 @@ if [ $? = 2 ]; then
 	fi
     fi
     echo "Start a new ssh-agent"
+    eval $(ssh-agent)
 fi
