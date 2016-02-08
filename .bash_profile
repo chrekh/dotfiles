@@ -73,3 +73,14 @@ elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
     title="$title ($dist)"
     echo $(tput tsl)${title}$(tput fsl)
 fi
+
+ssh-add -l > /dev/null 2>&1
+# 2 means ssh-add is unable to contact the authentication agent.
+if [ $? = 2 ]; then
+    if [ -n "$SSH_AUTH_SOCK" ] && [ -r $SSH_AUTH_SOCK ] && [ -n "$SSH_AGENT_PID" ]; then
+	if kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	    break;
+	fi
+    fi
+    echo "Start a new ssh-agent"
+fi
