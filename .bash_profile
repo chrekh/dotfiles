@@ -4,7 +4,7 @@ PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/um/bin /usr/local/bin 
     /opt/puppet/bin/ /opt/puppetlabs/bin \
     /bin /usr/bin /sbin /usr/sbin \
     ${PATH//:/ } \
-    /opt/boksm/bin /opt/boksm/sbin \
+    /opt/boksm/bin /opt/boksm/sbin '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
     /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )

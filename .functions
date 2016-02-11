@@ -47,10 +47,10 @@ if [ ${BASH_VERSINFO[0]} -ge 4 ]; then
     setpath() {   
 	local -A used
 	local newpath
-	for d in $@; do
+	for d in "$@"; do
 	    [ ${used[$d]} ] && continue
 	    used[$d]=y
-	    [ -d $d ] || continue
+	    [ -d "$d" ] || continue
 	    if [ $newpath ]; then
 		newpath=$newpath:$d
 	    else
