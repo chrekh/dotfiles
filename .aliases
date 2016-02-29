@@ -59,7 +59,7 @@ if [ $dist = gentoo ]; then
     alias eix='eix -n'
     worldopts='--deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --verbose-conflicts --backtrack=8'
     if [ $host = jane ]; then
-	worldopts="$worldopts --jobs=15 --load-average=15"
+	worldopts="$worldopts --jobs=5 --load-average=10"
     fi
     alias world="sudo emerge $worldopts @system @world"
 fi
