@@ -65,9 +65,9 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-if [ -e ~/.hostname ] && title=$(grep ^$host ~/.hostname); then
-    title="$title ($dist)"
-    echo $(tput tsl)${title}$(tput fsl)
+if [ -e /etc/hostaliases -a -s /etc/hostaliases ]; then
+    title=`cat /etc/hostaliases`
+    printf "\033]2;%s\007\033]1;%s\007" `hostname`" ($title)"
 elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
     title="$title ($dist)"
