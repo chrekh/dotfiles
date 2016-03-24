@@ -67,7 +67,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 if [ -e /etc/hostaliases -a -s /etc/hostaliases ]; then
     title=`cat /etc/hostaliases`
-    printf "\033]2;%s\007\033]1;%s\007" `hostname`" ($title)"
+    printf "\033]2;%s\007\033]1;%s\007" "$host ($title)"
 elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
     title="$title ($dist)"
