@@ -14,10 +14,14 @@ dist=unknown
 if [ $os = Li ]; then
     if [ -f /etc/SuSE-release ]; then
 	dist=suse
+	maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
+	min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
+	rel="$maj.$min"
     elif [ -f /etc/gentoo-release ]; then
 	dist=gentoo
     elif [ -f /etc/redhat-release ]; then
 	dist=redhat
+	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
     fi
     declare -a cu_ver
     cu_ver=($(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g'))
