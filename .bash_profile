@@ -62,17 +62,16 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 
 # I don't want man to ask stuipd questions
-[ $dist = suse ] && export MAN_POSIXLY_CORRECT=1
+[ $dist = Suse ] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-[ -n "$dist" ] && title=$dist
+[ -n "$dist" ] && title="[$dist]"
 [ -n "$rel" ] && title="[$dist $rel]"
 if [ -e /etc/hostaliases -a -s /etc/hostaliases ]; then
     aliases=`cat /etc/hostaliases`
     printf "\033]2;%s\007\033]1;%s\007" "$host $title ($aliases)"
 elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
-    title="$title ($dist)"
     echo $(tput tsl)${title}$(tput fsl)
 fi
 
