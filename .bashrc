@@ -21,7 +21,6 @@ if tty -s; then
 
     shopt -s checkwinsize # check window size after each command
     shopt -s failglob     # Don't expand * to '*' if no matches.
-    shopt -s dotglob      # expand filenames starting with .
     shopt -u sourcepath   # Don't use PATH for sourcing files.
     shopt -u progcomp     # Don't use programmable completion.
 
