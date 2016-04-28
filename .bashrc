@@ -1,4 +1,5 @@
 bashrc_sourced=y
+
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
 
 if tty -s; then
