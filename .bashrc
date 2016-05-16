@@ -10,9 +10,9 @@ if tty -s; then
     GIT_PS1_SHOWDIRTYSTATE=1
     if [ -r ~/.git-prompt.sh ] && git --version > /dev/null 2>&1; then
 	. ~/.git-prompt.sh
-	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\]'
+	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
     else
-	PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\]'
+	PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
     fi
     PROMPT_DIRTRIM=5
     
