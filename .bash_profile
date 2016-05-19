@@ -2,9 +2,9 @@ tty -s && echo sourcing .bash_profile
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
 PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/bin \
     /opt/puppet/bin/ /opt/puppetlabs/bin \
+    /opt/boksm/bin /opt/boksm/sbin '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
     /bin /usr/bin /sbin /usr/sbin \
     ${PATH//:/ } \
-    /opt/boksm/bin /opt/boksm/sbin '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
     /usr/lib/mit/bin \
     /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
