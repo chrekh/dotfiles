@@ -75,6 +75,7 @@ else
 		[ -d $d ]              || continue # d is not a directory
 		newpath=$newpath:$d
 	    else
+		[ -d $d ] || continue
 		newpath=$d
 	    fi
 	done
