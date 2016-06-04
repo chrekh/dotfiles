@@ -26,11 +26,5 @@ kaka=`xauth list $DISPLAY|awk '{print $NF}'`
 ssh  -f $remote xauth add $disp . $kaka
 
 # execute command remote
-
-#(rsh -n $remote ". .bash_profile;export DISPLAY=$disp;$@&")&
-
-ssh -T -f -o 'ForwardX11 no' $remote ". .bash_profile;export DISPLAY=$disp;$@ >/dev/null 2>&1 &"
-
-#sleep 1
-
-#kill -1 `ps ax | awk '/[r]sh -n .*export DISPLAY/{print $1}'`
+ssh -T -f -o 'ForwardX11 no' -o 'ForwardX11Trusted no' -o 'ForwardAgent no' \
+    $remote "export DISPLAY=$disp;$@>/tmp/xon.log 2>&1 &"
