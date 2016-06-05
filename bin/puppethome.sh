@@ -17,4 +17,5 @@ case $domain in
 	;;
 esac
 
+echo update $dest
 git archive HEAD | tar xvfC - $dest
