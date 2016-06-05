@@ -76,48 +76,50 @@ elif [ -n "$WINDOWID" ] && title=$(xprop -id $WINDOWID -notype WM_NAME \
     echo $(tput tsl)${title}$(tput fsl)
 fi
 
-if tty -s; then 
+if tty -s; then
     # Reuse or start new ssh-agent
     ssh-add -l > /dev/null 2>&1
     if [ $? -eq 2 ]; then
-	# ssh-add is unable to contact the agent from current env. Kill it.
+	# ssh-add is unable to contact the agent.
 	if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-	    ssh-agent -k
+	    # Kill it.
+	    eval $(ssh-agent -k)
+	    unset SSH_AUTH_SOCK
 	fi
-	if [ -e ~/.ssh-agent ]; then
-	    # We have access to stored agent info, read it.
-	    . ~/.ssh-agent
-	    ssh-add -l > /dev/null 2>&1
-	    if [ $? -eq 2 ]; then
-		# ssh-add is unable to contact the agent from stored info. Kill it.
-		if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-		    ssh-agent -k
-		fi
-		echo "Start a new ssh-agent"
-		eval $(ssh-agent)
-		# Store the agent info for later shells to use.
-		> ~/.ssh-agent
-		if [ -n "$SSH_AUTH_SOCK" ] && [ -r $SSH_AUTH_SOCK ]; then
-		    echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
-		fi
-		if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-		    echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
-		fi
-	    else
-		# ssh-add is able to contact the agent from stored info.
-		if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
-		    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-		elif [ -n "$SSH_AUTH_SOCK" ] && kill -0 ${SSH_AUTH_SOCK##*.} >/dev/null 2>&1; then
-		    echo "Use forwarded ssh-agent (${SSH_AUTH_SOCK##*.})"
-		fi
+	# Read stored agent info.
+	[ -e ~/.ssh-agent ] && . ~/.ssh-agent
+	ssh-add -l > /dev/null 2>&1
+	if [ $? -eq 2 ]; then
+	    # ssh-add is still unable to contact the agent.
+	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+		# Kill it.
+		eval $(ssh-agent -k)
+		unset SSH_AUTH_SOCK
+	    fi
+	    echo "Start a new ssh-agent"
+	    eval $(ssh-agent)
+	    # Store the agent info for later shells to use.
+	    > ~/.ssh-agent
+	    if [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
+	    fi
+	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+		echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
+	    fi
+	else
+	    # ssh-add is able to contact the agent from stored info.
+	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+		echo "Use existing ssh-agent ($SSH_AGENT_PID)"
+	    elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+		echo "Use forwarded ssh-agent"
 	    fi
 	fi
     else
 	# ssh-add is able to contact the agent from current env.
 	if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
 	    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-	elif [ -n "$SSH_AUTH_SOCK" ] && kill -0 ${SSH_AUTH_SOCK##*.} >/dev/null 2>&1; then
-	    echo "Use forwarded ssh-agent (${SSH_AUTH_SOCK##*.})"
+	elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+	    echo "Use forwarded ssh-agent"
 	fi
     fi
 fi
