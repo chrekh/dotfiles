@@ -55,7 +55,7 @@ case $domain in
     *.polisen.se | *.police.se)
 	GIT_AUTHOR_EMAIL=Christer.Ekholm@polisen.se
 	;;
-    *.init.se)
+    *init.se)
 	GIT_AUTHOR_EMAIL=che@init.se
 	;;
 esac
