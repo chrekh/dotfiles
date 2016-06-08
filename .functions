@@ -55,7 +55,7 @@ if [ ${BASH_VERSINFO[0]} -ge 4 ]; then
 	    [ ${used[$d]} ] && continue
 	    used[$d]=y
 	    [ -d "$d" ] || continue
-	    if [ $newpath ]; then
+	    if [ "$newpath" ]; then
 		newpath=$newpath:$d
 	    else
 		newpath=$d
