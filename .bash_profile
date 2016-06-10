@@ -61,7 +61,7 @@ case $domain in
 esac
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
-[ $os = MI ] && type blink > /dev/null 2>&1 && GIT_SSH=blink
+[ $os = MI ] && type blink > /dev/null 2>&1 && export GIT_SSH=blink
 
 # I don't want man to ask stuipd questions
 [ $dist = Suse ] && export MAN_POSIXLY_CORRECT=1
