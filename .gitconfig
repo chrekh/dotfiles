@@ -15,4 +15,4 @@
 [giggle]
 	main-window-maximized = false
 [color]
-	ui = auto
+	ui = never
