@@ -106,7 +106,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Rxvt"		Exec exec urxvt -ls
 +		"Xterm"		Exec exec xterm -ls
 + 		"Emacs"		Exec exec emacs -geometry 110x40 > ${HOME}/log/emacs 2>&1
-+		"Koms"		Exec exec emacs-24 -f koms -geometry 114x49+739-22 > ${HOME}/log/emacs-koms 2>&1
++		"Koms"		Exec exec emacs -f koms -geometry 114x49+739-22 > ${HOME}/log/emacs-koms 2>&1
 +		"Gnus"		Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
 +		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Chromium"	Exec exec chromium  > /${HOME}/log/chromium 2>&1
