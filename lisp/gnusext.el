@@ -8,6 +8,9 @@
 ;the topic parameters to the following:
 ;
 (setq mm-inline-text-html-with-images t
+      mm-text-html-renderer 'gnus-w3m
+      mm-inline-large-images t
+      gnus-blocked-images nil
       mm-discouraged-alternatives nil
       mm-w3m-safe-url-regexp nil
       ;gnus-treat-wash-html '("gwene")
