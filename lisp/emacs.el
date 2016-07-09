@@ -8,7 +8,6 @@
 
 (load "loads")
 
-(menu-bar-mode -1)
 (cond ((and window-system (not (featurep 'xemacs))) 
        (load "x-setup")
        (load-library "server")
