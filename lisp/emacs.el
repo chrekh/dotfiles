@@ -15,10 +15,9 @@
        (setq server-window (lambda (buf) (switch-to-buffer-other-frame buf)))
        (add-hook 'server-done-hook (lambda () (delete-frame)))
        
-       (if (fboundp 'server-running-p)
-	   (and (not (server-running-p))
-		(server-start))
-	 (server-start))
+       (and (fboundp 'server-running-p)
+	    (not (server-running-p))
+	    (server-start))
        (when (and (require 'edit-server nil t)
 		  (not (process-status "edit-server")))
 	 (setq edit-server-new-frame t)
