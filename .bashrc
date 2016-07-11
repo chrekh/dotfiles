@@ -8,16 +8,11 @@ if tty -s; then
     # prompt
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
-    if git --version >/dev/null 2>&1; then
-	for gp in /usr/share/git/git-prompt.sh ~/bin/git-prompt.sh; do
-	    if [ -r $gp ]; then
-		GIT_PS1_SHOWUPSTREAM="auto"
-		GIT_PS1_SHOWDIRTYSTATE=1
-		. $gp
-		PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
-		break
-	    fi
-	done
+    if [ -r ~/bin/git-prompt.sh ]; then
+	GIT_PS1_SHOWUPSTREAM="auto"
+	GIT_PS1_SHOWDIRTYSTATE=1
+	. ~/bin/git-prompt.sh
+	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
     fi
 
     set -m # enable job controll
