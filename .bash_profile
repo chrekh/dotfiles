@@ -29,7 +29,6 @@ export LC_MESSAGES=C
 export PAGER='less -idQMXsR'
 export LESS=idQMX
 
-export GZIP='--best'
 export EDITOR=vi
 export CHESSDIR=~/chess
 
