@@ -16,7 +16,7 @@ MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
 export PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
-[ -f ~/.bashrc -a ! "$bashrc_sourced" ] && . ~/.bashrc;
+[ -f ~/.bashrc ] && . ~/.bashrc;
 
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
