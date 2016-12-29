@@ -91,6 +91,14 @@
 ; Read my passwords
 (load-file "~/hemligt/kom-passwords.el")
 
+(defun koms-with-wait ()
+  (interactive)
+  (sit-for 1)
+  (redraw-display)
+  (sit-for 1)
+  (koms)
+  )
+
 (defun koms () ""
   (interactive)
   (condition-case nil (ludd) (error nil))

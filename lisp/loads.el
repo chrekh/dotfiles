@@ -39,6 +39,7 @@
     (progn
       (autoload 'ludd "luddkom" nil t)
       (autoload 'koms "luddkom" nil t)
+      (autoload 'koms-with-wait "luddkom" nil t)
       (autoload 'lys "luddkom" nil t)
       (autoload 'ender "luddkom" nil t)
       (autoload 'ham "luddkom" nil t)
