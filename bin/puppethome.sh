@@ -1,18 +1,17 @@
 #! /bin/bash
 
-. ~/.functions
-
 cd || exit 1
 umask 022
-case $domain in
-    utv.polisen.se)
+host=`hostname -f`
+case $host in
+    um-puppet.utv.rps.police.se | capsule.utv.polisen.se)
 	dest=/var/lib/puppet/files/UM/homedirs/u0043002
 	;;
-    appl.polisen.se)
+    satellite.appl.polisen.se)
 	dest=/var/lib/puppet/files/PROD/homedirs/196603089076
 	;;
     *)
-	echo "unconfigured domain $domain"
+	echo "No action defined for $host"
 	exit 1
 	;;
 esac
