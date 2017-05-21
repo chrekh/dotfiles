@@ -12,6 +12,7 @@ PATH=$(setpath ~/bin ~/perl /usr/local/adm/bin /usr/local/bin \
 )
 MANPATH=$(manpath 2>/dev/null)
 MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
+    /usr/local/man /usr/local/share/man \
     ${MANPATH//:/ } \
     /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
