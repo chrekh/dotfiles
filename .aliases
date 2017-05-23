@@ -35,6 +35,12 @@ if [ -x /sbin/btrfs ]; then
     alias b='sudo btrfs'
 fi
 
+# BoKS
+if [ -x /opt/boksm/bin/suexec ]; then
+    alias sudo=/opt/boksm/bin/suexec
+    alias sbk='sudo /opt/boksm/sbin/boksadm -S'
+fi
+
 # COW (Copy-On-Write) if supported
 if [ $os = Li ]; then
     (( ${cu_ver[0]} > 7 && ${cu_ver[1]} > 6 )) && alias cp='cp --reflink=auto'
