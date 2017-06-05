@@ -1,6 +1,15 @@
 bashrc_sourced=y
 
+
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
+
+# Try to set HOME to my home if BoKS has set it to /root
+[ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
+if [ "$PWD" = /root -a $HOME = /root ]; then
+    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se ]; then
+	HOME=/home/196603089076
+    fi
+fi
 
 if tty -s; then
     echo sourcing .bashrc
@@ -43,5 +52,8 @@ if tty -s; then
 
     if [ -e ~/.keymap-$domain ]; then
 	bind -f ~/.keymap-$domain
+    fi
+    if [ "$PWD" = /root -a $HOME = /root ]; then
+	HOME=/home/196603089076
     fi
 fi
