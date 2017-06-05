@@ -42,6 +42,9 @@ if tty -s; then
 	    break;
 	fi
     done
+    if [ -e ~/.keymap-$domain ]; then
+	bind -f ~/.keymap-$domain
+    fi
 fi
 
 umask 022
