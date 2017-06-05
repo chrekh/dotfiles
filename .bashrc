@@ -41,4 +41,7 @@ if tty -s; then
 	    stty erase '^h'
     esac
 
+    if [ -e ~/.keymap-$domain ]; then
+	bind -f ~/.keymap-$domain
+    fi
 fi
