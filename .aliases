@@ -39,7 +39,6 @@ fi
 if [ -x /opt/boksm/bin/suexec ]; then
     alias sudo=/opt/boksm/bin/suexec
     alias sbash="suexec bash --rcfile $(echo ~/.bashrc)"
-    alias sbk='sudo /opt/boksm/sbin/boksadm -S'
 fi
 
 # COW (Copy-On-Write) if supported
