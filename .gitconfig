@@ -16,3 +16,5 @@
 	main-window-maximized = false
 [color]
 	ui = never
+[core]
+	eol = lf
