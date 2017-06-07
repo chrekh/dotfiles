@@ -6,7 +6,8 @@ bashrc_sourced=y
 # Try to set HOME to my home if BoKS has set it to /root
 [ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
 if [ "$PWD" = /root -a $HOME = /root ]; then
-    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se ]; then
+    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
+	-o $domain = rps.police.se ]; then
 	HOME=/home/196603089076
 	alias vi='vim -u $HOME/.vimrc-polisen-prod'
     fi
