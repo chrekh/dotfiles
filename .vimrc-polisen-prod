@@ -5,7 +5,7 @@ syntax off
 set ignorecase
 :imap å }
 :imap ä {
-:imap ö ^V|
+:imap ö |
 :imap Å ]
 :imap Ä [
 :imap Ö \
