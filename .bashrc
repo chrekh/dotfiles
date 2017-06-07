@@ -51,8 +51,9 @@ if tty -s; then
 	    stty erase '^h'
     esac
 
-    if [ -e ~/.keymap-$domain ]; then
-	bind -f ~/.keymap-$domain
+    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
+	 -o $domain = rps.police.se ]; then
+	bind -f ~/.keymap-polisen-prod
     fi
     if [ "$PWD" = /root -a $HOME = /root ]; then
 	HOME=/home/196603089076
