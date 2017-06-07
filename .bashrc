@@ -8,6 +8,7 @@ bashrc_sourced=y
 if [ "$PWD" = /root -a $HOME = /root ]; then
     if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se ]; then
 	HOME=/home/196603089076
+	alias vi='vim -u $HOME/.vimrc-polisen-prod'
     fi
 fi
 

@@ -1,0 +1,12 @@
+syntax off
+:highlight nontext NONE
+:set compatible
+:set nomagic
+set ignorecase
+:imap å }
+:imap ä {
+:imap ö ^V|
+:imap Å ]
+:imap Ä [
+:imap Ö \
+:imap ¤ $
