@@ -8,12 +8,12 @@ bashrc_sourced=y
 # Use my keymap in polisen PROD
 if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
     -o $domain = mgmt.polisen.se -o $domain = rps.police.se ]; then
-    alias vi='vim -u $HOME/.vimrc-polisen-prod'
-    bind -f ~/.keymap-polisen-prod
     # Try to set HOME to my home if BoKS has set it to /root
     if [ "$PWD" = /root -a $HOME = /root ]; then
 	HOME=/home/196603089076
     fi
+    alias vi='vim -u $HOME/.vimrc-polisen-prod'
+    bind -f ~/.keymap-polisen-prod
 fi
 
 if tty -s; then
