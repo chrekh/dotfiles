@@ -7,9 +7,10 @@ bashrc_sourced=y
 [ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
 if [ "$PWD" = /root -a $HOME = /root ]; then
     if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
-	-o $domain = rps.police.se ]; then
+	-o $domain = mgmt.polisen.se -o $domain = rps.police.se ]; then
 	HOME=/home/196603089076
 	alias vi='vim -u $HOME/.vimrc-polisen-prod'
+	bind -f ~/.keymap-polisen-prod
     fi
 fi
 
@@ -52,10 +53,6 @@ if tty -s; then
 	    stty erase '^h'
     esac
 
-    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
-	 -o $domain = rps.police.se ]; then
-	bind -f ~/.keymap-polisen-prod
-    fi
     if [ "$PWD" = /root -a $HOME = /root ]; then
 	HOME=/home/196603089076
     fi
