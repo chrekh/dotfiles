@@ -3,7 +3,8 @@
 tty -s && echo sourcing .functions
 
 os=$(uname -s| cut -c 1-2)
-host=$(hostname -s 2>/dev/null || hostname 2>/dev/null)
+
+host=$(hostname 2>/dev/null | sed -e 's/\..*//')
 if [ $? -ne 0 ]; then
     host=unknown
     [ -n "$HOST" ] && host=$HOST
