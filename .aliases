@@ -13,6 +13,8 @@ if [ $os = Li ]; then
     fi
 elif [ $os = Da ]; then
     alias df='df -h'
+elif [ $os = HP ]; then
+    alias df=bdf
 fi
 
 alias rootxauth='sudo -H xauth add `xauth list $DISPLAY`'
