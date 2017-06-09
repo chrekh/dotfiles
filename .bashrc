@@ -2,26 +2,25 @@ bashrc_sourced=y
 
 
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
-
 [ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
-
-# Use my keymap in polisen PROD
-if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
-    -o $domain = mgmt.polisen.se -o $domain = rps.police.se ]; then
-    # Try to set HOME to my home if BoKS has set it to /root
-    if [ "$PWD" = /root -a $HOME = /root ]; then
-	HOME=/home/196603089076
-    fi
-    if type vim > /dev/null 2>&1; then
-	alias vi='vim -u ~/.vimrc-polisen-prod'
-    else
-	alias vi='vi -u ~/.vimrc-polisen-prod'
-    fi
-    bind -f ~/.keymap-polisen-prod
-fi
 
 if tty -s; then
     echo sourcing .bashrc
+
+    # Use my keymap in polisen PROD
+    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
+	-o $domain = mgmt.polisen.se -o $domain = rps.police.se ]; then
+	# Try to set HOME to my home if BoKS has set it to /root
+	if [ "$PWD" = /root -a $HOME = /root ]; then
+	    HOME=/home/196603089076
+	fi
+	if type vim > /dev/null 2>&1; then
+	    alias vi='vim -u ~/.vimrc-polisen-prod'
+	else
+	    alias vi='vi -u ~/.vimrc-polisen-prod'
+	fi
+	bind -f ~/.keymap-polisen-prod
+    fi
 
     # prompt
     PROMPT_DIRTRIM=5
@@ -38,9 +37,9 @@ if tty -s; then
     set +H # Disable ! history substitution (I never use them)
 
     shopt -s checkwinsize # check window size after each command
-    shopt -s failglob     # Don't expand * to '*' if no matches.
-    shopt -u sourcepath   # Don't use PATH for sourcing files.
-    shopt -u progcomp     # Don't use programmable completion.
+    shopt -s failglob	  # Don't expand * to '*' if no matches.
+    shopt -u sourcepath	  # Don't use PATH for sourcing files.
+    shopt -u progcomp	  # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
     [ -f ~/.bash_history ] && rm -f ~/.bash_history
