@@ -34,6 +34,8 @@ export LESS=idQMX
 export EDITOR=vi
 export CHESSDIR=~/chess
 
+export GREP_OPTIONS=--exclude-dir=.git
+
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
     for term in $TERM rxvt-unicode rxvt xterm vt100; do
