@@ -26,6 +26,7 @@ alias j=jobs
 alias f='finger -m'
 alias h='history'
 alias gzip='gzip --best'
+alias grep='grep --colour=auto --exclude-dir=.git'
 
 #Run mac-emacs on mac OS X
 if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
