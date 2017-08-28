@@ -26,7 +26,9 @@ alias j=jobs
 alias f='finger -m'
 alias h='history'
 alias gzip='gzip --best'
-alias grep='grep --colour=auto --exclude-dir=.git'
+if ! [ $dist = Suse -a $maj -lt 11 ]; then
+    alias grep='grep --colour=auto --exclude-dir=.git'
+fi
 
 #Run mac-emacs on mac OS X
 if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
