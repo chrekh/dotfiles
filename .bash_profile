@@ -83,7 +83,7 @@ if tty -s; then
     ssh-add -l > /dev/null 2>&1
     if [ $? -eq 2 ]; then
 	# ssh-add is unable to contact the agent.
-	if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    # Kill it.
 	    eval $(ssh-agent -k)
 	    unset SSH_AUTH_SOCK
@@ -93,7 +93,7 @@ if tty -s; then
 	ssh-add -l > /dev/null 2>&1
 	if [ $? -eq 2 ]; then
 	    # ssh-add is still unable to contact the agent.
-	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		# Kill it.
 		eval $(ssh-agent -k)
 		unset SSH_AUTH_SOCK
@@ -105,12 +105,12 @@ if tty -s; then
 	    if [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
 		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
 	    fi
-	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
 	    fi
 	else
 	    # ssh-add is able to contact the agent from stored info.
-	    if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	    elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
 		echo "Use forwarded ssh-agent"
@@ -118,7 +118,7 @@ if tty -s; then
 	fi
     else
 	# ssh-add is able to contact the agent from current env.
-	if [ -n "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
 	    echo "Use forwarded ssh-agent"
