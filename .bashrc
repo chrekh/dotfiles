@@ -7,21 +7,6 @@ bashrc_sourced=y
 if tty -s; then
     echo sourcing .bashrc
 
-    # Use my keymap in polisen PROD
-    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
-	-o $domain = mgmt.polisen.se -o $domain = rps.police.se -o $host = NT330595 ]; then
-	# Set HOME to my home if BoKS has set it to /root
-	if [ "$PWD" = /root -a $HOME = /root ]; then
-	    HOME=/home/196603089076
-	fi
-	if type vim > /dev/null 2>&1; then
-	    alias vi='vim -u ~/.vimrc-polisen-prod'
-	else
-	    alias vi='vi -u ~/.vimrc-polisen-prod'
-	fi
-	bind -f ~/.keymap-polisen-prod
-    fi
-
     # prompt
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
