@@ -65,7 +65,7 @@ if [ $dist = Gentoo ]; then
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
     alias eix='eix -n'
-    worldopts='--deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --verbose-conflicts --backtrack=8'
+    worldopts='--deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --changed-deps --verbose-conflicts --backtrack=8'
     if [ $host = jane ]; then
 	worldopts="$worldopts --jobs=5 --load-average=10"
     elif [ $host = ender ]; then
