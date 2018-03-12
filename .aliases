@@ -93,6 +93,8 @@ if [ "$host" = NT330595 ]; then
 fi
 if pum < /dev/null > /dev/null 2>&1; then
     alias last='last -wF|egrep -v ^cmdb|tac|pum'
+else
+    alias last='last -wF|egrep -v ^cmdb|tac'
 fi
 
 # ClearCase
