@@ -34,6 +34,7 @@ Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
 Style "wmpower"	    !Title, Sticky, WindowListSkip, NeverFocus, StaysOnTop
 Style "wmbattery"   !Title, WindowListSkip, NeverFocus, StaysOnTop
+Style "aumix"	    Sticky
 
 # What to do at startup
 AddToFunc InitFunction
