@@ -27,13 +27,14 @@ Style "dclock"      !Title, Sticky
 Style "XLoad"	    !Title, NeverFocus
 #Style "rdesktop"    !Title, !Borders
 Style "Tint2"	    !Title, !Borders
-Style "Chromium-browser" !Title, !Borders
-Style "Google-chrome-stable" !Title, !Borders
+Style "Chrom*"      !Title, !Borders
+Style "Google-chrome*" !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
 Style "wmpower"	    !Title, Sticky, WindowListSkip, NeverFocus, StaysOnTop
 Style "wmbattery"   !Title, WindowListSkip, NeverFocus, StaysOnTop
+Style "aumix"	    Sticky
 
 # What to do at startup
 AddToFunc InitFunction

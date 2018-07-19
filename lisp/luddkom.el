@@ -110,7 +110,7 @@
  ; (condition-case nil (tokkom) (error nil))
  ; (condition-case nil (mdskom) (error nil))
   (condition-case nil (mys) (error nil))
-  (condition-case nil (plutten) (error nil))
+ ; (condition-case nil (plutten) (error nil))
 )
 
 (defun start-or-goto-kom (alias kom user password)
