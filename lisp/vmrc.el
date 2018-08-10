@@ -81,6 +81,8 @@
 
 (setq vm-sa-map (make-sparse-keymap))
 
+(vm-current-key-bindings)
+(define-key vm-summary-mode-map "=" 'vm-summarize)
 (define-key vm-summary-mode-map "x" 'vm-expunge-folder)
 (define-key vm-summary-mode-map "O" vm-sa-map)
 (define-key vm-summary-mode-map "Q" 'vm-quit-no-change)
