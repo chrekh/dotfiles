@@ -8,7 +8,10 @@ host=$(hostname 2>/dev/null | sed -e 's/\..*//')
 if [ $? -ne 0 ]; then
     host=unknown
     [ -n "$HOST" ] && host=$HOST
+    [ -n "$HOSTNAME" ] && host=$HOSTNAME
 fi
+[ -z "$HOST" -a -n "$HOSTNAME" ] && HOST=$HOSTNAME
+export HOST HOSTNAME
 host=${host%%.*}
 dist=unknown
 
