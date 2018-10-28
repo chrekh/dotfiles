@@ -23,6 +23,7 @@
  next-line-add-newlines nil
  ;Info-enable-edit t
  dired-listing-switches "-al"
+ dired-auto-revert-buffer t
  dired-recursive-deletes 'always
  mouse-yank-at-point t
  dired-no-confirm '(byte-compile
