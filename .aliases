@@ -29,7 +29,11 @@ alias gzip='gzip --best'
 if [ $dist = Suse ] && [ $maj -lt 11 ]; then
     :
 else
-    alias grep='grep --colour=auto --exclude-dir=.git'
+    if [ $os = Li ]; then
+	alias grep='grep --colour=auto --exclude-dir=.git'
+    else
+	alias grep='grep --colour=auto'
+    fi
 fi
 
 #Run mac-emacs on mac OS X

@@ -23,7 +23,7 @@ export PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
 export LANG=sv_SE.utf8
 [ $os = CY ] && LANG=sv_SE.ISO-8859-1
 [ $os = HP ] && LANG=sv_SE.iso88591
-[ $os = Da ] && LANG=sv_SE.UTF-8
+[ $os = Da -o $os = Fr ] && LANG=sv_SE.UTF-8
 [ $host = lx310020 ] && LANG=sv_SE.iso88591
 [ $host = lx310021 ] && LANG=sv_SE.iso88591
 export LC_CTYPE=$LANG
