@@ -16,11 +16,6 @@ if tty -s; then
 	if [ "$PWD" = /root -a $HOME = /root ]; then
 	    HOME=/home/196603089076
 	fi
-	if type vim > /dev/null 2>&1; then
-	    alias vi='vim -u ~/.vimrc-polisen-prod'
-	else
-	    alias vi='vi -u ~/.vimrc-polisen-prod'
-	fi
 	bind -f ~/.keymap-polisen-prod
     fi
 
