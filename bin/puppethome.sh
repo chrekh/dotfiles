@@ -10,8 +10,8 @@ case $host in
     capsule.dmz.polisen.se )
 	dest=/var/lib/puppet/files/DMZ/homedirs/u0043002
 	;;
-    satellite.appl.polisen.se)
-	dest=/var/lib/puppet/files/PROD/homedirs/196603089076
+    satellite.appl.polisen.se | capsule*.dc.polisen.se)
+	dest=/var/lib/puppet/files/PROD/homedirs/196603089076ll 
 	;;
     *)
 	echo "No action defined for $host"
