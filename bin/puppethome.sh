@@ -4,7 +4,7 @@ cd || exit 1
 umask 022
 host=`hostname -f`
 case $host in
-    um-puppet.utv.rps.police.se | capsule.utv.polisen.se | satellite.utv.polisen.se )
+    um-puppet.utv.rps.police.se | capsule*.utv.polisen.se | satellite.utv.polisen.se )
 	dest=/var/lib/puppet/files/UM/homedirs/u0043002
 	;;
     capsule.dmz.polisen.se )
