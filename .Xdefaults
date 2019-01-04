@@ -20,9 +20,10 @@ Emacs*font:             -*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-1
 !Emacs*font:		-*-courier-medium-r-*-*-14-*-*-*-*-*-iso8859-1
 !Emacs*font:		-b&h-lucidatypewriter-medium-r-normal-sans-18-180-75-75-m-110-iso8859-1
 
-XClock*background:	#703000
+XClock*background:	#303000
 XClock*foreground:	#ffff20
 XClock*font: 		-*-new century schoolbook-*-r-*-*-34-*-*-*-*-*-*-*
+XClock*face:		Times-40
 XClock*borderWidth:     0
 
 dclock*background:      #d0ffe0
