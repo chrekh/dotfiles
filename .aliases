@@ -92,9 +92,11 @@ if [ "$domain" = utv.polisen.se ]; then
 	alias rxvt="xterm -ls -bg '#ffd0c0' -fg '#000000'"
     fi
 fi
-if [ "$host" = NT330595 -o "$host" = NT462082 ]; then
-    alias down='cd //tsclient/C/Users/u0043002/Downloads'
-fi
+case $host in
+    nt* | NT* )
+	alias down='cd //tsclient/C/Users/u0043002/Downloads'
+	;;
+esac
 if pum < /dev/null > /dev/null 2>&1; then
     alias last='last -wF|egrep -v ^cmdb|tac|pum'
 else
