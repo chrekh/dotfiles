@@ -1,4 +1,5 @@
 #! /bin/sh
+export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
 
 exec >$HOME/.xsessionlog 2>$HOME/.xsessionlog
 #sleep 5
