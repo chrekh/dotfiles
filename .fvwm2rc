@@ -1,4 +1,5 @@
 DeskTopSize 1x4
+Test (EnvMatch HOST vdx*) DeskTopSize 1x2
 Test (EnvMatch HOST bean) DeskTopSize 2x3
 EdgeScroll 100 100
 
