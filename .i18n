@@ -1,0 +1,21 @@
+[ -r ~/.functions -a ! "$os" ] && . ~/.functions
+
+export LANG=sv_SE.utf8
+[ $os = CY ] && LANG=sv_SE.ISO-8859-1
+[ $os = HP ] && LANG=sv_SE.iso88591
+[ $os = Da -o $os = Fr ] && LANG=sv_SE.UTF-8
+[ $host = lx310020 ] && LANG=sv_SE.iso88591
+[ $host = lx310021 ] && LANG=sv_SE.iso88591
+
+export LC_CTYPE="$LANG"
+export LC_NUMERIC="$LANG"
+export LC_TIME="$LANG"
+export LC_COLLATE="$LANG"
+export LC_MONETARY="$LANG"
+export LC_MESSAGES=C
+export LC_PAPER="$LANG"
+export LC_NAME="$LANG"
+export LC_ADDRESS="$LANG"
+export LC_TELEPHONE="$LANG"
+export LC_MEASUREMENT="$LANG"
+export LC_IDENTIFICATION="$LANG"
