@@ -2,6 +2,8 @@ DeskTopSize 1x4
 Test (EnvMatch HOST vdx*) DeskTopSize 1x2
 Test (EnvMatch HOST bean) DeskTopSize 2x3
 EdgeScroll 100 100
+EdgeThickness 1
+Test (EnvMatch HOST vdx*) EdgeResistance 200 0
 
 ClickTime 750
 ColormapFocus FollowsFocus
