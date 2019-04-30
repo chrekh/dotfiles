@@ -1,6 +1,10 @@
 #! /bin/sh
-export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
-
+host=$(hostname -s)
+case $host in
+    vdx*)
+	export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
+	;;
+esac
 exec >$HOME/.xsessionlog 2>$HOME/.xsessionlog
 #sleep 5
 ssh-add -l
