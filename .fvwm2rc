@@ -1,6 +1,9 @@
 DeskTopSize 1x4
+Test (EnvMatch HOST vdx*) DeskTopSize 1x2
 Test (EnvMatch HOST bean) DeskTopSize 2x3
 EdgeScroll 100 100
+EdgeThickness 1
+Test (EnvMatch HOST vdx*) EdgeResistance 200 0
 
 ClickTime 750
 ColormapFocus FollowsFocus
@@ -118,6 +121,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Firefox"	Exec exec firefox -P default > /${HOME}/log/firefox 2>&1
 Test (EnvMatch HOST jane) + "Chromium"	Exec exec chromium  > /${HOME}/log/chromium 2>&1
 Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST vdx*) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST jane) + "Amarok"        Exec amarok > ${HOME}/log/amarok 2>&1
 Test (EnvMatch HOST jane) + "Thunderbird"   Exec thunderbird > ${HOME}/log/thunderbird 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
