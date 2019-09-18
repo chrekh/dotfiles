@@ -57,6 +57,9 @@ case $domain in
     *.polisen.se | *.police.se)
 	GIT_AUTHOR_EMAIL=Christer.Ekholm@polisen.se
 	;;
+    *.rsv.se | rsv.se | *.rsvm.se | rsvm.se | *.skatteverket.se )
+	GIT_AUTHOR_EMAIL=Christer.Ekholm@skatteverket.se
+	;;
     *init.se)
 	GIT_AUTHOR_EMAIL=che@init.se
 	;;
