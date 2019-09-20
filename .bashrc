@@ -48,7 +48,7 @@ if tty -s; then
 
     stty kill ^@
     case $TERM in
-	vt* | xterm | linux)
+	vt* | xterm | xterm-* | linux)
 	    stty erase '^?'
 	    ;;
 	*)
