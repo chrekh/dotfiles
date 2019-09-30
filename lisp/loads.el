@@ -19,6 +19,7 @@
 (autoload 'html-helper-mode "html-helper-mode" nil t)
 (autoload 'ruby-mode "ruby-mode" nil t)
 (autoload 'puppet-mode "puppet-mode" nil t)
+(autoload 'puppetfile-mode "puppetfile-mode" nil t)
 (autoload 'yaml-mode "yaml-mode" "Simple mode to edit YAML." t)
 (autoload 'compile "compile.el" nil t)
 (autoload 'swedish-keys-mode "swedkey.el" nil t)
