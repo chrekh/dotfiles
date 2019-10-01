@@ -4,6 +4,7 @@ bashrc_sourced=y
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
 [ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
 [ -r /home/u0043002/.functions -a ! "$os" ] && .  /home/u0043002/.functions
+[ -r /home/jjri/.functions -a ! "$os" ] && .  /home/jjri/.functions
 
 if tty -s; then
     echo sourcing .bashrc

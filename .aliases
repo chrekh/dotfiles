@@ -50,6 +50,8 @@ fi
 if [ -x /opt/boksm/bin/suexec ]; then
     alias sudo=/opt/boksm/bin/suexec
     alias sbash="suexec bash --rcfile $(echo ~/.bashrc)"
+elif [[ $domain =~ (^|\.)rsvm?\.se$ ]]; then
+    alias sbash="sudo bash --rcfile $(echo ~/.bashrc)"
 else
     alias sbash='sudo bash'
 fi
