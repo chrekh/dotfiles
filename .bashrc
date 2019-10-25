@@ -1,11 +1,16 @@
 bashrc_sourced=y
 
-
-[ -r ~/.functions -a ! "$os" ] && . ~/.functions
-[ -r /home/196603089076/.functions -a ! "$os" ] && .  /home/196603089076/.functions
-[ -r /home/u0043002/.functions -a ! "$os" ] && .  /home/u0043002/.functions
-[ -r /home/jjri/.functions -a ! "$os" ] && .  /home/jjri/.functions
-
+my_real_home=${HOME:=~}
+if [ -r ~/.functions ]; then
+    my_real_home=~
+elif [ -r /home/196603089076/.functions ]; then
+    my_real_home=/home/196603089076/
+elif [ -r /home/u0043002/.functions ]; then
+    my_real_home=/home/u0043002
+elif [ -r /home/jjri/.functions ]; then
+    my_real_home=/home/jjri
+fi
+. $my_real_home/.functions
 if tty -s; then
     echo sourcing .bashrc
 
@@ -23,10 +28,10 @@ if tty -s; then
     # prompt
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
-    if [ -r ~/bin/git-prompt.sh ]; then
+    if [ -r $my_real_home/bin/git-prompt.sh ]; then
 	GIT_PS1_SHOWUPSTREAM="auto"
 	GIT_PS1_SHOWDIRTYSTATE=1
-	. ~/bin/git-prompt.sh
+	. $my_real_home/bin/git-prompt.sh
 	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
     fi
 
@@ -40,12 +45,12 @@ if tty -s; then
     shopt -u progcomp	  # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
-    [ -f ~/.bash_history ] && rm -f ~/.bash_history
-    [ -d ~/.bash_history ] || mkdir ~/.bash_history
-    HISTFILE=~/.bash_history/$host$(tty | sed -e s:/:_:g)
+    [ -f $my_real_home/.bash_history ] && rm -f $my_real_home/.bash_history
+    [ -d $my_real_home/.bash_history ] || mkdir $my_real_home/.bash_history
+    HISTFILE=$my_real_home/.bash_history/$host$(tty | sed -e s:/:_:g)
     HISTSIZE=200
 
-    [ -r ~/.aliases ] && . ~/.aliases
+    [ -r $my_real_home/.aliases ] && . $my_real_home/.aliases
 
     stty kill ^@
     case $TERM in
