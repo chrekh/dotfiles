@@ -10,7 +10,7 @@ elif [ -r /home/u0043002/.functions ]; then
 elif [ -r /home/jjri/.functions ]; then
     my_real_home=/home/jjri
 fi
-. $my_real_home/.functions
+[ "$os" ] || . $my_real_home/.functions
 if tty -s; then
     echo sourcing .bashrc
 
