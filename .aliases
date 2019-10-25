@@ -17,6 +17,11 @@ elif [ $os = HP ]; then
     alias df=bdf
 fi
 
+# Some alias only for root
+if [ "$UID" -eq '0' ]; then
+    alias z='suspend -f'
+fi
+
 alias rootxauth='sudo -H xauth add `xauth list $DISPLAY`'
 alias g=git
 alias l=less
