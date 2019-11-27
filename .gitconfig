@@ -18,3 +18,5 @@
 	ui = never
 [core]
 	eol = lf
+[grep]
+	patternType = perl
