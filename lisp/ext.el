@@ -6,6 +6,7 @@
 				("Puppetfile$" . puppetfile-mode)
 				("\\.ya?ml$" . yaml-mode)
 				("\\.eml$" . text-mode)
+				("\\.pm?6$" . perl6-mode)
 				)
 			      auto-mode-alist))
 

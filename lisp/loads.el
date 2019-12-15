@@ -24,6 +24,7 @@
 (autoload 'compile "compile.el" nil t)
 (autoload 'swedish-keys-mode "swedkey.el" nil t)
 (autoload 'wormy "wormy" nil t)
+(autoload 'perl6-mode "perl6-mode" nil t)
 
 (autoload 'vm "vm" "Start VM on your primary inbox." t)
 (autoload 'vm-other-frame "vm" "Like `vm' but starts in another frame." t)
