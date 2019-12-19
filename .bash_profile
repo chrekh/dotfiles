@@ -6,7 +6,7 @@ PATH=$(setpath ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /bin /usr/bin /sbin /usr/sbin \
     /e/bokshack \
     ${PATH//:/ } \
-    /usr/share/perl6/site/bin
+    /usr/share/perl6/site/bin \
     /usr/lib/mit/bin \
     /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
