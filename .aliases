@@ -78,7 +78,7 @@ if [ $dist = Gentoo ]; then
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
     alias eix='eix -n'
-    worldopts='--oneshot --deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --changed-deps --verbose-conflicts --backtrack=8'
+    worldopts='--oneshot --deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --changed-deps --verbose-conflicts --backtrack=8 --autounmask-backtrack=y'
     case $host in
 	jane)
 	    worldopts="$worldopts --jobs=5 --load-average=10"
