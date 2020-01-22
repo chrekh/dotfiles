@@ -1,6 +1,6 @@
 ; gus as maillist-reader
 (setq gnus-select-method
-      '(nntp "news.gmane.org")
+      '(nntp "news.gmane.io")
       )
 
 ;If you're using Gnus, I'd suggest switching the HTML renderer to w3m or
