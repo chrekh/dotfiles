@@ -18,4 +18,6 @@
 		       (:subject))
  
  mu4e-view-show-addresses t
+
+ mu4e-confirm-quit nil
  )
