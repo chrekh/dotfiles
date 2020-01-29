@@ -48,6 +48,14 @@ if [ $host = ender ]; then
             rm -f $f.spamtmp
 	done
     }
+    ham() {
+	for f in $@; do
+            echo -n "$f "
+            mv $f $f.spamtmp
+            sa-learn --ham --mbox $f.spamtmp
+            rm -f $f.spamtmp
+	done
+    }
 fi
 
 if [ ${BASH_VERSINFO[0]} -ge 4 ]; then
