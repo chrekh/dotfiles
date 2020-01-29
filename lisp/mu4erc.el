@@ -16,8 +16,13 @@
 		       (:flags . 6)
 		       (:from-or-to . 22)
 		       (:subject))
+ mu4e-maildir-shortcuts '( ("/inbox" . ?i)
+			   ("/spam" . ?s)
+			   )
  
  mu4e-view-show-addresses t
-
+ mu4e-headers-sort-field :date
+ mu4e-headers-sort-direction 'descending
  mu4e-confirm-quit nil
  )
+
