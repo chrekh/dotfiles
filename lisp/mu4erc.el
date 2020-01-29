@@ -26,3 +26,7 @@
  mu4e-confirm-quit nil
  )
 
+(defun my-create-maildir (dir)
+  (interactive "MDir: ")
+  (mu4e-create-maildir-maybe (expand-file-name dir mu4e-maildir)))
+(define-key mu4e-main-mode-map "N" 'my-create-maildir)
