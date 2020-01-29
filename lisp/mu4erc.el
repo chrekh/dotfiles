@@ -30,3 +30,20 @@
   (interactive "MDir: ")
   (mu4e-create-maildir-maybe (expand-file-name dir mu4e-maildir)))
 (define-key mu4e-main-mode-map "N" 'my-create-maildir)
+(define-key mu4e-headers-mode-map "N" 'my-create-maildir)
+
+(defun my-mu4e-mark-spam ()
+  "Mark this mail as spam"
+  (interactive)
+  (mu4e-view-pipe "/usr/bin/sa-learn --spam -"))
+
+(defun my-mu4e-mark-ham ()
+  "Mark this mail as ham"
+  (interactive)
+  (mu4e-view-pipe "/usr/bin/sa-learn --ham -"))
+
+(setq mu4e-spam-map (make-sparse-keymap))
+(define-key mu4e-headers-mode-map "O" mu4e-spam-map)
+(define-key mu4e-view-mode-map "O" mu4e-spam-map)
+(define-key mu4e-spam-map "h" 'my-mu4e-mark-ham)
+(define-key mu4e-spam-map "s" 'my-mu4e-mark-spam)
