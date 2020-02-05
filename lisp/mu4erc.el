@@ -22,7 +22,7 @@
  
  mu4e-view-show-addresses t
  mu4e-headers-sort-field :date
- mu4e-headers-sort-direction 'descending
+ mu4e-headers-sort-direction 'ascending
  mu4e-confirm-quit nil
  )
 
