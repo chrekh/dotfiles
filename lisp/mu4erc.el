@@ -1,3 +1,5 @@
+(load-library "mu4e")
+
 (setq
  ;; use mu4e for e-mail in emacs
  mail-user-agent 'mu4e-user-agent
