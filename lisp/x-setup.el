@@ -4,6 +4,7 @@
 (transient-mark-mode 1)
 (setq mark-even-if-inactive t)
 (global-unset-key "\C-z")
+(global-unset-key "\C-x\C-z")
 
 ;; fringe TEST-line       sdf                    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                     sdf------------------------------
 
