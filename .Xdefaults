@@ -33,6 +33,7 @@ dclock*font:            -*-charter-*-r-*-*-17-*-*-*-*-*-iso8859-*
 
 XBiff*background:	#d0ffe0
 XBiff*foreground:	#206020
+XBiff*checkCommand:	/usr/local/adm/bin/biffcheck
 /* XBiff*file:		/home/che/Mail/newmail */
 xload*background:	#d0ffe0
 xload*foreground:	#206020

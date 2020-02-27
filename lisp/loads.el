@@ -5,7 +5,9 @@
 (load "html")
 (load "calweek")
 (load "ext")
-(load "mu4erc")
+(condition-case nil
+    (load "mu4erc")
+  (error nil))
 (condition-case nil
     (load "50magit.el")
   (error nil))
