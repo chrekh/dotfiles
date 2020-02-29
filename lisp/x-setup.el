@@ -30,6 +30,7 @@
        (setq select-active-regions 'only
              x-select-enable-primary t
              x-select-enable-clipboard t
+             mouse-drag-copy-region t
              )
        ))
 
