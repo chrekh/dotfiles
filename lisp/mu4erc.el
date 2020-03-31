@@ -20,6 +20,7 @@
 		       (:subject))
  mu4e-maildir-shortcuts '( ("/inbox" . ?i)
 			   ("/spam" . ?s)
+			   ("/dmarc" . ?d)
 			   )
  
  mu4e-view-show-addresses t
