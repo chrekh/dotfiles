@@ -46,11 +46,6 @@ if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
     alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs $@'
 fi
 
-# Btrfs
-if [ -x /sbin/btrfs ]; then
-    alias b='sudo btrfs'
-fi
-
 # BoKS
 if [ -x /opt/boksm/bin/suexec ]; then
     alias sudo=/opt/boksm/bin/suexec

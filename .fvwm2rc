@@ -107,7 +107,6 @@ Test (EnvMatch HOST bean) + "ender"  Exec exec urxvt -bg "#ffdddd" -fg "#544949"
 Test (EnvMatch HOST jane) + "bean"   Exec exec urxvt -bg "#e0f0ff" -fg "#202040" -title bean -e ssh bean.chrekh.se
 Test (EnvMatch HOST jane) + "Init"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Init -e ssh ssh.init.se
 Test (EnvMatch HOST jane) + "Huey"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Huey -e ssh huey.incedo.org
-Test (EnvMatch HOST jane) + "Huey(DNS)" Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title 'Huey(DNS)' -e ssh huey.incedo.org -p 10022
 Test (EnvMatch HOST jane) + "Dewey"  Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Dewey -e ssh dewey.incedo.org
 Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Louie -e ssh louie.incedo.org
 Test (EnvMatch HOST bean) + "Init"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Init -e ssh ssh.init.se
