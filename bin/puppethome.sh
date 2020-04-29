@@ -10,6 +10,9 @@ case $host in
     capsule.dmz.polisen.se )
 	dest=/var/lib/puppet/files/DMZ/homedirs/u0043002
 	;;
+    capsule.exkop.polisen.se)
+	dest=/var/lib/puppet/files/EXKOP/homedirs/u0043002
+	;;
     satellite.appl.polisen.se | capsule*.dc.polisen.se)
 	dest=/var/lib/puppet/files/PROD/homedirs/196603089076
 	;;
