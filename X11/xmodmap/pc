@@ -6,7 +6,7 @@ clear lock
 clear mod5
 
 ! AltGr
-keycode 113 = Mode_switch
+keycode 108 = Mode_switch
 
 ! Make Caps_Lock Control
 keycode 66 = Control_L
