@@ -20,8 +20,11 @@ xrdb -load $HOME/.Xdefaults
 
 xmodmap $HOME/X11/xmodmap/pc
 
-#xsetroot -solid "#703000"
-xsetbg $HOME/X11/rainlight.gif
+if [[ -f $HOME/X11/rainlight.gif ]]; then
+    xsetbg $HOME/X11/rainlight.gif
+else
+    xsetroot -solid "#703000"
+fi
 
 fvwm
 
