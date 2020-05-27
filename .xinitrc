@@ -17,6 +17,7 @@ case $host in
 	;;
     *)
 	xmodmap ~/X11/xmodmap/pc
+	xmodmap -e 'keycode 113 = Mode_switch'
 	;;
 esac
 
