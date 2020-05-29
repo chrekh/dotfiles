@@ -13,8 +13,6 @@ xauth list
 
 test -r $HOME/.bash_profile && . $HOME/.bash_profile
 
-echo IN'  '`date +"V-%V %c"` >> $HOME/log/xloginlog
-
 xset b off
 xrdb -load $HOME/.Xdefaults
 
@@ -27,8 +25,3 @@ else
 fi
 
 fvwm
-
-#ssh-agent -k
-#
-
-echo OUT' '`date +"V-%V %c"` >> $HOME/log/xloginlog
