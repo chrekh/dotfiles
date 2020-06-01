@@ -19,6 +19,10 @@ xset b off
 xrdb -load $HOME/.Xdefaults
 
 case $host in
+    jane)
+	xmodmap ~/X11/xmodmap/pc
+	xmodmap -e 'keycode 108 = Mode_switch'
+	;;
     bean)
 	xmodmap ~/X11/xmodmap/macbook
 	xmodmap -e 'keycode 108 = Mode_switch'
