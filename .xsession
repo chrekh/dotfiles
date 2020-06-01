@@ -21,7 +21,7 @@ xrdb -load $HOME/.Xdefaults
 case $host in
     bean)
 	xmodmap ~/X11/xmodmap/macbook
-	xmodmap -e 'keycode 134 = Mode_switch'
+	xmodmap -e 'keycode 108 = Mode_switch'
 	;;
     *)
 	xmodmap ~/X11/xmodmap/pc
