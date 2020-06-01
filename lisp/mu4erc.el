@@ -19,7 +19,7 @@
 		       (:from-or-to . 22)
 		       (:subject))
  mu4e-maildir-shortcuts '( ("/inbox" . ?i)
-			   ("/spam" . ?s)
+			   ("/sent" . ?s)
 			   ("/dmarc" . ?d)
 			   )
  
