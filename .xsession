@@ -12,7 +12,20 @@ test -r $HOME/.bash_profile && . $HOME/.bash_profile
 xset b off
 xrdb -load $HOME/.Xdefaults
 
-xmodmap $HOME/X11/xmodmap/pc
+case $host in
+    jane)
+	xmodmap ~/X11/xmodmap/pc
+	xmodmap -e 'keycode 108 = Mode_switch'
+	;;
+    bean)
+	xmodmap ~/X11/xmodmap/macbook
+	xmodmap -e 'keycode 108 = Mode_switch'
+	;;
+    *)
+	xmodmap ~/X11/xmodmap/pc
+	xmodmap -e 'keycode 113 = Mode_switch'
+	;;
+esac
 
 if [[ -f $HOME/X11/rainlight.gif ]]; then
     xsetbg $HOME/X11/rainlight.gif

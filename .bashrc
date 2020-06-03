@@ -17,7 +17,7 @@ if tty -s; then
     # Use my keymap in polisen PROD
     if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
 	-o $domain = mgmt.polisen.se -o $domain = rps.police.se -o $domain = bd.polisen.se \
-	-o $host = NT330595 ]; then
+	-o $host = NT330595 -o $host = NT462792 ]; then
 	# Set HOME to my home if BoKS has set it to /root
 	if [ "$PWD" = /root -a $HOME = /root ]; then
 	    HOME=/home/196603089076
