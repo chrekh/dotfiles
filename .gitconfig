@@ -20,3 +20,5 @@
 	eol = lf
 [grep]
 	patternType = perl
+[pull]
+	rebase = false
