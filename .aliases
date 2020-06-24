@@ -105,12 +105,21 @@ case $host in
 	alias down='cd //tsclient/C/Users/u0043002/Downloads'
 	;;
 esac
-if pum < /dev/null > /dev/null 2>&1; then
-    alias last='last -wF|egrep -v ^cmdb|tac|pum'
+if [[ "$domain" =~ (polisen|police)[.]se$ ]]; then
+    if pum < /dev/null > /dev/null 2>&1; then
+	last() {
+	    /usr/bin/last -dwF "$@" | egrep -v ^cmdb | tac | pum
+	}    
+    else
+	last() {
+	    /usr/bin/last -dwF "$@" | egrep -v ^cmdb | tac
+	}
+    fi
 else
-    alias last='last -wF|egrep -v ^cmdb|tac'
+    last() {
+	/usr/bin/last -dwF "$@" | tac
+    }
 fi
-
 # ClearCase
 if type cleartool > /dev/null 2>&1; then
     alias c=cleartool
