@@ -5,7 +5,7 @@ tty -s && echo sourcing .functions
 os=$(uname -s| cut -c 1-2)
 
 host=$(hostname 2>/dev/null | sed -e 's/\..*//')
-if [ $? -ne 0 ]; then
+if [ ! $hostname ]; then
     host=unknown
     [ -n "$HOST" ] && host=$HOST
     [ -n "$HOSTNAME" ] && host=$HOSTNAME
