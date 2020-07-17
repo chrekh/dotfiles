@@ -28,7 +28,11 @@ alias l=less
 alias zl=zless
 alias llt='ll -tr'
 alias j=jobs
-alias f='finger -m'
+if $(hash pinky > /dev/null 2>&1); then
+    alias f=pinky
+else
+    alias f='finger -m'
+fi
 alias h='history'
 alias gzip='gzip --best'
 if [ $dist = Suse ] && [ $maj -lt 11 ]; then
