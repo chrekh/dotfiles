@@ -1,4 +1,0 @@
-#! /bin/sh 
-
-xauth add :0 . $(mcookie)
-HOST=$(hostname) xinit -- /usr/bin/X -listen tcp -auth ${HOME}/.Xauthority > ${HOME}/log/xinit.log 2>&1
