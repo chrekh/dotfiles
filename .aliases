@@ -65,7 +65,14 @@ if [ $os = Li ]; then
     (( ${cu_ver[0]} > 7 && ${cu_ver[1]} > 6 )) && alias cp='cp --reflink=auto'
 fi
 
-[ $DISPLAY ] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
+case $host in
+    jane)
+	[ $DISPLAY ] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
+	;;
+    bean)
+	[ $DISPLAY ] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
+	;;
+esac
 
 if [ -x /usr/local/bin/morse ]; then
     alias morse='time /usr/local/bin/morse -r -C 'qwertyuiopasdfghjklzxcvbnm,.?/}{\\\|' -w 20 -T -q -n 5 -N 100'
