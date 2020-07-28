@@ -39,6 +39,21 @@ if [ ! $domain ]; then
 fi
 [ $domain ] || domain=none
 
+case $domain in
+    *.rsv.se)
+	site=rsv
+	;;
+    *.polisen.se | *.rps.se)
+	site=rps
+	;;
+    *.chrekh.se)
+	site=home
+	;;
+    *)
+	site=unknown
+	;;
+esac
+
 if [ $host = ender ]; then
     spam() {
 	for f in $@; do
