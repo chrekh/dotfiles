@@ -1,0 +1,138 @@
+#! /usr/bin/perl
+
+use 5.016;
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use Socket;
+use Data::Dumper;
+
+my %opts;
+
+GetOptions(\%opts,'list','sync','r','t','big') || die;
+
+my $dotfilelist = "$ENV{HOME}/db/dotfiles";
+
+our %hostdb;
+&readhostdb;
+my %groups = ( moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' ],
+	       cms  => [ 'prod-puppet-cm1',
+			 'prod-puppet-cm2',
+			 'prod-puppet-cm3',
+			 'prod-puppet-cm4',
+			 'prod-puppet-cm5',
+			 ],
+	   );
+
+my @hosts;
+for my $host ( @ARGV ) {
+    if ( exists $groups{$host} ) {
+	push @hosts, @{$groups{$host}};
+	next;
+    }
+    push @hosts, $host;
+}
+
+for my $host ( @hosts ) {
+    my $target = $host;
+    unless ( $host =~ /[.]/ ) {
+	$target = &lookup($host);
+    }
+    my @title = ($target);
+    @title = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
+
+    # Select color to use
+    my %color = ( 'sys.rsv.se'    => { bg => '#c0ffff', fg => '#000000' },
+		  'rsvm.se'       => { bg => '#ffe0e0', fg => '#000000' },
+		  'pm.sys.rsv.se' => { bg => '#ccffcc', fg => '#300000' }
+	      );
+    my ($bg,$fg) = ('#ffffe0','#301010');
+    my ($dom) = $target =~ /^[^.]+\.(.+)$/;
+    if ( exists $color{$dom} ) {
+	($bg,$fg) = ($color{$dom}{bg},$color{$dom}{fg});
+    }
+
+    if ( exists $opts{list} ) {
+	print "$target - @title\n";
+	exit 0;
+    }
+
+    my @cmd;
+    my $background = 0;
+    if ( exists $opts{sync} ) {
+	@cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
+	$background = 0;
+    }
+    else {
+	@cmd = ('urxvt','-T',join(' ',@title),'-geometry','120x40','-fg',$fg,'-bg',$bg);
+	push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
+	push(@cmd,'-e','ssh','-t',$target );
+	push(@cmd,'-l','root') if ( exists $opts{r} );
+	push(@cmd,'-l','tmpuser') if ( exists $opts{t} );
+	$background = 1;
+    }
+
+    if ( $background ) {
+	my $pid = fork;
+	if ( $pid == 0 ) {
+	    # Child
+	    say "[$$] exec @cmd";
+	    open(STDIN,'<','/dev/null');
+	    open(STDOUT,'>','/dev/null');
+	    open(STDERR,'>','/dev/null');
+	    exec @cmd;
+	    die "exec failed: $!";
+	}
+    }
+    else {
+	say "[$$] system @cmd";
+	system(@cmd);
+    }
+}
+
+sub lookup {
+    my $host = shift;
+    return "$host.rsvm.se" if ( gethostbyname "$host.rsvm.se");
+    return "$host.rsv.se" if ( gethostbyname "$host.rsv.se");
+    for my $env ( qw<sys acc kap utv pro dmz test-dmz ocp
+		     infra ipa labb lb meet ppx rel1 rex rsv> ) {
+	return "$host.$env.rsv.se" if ( gethostbyname "$host.$env.rsv.se" );
+    }
+    if ( exists $hostdb{$host} ) {
+	return $hostdb{$host}{fqdn};
+    }
+    die "Lookup $host failed!\n";
+}
+
+sub readhostdb {
+    our %hostdb;
+    open(DB,'<',"$ENV{HOME}/db/all-hosts") || die "open hostdb failed: $!";
+    while ( <DB> ) {
+	chomp;
+	next if ( /^;/ );
+	if ( my($host,$dom,$type,$val) =
+	     /^
+	      ([^.]+)[.]      # host
+              (\S+)[.]\s+        # domain
+	      \d+\s+IN\s+     # skip
+              (A|CNAME)\s+ # type
+	      (\S+)           # value
+	      [.]
+             /x ) {
+	    $hostdb{$host}{fqdn} = "${host}.${dom}";
+	    if ( $type eq 'CNAME' ) {
+		$hostdb{$host}{names}{$val} = 1;
+		$hostdb{$host}{names}{$host} = 1;
+		$hostdb{"${host}.${dom}"}{names}{$val} = 1;
+		$hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
+		$hostdb{$val}{names}{$val} = 1;
+		$hostdb{$val}{names}{$host} = 1;
+		$hostdb{$val}{names}{"$host.$dom"} = 1;
+	    }
+	    next;
+	}
+    }
+    close(DB);
+}

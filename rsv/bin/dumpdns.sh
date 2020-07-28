@@ -1,0 +1,15 @@
+#! /bin/bash
+
+for d in acc.rsv.se. bmp.rsv.se. db.rsv.se. dmz.rsv.se. infra.rsv.se. ipa.rsv.se. kap.rsv.se. \
+         labb.rsv.se. lb.rsv.se. meet.rsv.se. ocp.rsv.se. labb.ocp.rsv.se test.ocp.rsv.se. \
+         prod.ocp.rsv.se ppx.rsv.se. pro.rsv.se. prov.rsv.se. rel1.rsv.se. rex.rsv.se. rsv.rsv.se. \
+         sys.rsv.se. test-dmz.rsv.se. test.rsv.se. utv.rsv.se. rsv.se. \
+         pro.val.se. ; do
+    host -al $d
+done > $HOME/db/all-hosts
+
+# ibx.rsv.se don't allow zonetransfer for rsvm.se
+for d in rsvm.se; do
+    host -al $d v00001.rsvm.se
+done >> $HOME/db/all-hosts
+    
