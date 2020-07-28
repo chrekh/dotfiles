@@ -1,4 +1,0 @@
-#! /bin/bash
-
-xterm -ls -geometry 80x15+2+1082 &
-ssh v10073.rsvm.se X11/xsession

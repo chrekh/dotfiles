@@ -72,8 +72,11 @@ case $host in
     bean)
 	[ $DISPLAY ] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
 	;;
-    u11338 | u11340 )
-	alias x='~/rsv/bin/rsvx'
+    u11338)
+	alias x='xterm -ls -geometry 80x15+2+1082 & ssh v10073.rsvm.se X11/xsession'
+	;;
+    u11340)
+	alias x='xterm -ls -geometry 80x15+2+1082 &'
 	;;
 esac
 
