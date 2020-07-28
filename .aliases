@@ -72,6 +72,9 @@ case $host in
     bean)
 	[ $DISPLAY ] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
 	;;
+    u11338 | u11340 )
+	alias x='~/rsv/bin/rsvx'
+	;;
 esac
 
 if [ -x /usr/local/bin/morse ]; then
