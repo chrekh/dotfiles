@@ -42,6 +42,9 @@ fi
 [ $domain ] || domain=none
 
 case $domain in
+    ad.polisen.se)
+	site=rpswin
+	;;
     *.rsv.se)
 	site=rsv
 	;;
