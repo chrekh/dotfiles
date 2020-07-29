@@ -31,7 +31,7 @@ if [ $os = Li ]; then
     cu_ver=($(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g'))
 fi
 
-declare -l domain
+[ ${BASH_VERSINFO[0]} -ge 4 ] && declare -l domain
 domain=$(dnsdomainname 2>/dev/null)
 if [ ! $domain ]; then
     if [ -f /etc/resolv.conf ]; then
