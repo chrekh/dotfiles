@@ -1,0 +1,109 @@
+#! /usr/bin/perl
+
+use strict;
+use warnings;
+
+use 5.010;
+
+use GDBM_File ;
+use Getopt::Long;
+
+Getopt::Long::Configure('bundling');
+my %opts;
+GetOptions(\%opts,'c=s','r','n') || die;
+
+my $catdb = '/home/u0043002/db/hostcat';
+my %catdb;
+tie(%catdb, 'GDBM_File', $catdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
+
+my @hosts;
+if ( @ARGV ) {
+    @hosts = @ARGV;
+}
+else {
+    @hosts = <STDIN>;
+    chomp @hosts;
+}
+
+for my $h ( @hosts ) {
+    &dologin($h);
+}
+
+sub dologin {
+    my $target = shift;
+
+    $target =~ s/\.(cim|inas)$/.utv.polisen.se/;
+    $target =~ s/\.(um|arv)$/.utv.rps.police.se/;
+    $target =~ s/\.(pki)$/.pki.utv.polisen.se/;
+
+    my($name) = gethostbyname($target);
+    unless ( defined $name ) {
+	$target =~ s/^([^.]+).*$/${1}.utv.polisen.se/;
+	($name) = gethostbyname($target);
+    }
+    unless ( defined $name ) {
+	$target =~ s/^([^.]+).*$/${1}.utv.rps.police.se/;
+	($name) = gethostbyname($target);
+    }
+    unless ( defined $name ) {
+	$target =~ s/^([^.]+).*$/${1}.pki.utv.polisen.se/;
+	($name) = gethostbyname($target);
+    }
+    unless ( defined $name ) {
+	return
+    }
+
+    my $cat = 'linux';
+    $cat = 'inas' if ( $name =~ /\.polisen\.se/ );
+    $cat = 'pia' if ( $name =~ /^lxa/ );
+
+
+    my %names;
+    $names{$name} = 1;
+    my @names = sort byhostname keys %names;
+    for ( $name, @names ) {
+	if ( exists $opts{c} ) {
+	    $cat = $opts{c};
+	    $catdb{$_} = $cat;
+	}
+	else {
+	    if ( exists $catdb{$_} ) {
+		$cat = $catdb{$_};
+		last;
+	    }
+	}
+    }
+
+    my $title = ( @names ) ? "@names" : $name;
+
+    $cat='root' if ( exists $opts{r} );
+    print "sxt $name $title $cat\n";
+    &sxt($name,$title,$cat) unless ( exists $opts{n} );
+}
+
+sub sxt {
+    my ($host,$dispname,$cat) = @_;
+    my $pid = fork;
+    die "fork failed: $!" unless defined $pid;
+
+    if ( $pid == 0 ) {
+	# child
+	exec('sxt',$host,$dispname,$cat);
+    }
+}
+
+sub byhostname {
+    # Sort by hostname but put lx-names first
+    if ( $a =~ /^lx\d{6}$/ ) {
+	if ( $b =~ /^lx\d{6}$/ ) {
+	    return $a cmp $b;
+	}
+	return -1;
+    }
+    elsif ( $b =~ /^lx\d{6}$/ ) {
+	return 1;
+    }
+    else {
+	return $a cmp $b;
+    }
+}
