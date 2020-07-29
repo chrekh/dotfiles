@@ -31,12 +31,14 @@ if [ $os = Li ]; then
     cu_ver=($(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g'))
 fi
 
+declare -l domain
 domain=$(dnsdomainname 2>/dev/null)
 if [ ! $domain ]; then
     if [ -f /etc/resolv.conf ]; then
 	domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
     fi
 fi
+[ $domain ] || domain=$USERDNSDOMAIN
 [ $domain ] || domain=none
 
 case $domain in
