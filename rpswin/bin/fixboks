@@ -1,0 +1,11 @@
+#! /bin/bash
+
+"C:\Program Files\Net iD\iid.exe" -restart
+
+# Trigger PIN entry
+sleep 2
+for try in 1 2 3; do
+    echo try $try
+    blink git.dc.polisen.se date && break
+    sleep $try
+done
