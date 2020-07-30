@@ -129,7 +129,6 @@ sub lookup {
 
     for my $env ( qw<sys acc kap utv pro dmz test-dmz ocp
 		     infra ipa labb lb meet ppx rel1 rex rsv> ) {
-	$target =~ s/^([^.]+).*$/${1}.${env}.rsv.se/;
 	($name) = gethostbyname("${target}.${env}.rsv.se");
 	return $name if ( defined $name );
     }
