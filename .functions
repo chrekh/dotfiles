@@ -45,13 +45,13 @@ case $domain in
     ad.polisen.se)
 	site=rpswin
 	;;
-    *.rsv.se)
+    rsv.se | *.rsv.se | rsvm.se | *.rsvm.se)
 	site=rsv
 	;;
-    *.polisen.se | *.rps.se)
+    polisen.se | *.polisen.se | rps.se | *.rps.se)
 	site=rps
 	;;
-    *.chrekh.se)
+    chrekh.se | *.chrekh.se)
 	site=home
 	;;
     *)
