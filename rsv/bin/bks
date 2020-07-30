@@ -156,16 +156,13 @@ sub readhostdb {
 	    $hostdb{$host}{fqdn} = "${host}.${dom}";
 	    if ( $type eq 'CNAME' ) {
 		$hostdb{$host}{names}{$val} = 1;
-		$hostdb{$host}{names}{$host} = 1;
 		$hostdb{"${host}.${dom}"}{names}{$val} = 1;
 		$hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
 		$hostdb{$val}{names}{$val} = 1;
-		$hostdb{$val}{names}{$host} = 1;
 		$hostdb{$val}{names}{"$host.$dom"} = 1;
 	    }
 	    if ( $type eq 'A' ) {
 		next unless ( $val =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
-		$hostdb{$val}{names}{$host} = 1;
 		$hostdb{$val}{names}{"${host}.${dom}"} = 1;
 	    }
 	    next;
