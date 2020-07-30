@@ -32,7 +32,7 @@ my %groups = ( moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' 
 	   );
 
 my @hosts;
-for my $host ( @ARGV,<STDIN> ) {
+for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
     if ( exists $groups{$host} ) {
 	push @hosts, @{$groups{$host}};
@@ -42,23 +42,30 @@ for my $host ( @ARGV,<STDIN> ) {
 }
 
 for my $host ( @hosts ) {
-    my $target = $host;
-    unless ( $host =~ /[.]/ ) {
-	$target = &lookup($host);
-    }
+    &dologin($host);
+}
+
+sub dologin {
+    my $host = shift;
+    my $target = &lookup($host);
+
+    my $cat = 'linux';
+    $cat = 'inas' if ( $target =~ /\.polisen\.se/ );
+    $cat = 'pia' if ( $target =~ /^lxa/ );
+    $cat = 'sys' if ( $target =~ /\.sys\.rsv\.se$/ );
+    $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
+    $cat = 'pm' if ( $target =~ /^[^.]+\.pm\./ );
+
     my @title = ($target);
     @title = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
 
     # Select color to use
-    my %color = ( 'sys.rsv.se'    => { bg => '#c0ffff', fg => '#000000' },
-		  'rsvm.se'       => { bg => '#ffe0e0', fg => '#000000' },
-		  'pm.sys.rsv.se' => { bg => '#ccffcc', fg => '#300000' }
-	      );
-    my ($bg,$fg) = ('#ffffe0','#301010');
-    my ($dom) = $target =~ /^[^.]+\.(.+)$/;
-    if ( exists $color{$dom} ) {
-	($bg,$fg) = ($color{$dom}{bg},$color{$dom}{fg});
-    }
+    my %color = (
+	'linux'  => { bg => '#ffffe0', fg => '#301010' },
+	'sys'    => { bg => '#c0ffff', fg => '#000000' },
+	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },
+	'pm'     => { bg => '#ccffcc', fg => '#300000' },
+    );
 
     if ( exists $opts{list} ) {
 	print "$target - @title\n";
@@ -72,7 +79,8 @@ for my $host ( @hosts ) {
 	$background = 0;
     }
     else {
-	@cmd = ('urxvt','-T',join(' ',@title),'-geometry','120x40','-fg',$fg,'-bg',$bg);
+	@cmd = ('urxvt','-T',join(' ',@title),'-geometry','120x40',
+		'-fg',$color{$cat}{fg},'-bg',$color{$cat}{bg});
 	push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
 	push(@cmd,'-e','ssh','-t',$target );
 	push(@cmd,'-l','root') if ( exists $opts{r} );
@@ -100,17 +108,35 @@ for my $host ( @hosts ) {
 }
 
 sub lookup {
-    my $host = shift;
-    return "$host.rsvm.se" if ( gethostbyname "$host.rsvm.se");
-    return "$host.rsv.se" if ( gethostbyname "$host.rsv.se");
+    my $target = shift;
+
+    $target =~ s/\.(cim|inas)$/.utv.polisen.se/;
+    $target =~ s/\.(um|arv)$/.utv.rps.police.se/;
+    $target =~ s/\.(pki)$/.pki.utv.polisen.se/;
+
+    my($name) = gethostbyname($target);
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.utv.polisen.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.utv.rps.police.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.pki.utv.polisen.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.rsvm.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.rsv.se");
+    return $name if ( defined $name );
+
     for my $env ( qw<sys acc kap utv pro dmz test-dmz ocp
 		     infra ipa labb lb meet ppx rel1 rex rsv> ) {
-	return "$host.$env.rsv.se" if ( gethostbyname "$host.$env.rsv.se" );
+	$target =~ s/^([^.]+).*$/${1}.${env}.rsv.se/;
+	($name) = gethostbyname("${target}.${env}.rsv.se");
+	return $name if ( defined $name );
     }
-    if ( exists $hostdb{$host} ) {
-	return $hostdb{$host}{fqdn};
+    if ( exists $hostdb{$target} ) {
+	return $hostdb{$target}{fqdn};
     }
-    die "Lookup $host failed!\n";
+    die "Lookup $target failed!\n";
 }
 
 sub readhostdb {
