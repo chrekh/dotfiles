@@ -140,7 +140,7 @@ sub lookup {
 
 sub readhostdb {
     our %hostdb;
-    open(DB,'<',"$ENV{HOME}/db/all-hosts") || die "open hostdb failed: $!";
+    open(DB,'<',"$ENV{HOME}/db/all-hosts") || return;
     while ( <DB> ) {
 	chomp;
 	next if ( /^;/ );
