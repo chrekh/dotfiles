@@ -6,12 +6,17 @@ use strict;
 use warnings;
 
 use Getopt::Long;
+use GDBM_File ;
 use Socket;
 use Data::Dumper;
 
 my %opts;
+Getopt::Long::Configure('bundling');
+GetOptions(\%opts,'c=s','n','list','sync','r','t','big') || die;
 
-GetOptions(\%opts,'list','sync','r','t','big') || die;
+my $catdb = "$ENV{HOME}/db/hostcat";
+my %catdb;
+tie(%catdb, 'GDBM_File', $catdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
 
 my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
@@ -27,7 +32,8 @@ my %groups = ( moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' 
 	   );
 
 my @hosts;
-for my $host ( @ARGV ) {
+for my $host ( @ARGV,<STDIN> ) {
+    chomp $host;
     if ( exists $groups{$host} ) {
 	push @hosts, @{$groups{$host}};
 	next;
@@ -79,6 +85,7 @@ for my $host ( @hosts ) {
 	if ( $pid == 0 ) {
 	    # Child
 	    say "[$$] exec @cmd";
+	    exit 0 if ( exists $opts{n} );
 	    open(STDIN,'<','/dev/null');
 	    open(STDOUT,'>','/dev/null');
 	    open(STDERR,'>','/dev/null');
@@ -88,7 +95,7 @@ for my $host ( @hosts ) {
     }
     else {
 	say "[$$] system @cmd";
-	system(@cmd);
+	system(@cmd) unless ( exists $opts{n} );
     }
 }
 
