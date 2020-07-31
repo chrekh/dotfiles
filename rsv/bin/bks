@@ -147,11 +147,12 @@ sub readhostdb {
 	if ( my($host,$dom,$type,$val) =
 	     /^
 	      ([^.]+)[.]      # host
-              (\S+)[.]\s+        # domain
+              (\S+)[.]\s+     # domain
 	      \d+\s+IN\s+     # skip
-              (A|CNAME)\s+ # type
-	      (\S+)           # value
-	      [.]?
+              (A|CNAME)\s+    # type
+	      (\S+?)          # value
+	      [.]?            # top-domain dot
+	      $
              /x ) {
 	    $hostdb{$host}{fqdn} = "${host}.${dom}";
 	    if ( $type eq 'CNAME' ) {
