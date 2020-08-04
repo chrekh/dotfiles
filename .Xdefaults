@@ -43,8 +43,6 @@ Rxvt*font:              -*-fixed-medium-r-*-*-14-*-*-*-c-*-iso8859-*
 Rxvt*background:        #ffffe0
 Rxvt*foreground:        #602020
 Rxvt*geometry:          100x40
-Rxvt*backspacekey:      
-Rxvt*deletekey:		
 Rxvt*fading:		10
 Rxvt*saveLines:         100000
 Rxvt*cutchars:		"#\\`\"''&()*,.;:<=>?@[]{|}$/	"
