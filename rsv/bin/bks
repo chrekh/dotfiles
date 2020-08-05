@@ -62,6 +62,8 @@ sub dologin {
     # Select color to use
     my %color = (
 	'linux'  => { bg => '#ffffe0', fg => '#301010' },
+	'inas'   => { bg => '#daffea', fg => '#000030' }, # Ljusare blå
+	'pia'    => { bg => '#e5e0b5', fg => '#151500' }, # gråbrun
 	'sys'    => { bg => '#c0ffff', fg => '#000000' },
 	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },
 	'pm'     => { bg => '#ccffcc', fg => '#300000' },
