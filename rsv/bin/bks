@@ -92,6 +92,7 @@ sub dologin {
 	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },
 	'pm'     => { bg => '#ccffcc', fg => '#300000' },
     );
+    $cat = 'linux' unless ( exists $color{$cat} );
 
     if ( exists $opts{list} ) {
 	print "$target - $title\n";
