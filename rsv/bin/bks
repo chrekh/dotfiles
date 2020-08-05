@@ -60,8 +60,23 @@ sub dologin {
 	$cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
 	$cat = 'pm' if ( $target =~ /^[^.]+\.pm\./ );
     }
-    my @title = ($target);
-    @title = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
+    my @names = ($target);
+    @names = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
+
+    for ( @names ) {
+	if ( exists $opts{c} ) {
+	    $cat = $opts{c};
+	    $catdb{$_} = $cat;
+	}
+	else {
+	    if ( exists $catdb{$_} ) {
+		$cat = $catdb{$_};
+		last;
+	    }
+	}
+    }
+
+    my $title = "@names";
 
     # Select color to use
     my %color = (
@@ -74,7 +89,7 @@ sub dologin {
     );
 
     if ( exists $opts{list} ) {
-	print "$target - @title\n";
+	print "$target - $title\n";
 	exit 0;
     }
 
@@ -85,7 +100,7 @@ sub dologin {
 	$background = 0;
     }
     else {
-	@cmd = ('urxvt','-T',join(' ',@title),'-geometry','120x40',
+	@cmd = ('urxvt','-T',$title,'-geometry','120x40',
 		'-fg',$color{$cat}{fg},'-bg',$color{$cat}{bg});
 	push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
 	push(@cmd,'-e','ssh','-t',$target );
