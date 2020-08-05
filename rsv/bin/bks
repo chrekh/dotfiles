@@ -85,12 +85,13 @@ sub dologin {
 
     # Select color to use
     my %color = (
-	'linux'  => { bg => '#ffffe0', fg => '#301010' },
-	'inas'   => { bg => '#daffea', fg => '#000030' }, # Ljusare blå
+	'linux'  => { bg => '#ffffe0', fg => '#301010' }, # beige
+	'inas'   => { bg => '#daffea', fg => '#000030' }, # ljusare blå
 	'pia'    => { bg => '#e5e0b5', fg => '#151500' }, # gråbrun
-	'sys'    => { bg => '#c0ffff', fg => '#000000' },
-	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },
-	'pm'     => { bg => '#ccffcc', fg => '#300000' },
+	'sys'    => { bg => '#c0ffff', fg => '#000000' }, # mörkare blå
+	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' }, # rosa
+	'umprod' => { bg => '#ffe0e0', fg => '#000000' }, # rosa
+	'pm'     => { bg => '#ccffcc', fg => '#300000' }, # grön
     );
     $cat = 'linux' unless ( exists $color{$cat} );
 
