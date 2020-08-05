@@ -50,7 +50,7 @@ sub dologin {
     my $target = &lookup($host);
 
     my $cat = 'linux';
-    if ( exists $opts{c} ) {
+    if ( exists $opts{c} && $opts{c} ne 'clear' ) {
 	$cat = $opts{c};
     }
     else {
@@ -65,8 +65,13 @@ sub dologin {
 
     for ( @names ) {
 	if ( exists $opts{c} ) {
-	    $cat = $opts{c};
-	    $catdb{$_} = $cat;
+	    if ( $opts{c} eq 'clear' ) {
+		delete $catdb{$_};
+	    }
+	    else {
+		$cat = $opts{c};
+		$catdb{$_} = $cat;
+	    }
 	}
 	else {
 	    if ( exists $catdb{$_} ) {
