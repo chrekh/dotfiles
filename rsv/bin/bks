@@ -50,12 +50,16 @@ sub dologin {
     my $target = &lookup($host);
 
     my $cat = 'linux';
-    $cat = 'inas' if ( $target =~ /\.polisen\.se/ );
-    $cat = 'pia' if ( $target =~ /^lxa/ );
-    $cat = 'sys' if ( $target =~ /\.sys\.rsv\.se$/ );
-    $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
-    $cat = 'pm' if ( $target =~ /^[^.]+\.pm\./ );
-
+    if ( exists $opts{c} ) {
+	$cat = $opts{c};
+    }
+    else {
+	$cat = 'inas' if ( $target =~ /\.polisen\.se/ );
+	$cat = 'pia' if ( $target =~ /^lxa/ );
+	$cat = 'sys' if ( $target =~ /\.sys\.rsv\.se$/ );
+	$cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
+	$cat = 'pm' if ( $target =~ /^[^.]+\.pm\./ );
+    }
     my @title = ($target);
     @title = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
 
