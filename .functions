@@ -14,6 +14,7 @@ fi
 export HOST HOSTNAME
 host=${host%%.*}
 dist=unknown
+uid=$(id -u)
 
 if [ $os = Li ]; then
     if [ -f /etc/SuSE-release ]; then
