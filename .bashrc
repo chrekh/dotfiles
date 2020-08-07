@@ -45,9 +45,9 @@ if tty -s; then
     shopt -u progcomp	  # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
-    [ -f $my_real_home/.bash_history ] && rm -f $my_real_home/.bash_history
-    [ -d $my_real_home/.bash_history ] || mkdir $my_real_home/.bash_history
-    HISTFILE=$my_real_home/.bash_history/$host$(tty | sed -e s:/:_:g)
+    if [ "$id" -ne 0 ]; then
+	[ -d $my_real_home/.bash_history ] && rm -rf $my_real_home/.bash_history
+    fi
     HISTSIZE=200
 
     [ -r $my_real_home/.aliases ] && . $my_real_home/.aliases
