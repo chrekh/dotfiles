@@ -12,11 +12,15 @@ use Data::Dumper;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions(\%opts,'c=s','n','list','sync','r','t','big') || die;
+GetOptions(\%opts,'c=s','n','list','r','t','big') || die;
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
 tie(%catdb, 'GDBM_File', $catdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
+
+my $syncdb = "$ENV{HOME}/db/hostsync";
+my %syncdb;
+tie(%syncdb, 'GDBM_File', $syncdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
 
 my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
@@ -101,37 +105,33 @@ sub dologin {
     }
 
     my @cmd;
-    my $background = 0;
-    if ( exists $opts{sync} ) {
-	@cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
-	$background = 0;
-    }
-    else {
-	@cmd = ('urxvt','-T',$title,'-geometry','120x40',
-		'-fg',$color{$cat}{fg},'-bg',$color{$cat}{bg});
-	push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
-	push(@cmd,'-e','ssh','-t',$target );
-	push(@cmd,'-l','root') if ( exists $opts{r} );
-	push(@cmd,'-l','tmpuser') if ( exists $opts{t} );
-	$background = 1;
-    }
-
-    if ( $background ) {
-	my $pid = fork;
-	if ( $pid == 0 ) {
-	    # Child
-	    say "[$$] exec @cmd";
-	    exit 0 if ( exists $opts{n} );
-	    open(STDIN,'<','/dev/null');
-	    open(STDOUT,'>','/dev/null');
-	    open(STDERR,'>','/dev/null');
-	    exec @cmd;
-	    die "exec failed: $!";
+    if ( $target =~ m{[.]rsvm?[.]se$} ) {
+	my $lastsynctime = (stat($dotfilelist))[9];
+	if ( ! exists $syncdb{$target} || $syncdb{$target} < $lastsynctime ) {
+	    @cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
+	    say "[$$] system @cmd";
+	    system(@cmd) unless ( exists $opts{n} );
+	    $syncdb{$target} = time;
 	}
     }
-    else {
-	say "[$$] system @cmd";
-	system(@cmd) unless ( exists $opts{n} );
+
+    @cmd = ('urxvt','-T',$title,'-geometry','120x40',
+	    '-fg',$color{$cat}{fg},'-bg',$color{$cat}{bg});
+    push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
+    push(@cmd,'-e','ssh','-t',$target );
+    push(@cmd,'-l','root') if ( exists $opts{r} );
+    push(@cmd,'-l','tmpuser') if ( exists $opts{t} );
+
+    my $pid = fork;
+    if ( $pid == 0 ) {
+	# Child
+	say "[$$] exec @cmd";
+	exit 0 if ( exists $opts{n} );
+	open(STDIN,'<','/dev/null');
+	open(STDOUT,'>','/dev/null');
+	open(STDERR,'>','/dev/null');
+	exec @cmd;
+	die "exec failed: $!";
     }
 }
 
