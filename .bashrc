@@ -45,7 +45,7 @@ if tty -s; then
     shopt -u progcomp	  # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
-    if [ "$id" -ne 0 ]; then
+    if [ "$uid" -ne 0 ]; then
 	[ -d $my_real_home/.bash_history ] && rm -rf $my_real_home/.bash_history
     fi
     HISTSIZE=200
