@@ -106,8 +106,7 @@ sub dologin {
 
     my @cmd;
     if ( $target =~ m{[.]rsvm?[.]se$} ) {
-	my $lastsynctime = (stat($dotfilelist))[9];
-	if ( ! exists $syncdb{$target} || $syncdb{$target} < $lastsynctime ) {
+	unless ( exists $syncdb{$target} ) {
 	    @cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
 	    say "[$$] system @cmd";
 	    system(@cmd) unless ( exists $opts{n} );
