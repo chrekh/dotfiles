@@ -1,8 +1,12 @@
 bashrc_sourced=y
 
-my_real_home=${HOME:=~}
-if [ -r ~/.functions ]; then
-    my_real_home=~
+if [ -n "$SUDO_USER" ]; then
+    home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
+else
+    home_candidate=${HOME:=~}
+fi
+if [ -r ${home_candidate}/.functions ]; then
+    my_real_home=${home_candidate}
 elif [ -r /home/196603089076/.functions ]; then
     my_real_home=/home/196603089076/
 elif [ -r /home/u0043002/.functions ]; then
