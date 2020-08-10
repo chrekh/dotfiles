@@ -53,6 +53,7 @@ if tty -s; then
 	[ -d $my_real_home/.bash_history ] && rm -rf $my_real_home/.bash_history
     fi
     HISTSIZE=200
+    HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
 
     [ -r $my_real_home/.aliases ] && . $my_real_home/.aliases
 
