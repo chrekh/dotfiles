@@ -73,10 +73,10 @@ case $host in
 	[ $DISPLAY ] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
 	;;
     u11338)
-	alias x='xterm -ls -geometry 80x15+2+1082 & ssh v10073.rsvm.se X11/xsession'
+	alias x='xterm -ls -geometry 80x15+2+1082 -bg "#d0c8c1" & ssh v10073.rsvm.se X11/xsession'
 	;;
     u11340)
-	alias x='xterm -ls -geometry 80x15+2+1082 &'
+	alias x='xterm -ls -geometry 80x15+2+1082 -bg "#d0c8c1" &'
 	;;
 esac
 
