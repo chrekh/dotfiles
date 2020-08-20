@@ -1,5 +1,3 @@
-bashrc_sourced=y
-
 if [ -n "$SUDO_USER" ]; then
     home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
 else
