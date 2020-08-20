@@ -1,3 +1,6 @@
+# Source global definitions
+[ -f /etc/bashrc ] && . /etc/bashrc
+
 if [ -n "$SUDO_USER" ]; then
     home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
 else
