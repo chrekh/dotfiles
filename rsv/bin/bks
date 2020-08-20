@@ -12,7 +12,7 @@ use Data::Dumper;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions(\%opts,'c=s','n','list','r','t','big') || die;
+GetOptions(\%opts,'c=s','n','list','r','t','big','sync') || die;
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
@@ -106,7 +106,7 @@ sub dologin {
 
     my @cmd;
     if ( $target =~ m{[.]rsvm?[.]se$} ) {
-	unless ( exists $syncdb{$target} ) {
+	if ( exists $opts{sync} || ! exists $syncdb{$target} ) {
 	    @cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
 	    say "[$$] system @cmd";
 	    system(@cmd) unless ( exists $opts{n} );
