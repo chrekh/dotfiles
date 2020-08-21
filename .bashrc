@@ -1,5 +1,10 @@
 # Source global definitions
-[ -f /etc/bashrc ] && . /etc/bashrc
+for rc in /etc/bash/bashrc /etc/bashrc; do
+    if [ -f $rc ]; then
+	. $rc
+	break
+    fi
+done
 
 if [ -n "$SUDO_USER" ]; then
     home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
