@@ -2,7 +2,7 @@
  indicate-empty-lines t
  indicate-unused-lines t
  case-fold-search t
- fill-column 90
+ fill-column 79
  )
 
 (custom-set-variables
