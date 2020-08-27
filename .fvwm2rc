@@ -53,6 +53,7 @@ Test (EnvMatch HOST jane) + I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geo
 Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
 Test (EnvMatch HOST lx*)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
 Test (EnvMatch HOST vdx*)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
+Test (EnvMatch HOST v10073)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
 Test (EnvMatch HOST bean) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
 
 AddToFunc RestartFunction
