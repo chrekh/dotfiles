@@ -34,7 +34,7 @@ else
     xsetroot -solid "#703000"
 fi
 
-fvwm
+HOST=$host fvwm
 
 # Cleanup some processes that tend to be left after exiting, and that might
 # keep ssh X11 tunnel open preventing ssh from exiting
