@@ -1,4 +1,10 @@
 #! /bin/sh
+
+export LANG=sv_SE.utf8
+export LC_MESSAGES=C
+
+[ $os = Da ] && exec quartz-wm
+
 host=$(hostname -s)
 case $host in
     vdx*)
@@ -14,6 +20,7 @@ xrdb -load $HOME/.Xdefaults
 
 case $host in
     jane)
+	nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
 	xmodmap ~/X11/xmodmap/pc
 	xmodmap -e 'keycode 108 = Mode_switch'
 	;;
