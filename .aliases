@@ -39,9 +39,9 @@ if [ $dist = Suse ] && [ $rel_maj -lt 11 ]; then
     :
 else
     if [ $os = Li ]; then
-	alias grep='grep --colour=auto --exclude-dir=.git'
+	alias grep='grep --color=auto --exclude-dir=.git'
     else
-	alias grep='grep --colour=auto'
+	alias grep='grep --color=auto'
     fi
 fi
 
