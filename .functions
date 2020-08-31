@@ -19,9 +19,9 @@ uid=$(id -u)
 if [ $os = Li ]; then
     if [ -f /etc/SuSE-release ]; then
 	dist=Suse
-	maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
-	min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
-	rel="$maj.$min"
+	rel_maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
+	rel_min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
+	rel="${rel_maj}.${rel_min}"
     elif [ -f /etc/gentoo-release ]; then
 	dist=Gentoo
     elif [ -f /etc/redhat-release ]; then
