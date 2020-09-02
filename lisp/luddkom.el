@@ -132,7 +132,7 @@
 (defun ludd () ""
   (interactive)
   (setq-default my-kom-server-priority 250)
-  (start-or-goto-kom "LuddKOM" "kom.ludd.luth.se" "Christer Ekholm" (plist-get kom-passwd 'ludd)))
+  (start-or-goto-kom "LuddKOM" "kom.ludd.ltu.se" "Christer Ekholm" (plist-get kom-passwd 'ludd)))
 
 (defun lys () ""
   (interactive)
