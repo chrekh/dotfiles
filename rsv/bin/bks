@@ -106,13 +106,13 @@ sub dologin {
 
     my @cmd;
     # rsync my dotfiles to hosts in *.rsv.se (except *.utv.rsv.se where home is on NFS)
-    if ( $target =~ m{[.]rsvm?[.]se$} && $target !~ m{[.]utv[.]rsv[.]se$} ) {
-	if ( exists $opts{sync} || ! exists $syncdb{$target} ) {
-	    @cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
-	    say "[$$] system @cmd";
-	    system(@cmd) unless ( exists $opts{n} );
-	    $syncdb{$target} = time;
-	}
+    if ( exists $opts{sync}
+	 || ( $target =~ m{[.]rsvm?[.]se$} && $target !~ m{[.]utv[.]rsv[.]se$}
+	      && ! exists $syncdb{$target} ) ) {
+	@cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
+	say "[$$] system @cmd";
+	system(@cmd) unless ( exists $opts{n} );
+	$syncdb{$target} = time;
     }
 
     @cmd = ('urxvt','-T',$title,'-geometry','120x40',
