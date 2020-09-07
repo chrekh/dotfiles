@@ -6,132 +6,139 @@ use strict;
 use warnings;
 
 use Getopt::Long;
-use GDBM_File ;
+use GDBM_File;
 use Socket;
 use Data::Dumper;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions(\%opts,'c=s','n','list','r','t','big','sync') || die;
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync' ) || die;
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
-tie(%catdb, 'GDBM_File', $catdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
+tie( %catdb, 'GDBM_File', $catdb, &GDBM_WRCREAT, 0640 ) || die "tie failed: $!";
 
 my $syncdb = "$ENV{HOME}/db/hostsync";
 my %syncdb;
-tie(%syncdb, 'GDBM_File', $syncdb , &GDBM_WRCREAT, 0640) || die "tie failed: $!";
+tie( %syncdb, 'GDBM_File', $syncdb, &GDBM_WRCREAT, 0640 ) || die "tie failed: $!";
 
 my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
 our %hostdb;
 &readhostdb;
-my %groups = ( moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' ],
-	       cms  => [ 'prod-puppet-cm1',
-			 'prod-puppet-cm2',
-			 'prod-puppet-cm3',
-			 'prod-puppet-cm4',
-			 'prod-puppet-cm5',
-			 ],
-	   );
+my %groups = (
+    moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' ],
+    cms  => [
+        'prod-puppet-cm1', 'prod-puppet-cm2', 'prod-puppet-cm3', 'prod-puppet-cm4',
+        'prod-puppet-cm5',
+    ],
+);
 
 my @hosts;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
     if ( exists $groups{$host} ) {
-	push @hosts, @{$groups{$host}};
-	next;
+        push @hosts, @{ $groups{$host} };
+        next;
     }
     push @hosts, $host;
 }
 
-for my $host ( @hosts ) {
+for my $host (@hosts) {
     &dologin($host);
 }
 
 sub dologin {
-    my $host = shift;
+    my $host   = shift;
     my $target = &lookup($host);
 
     my $cat = 'linux';
     if ( exists $opts{c} && $opts{c} ne 'clear' ) {
-	$cat = $opts{c};
+        $cat = $opts{c};
     }
     else {
-	$cat = 'inas' if ( $target =~ /\.polisen\.se/ );
-	$cat = 'pia' if ( $target =~ /^lxa/ );
-	$cat = 'sys' if ( $target =~ /\.sys\.rsv\.se$/ );
-	$cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
-	$cat = 'pm' if ( $target =~ /^[^.]+\.pm\./ );
+        $cat = 'inas' if ( $target =~ /\.polisen\.se/ );
+        $cat = 'pia'  if ( $target =~ /^lxa/ );
+        $cat = 'sys'  if ( $target =~ /\.sys\.rsv\.se$/ );
+        $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
+        $cat = 'pm'   if ( $target =~ /^[^.]+\.pm\./ );
     }
     my @names = ($target);
-    @names = keys %{$hostdb{$target}{names}} if ( exists $hostdb{$target}{names} );
+    @names = keys %{ $hostdb{$target}{names} } if ( exists $hostdb{$target}{names} );
 
-    for ( @names ) {
-	if ( exists $opts{c} ) {
-	    if ( $opts{c} eq 'clear' ) {
-		delete $catdb{$_};
-	    }
-	    else {
-		$cat = $opts{c};
-		$catdb{$_} = $cat;
-	    }
-	}
-	else {
-	    if ( exists $catdb{$_} ) {
-		$cat = $catdb{$_};
-		last;
-	    }
-	}
+    for (@names) {
+        if ( exists $opts{c} ) {
+            if ( $opts{c} eq 'clear' ) {
+                delete $catdb{$_};
+            }
+            else {
+                $cat = $opts{c};
+                $catdb{$_} = $cat;
+            }
+        }
+        else {
+            if ( exists $catdb{$_} ) {
+                $cat = $catdb{$_};
+                last;
+            }
+        }
     }
 
     my $title = "@names";
 
     # Select color to use
     my %color = (
-	'linux'  => { bg => '#ffffe0', fg => '#301010' }, # beige
-	'inas'   => { bg => '#daffea', fg => '#000030' }, # ljusare blå
-	'pia'    => { bg => '#e5e0b5', fg => '#151500' }, # gråbrun
-	'sys'    => { bg => '#c0ffff', fg => '#000000' }, # mörkare blå
-	'rsvm'   => { bg => '#ffe0e0', fg => '#000000' }, # rosa
-	'umprod' => { bg => '#ffe0e0', fg => '#000000' }, # rosa
-	'pm'     => { bg => '#ccffcc', fg => '#300000' }, # grön
+        'linux'  => { bg => '#ffffe0', fg => '#301010' },    # beige
+        'inas'   => { bg => '#daffea', fg => '#000030' },    # ljusare blå
+        'pia'    => { bg => '#e5e0b5', fg => '#151500' },    # gråbrun
+        'sys'    => { bg => '#c0ffff', fg => '#000000' },    # mörkare blå
+        'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },    # rosa
+        'umprod' => { bg => '#ffe0e0', fg => '#000000' },    # rosa
+        'pm'     => { bg => '#ccffcc', fg => '#300000' },    # grön
     );
     $cat = 'linux' unless ( exists $color{$cat} );
 
     if ( exists $opts{list} ) {
-	print "$target - $title\n";
-	exit 0;
+        print "$target - $title\n";
+        exit 0;
     }
 
     my @cmd;
+
     # rsync my dotfiles to hosts in *.rsv.se (except *.utv.rsv.se where home is on NFS)
-    if ( exists $opts{sync}
-	 || ( $target =~ m{[.]rsvm?[.]se$} && $target !~ m{[.]utv[.]rsv[.]se$}
-	      && ! exists $syncdb{$target} ) ) {
-	@cmd = ('rsync','-Havx','--files-from',$dotfilelist,$ENV{HOME},"${target}:");
-	say "[$$] system @cmd";
-	system(@cmd) unless ( exists $opts{n} );
-	$syncdb{$target} = time;
+    if (exists $opts{sync}
+        || (   $target =~ m{[.]rsvm?[.]se$}
+            && $target !~ m{[.]utv[.]rsv[.]se$}
+            && !exists $syncdb{$target} )
+        ) {
+        @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
+        say "[$$] system @cmd";
+        system(@cmd) unless ( exists $opts{n} );
+        $syncdb{$target} = time;
     }
 
-    @cmd = ('urxvt','-T',$title,'-geometry','120x40',
-	    '-fg',$color{$cat}{fg},'-bg',$color{$cat}{bg});
-    push(@cmd,'-fn','-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*') if ( exists $opts{big} );
-    push(@cmd,'-e','ssh','-t',$target );
-    push(@cmd,'-l','root') if ( exists $opts{r} );
-    push(@cmd,'-l','tmpuser') if ( exists $opts{t} );
+    @cmd = (
+        'urxvt',  '-T',  $title,           '-geometry',
+        '120x40', '-fg', $color{$cat}{fg}, '-bg',
+        $color{$cat}{bg}
+    );
+    push( @cmd, '-fn', '-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*' )
+        if ( exists $opts{big} );
+    push( @cmd, '-e', 'ssh', '-t', $target );
+    push( @cmd, '-l', 'root' )    if ( exists $opts{r} );
+    push( @cmd, '-l', 'tmpuser' ) if ( exists $opts{t} );
 
     my $pid = fork;
     if ( $pid == 0 ) {
-	# Child
-	say "[$$] exec @cmd";
-	exit 0 if ( exists $opts{n} );
-	open(STDIN,'<','/dev/null');
-	open(STDOUT,'>','/dev/null');
-	open(STDERR,'>','/dev/null');
-	exec @cmd;
-	die "exec failed: $!";
+
+        # Child
+        say "[$$] exec @cmd";
+        exit 0 if ( exists $opts{n} );
+        open( STDIN,  '<', '/dev/null' );
+        open( STDOUT, '>', '/dev/null' );
+        open( STDERR, '>', '/dev/null' );
+        exec @cmd;
+        die "exec failed: $!";
     }
 }
 
@@ -142,7 +149,7 @@ sub lookup {
     $target =~ s/\.(um|arv)$/.utv.rps.police.se/;
     $target =~ s/\.(pki)$/.pki.utv.polisen.se/;
 
-    my($name) = gethostbyname($target);
+    my ($name) = gethostbyname($target);
     return $name if ( defined $name );
     ($name) = gethostbyname("${target}.utv.polisen.se");
     return $name if ( defined $name );
@@ -155,25 +162,27 @@ sub lookup {
     ($name) = gethostbyname("${target}.rsv.se");
     return $name if ( defined $name );
 
-    for my $env ( qw<sys acc kap utv pro dmz test-dmz ocp
-		     infra ipa labb lb meet ppx rel1 rex rsv> ) {
-	($name) = gethostbyname("${target}.${env}.rsv.se");
-	return $name if ( defined $name );
+    for my $env (
+        qw<sys acc kap utv pro dmz test-dmz ocp
+        infra ipa labb lb meet ppx rel1 rex rsv>
+        ) {
+        ($name) = gethostbyname("${target}.${env}.rsv.se");
+        return $name if ( defined $name );
     }
     if ( exists $hostdb{$target} ) {
-	return $hostdb{$target}{fqdn};
+        return $hostdb{$target}{fqdn};
     }
     die "Lookup $target failed!\n";
 }
 
 sub readhostdb {
     our %hostdb;
-    open(DB,'<',"$ENV{HOME}/db/all-hosts") || return;
-    while ( <DB> ) {
-	chomp;
-	next if ( /^;/ );
-	if ( my($host,$dom,$type,$val) =
-	     /^
+    open( DB, '<', "$ENV{HOME}/db/all-hosts" ) || return;
+    while (<DB>) {
+        chomp;
+        next if (/^;/);
+        if (my ( $host, $dom, $type, $val )
+            = /^
 	      ([^.]+)[.]      # host
               (\S+)[.]\s+     # domain
 	      \d+\s+IN\s+     # skip
@@ -181,30 +190,31 @@ sub readhostdb {
 	      (\S+?)          # value
 	      [.]?            # top-domain dot
 	      $
-             /x ) {
-	    $hostdb{$host}{fqdn} = "${host}.${dom}";
-	    if ( $type eq 'CNAME' ) {
-		$hostdb{$host}{names}{$val} = 1;
-		$hostdb{"${host}.${dom}"}{names}{$val} = 1;
-		$hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
-		$hostdb{$val}{names}{$val} = 1;
-		$hostdb{$val}{names}{"$host.$dom"} = 1;
-	    }
-	    if ( $type eq 'A' ) {
-		next unless ( $val =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
-		$hostdb{$val}{names}{"${host}.${dom}"} = 1;
-	    }
-	    next;
-	}
+             /x
+            ) {
+            $hostdb{$host}{fqdn} = "${host}.${dom}";
+            if ( $type eq 'CNAME' ) {
+                $hostdb{$host}{names}{$val}                        = 1;
+                $hostdb{"${host}.${dom}"}{names}{$val}             = 1;
+                $hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
+                $hostdb{$val}{names}{$val}                         = 1;
+                $hostdb{$val}{names}{"$host.$dom"}                 = 1;
+            }
+            if ( $type eq 'A' ) {
+                next unless ( $val =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
+                $hostdb{$val}{names}{"${host}.${dom}"} = 1;
+            }
+            next;
+        }
     }
     for my $key ( keys %hostdb ) {
-	next unless ( $key =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
-	for my $nam1 ( keys %{$hostdb{$key}{names}} ) {
-	    for my $nam2 ( keys %{$hostdb{$key}{names}} ) {
-		$hostdb{$nam1}{names}{$nam2} = 1;
-		$hostdb{$nam2}{names}{$nam1} = 1;
-	    }
-	}
+        next unless ( $key =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
+        for my $nam1 ( keys %{ $hostdb{$key}{names} } ) {
+            for my $nam2 ( keys %{ $hostdb{$key}{names} } ) {
+                $hostdb{$nam1}{names}{$nam2} = 1;
+                $hostdb{$nam2}{names}{$nam1} = 1;
+            }
+        }
     }
     close(DB);
 }
