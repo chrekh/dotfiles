@@ -105,11 +105,9 @@ sub dologin {
 
     my @cmd;
 
-    # rsync my dotfiles to hosts in *.rsv.se (except *.utv.rsv.se where home is on NFS)
+    # rsync my dotfiles to hosts in *.rsv.se
     if (exists $opts{sync}
-        || (   $target =~ m{[.]rsvm?[.]se$}
-            && $target !~ m{[.]utv[.]rsv[.]se$}
-            && !exists $syncdb{$target} )
+        || (   $target =~ m{[.]rsvm?[.]se$} && !exists $syncdb{$target} )
         ) {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
