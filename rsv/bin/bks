@@ -127,6 +127,7 @@ sub dologin {
     push( @cmd, '-l', 'tmpuser' ) if ( exists $opts{t} );
 
     my $pid = fork;
+    die "fork failed: $!" unless defined $pid;
     if ( $pid == 0 ) {
 
         # Child
