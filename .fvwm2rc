@@ -29,7 +29,7 @@ Style "XDaliClock"  !Title, Sticky, NeverFocus
 Style "XClock"      !Title, Sticky, NeverFocus
 Style "Xlogin"      !Title, Sticky, PositionPlacement UnderMouse
 Style "dclock"      !Title, Sticky
-Style "launchwindow" Sticky
+Style "launchwindow" !Title, Sticky
 Style "XLoad"	    !Title, NeverFocus
 #Style "rdesktop"    !Title, !Borders
 Style "Tint2"	    !Title, !Borders
