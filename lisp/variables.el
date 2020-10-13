@@ -20,6 +20,7 @@
  initial-scratch-message nil
  confirm-nonexistent-file-or-buffer nil
  calendar-week-start-day 1
+ line-move-visual nil
  require-final-newline t
  next-line-add-newlines nil
  ;Info-enable-edit t
