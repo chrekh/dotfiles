@@ -1,5 +1,5 @@
 tty -s && echo sourcing .bash_profile
-[ -r ~/.functions -a ! "$os" ] && . ~/.functions
+[[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /opt/puppet/bin/ /opt/puppetlabs/bin \
     /opt/boksm/bin /opt/boksm/sbin '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
@@ -75,7 +75,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 [ -n "$dist" ] && title="[$dist]"
 [ -n "$rel" ] && title="[$dist $rel]"
-if [ -e /etc/hostaliases -a -s /etc/hostaliases ]; then
+if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
     aliases=`cat /etc/hostaliases`
     printf "\033]2;%s\007\033]1;%s\007" "$host $title ($aliases)"
 elif [ -n "$WINDOWID" ] && $(hash xprop > /dev/null 2>&1) && title=$(xprop -id $WINDOWID -notype WM_NAME \
@@ -117,7 +117,7 @@ if tty -s; then
 	    # ssh-add is able to contact the agent from stored info.
 	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-	    elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+	    elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "Use forwarded ssh-agent"
 	    fi
 	fi
@@ -125,7 +125,7 @@ if tty -s; then
 	# ssh-add is able to contact the agent from current env.
 	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-	elif [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+	elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 	    echo "Use forwarded ssh-agent"
 	fi
     fi
