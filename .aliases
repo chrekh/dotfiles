@@ -28,11 +28,16 @@ alias l=less
 alias zl=zless
 alias llt='ll -tr'
 alias j=jobs
-if $(hash pinky > /dev/null 2>&1); then
-    alias f=pinky
-else
-    alias f='finger -m'
-fi
+f() {
+    if [ -n "$*" ]; then
+	printf "%-9s %s\n" "Login" "Name"
+	getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
+    elif $(hash pinky > /dev/null 2>&1); then
+	pinky
+    else
+	finger -m
+    fi
+}
 alias h='history'
 alias gzip='gzip --best'
 if [ $dist = Suse ] && [ $rel_maj -lt 11 ]; then
