@@ -27,7 +27,7 @@ my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 our %hostdb;
 &readhostdb;
 my %groups = (
-    moms => [ 'prod-puppet-mom', 'dev-puppet-mom', 'test-puppet-mom' ],
+    moms => [ 'prod-puppet-mom', 'dev-puppet-mom' ],
     cms  => [
         'prod-puppet-cm1', 'prod-puppet-cm2', 'prod-puppet-cm3', 'prod-puppet-cm4',
         'prod-puppet-cm5',
