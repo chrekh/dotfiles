@@ -3,7 +3,7 @@
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 alias ls='ls -F'
 alias ll='ls -al'
-if [ $os = Li ]; then
+if [[ $os == Li ]]; then
     alias df='df -h'
     alias ls='ls -vF'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
@@ -12,14 +12,14 @@ if [ $os = Li ]; then
     else
 	alias free='free -mt'
     fi
-elif [ $os = Da ]; then
+elif [[ $os == Da ]]; then
     alias df='df -h'
-elif [ $os = HP ]; then
+elif [[ $os == HP ]]; then
     alias df=bdf
 fi
 
 # Some alias only for root
-if [ "$UID" -eq '0' ]; then
+if [[ $UID == 0 ]]; then
     alias z='suspend -f'
 fi
 
@@ -30,7 +30,7 @@ alias zl=zless
 alias llt='ll -tr'
 alias j=jobs
 f() {
-    if [ -n "$*" ]; then
+    if [[ -n "$*" ]]; then
 	printf "%-9s %s\n" "Login" "Name"
 	getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
     elif $(hash pinky > /dev/null 2>&1); then
@@ -41,10 +41,10 @@ f() {
 }
 alias h='history'
 alias gzip='gzip --best'
-if [ $dist = Suse ] && [ $rel_maj -lt 11 ]; then
+if [[ $dist == Suse && $rel_maj < 11 ]]; then
     :
 else
-    if [ $os = Li ]; then
+    if [[ $os == Li ]]; then
 	alias grep='grep --color=auto --exclude-dir=.git'
     else
 	alias grep='grep --color=auto'
@@ -52,12 +52,12 @@ else
 fi
 
 #Run mac-emacs on mac OS X
-if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
+if [[ "${TERM_PROGRAM}" == "iTerm.app" ]]; then
     alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs $@'
 fi
 
 # BoKS
-if [ -x /opt/boksm/bin/suexec ]; then
+if [[ -x /opt/boksm/bin/suexec ]]; then
     alias sudo=/opt/boksm/bin/suexec
     alias sbash="suexec bash --rcfile $(echo ~/.bashrc)"
 elif [[ $domain =~ (^|\.)rsvm?\.se$ ]]; then
@@ -67,16 +67,16 @@ else
 fi
 
 # COW (Copy-On-Write) if supported
-if [ $os = Li ]; then
+if [[ $os == Li ]]; then
     (( ${cu_ver[0]} > 7 && ${cu_ver[1]} > 6 )) && alias cp='cp --reflink=auto'
 fi
 
 case $host in
     jane)
-	[ $DISPLAY ] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
+	[[ $DISPLAY ]] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
 	;;
     bean)
-	[ $DISPLAY ] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
+	[[ $DISPLAY ]] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
 	;;
     u11338)
 	alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" & ssh -o ControlMaster=no v10073.rsvm.se X11/xsession'
@@ -86,12 +86,12 @@ case $host in
 	;;
 esac
 
-if [ -x /usr/local/bin/morse ]; then
+if [[ -x /usr/local/bin/morse ]]; then
     alias morse='time /usr/local/bin/morse -r -C 'qwertyuiopasdfghjklzxcvbnm,.?/}{\\\|' -w 20 -T -q -n 5 -N 100'
 fi
 
 # Gentoo
-if [ $dist = Gentoo ]; then
+if [[ $dist == Gentoo ]]; then
     alias qpkg='qpkg -nc'
     alias equery='equery --nocolor'
     alias genlop='genlop --nocolor'
@@ -112,11 +112,11 @@ if [ $dist = Gentoo ]; then
 fi
 
 # RPS
-if [ "$domain" = utv.rps.police.se ]; then
+if [[ "$domain" == utv.rps.police.se ]]; then
     alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=u0043002,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
     alias ads='net ads -U a0043002@UMAD.UTV.POLISEN.SE search'
 fi
-if [ "$domain" = utv.polisen.se ]; then
+if [[ "$domain" == utv.polisen.se ]]; then
     if rpm -q rxvt-unicode > /dev/null 2>&1; then
 	alias rxvt="urxvt -ls -bg '#ffd0c0' -fg '#000000'"
     else
