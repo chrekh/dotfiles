@@ -5,7 +5,7 @@ shift;
 
 case $DISPLAY in
     :0*)
-	disp=`hostname`.chrekh.se$DISPLAY
+	disp=$(hostname).chrekh.se"${DISPLAY}"
 	;;
     *)
 	disp=$DISPLAY
@@ -13,9 +13,9 @@ case $DISPLAY in
 esac	
 
 # Put xauth information to remote
-kaka=`xauth list $DISPLAY|awk '{print $NF}'`
-ssh  -f $remote xauth add $disp . $kaka
+kaka=$(xauth list "${DISPLAY}"|awk '{print $NF}')
+ssh  -f "${remote}" xauth add "${disp}" . "${kaka}"
 
 # execute command remote
 ssh -T -f -o 'ForwardX11 no' -o 'ForwardX11Trusted no' -o 'ForwardAgent no' \
-    $remote "export DISPLAY=$disp;$@>/tmp/xon.log 2>&1 &"
+    "${remote}" "export DISPLAY=$disp;$*>/tmp/xon.log 2>&1 &"
