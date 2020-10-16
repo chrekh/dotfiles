@@ -1,5 +1,7 @@
 # -*- mode: shell-script -*-
 
+# shellcheck shell=bash
+# shellcheck source=./.functions
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 alias ls='ls -F'
 alias ll='ls -al'
