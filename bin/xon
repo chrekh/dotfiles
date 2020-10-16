@@ -4,7 +4,7 @@ remote=$1;
 shift;
 
 # wait for ssh-add in possible other xon
-while ps -eo cmd| grep -q ^s[s]h-add; do
+while pgrep '^ssh-add' > /dev/null; do
     sleep 1;
 done
 
