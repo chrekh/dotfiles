@@ -6,31 +6,31 @@ tty -s && echo sourcing .functions
 os=$(uname -s| cut -c 1-2)
 
 host=$(hostname 2>/dev/null | sed -e 's/\..*//')
-if [ ! $host ]; then
+if [[ ! $host ]]; then
     host=unknown
-    [ -n "$HOST" ] && host=$HOST
-    [ -n "$HOSTNAME" ] && host=$HOSTNAME
+    [[ -n "$HOST" ]] && host=$HOST
+    [[ -n "$HOSTNAME" ]] && host=$HOSTNAME
 fi
-[ -z "$HOST" -a -n "$HOSTNAME" ] && HOST=$HOSTNAME
+[[ -z "$HOST" && -n "$HOSTNAME" ]] && HOST=$HOSTNAME
 export HOST HOSTNAME
 host=${host%%.*}
 dist=unknown
 uid=$(id -u)
 
-if [ $os = Li ]; then
-    if [ -f /etc/SuSE-release ]; then
+if [[ $os = Li ]]; then
+    if [[ -f /etc/SuSE-release ]]; then
 	dist=Suse
 	rel_maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
 	rel_min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
 	rel="${rel_maj}.${rel_min}"
-    elif [ -f /etc/gentoo-release ]; then
+    elif [[ -f /etc/gentoo-release ]]; then
 	dist=Gentoo
-    elif [ -f /etc/os-release ]; then
+    elif [[ -f /etc/os-release ]]; then
 	dist=RedHat
 	rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
 	rel_maj=$(echo $rel | sed -re 's/[.].+$//')
 	rel_min=$(echo $rel | sed -re 's/^.+[.]//')
-    elif [ -f /etc/redhat-release ]; then
+    elif [[ -f /etc/redhat-release ]]; then
 	dist=RedHat
 	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
     fi
@@ -38,15 +38,15 @@ if [ $os = Li ]; then
     cu_ver=($(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g'))
 fi
 
-[ ${BASH_VERSINFO[0]} -ge 4 ] && declare -l domain
+[[ ${BASH_VERSINFO[0]} -ge 4 ]] && declare -l domain
 domain=$(dnsdomainname 2>/dev/null)
-if [ ! $domain ]; then
-    if [ -f /etc/resolv.conf ]; then
+if [[ ! $domain ]]; then
+    if [[ -f /etc/resolv.conf ]]; then
 	domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
     fi
 fi
-[ $domain ] || domain=$USERDNSDOMAIN
-[ $domain ] || domain=none
+[[ $domain ]] || domain=$USERDNSDOMAIN
+[[ $domain ]] || domain=none
 
 case $domain in
     ad.polisen.se)
@@ -66,7 +66,7 @@ case $domain in
 	;;
 esac
 
-if [ $host = ender ]; then
+if [[ $host = ender ]]; then
     spam() {
 	for f in $@; do
             echo -n "$f "
@@ -85,16 +85,16 @@ if [ $host = ender ]; then
     }
 fi
 
-if [ ${BASH_VERSINFO[0]} -ge 4 ]; then
+if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     # bash-4 have hashes
     setpath() {   
 	local -A used
 	local newpath
 	for d in "$@"; do
-	    [ ${used[$d]} ] && continue
+	    [[ ${used[$d]} ]] && continue
 	    used[$d]=y
-	    [ -d "$d" ] || continue
-	    if [ "$newpath" ]; then
+	    [[ -d "$d" ]] || continue
+	    if [[ "$newpath" ]]; then
 		newpath=$newpath:$d
 	    else
 		newpath=$d
@@ -106,15 +106,15 @@ else
     setpath() {   
 	local newpath
 	for d in $@; do
-	    if [ $newpath ]; then
-		[ $newpath = ${d} ]    && continue # d is exactly $PATH 
-		[ ${newpath##$d:*} ]   || continue # d is first in $PATH
-		[ ${newpath%%*:$d} ]   || continue # d is last in $PATH
-		[ ${newpath##*:$d:*} ] || continue # d is in $PATH
-		[ -d $d ]              || continue # d is not a directory
+	    if [[ $newpath ]]; then
+		[[ $newpath = ${d} ]]    && continue # d is exactly $PATH 
+		[[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
+		[[ ${newpath%%*:$d} ]]   || continue # d is last in $PATH
+		[[ ${newpath##*:$d:*} ]] || continue # d is in $PATH
+		[[ -d $d ]]              || continue # d is not a directory
 		newpath=$newpath:$d
 	    else
-		[ -d $d ] || continue
+		[[ -d $d ]] || continue
 		newpath=$d
 	    fi
 	done
@@ -122,11 +122,11 @@ else
     }
 fi    
 
-if [ -x /vobs/um/umtool/bin/projenv ]; then
+if [[ -x /vobs/um/umtool/bin/projenv ]]; then
     projenv() {
 	eval $(/vobs/um/umtool/bin/projenv)
     }
-elif [ -x /opt/umtool/bin/projenv ]; then
+elif [[ -x /opt/umtool/bin/projenv ]]; then
     projenv() {
 	eval $(/opt/umtool/bin/projenv)
     }
