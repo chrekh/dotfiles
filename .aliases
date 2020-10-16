@@ -33,7 +33,7 @@ f() {
     if [[ -n "$*" ]]; then
 	printf "%-9s %s\n" "Login" "Name"
 	getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
-    elif $(hash pinky > /dev/null 2>&1); then
+    elif hash pinky > /dev/null 2>&1; then
 	pinky
     else
 	finger -m
