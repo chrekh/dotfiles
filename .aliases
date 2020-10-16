@@ -112,6 +112,7 @@ if [[ $dist == Gentoo ]]; then
 	    worldopts="$worldopts --jobs=2 --load-average=4"
 	    ;;
     esac
+    # shellcheck disable=SC2139
     alias world="sudo emerge $worldopts @system @world @preserved-rebuild"
 fi
 
