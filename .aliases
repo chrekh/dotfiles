@@ -72,7 +72,7 @@ fi
 
 # COW (Copy-On-Write) if supported
 if [[ $os == Li ]]; then
-    (( ${cu_ver[0]} > 7 && ${cu_ver[1]} > 6 )) && alias cp='cp --reflink=auto'
+    (( cu_ver[0] > 7 && cu_ver[1] > 6 )) && alias cp='cp --reflink=auto'
 fi
 
 case $host in
