@@ -3,15 +3,6 @@
 remote=$1;
 shift;
 
-# wait for ssh-add in possible other xon
-while pgrep '^ssh-add' > /dev/null; do
-    sleep 1;
-done
-
-export SSH_ASKPASS=x11-ssh-askpass
-ssh-add -l > /dev/null 2>&1 || ssh-add
-ssh-add -l > /dev/null 2>&1 || exit
-
 case $DISPLAY in
     :0*)
 	disp=`hostname`.chrekh.se$DISPLAY
