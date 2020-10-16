@@ -43,7 +43,7 @@ f() {
 }
 alias h='history'
 alias gzip='gzip --best'
-if [[ $dist == Suse && $rel_maj < 11 ]]; then
+if [[ $dist == Suse && $rel_maj -lt 11 ]]; then
     :
 else
     if [[ $os == Li ]]; then
