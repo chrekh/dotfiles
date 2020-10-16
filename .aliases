@@ -63,9 +63,9 @@ fi
 # BoKS
 if [[ -x /opt/boksm/bin/suexec ]]; then
     alias sudo=/opt/boksm/bin/suexec
-    alias sbash="suexec bash --rcfile $(echo ~/.bashrc)"
+    alias sbash="suexec bash --rcfile ~/.bashrc"
 elif [[ $domain =~ (^|\.)rsvm?\.se$ ]]; then
-    alias sbash="sudo bash --rcfile $(echo ~/.bashrc)"
+    alias sbash="sudo bash --rcfile ~/.bashrc"
 else
     alias sbash='sudo bash'
 fi
