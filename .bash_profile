@@ -22,14 +22,14 @@ MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
 )
 PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
 export PERL5LIB
-[ -f ~/.bashrc ] && . ~/.bashrc;
+[[ -f ~/.bashrc ]] && . ~/.bashrc;
 
 export LANG=sv_SE.utf8
-[ $os = CY ] && LANG=sv_SE.ISO-8859-1
-[ $os = HP ] && LANG=sv_SE.iso88591
-[ $os = Da -o $os = Fr ] && LANG=sv_SE.UTF-8
-[ $host = lx310020 ] && LANG=sv_SE.iso88591
-[ $host = lx310021 ] && LANG=sv_SE.iso88591
+[[ $os = CY ]] && LANG=sv_SE.ISO-8859-1
+[[ $os = HP ]] && LANG=sv_SE.iso88591
+[[ $os = Da || $os = Fr ]] && LANG=sv_SE.UTF-8
+[[ $host = lx310020 ]] && LANG=sv_SE.iso88591
+[[ $host = lx310021 ]] && LANG=sv_SE.iso88591
 export LC_CTYPE=$LANG
 export LC_MESSAGES=C
 
@@ -51,8 +51,8 @@ fi
 
 umask 022
 
-[ $domain = utv.rps.police.se ] && export LDAP_BASEDN='dc=utv,dc=rps,dc=police,dc=se';
-[ $domain = utv.polisen.se ] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
+[[ $domain = utv.rps.police.se ]] && export LDAP_BASEDN='dc=utv,dc=rps,dc=police,dc=se';
+[[ $domain = utv.polisen.se ]] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
 
 # Git configurations depending on where I am
 export GIT_AUTHOR_EMAIL=che@chrekh.se
@@ -70,18 +70,18 @@ case $domain in
 esac
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
-[ $os = MI ] && type blink > /dev/null 2>&1 && export GIT_SSH=blink
+[[ $os = MI ]] && type blink > /dev/null 2>&1 && export GIT_SSH=blink
 
 # I don't want man to ask stuipd questions
-[ $dist = Suse ] && export MAN_POSIXLY_CORRECT=1
+[[ $dist = Suse ]] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-[ -n "$dist" ] && title="[$dist]"
-[ -n "$rel" ] && title="[$dist $rel]"
+[[ -n "$dist" ]] && title="[$dist]"
+[[ -n "$rel" ]] && title="[$dist $rel]"
 if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
     aliases=`cat /etc/hostaliases`
     printf "\033]2;%s\007\033]1;%s\007" "$host $title ($aliases)"
-elif [ -n "$WINDOWID" ] && hash xprop > /dev/null 2>&1; then
+elif [[ -n "$WINDOWID" ]] && hash xprop > /dev/null 2>&1; then
     title=$(xprop -id $WINDOWID -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
     echo "$(tput tsl)${title}$(tput fsl)"
 fi
@@ -89,19 +89,19 @@ fi
 if tty -s; then
     # Reuse or start new ssh-agent
     ssh-add -l > /dev/null 2>&1
-    if [ $? -eq 2 ]; then
+    if [[ $? -eq 2 ]]; then
 	# ssh-add is unable to contact the agent.
-	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    # Kill it.
 	    eval "$(ssh-agent -k)"
 	    unset SSH_AUTH_SOCK
 	fi
 	# Read stored agent info.
-	[ -e ~/.ssh-agent ] && . ~/.ssh-agent
+	[[ -e ~/.ssh-agent ]] && . ~/.ssh-agent
 	ssh-add -l > /dev/null 2>&1
-	if [ $? -eq 2 ]; then
+	if [[ $? -eq 2 ]]; then
 	    # ssh-add is still unable to contact the agent.
-	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		# Kill it.
 		eval "$(ssh-agent -k)"
 		unset SSH_AUTH_SOCK
@@ -110,15 +110,15 @@ if tty -s; then
 	    eval "$(ssh-agent)"
 	    # Store the agent info for later shells to use.
 	    > ~/.ssh-agent
-	    if [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
+	    if [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
 	    fi
-	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
 	    fi
 	else
 	    # ssh-add is able to contact the agent from stored info.
-	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	    elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "Use forwarded ssh-agent"
@@ -126,7 +126,7 @@ if tty -s; then
 	fi
     else
 	# ssh-add is able to contact the agent from current env.
-	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 	    echo "Use forwarded ssh-agent"
