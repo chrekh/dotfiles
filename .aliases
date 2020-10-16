@@ -1,5 +1,6 @@
 # -*- mode: shell-script -*-
 
+[[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 alias ls='ls -F'
 alias ll='ls -al'
 if [ $os = Li ]; then
