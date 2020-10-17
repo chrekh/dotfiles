@@ -42,7 +42,7 @@ export CHESSDIR=~/chess
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
     for term in $TERM rxvt-unicode rxvt xterm vt100; do
-	if tput -T $term cols >/dev/null 2>&1; then
+	if tput -T "$term" cols >/dev/null 2>&1; then
 	    TERM=$term;
 	    break;
 	fi
@@ -82,7 +82,7 @@ if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
     aliases=$(cat /etc/hostaliases)
     printf "\033]2;%s\007\033]1;%s\007" "$host $title" "($aliases)"
 elif [[ -n "$WINDOWID" ]] && hash xprop > /dev/null 2>&1; then
-    title=$(xprop -id $WINDOWID -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
+    title=$(xprop -id "$WINDOWID" -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
     echo "$(tput tsl)${title}$(tput fsl)"
 fi
 
@@ -91,7 +91,7 @@ if tty -s; then
     ssh-add -l > /dev/null 2>&1
     if [[ $? -eq 2 ]]; then
 	# ssh-add is unable to contact the agent.
-	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
 	    # Kill it.
 	    eval "$(ssh-agent -k)"
 	    unset SSH_AUTH_SOCK
@@ -101,7 +101,7 @@ if tty -s; then
 	ssh-add -l > /dev/null 2>&1
 	if [[ $? -eq 2 ]]; then
 	    # ssh-add is still unable to contact the agent.
-	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
 		# Kill it.
 		eval "$(ssh-agent -k)"
 		unset SSH_AUTH_SOCK
@@ -113,12 +113,12 @@ if tty -s; then
 	    if [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
 	    fi
-	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
 		echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
 	    fi
 	else
 	    # ssh-add is able to contact the agent from stored info.
-	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
 		echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	    elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "Use forwarded ssh-agent"
@@ -126,7 +126,7 @@ if tty -s; then
 	fi
     else
 	# ssh-add is able to contact the agent from current env.
-	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
+	if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
 	    echo "Use existing ssh-agent ($SSH_AGENT_PID)"
 	elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 	    echo "Use forwarded ssh-agent"
