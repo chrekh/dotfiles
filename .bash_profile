@@ -82,7 +82,7 @@ if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
     printf "\033]2;%s\007\033]1;%s\007" "$host $title ($aliases)"
 elif [ -n "$WINDOWID" ] && $(hash xprop > /dev/null 2>&1) && title=$(xprop -id $WINDOWID -notype WM_NAME \
 			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
-    echo $(tput tsl)${title}$(tput fsl)
+    echo "$(tput tsl)${title}$(tput fsl)"
 fi
 
 if tty -s; then
@@ -92,7 +92,7 @@ if tty -s; then
 	# ssh-add is unable to contact the agent.
 	if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 	    # Kill it.
-	    eval $(ssh-agent -k)
+	    eval "$(ssh-agent -k)"
 	    unset SSH_AUTH_SOCK
 	fi
 	# Read stored agent info.
@@ -102,11 +102,11 @@ if tty -s; then
 	    # ssh-add is still unable to contact the agent.
 	    if [ -n "$SSH_AGENT_PID" ] && ps --no-headers -p $SSH_AGENT_PID >/dev/null 2>&1; then
 		# Kill it.
-		eval $(ssh-agent -k)
+		eval "$(ssh-agent -k)"
 		unset SSH_AUTH_SOCK
 	    fi
 	    echo "Start a new ssh-agent"
-	    eval $(ssh-agent)
+	    eval "$(ssh-agent)"
 	    # Store the agent info for later shells to use.
 	    > ~/.ssh-agent
 	    if [ -n "$SSH_AUTH_SOCK" -a -r "$SSH_AUTH_SOCK" ]; then
