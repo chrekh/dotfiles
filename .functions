@@ -109,7 +109,7 @@ else
 	local newpath
 	for d in "$@"; do
 	    if [[ $newpath ]]; then
-		[[ $newpath = ${d} ]]    && continue # d is exactly $PATH 
+		[[ $newpath = "${d}" ]]  && continue # d is exactly $PATH 
 		[[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
 		[[ ${newpath%%*:$d} ]]   || continue # d is last in $PATH
 		[[ ${newpath##*:$d:*} ]] || continue # d is in $PATH
