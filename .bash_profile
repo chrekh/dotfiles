@@ -109,7 +109,7 @@ if tty -s; then
 	    echo "Start a new ssh-agent"
 	    eval "$(ssh-agent)"
 	    # Store the agent info for later shells to use.
-	    > ~/.ssh-agent
+	    : > ~/.ssh-agent
 	    if [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
 		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
 	    fi
