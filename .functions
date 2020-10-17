@@ -36,7 +36,8 @@ if [[ $os = Li ]]; then
 	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
     fi
     declare -a cu_ver
-    cu_ver=($(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g'))
+    FS=" " read -ra cu_ver \
+      <<< "$(cp --version 2> /dev/null | head -n 1 | awk '{print $NF}' | sed -e 's/\./ /g')"
 fi
 
 [[ ${BASH_VERSINFO[0]} -ge 4 ]] && declare -l domain
