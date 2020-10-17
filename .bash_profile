@@ -20,7 +20,8 @@ MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
     /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
-export PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
+PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
+export PERL5LIB
 [ -f ~/.bashrc ] && . ~/.bashrc;
 
 export LANG=sv_SE.utf8
