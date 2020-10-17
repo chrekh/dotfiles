@@ -1,5 +1,6 @@
 # -*- mode: shell-script -*-
 
+# shellcheck disable=SC2034
 # shellcheck shell=bash
 tty -s && echo sourcing .functions
 
