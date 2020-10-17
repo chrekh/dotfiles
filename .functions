@@ -29,8 +29,8 @@ if [[ $os = Li ]]; then
     elif [[ -f /etc/os-release ]]; then
 	dist=RedHat
 	rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
-	rel_maj=$(echo $rel | sed -re 's/[.].+$//')
-	rel_min=$(echo $rel | sed -re 's/^.+[.]//')
+	rel_maj=$(echo "$rel" | sed -re 's/[.].+$//')
+	rel_min=$(echo "$rel" | sed -re 's/^.+[.]//')
     elif [[ -f /etc/redhat-release ]]; then
 	dist=RedHat
 	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
@@ -71,17 +71,17 @@ if [[ $host = ender ]]; then
     spam() {
 	for f in "$@"; do
             echo -n "$f "
-            mv $f $f.spamtmp
-            sa-learn --spam --mbox $f.spamtmp
-            rm -f $f.spamtmp
+            mv "$f" "$f".spamtmp
+            sa-learn --spam --mbox "$f".spamtmp
+            rm -f "$f".spamtmp
 	done
     }
     ham() {
 	for f in "$@"; do
             echo -n "$f "
-            mv $f $f.spamtmp
-            sa-learn --ham --mbox $f.spamtmp
-            rm -f $f.spamtmp
+            mv "$f" "$f".spamtmp
+            sa-learn --ham --mbox "$f".spamtmp
+            rm -f "$f".spamtmp
 	done
     }
 fi
@@ -101,7 +101,7 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
 		newpath=$d
 	    fi
 	done
-	echo $newpath
+	echo "$newpath"
     }
 else
     setpath() {   
@@ -119,7 +119,7 @@ else
 		newpath=$d
 	    fi
 	done
-	echo $newpath
+	echo "$newpath"
     }
 fi    
 
