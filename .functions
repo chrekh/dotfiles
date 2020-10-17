@@ -69,7 +69,7 @@ esac
 
 if [[ $host = ender ]]; then
     spam() {
-	for f in $@; do
+	for f in "$@"; do
             echo -n "$f "
             mv $f $f.spamtmp
             sa-learn --spam --mbox $f.spamtmp
@@ -77,7 +77,7 @@ if [[ $host = ender ]]; then
 	done
     }
     ham() {
-	for f in $@; do
+	for f in "$@"; do
             echo -n "$f "
             mv $f $f.spamtmp
             sa-learn --ham --mbox $f.spamtmp
@@ -106,7 +106,7 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
 else
     setpath() {   
 	local newpath
-	for d in $@; do
+	for d in "$@"; do
 	    if [[ $newpath ]]; then
 		[[ $newpath = ${d} ]]    && continue # d is exactly $PATH 
 		[[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
