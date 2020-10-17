@@ -80,8 +80,8 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
     aliases=`cat /etc/hostaliases`
     printf "\033]2;%s\007\033]1;%s\007" "$host $title ($aliases)"
-elif [ -n "$WINDOWID" ] && $(hash xprop > /dev/null 2>&1) && title=$(xprop -id $WINDOWID -notype WM_NAME \
-			           | sed -e 's/^.*\" *\(.*\) *\"/\1/'); then
+elif [ -n "$WINDOWID" ] && hash xprop > /dev/null 2>&1; then
+    title=$(xprop -id $WINDOWID -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
     echo "$(tput tsl)${title}$(tput fsl)"
 fi
 
