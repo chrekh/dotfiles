@@ -2,6 +2,7 @@
 # shellcheck source=./.functions
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
+# shellcheck disable=SC2086
 PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /opt/puppet/bin/ /opt/puppetlabs/bin \
     /opt/boksm/bin /opt/boksm/sbin '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
@@ -14,12 +15,14 @@ PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/l
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )
 MANPATH=$(manpath 2>/dev/null)
+# shellcheck disable=SC2086
 MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
     /usr/local/man /usr/local/share/man \
     ${MANPATH//:/ } \
     /opt/boksm/man \
     /opt/umtool/man /opt/cfengine/cfe/man
 )
+# shellcheck disable=SC2086
 PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
 export PERL5LIB
 [[ -f ~/.bashrc ]] && . ~/.bashrc;
