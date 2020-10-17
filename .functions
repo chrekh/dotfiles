@@ -122,13 +122,3 @@ else
 	echo "$newpath"
     }
 fi    
-
-if [[ -x /vobs/um/umtool/bin/projenv ]]; then
-    projenv() {
-	eval $(/vobs/um/umtool/bin/projenv)
-    }
-elif [[ -x /opt/umtool/bin/projenv ]]; then
-    projenv() {
-	eval $(/opt/umtool/bin/projenv)
-    }
-fi
