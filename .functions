@@ -1,11 +1,12 @@
 # -*- mode: shell-script -*-
 
+# shellcheck shell=bash
 tty -s && echo sourcing .functions
 
 os=$(uname -s| cut -c 1-2)
 
 host=$(hostname 2>/dev/null | sed -e 's/\..*//')
-if [ ! $hostname ]; then
+if [ ! $host ]; then
     host=unknown
     [ -n "$HOST" ] && host=$HOST
     [ -n "$HOSTNAME" ] && host=$HOSTNAME
