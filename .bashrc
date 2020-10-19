@@ -42,9 +42,8 @@ if tty -s; then
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
     if [[ -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
-	GIT_PS1_SHOWUPSTREAM="auto"
-	GIT_PS1_SHOWDIRTYSTATE=1
-	. $my_real_home/contrib/completion/git-prompt.sh
+	GIT_PS1_SHOWUPSTREAM="auto" GIT_PS1_SHOWDIRTYSTATE=1 \
+			    . $my_real_home/contrib/completion/git-prompt.sh
 	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
     fi
 
