@@ -1,35 +1,35 @@
 # Source global definitions
 for rc in /etc/bash/bashrc /etc/bashrc; do
-    if [ -f $rc ]; then
+    if [[ -f $rc ]]; then
 	. $rc
 	break
     fi
 done
 
-if [ -n "$SUDO_USER" ]; then
+if [[ -n "$SUDO_USER" ]]; then
     home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
 else
     home_candidate=${HOME:=~}
 fi
-if [ -r ${home_candidate}/.functions ]; then
+if [[ -r ${home_candidate}/.functions ]]; then
     my_real_home=${home_candidate}
-elif [ -r /home/196603089076/.functions ]; then
+elif [[ -r /home/196603089076/.functions ]]; then
     my_real_home=/home/196603089076/
-elif [ -r /home/u0043002/.functions ]; then
+elif [[ -r /home/u0043002/.functions ]]; then
     my_real_home=/home/u0043002
-elif [ -r /home/jjri/.functions ]; then
+elif [[ -r /home/jjri/.functions ]]; then
     my_real_home=/home/jjri
 fi
-[ "$os" ] || . $my_real_home/.functions
+[[ "$os" ]] || . $my_real_home/.functions
 if tty -s; then
     echo sourcing .bashrc
 
     # Use my keymap in polisen PROD
-    if [ $domain = appl.polisen.se -o $domain = dc.polisen.se -o $domain = dmz.polisen.se \
-	-o $domain = mgmt.polisen.se -o $domain = rps.police.se -o $domain = bd.polisen.se \
-	-o $host = NT330595 -o $host = NT462792 ]; then
+    if [[ $domain = appl.polisen.se || $domain = dc.polisen.se || $domain = dmz.polisen.se \
+	|| $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
+	|| $host = NT330595 || $host = NT462792 ]]; then
 	# Set HOME to my home if BoKS has set it to /root
-	if [ "$PWD" = /root -a $HOME = /root ]; then
+	if [[ "$PWD" = /root && $HOME = /root ]]; then
 	    HOME=/home/196603089076
 	fi
 	bind -f ~/.keymap-polisen-prod
@@ -38,7 +38,7 @@ if tty -s; then
     # prompt
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
-    if [ -r $my_real_home/contrib/completion/git-prompt.sh ]; then
+    if [[ -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
 	GIT_PS1_SHOWUPSTREAM="auto"
 	GIT_PS1_SHOWDIRTYSTATE=1
 	. $my_real_home/contrib/completion/git-prompt.sh
@@ -55,13 +55,13 @@ if tty -s; then
     shopt -u progcomp	  # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
-    if [ "$uid" -ne 0 ]; then
+    if [[ "$uid" -ne 0 ]]; then
 	HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
-	[ -d $my_real_home/.bash_history ] && rm -rf $my_real_home/.bash_history
+	[[ -d $my_real_home/.bash_history ]] && rm -rf $my_real_home/.bash_history
     fi
     HISTSIZE=200
 
-    [ -r $my_real_home/.aliases ] && . $my_real_home/.aliases
+    [[ -r $my_real_home/.aliases ]] && . $my_real_home/.aliases
 
     stty kill ^@
     case $TERM in
@@ -72,7 +72,7 @@ if tty -s; then
 	    stty erase '^h'
     esac
 
-    if [ "$PWD" = /root -a $HOME = /root ]; then
+    if [[ "$PWD" = /root && $HOME = /root ]]; then
 	HOME=/home/196603089076
     fi
 fi
