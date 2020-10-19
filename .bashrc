@@ -10,7 +10,7 @@ for rc in /etc/bash/bashrc /etc/bashrc; do
 done
 
 if [[ -n "$SUDO_USER" ]]; then
-    home_candidate=$(getent passwd $SUDO_USER | cut -d: -f6)
+    home_candidate=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 else
     home_candidate=${HOME:=~}
 fi
