@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# shellcheck source=./.functions
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # Source global definitions
 for rc in /etc/bash/bashrc /etc/bashrc; do
