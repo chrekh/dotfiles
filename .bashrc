@@ -1,3 +1,4 @@
+[[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # Source global definitions
 for rc in /etc/bash/bashrc /etc/bashrc; do
     if [[ -f $rc ]]; then
