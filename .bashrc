@@ -30,11 +30,7 @@ if tty -s; then
     if [[ $domain = appl.polisen.se || $domain = dc.polisen.se || $domain = dmz.polisen.se \
 	|| $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
 	|| $host = NT330595 || $host = NT462792 ]]; then
-	# Set HOME to my home if BoKS has set it to /root
-	if [[ "$PWD" = /root && $HOME = /root ]]; then
-	    HOME=/home/196603089076
-	fi
-	bind -f ~/.keymap-polisen-prod
+	[[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
     fi
 
     # prompt
@@ -75,8 +71,4 @@ if tty -s; then
 	*)
 	    stty erase '^h'
     esac
-
-    if [[ "$PWD" = /root && $HOME = /root ]]; then
-	HOME=/home/196603089076
-    fi
 fi
