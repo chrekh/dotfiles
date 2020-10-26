@@ -81,14 +81,16 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 [[ -n "$dist" ]] && title="[$dist]"
 [[ -n "$rel" ]] && title="[$dist $rel]"
-if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
-    aliases=$(cat /etc/hostaliases)
-    echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
-elif [[ -n "$WINDOWID" ]] && hash xprop > /dev/null 2>&1; then
-    title=$(xprop -id "$WINDOWID" -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
-    echo -n "$(tput tsl)${title}$(tput fsl)"
-else
-    echo -n "$(tput tsl)$host ${title}$(tput fsl)"
+if [[ $(tput tsl) ]]; then
+    if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
+	aliases=$(cat /etc/hostaliases)
+	echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
+    elif [[ -n "$WINDOWID" ]] && hash xprop > /dev/null 2>&1; then
+	title=$(xprop -id "$WINDOWID" -notype WM_NAME | sed -e 's/^.*\" *\(.*\) *\"/\1/')
+	echo -n "$(tput tsl)${title}$(tput fsl)"
+    else
+	echo -n "$(tput tsl)$host ${title}$(tput fsl)"
+    fi
 fi
 
 if tty -s; then
