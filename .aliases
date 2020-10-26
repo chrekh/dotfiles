@@ -86,7 +86,7 @@ case $host in
 	alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" & ssh -o ControlMaster=no v10073.rsvm.se X11/xsession'
 	;;
     u11340)
-	alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" &'
+	alias x='xterm -name launchwindow -ls -geometry 80x15+110+2 -bg "#dfdfff" &'
 	;;
 esac
 
