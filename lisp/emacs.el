@@ -30,3 +30,7 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'eval-expression 'disabled nil)
 (setq load-home-init-file t) ; don't load init file from ~/.xemacs/init.el
+
+(custom-set-variables
+ '(indent-tabs-mode nil)
+ )
