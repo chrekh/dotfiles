@@ -20,20 +20,20 @@ uid=$(id -u)
 
 if [[ $os = Li ]]; then
     if [[ -f /etc/SuSE-release ]]; then
-	dist=Suse
-	rel_maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
-	rel_min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
-	rel="${rel_maj}.${rel_min}"
+        dist=Suse
+        rel_maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
+        rel_min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
+        rel="${rel_maj}.${rel_min}"
     elif [[ -f /etc/gentoo-release ]]; then
-	dist=Gentoo
+        dist=Gentoo
     elif [[ -f /etc/os-release ]]; then
-	dist=RedHat
-	rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
-	rel_maj=$(echo "$rel" | sed -re 's/[.].+$//')
-	rel_min=$(echo "$rel" | sed -re 's/^.+[.]//')
+        dist=RedHat
+        rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
+        rel_maj=$(echo "$rel" | sed -re 's/[.].+$//')
+        rel_min=$(echo "$rel" | sed -re 's/^.+[.]//')
     elif [[ -f /etc/redhat-release ]]; then
-	dist=RedHat
-	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
+        dist=RedHat
+        rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
     fi
     declare -a cu_ver
     FS=" " read -ra cu_ver \
@@ -44,7 +44,7 @@ fi
 domain=$(dnsdomainname 2>/dev/null)
 if [[ ! $domain ]]; then
     if [[ -f /etc/resolv.conf ]]; then
-	domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
+        domain=$(awk '/domain/{print $2; exit};/search/{print $2; exit}' /etc/resolv.conf)
     fi
 fi
 [[ $domain ]] || domain=$USERDNSDOMAIN
@@ -52,74 +52,74 @@ fi
 
 case $domain in
     ad.polisen.se)
-	site=rpswin
-	;;
+        site=rpswin
+        ;;
     rsv.se | *.rsv.se | rsvm.se | *.rsvm.se)
-	site=rsv
-	;;
+        site=rsv
+        ;;
     polisen.se | *.polisen.se | rps.se | *.rps.se)
-	site=rps
-	;;
+        site=rps
+        ;;
     chrekh.se | *.chrekh.se)
-	site=home
-	;;
+        site=home
+        ;;
     *)
-	site=unknown
-	;;
+        site=unknown
+        ;;
 esac
 
 if [[ $host = ender ]]; then
     spam() {
-	for f in "$@"; do
+        for f in "$@"; do
             echo -n "$f "
             mv "$f" "$f".spamtmp
             sa-learn --spam --mbox "$f".spamtmp
             rm -f "$f".spamtmp
-	done
+        done
     }
     ham() {
-	for f in "$@"; do
+        for f in "$@"; do
             echo -n "$f "
             mv "$f" "$f".spamtmp
             sa-learn --ham --mbox "$f".spamtmp
             rm -f "$f".spamtmp
-	done
+        done
     }
 fi
 
 if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     # bash-4 have hashes
     setpath() {   
-	local -A used
-	local newpath
-	for d in "$@"; do
-	    [[ ${used[$d]} ]] && continue
-	    used[$d]=y
-	    [[ -d "$d" ]] || continue
-	    if [[ "$newpath" ]]; then
-		newpath=$newpath:$d
-	    else
-		newpath=$d
-	    fi
-	done
-	echo "$newpath"
+        local -A used
+        local newpath
+        for d in "$@"; do
+            [[ ${used[$d]} ]] && continue
+            used[$d]=y
+            [[ -d "$d" ]] || continue
+            if [[ "$newpath" ]]; then
+                newpath=$newpath:$d
+            else
+                newpath=$d
+            fi
+        done
+        echo "$newpath"
     }
 else
     setpath() {   
-	local newpath
-	for d in "$@"; do
-	    if [[ $newpath ]]; then
-		[[ $newpath = "${d}" ]]  && continue # d is exactly $PATH 
-		[[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
-		[[ ${newpath%%*:$d} ]]   || continue # d is last in $PATH
-		[[ ${newpath##*:$d:*} ]] || continue # d is in $PATH
-		[[ -d $d ]]              || continue # d is not a directory
-		newpath=$newpath:$d
-	    else
-		[[ -d $d ]] || continue
-		newpath=$d
-	    fi
-	done
-	echo "$newpath"
+        local newpath
+        for d in "$@"; do
+            if [[ $newpath ]]; then
+                [[ $newpath = "${d}" ]]  && continue # d is exactly $PATH 
+                [[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
+                [[ ${newpath%%*:$d} ]]   || continue # d is last in $PATH
+                [[ ${newpath##*:$d:*} ]] || continue # d is in $PATH
+                [[ -d $d ]]              || continue # d is not a directory
+                newpath=$newpath:$d
+            else
+                [[ -d $d ]] || continue
+                newpath=$d
+            fi
+        done
+        echo "$newpath"
     }
 fi    

@@ -10,9 +10,9 @@ if [[ $os == Li ]]; then
     alias ls='ls -vF'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
     if free -V | grep -q procps-ng; then
-	alias free='free -ht'
+        alias free='free -ht'
     else
-	alias free='free -mt'
+        alias free='free -mt'
     fi
 elif [[ $os == Da ]]; then
     alias df='df -h'
@@ -33,12 +33,12 @@ alias llt='ll -tr'
 alias j=jobs
 f() {
     if [[ -n "$*" ]]; then
-	printf "%-9s %s\n" "Login" "Name"
-	getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
+        printf "%-9s %s\n" "Login" "Name"
+        getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
     elif hash pinky > /dev/null 2>&1; then
-	pinky
+        pinky
     else
-	finger -m
+        finger -m
     fi
 }
 alias h='history'
@@ -47,16 +47,16 @@ if [[ $dist == Suse && $rel_maj -lt 11 ]]; then
     :
 else
     if [[ $os == Li ]]; then
-	alias grep='grep --color=auto --exclude-dir=.git'
+        alias grep='grep --color=auto --exclude-dir=.git'
     else
-	alias grep='grep --color=auto'
+        alias grep='grep --color=auto'
     fi
 fi
 
 #Run mac-emacs on mac OS X
 if [[ "${TERM_PROGRAM}" == "iTerm.app" ]]; then
     emacs() {
-	/Applications/Emacs.app/Contents/MacOS/Emacs "$@"
+        /Applications/Emacs.app/Contents/MacOS/Emacs "$@"
     }
 fi
 
@@ -77,17 +77,17 @@ fi
 
 case $host in
     jane)
-	[[ $DISPLAY ]] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
-	;;
+        [[ $DISPLAY ]] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
+        ;;
     bean)
-	[[ $DISPLAY ]] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
-	;;
+        [[ $DISPLAY ]] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
+        ;;
     u11338)
-	alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" & ssh -o ControlMaster=no v10073.rsvm.se X11/xsession'
-	;;
+        alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" & ssh -o ControlMaster=no v10073.rsvm.se X11/xsession'
+        ;;
     u11340)
-	alias x='xterm -name launchwindow -ls -geometry 80x15+110+2 -bg "#dfdfff" &'
-	;;
+        alias x='xterm -name launchwindow -ls -geometry 80x15+110+2 -bg "#dfdfff" &'
+        ;;
 esac
 
 if [[ -x /usr/local/bin/morse ]]; then
@@ -102,15 +102,15 @@ if [[ $dist == Gentoo ]]; then
     alias eix='eix -n'
     worldopts='--oneshot --deep --update --ask --verbose y --keep-going --newuse --with-bdeps y --changed-deps --verbose-conflicts --backtrack=8 --autounmask-backtrack=y'
     case $host in
-	jane)
-	    worldopts="$worldopts --jobs=5 --load-average=10"
-	    ;;
-	ender)
-	    worldopts="$worldopts --jobs=2 --load-average=4"
-	    ;;
-	bean)
-	    worldopts="$worldopts --jobs=2 --load-average=4"
-	    ;;
+        jane)
+            worldopts="$worldopts --jobs=5 --load-average=10"
+            ;;
+        ender)
+            worldopts="$worldopts --jobs=2 --load-average=4"
+            ;;
+        bean)
+            worldopts="$worldopts --jobs=2 --load-average=4"
+            ;;
     esac
     # shellcheck disable=SC2139
     alias world="sudo emerge $worldopts @system @world @preserved-rebuild"
@@ -123,15 +123,15 @@ if [[ "$domain" == utv.rps.police.se ]]; then
 fi
 if [[ "$domain" == utv.polisen.se ]]; then
     if rpm -q rxvt-unicode > /dev/null 2>&1; then
-	alias rxvt="urxvt -ls -bg '#ffd0c0' -fg '#000000'"
+        alias rxvt="urxvt -ls -bg '#ffd0c0' -fg '#000000'"
     else
-	alias rxvt="xterm -ls -bg '#ffd0c0' -fg '#000000'"
+        alias rxvt="xterm -ls -bg '#ffd0c0' -fg '#000000'"
     fi
 fi
 case $host in
     nt* | NT* )
-	alias down='cd //tsclient/C/Users/u0043002/Downloads'
-	;;
+        alias down='cd //tsclient/C/Users/u0043002/Downloads'
+        ;;
 esac
 if pum < /dev/null > /dev/null 2>&1; then
     alias last='last -wF|egrep -v ^cmdb|tac|pum'

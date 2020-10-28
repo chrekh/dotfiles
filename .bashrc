@@ -3,8 +3,8 @@
 # Source global definitions
 for rc in /etc/bash/bashrc /etc/bashrc; do
     if [[ -f $rc ]]; then
-	. $rc
-	break
+        . $rc
+        break
     fi
 done
 
@@ -28,21 +28,21 @@ if tty -s; then
 
     # Use my keymap in polisen PROD
     if [[ $domain = appl.polisen.se || $domain = dc.polisen.se || $domain = dmz.polisen.se \
-	|| $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
-	|| $host = NT330595 || $host = NT462792 ]]; then
-	[[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
+        || $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
+        || $host = NT330595 || $host = NT462792 ]]; then
+        [[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
     fi
 
     # prompt
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
     if [[ -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
-	# shellcheck disable=SC2034
-	GIT_PS1_SHOWUPSTREAM="auto"
-	# shellcheck disable=SC2034
-	GIT_PS1_SHOWDIRTYSTATE=1
-	. $my_real_home/contrib/completion/git-prompt.sh
-	PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
+        # shellcheck disable=SC2034
+        GIT_PS1_SHOWUPSTREAM="auto"
+        # shellcheck disable=SC2034
+        GIT_PS1_SHOWDIRTYSTATE=1
+        . $my_real_home/contrib/completion/git-prompt.sh
+        PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
     fi
 
     set -m # enable job controll
@@ -50,14 +50,14 @@ if tty -s; then
     set +H # Disable ! history substitution (I never use them)
 
     shopt -s checkwinsize # check window size after each command
-    shopt -s failglob	  # Don't expand * to '*' if no matches.
-    shopt -u sourcepath	  # Don't use PATH for sourcing files.
-    shopt -u progcomp	  # Don't use programmable completion.
+    shopt -s failglob     # Don't expand * to '*' if no matches.
+    shopt -u sourcepath   # Don't use PATH for sourcing files.
+    shopt -u progcomp     # Don't use programmable completion.
 
     HISTCONTROL=ignoredups
     if [[ "$uid" -ne 0 ]]; then
-	HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
-	[[ -d $my_real_home/.bash_history ]] && rm -rf $my_real_home/.bash_history
+        HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
+        [[ -d $my_real_home/.bash_history ]] && rm -rf $my_real_home/.bash_history
     fi
     HISTSIZE=200
 
@@ -65,10 +65,10 @@ if tty -s; then
 
     stty kill ^@
     case $TERM in
-	vt* | xterm | xterm-* | linux)
-	    stty erase '^?'
-	    ;;
-	*)
-	    stty erase '^h'
+        vt* | xterm | xterm-* | linux)
+            stty erase '^?'
+            ;;
+        *)
+            stty erase '^h'
     esac
 fi
