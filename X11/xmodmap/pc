@@ -35,34 +35,3 @@ keycode 59 = comma semicolon less less
 keycode 60 = period colon greater greater
 keycode 61 = minus underscore
 keycode 94 = less greater
-
-! Numeric Keypad
-keycode 90 = 0
-keycode 87 = 1
-keycode 88 = 2
-keycode 89 = 3
-keycode 83 = 4
-keycode 84 = 5
-keycode 85 = 6
-keycode 79 = 7
-keycode 80 = 8
-keycode 81 = 9
-keycode 91 = period period
-
-! Numeric Keypad at skatteverket (X-Win32)
-keycode 112 = slash slash
-keycode  63 = asterisk asterisk
-keycode  82 = minus minus
-keycode  86 = plus plus
-keycode 108 = Return Return
-keycode 139 = 0
-keycode 140 = 1
-keycode 141 = 2
-keycode 142 = 3
-keycode 143 = 4
-keycode 144 = 5
-keycode 145 = 6
-keycode 146 = 7
-keycode 147 = 8
-keycode 148 = 9
-keycode 149 = period period

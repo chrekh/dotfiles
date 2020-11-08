@@ -23,14 +23,20 @@ case $host in
     jane)
 	nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
 	xmodmap ~/X11/xmodmap/pc
+	xmodmap ~/X11/xmodmap/pc_kp
 	xmodmap -e 'keycode 108 = Mode_switch'
 	;;
     bean)
 	xmodmap ~/X11/xmodmap/macbook
 	xmodmap -e 'keycode 108 = Mode_switch'
 	;;
+    v10073)
+	xmodmap ~/X11/xmodmap/pc
+        xmodmap ~/X11/xmodmap/x-win32_kp
+        ;;
     *)
 	xmodmap ~/X11/xmodmap/pc
+	xmodmap ~/X11/xmodmap/pc_kp
 	xmodmap -e 'keycode 113 = Mode_switch'
 	;;
 esac
