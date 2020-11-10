@@ -58,6 +58,6 @@ HOST=$host fvwm
 killall -u jjri -r -- dbus- -agent emacs
 
 # And kill all remaining X clients
-xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read id; do
+xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read -r id; do
     xkill -id "$id"
 done
