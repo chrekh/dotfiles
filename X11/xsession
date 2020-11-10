@@ -15,6 +15,7 @@ case $host in
 esac
 exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
 
+# shellcheck source=../.bash_profile
 test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
 
 xset b off
