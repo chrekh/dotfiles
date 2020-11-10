@@ -33,6 +33,7 @@ case $host in
     v10073)
         xmodmap ~/X11/xmodmap/pc
         xmodmap ~/X11/xmodmap/x-win32_kp
+        xmodmap -e 'keycode 113 = Mode_switch'
         ;;
     *)
         xmodmap ~/X11/xmodmap/pc
