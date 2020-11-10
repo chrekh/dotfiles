@@ -13,12 +13,12 @@ case $host in
         export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
         ;;
 esac
-exec >$HOME/.xsessionlog 2>$HOME/.xsessionlog
+exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
 
-test -r $HOME/.bash_profile && . $HOME/.bash_profile
+test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
 
 xset b off
-xrdb -load $HOME/.Xdefaults
+xrdb -load "$HOME"/.Xdefaults
 
 case $host in
     jane)
@@ -58,5 +58,5 @@ killall -u jjri -r -- dbus- -agent emacs
 
 # And kill all remaining X clients
 xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read id; do
-    xkill -id $id
+    xkill -id "$id"
 done
