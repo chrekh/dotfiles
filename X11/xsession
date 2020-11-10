@@ -9,8 +9,8 @@ export LC_MESSAGES=C
 host=$(hostname -s)
 case $host in
     vdx*)
-	export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
-	;;
+        export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
+        ;;
 esac
 exec >$HOME/.xsessionlog 2>$HOME/.xsessionlog
 
@@ -21,24 +21,24 @@ xrdb -load $HOME/.Xdefaults
 
 case $host in
     jane)
-	nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
-	xmodmap ~/X11/xmodmap/pc
-	xmodmap ~/X11/xmodmap/pc_kp
-	xmodmap -e 'keycode 108 = Mode_switch'
-	;;
+        nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
+        xmodmap ~/X11/xmodmap/pc
+        xmodmap ~/X11/xmodmap/pc_kp
+        xmodmap -e 'keycode 108 = Mode_switch'
+        ;;
     bean)
-	xmodmap ~/X11/xmodmap/macbook
-	xmodmap -e 'keycode 108 = Mode_switch'
-	;;
+        xmodmap ~/X11/xmodmap/macbook
+        xmodmap -e 'keycode 108 = Mode_switch'
+        ;;
     v10073)
-	xmodmap ~/X11/xmodmap/pc
+        xmodmap ~/X11/xmodmap/pc
         xmodmap ~/X11/xmodmap/x-win32_kp
         ;;
     *)
-	xmodmap ~/X11/xmodmap/pc
-	xmodmap ~/X11/xmodmap/pc_kp
-	xmodmap -e 'keycode 113 = Mode_switch'
-	;;
+        xmodmap ~/X11/xmodmap/pc
+        xmodmap ~/X11/xmodmap/pc_kp
+        xmodmap -e 'keycode 113 = Mode_switch'
+        ;;
 esac
 
 if $(hash -r xsetbg > /dev/null 2>&1) && [[ -f $HOME/X11/rainlight.gif ]]; then
