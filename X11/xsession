@@ -3,6 +3,7 @@
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
 
+# shellcheck source=../.functions
 [ -r ~/.functions -a ! "$os" ] && . ~/.functions
 [ $os = Da ] && exec quartz-wm
 
