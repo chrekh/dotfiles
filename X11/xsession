@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
