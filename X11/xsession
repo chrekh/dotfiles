@@ -44,7 +44,7 @@ case $host in
         ;;
 esac
 
-if $(hash -r xsetbg > /dev/null 2>&1) && [[ -f $HOME/X11/rainlight.gif ]]; then
+if hash -r xsetbg > /dev/null 2>&1 && [[ -f $HOME/X11/rainlight.gif ]]; then
     # Let fvwm set the bg image
     :
 else
