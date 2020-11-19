@@ -2,7 +2,13 @@
 
 # shellcheck disable=SC2034
 # shellcheck shell=bash
-tty -s && echo sourcing .functions
+if tty -s; then
+    echo sourcing .functions
+    # Read terminal answerback
+    stty raw min 0 time 2;echo -ne '\005' && read -s term_answerback;stty cooked
+    [[ $term_answerback =~ ^[a-zA-Z] ]] || term_answerback=garbage
+    [[ $term_answerback == PuTTY ]] && echo PuTTY detected
+fi
 
 os=$(uname -s| cut -c 1-2)
 
