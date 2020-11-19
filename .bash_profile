@@ -85,8 +85,6 @@ if [[ $(tput tsl) ]]; then
     if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
         aliases=$(cat /etc/hostaliases)
         echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
-    else
-        echo -n "$(tput tsl)$host ${title}$(tput fsl)"
     fi
 fi
 
