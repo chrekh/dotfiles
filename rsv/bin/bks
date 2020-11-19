@@ -84,7 +84,7 @@ sub dologin {
         }
     }
 
-    my $title = "@names";
+    my $title = join("   ",map { s/[.].+$//;$_ } sort byhostname @names);
 
     # Select color to use
     my %color = (
@@ -216,4 +216,21 @@ sub readhostdb {
         }
     }
     close(DB);
+}
+
+sub byhostname {
+    if ( $a =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+        if ( $b =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+            return ($a cmp $b);
+        }
+        else {
+            return -1;
+        }
+    }
+    elsif ( $b =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+        return 1;
+    }
+    else {
+        return ($a cmp $b);
+    }
 }
