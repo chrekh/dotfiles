@@ -1,10 +1,11 @@
-#! /bin/sh
+#! /bin/bash
 
 export LANG=sv_SE.utf8
 export LC_MESSAGES=C
 
-[ -r ~/.functions -a ! "$os" ] && . ~/.functions
-[ $os = Da ] && exec quartz-wm
+# shellcheck source=../.functions
+[[ -r ~/.functions && ! "$os" ]] && . ~/.functions
+[[ $os = Da ]] && exec quartz-wm
 
 host=$(hostname -s)
 case $host in
@@ -12,12 +13,13 @@ case $host in
         export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
         ;;
 esac
-exec >$HOME/.xsessionlog 2>$HOME/.xsessionlog
+exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
 
-test -r $HOME/.bash_profile && . $HOME/.bash_profile
+# shellcheck source=../.bash_profile
+test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
 
 xset b off
-xrdb -load $HOME/.Xdefaults
+xrdb -load "$HOME"/.Xdefaults
 
 case $host in
     jane)
@@ -42,7 +44,7 @@ case $host in
         ;;
 esac
 
-if $(hash -r xsetbg > /dev/null 2>&1) && [[ -f $HOME/X11/rainlight.gif ]]; then
+if hash -r xsetbg > /dev/null 2>&1 && [[ -f $HOME/X11/rainlight.gif ]]; then
     # Let fvwm set the bg image
     :
 else
@@ -56,6 +58,6 @@ HOST=$host fvwm
 killall -u jjri -r -- dbus- -agent emacs
 
 # And kill all remaining X clients
-xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read id; do
-    xkill -id $id
+xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read -r id; do
+    xkill -id "$id"
 done
