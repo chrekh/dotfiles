@@ -5,7 +5,7 @@
 if tty -s; then
     echo sourcing .functions
     # Read terminal answerback
-    stty raw min 0 time 2;echo -ne '\005' && read -s term_answerback;stty cooked
+    stty raw min 0 time 2;echo -ne '\005' && read -rs term_answerback;stty cooked
     [[ $term_answerback =~ ^[a-zA-Z] ]] || term_answerback=garbage
     [[ $term_answerback == PuTTY ]] && echo PuTTY detected
 fi
