@@ -1,7 +1,11 @@
 "\C-u":	kill-whole-line
 $if bash
-set show-all-if-ambiguous On
-set completion-query-items 300
+  set show-all-if-ambiguous On
+  set completion-query-items 300
+  set enable-bracketed-paste Off
+  $if enable-bracketed-paste = On
+    set enable-bracketed-paste Off
+  $endif
 $endif
 set meta-flag On
 set convert-meta Off
