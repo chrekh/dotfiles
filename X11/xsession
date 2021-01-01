@@ -19,7 +19,7 @@ exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
 test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
 
 xset b off
-xrdb -load "$HOME"/.Xdefaults
+xrdb -load "$HOME"/.Xresources
 
 case $host in
     jane)
