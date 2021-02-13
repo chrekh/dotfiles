@@ -136,6 +136,7 @@ Test (EnvMatch HOST lx*)  + "Vcum"	    Exec exec rdesktop -k sv -g 1280x1024 vcu
 Test (EnvMatch HOST jane) + "Mu4e"	    Exec xon ender 'emacs -geometry 105x50+791+269 -f mu4e'&
 Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
 Test (EnvMatch HOST jane) + "slack"	    Exec slack
+Test (EnvMatch HOST bean) + "slack"	    Exec slack
 Test (EnvMatch HOST jane) + "Virtmanager"   Exec virt-manager
 Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
 Test (EnvMatch HOST jane) + "Xboard -ncp"   Exec xboard -ncp
