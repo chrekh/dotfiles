@@ -9,12 +9,6 @@ use Getopt::Long;
 use GDBM_File;
 use Socket;
 use Data::Dumper;
-use Sys::Hostname;
-
-unless ( hostname =~ /^lx413553/ ) {
-    say "This can only be used on homer";
-    exit 1;
-}
 
 my %opts;
 Getopt::Long::Configure('bundling');
