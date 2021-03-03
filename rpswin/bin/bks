@@ -4,13 +4,13 @@
 for h in "$@"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
         # Use nslookup to find domain
-        fqdn=$(nslookup ${h}${dom} 2>/dev/null | awk '/Name:/{print $NF}')
+        fqdn=$(nslookup "${h}${dom}" 2>/dev/null | awk '/Name:/{print $NF}')
         host=${h}${dom}
         [[ -z $fqdn ]] || break
     done
 
     user=u0043002
 
-    echo bokssh ${user}@${host}
-    nohup bokssh ${user}@${host} > /dev/null 2>&1 &
+    echo bokssh "${user}@${host}"
+    nohup bokssh "${user}@${host}" > /dev/null 2>&1 &
 done
