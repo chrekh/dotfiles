@@ -14,7 +14,7 @@ case $host in
 	dest=/var/lib/puppet/files/EXKOP/homedirs/u0043002
 	;;
     satellite.appl.polisen.se | capsule*.dc.polisen.se)
-	dest=/var/lib/puppet/files/PROD/homedirs/196603089076
+	dest=/var/lib/puppet/files/PROD/homedirs/u0043002
 	;;
     *)
 	echo "No action defined for $host"
