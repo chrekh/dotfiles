@@ -22,5 +22,11 @@ case $host in
 	;;
 esac
 
-echo update $dest
-git archive HEAD | tar xvfC - $dest
+dotfilelist="${HOME}/db/dotfiles"
+if [[ ! -r "$dotfilelist" ]]; then
+    echo "can't read $dotfilelist"
+    exit 1
+fi
+
+echo update "$dest"
+rsync -Havx --files-from "$dotfilelist" "$HOME" "$dest"
