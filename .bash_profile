@@ -40,6 +40,9 @@ export PAGER='less -idQMXsR'
 export LESS=idQMX
 
 export EDITOR=vi
+if ! hash vi > /dev/null 2>&1; then
+	    hash vim > /dev/null 2>&1 && EDITOR=vim
+fi
 export CHESSDIR=~/chess
 
 # Find a working terminal-type, and start with current $TERM
