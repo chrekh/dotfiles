@@ -120,7 +120,7 @@ Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Hosts"		Popup hosts
 +		"Rxvt"		Exec exec urxvt -ls
 +		"Xterm"		Exec exec xterm -ls
-+ 		"Emacs"		Exec exec emacs -geometry 110x40 ${HOME}/tmp/tmp > ${HOME}/log/emacs 2>&1
++ 		"Emacs"		Exec exec emacs -geometry 110x40 > ${HOME}/log/emacs 2>&1
 Test (EnvMatch HOST jane) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 114x49+739-22 > ${HOME}/log/emacs-koms 2>&1
 Test (EnvMatch HOST bean) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 109x49+5+10 > ${HOME}/log/emacs-koms 2>&1
 Test (EnvMatch HOST jane) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
