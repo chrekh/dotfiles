@@ -62,6 +62,7 @@ sub dologin {
         $cat = 'sys'  if ( $target =~ /\.sys\.rsv\.se$/ );
         $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
         $cat = 'pm'   if ( $target =~ /^[^.]+\.pm\./ );
+        $cat = 'dmz'  if ( $target =~ /[.](test-)?dmz[.]/ );
     }
     my @names = ($target);
     @names = keys %{ $hostdb{$target}{names} } if ( exists $hostdb{$target}{names} );
@@ -95,6 +96,7 @@ sub dologin {
         'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },    # rosa
         'umprod' => { bg => '#ffe0e0', fg => '#000000' },    # rosa
         'pm'     => { bg => '#ccffcc', fg => '#300000' },    # grön
+        'dmz'    => { bg => '#e5e5ff', fg => '#300000' },    # lila
     );
     $cat = 'linux' unless ( exists $color{$cat} );
 
