@@ -112,6 +112,10 @@ sub dologin {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
         system(@cmd) unless ( exists $opts{n} );
+        unless ( $? == 0 ) {
+            say "rsync failed, try tar & ssh instead";
+            system qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+        }
         $syncdb{$target} = time;
     }
 
