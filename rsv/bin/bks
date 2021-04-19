@@ -116,7 +116,9 @@ sub dologin {
         system(@cmd) unless ( exists $opts{n} );
         unless ( $? == 0 ) {
             say "rsync failed, try tar & ssh instead";
-            system qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+            my $cmd = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+            say "[$$] $cmd";
+            system $cmd;
         }
         $syncdb{$target} = time;
     }
