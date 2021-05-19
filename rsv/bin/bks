@@ -108,8 +108,10 @@ sub dologin {
     my @cmd;
 
     # rsync my dotfiles to hosts in *.rsv.se
-    if (exists $opts{sync}
-        || (   $target =~ m{[.]rsvm?[.]se$} && !exists $syncdb{$target} )
+    if ( ( exists $opts{sync}
+           || (   $target =~ m{[.]rsvm?[.]se$} && !exists $syncdb{$target} )
+           )
+         && ! ( exists $opts{t} || exists $opts{r} )
         ) {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
