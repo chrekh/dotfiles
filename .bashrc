@@ -57,6 +57,7 @@ if tty -s; then
     HISTCONTROL=ignoredups
     if [[ "$uid" -ne 0 ]]; then
         HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
+        [[ -d $my_real_home/.historydir ]] && HISTFILE=$my_real_home/.historydir/$host
         [[ -d $my_real_home/.bash_history ]] && rm -rf $my_real_home/.bash_history
     fi
     HISTSIZE=200
