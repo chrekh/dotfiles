@@ -1,17 +1,11 @@
 #! /bin/bash
 
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --sync) sync=1;;
-        *)
-            echo "invalid option $1"
-            exit 1
-            ;;
-    esac
-    shift
-done
-
-
+case $1 in
+    --sync)
+	sync=1
+	shift
+	;;
+esac
 
 for h in "$@"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
