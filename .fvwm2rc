@@ -46,7 +46,7 @@ Style "aumix"	    Sticky
 AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager
-+ I Exec exec xscreensaver -no-capture-stderr -no-splash
++ I Exec exec xscreensaver --no-splash --log ~/log/xscreensaver.log
 + I Exec exec xsetbg ~/X11/rainlight.gif
 + I Exec exec urxvt -ls -geometry 100x40+5-5
 Test (EnvMatch HOST vdx*) + I Exec /opt/Citrix/VDA/bin/ctxclipboard

@@ -1,5 +1,11 @@
 #! /bin/bash
 
+case $1 in
+    --sync)
+	sync=1
+	shift
+	;;
+esac
 
 for h in "$@"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
@@ -10,6 +16,10 @@ for h in "$@"; do
     done
 
     user=u0043002
+
+    if [[ $sync ]]; then
+	tar --create --file=- --directory="${HOME}" --no-recursion --files-from="${HOME}/db/dotfiles" | blink "${user}@${host}" tar xf -
+    fi
 
     echo bokssh "${user}@${host}"
     nohup bokssh "${user}@${host}" > /dev/null 2>&1 &

@@ -36,7 +36,7 @@ for ( 1 .. 100 ) {
     for ( 1 .. $length ) {
         my $twobytes;
         read( RND, $twobytes, 2 );
-        my $rand = unpack("%S2",$twobytes);  # 16-bit (0 - 65535)
+        my $rand = unpack("S2",$twobytes);  # 16-bit (0 - 65535)
         $password .= @all[ $rand % @all ];
     }
     if ( &passok($password) ) {
