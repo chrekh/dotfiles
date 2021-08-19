@@ -4,6 +4,7 @@
                                 ("\\.db$" . zone-mode)
 				("\\.pp$" . puppet-mode)
 				("Puppetfile$" . puppetfile-mode)
+				("Jenkinsfile" . javascript-mode)
 				("\\.ya?ml$" . yaml-mode)
 				("\\.eml$" . text-mode)
 				("\\.\\(pm?\\|pod\\|t\\)6$" . perl6-mode)
