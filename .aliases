@@ -123,23 +123,6 @@ if [[ $dist == Gentoo ]]; then
     alias world="sudo emerge $worldopts @system @world @preserved-rebuild"
 fi
 
-# RPS
-if [[ "$domain" == utv.rps.police.se ]]; then
-    alias nds='ldapsearch -x -h fs-rpsutv-1 -b ou=rps,o=police,c=se -D CN=u0043002,OU=USE,OU=RPS,O=POLICE,C=SE -y /localhome/chrekh/ldappw'
-    alias ads='net ads -U a0043002@UMAD.UTV.POLISEN.SE search'
-fi
-if [[ "$domain" == utv.polisen.se ]]; then
-    if rpm -q rxvt-unicode > /dev/null 2>&1; then
-        alias rxvt="urxvt -ls -bg '#ffd0c0' -fg '#000000'"
-    else
-        alias rxvt="xterm -ls -bg '#ffd0c0' -fg '#000000'"
-    fi
-fi
-case $host in
-    nt* | NT* )
-        alias down='cd //tsclient/C/Users/u0043002/Downloads'
-        ;;
-esac
 if pum < /dev/null > /dev/null 2>&1; then
     alias last='last -wF|egrep -v ^cmdb|tac|pum'
 else
