@@ -129,6 +129,15 @@ else
     alias last='last -wF|egrep -v ^cmdb|tac'
 fi
 
+# Polisen
+case $domain in
+    *.polisen.se)
+	if hash hammer > /dev/null 2>&1; then
+	    alias hp='hammer -c ~/.hammer/prod.yaml'
+	    alias hu='hammer -c ~/.hammer/um.yaml'
+	fi
+esac
+
 # ClearCase
 if type cleartool > /dev/null 2>&1; then
     alias c=cleartool
