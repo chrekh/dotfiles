@@ -168,14 +168,11 @@ sub lookup {
     my $target = shift;
 
     $target =~ s/\.(cim|inas)$/.utv.polisen.se/;
-    $target =~ s/\.(um|arv)$/.utv.rps.police.se/;
     $target =~ s/\.(pki)$/.pki.utv.polisen.se/;
 
     my ($name) = gethostbyname($target);
     return $name if ( defined $name );
     ($name) = gethostbyname("${target}.utv.polisen.se");
-    return $name if ( defined $name );
-    ($name) = gethostbyname("${target}.utv.rps.police.se");
     return $name if ( defined $name );
     ($name) = gethostbyname("${target}.pki.utv.polisen.se");
     return $name if ( defined $name );
