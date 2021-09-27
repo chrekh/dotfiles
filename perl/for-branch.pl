@@ -20,11 +20,11 @@ my $repo = Git->repository;
 # The current branch (to return to)
 my $curbranch = $repo->command_oneline('symbolic-ref','--short','-q','HEAD');
 
-# List branches
-my @branches;
+# List branches, put current branch first.
+my @branches = ( $curbranch );
 for ( $repo->command('show-ref','--heads') ) {
     if ( m<refs/heads/(\S+)$> ) {
-	push(@branches,$1);
+	push(@branches,$1) unless ( $1 eq $curbranch );
     }
 }
 
