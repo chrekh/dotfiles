@@ -65,3 +65,8 @@ for my $br ( @branches ) {
     }
     print "\n";
 }
+
+# Check out the branch we where on when we started
+unless ( $repo->command_oneline('symbolic-ref','--short','-q','HEAD') eq "$curbranch" ) {
+    $repo->command_noisy('checkout','-q',$curbranch);
+}
