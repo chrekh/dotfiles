@@ -9,8 +9,8 @@ esac
 
 for h in "$@"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
-        # Use nslookup to find domain
-        fqdn=$(nslookup "${h}${dom}" 2>/dev/null | awk '/Name:/{print $NF}')
+        # Use ping to find domain
+        fqdn=$(ping -n 1 git 2>/dev/null | awk '/^Pinging/{print $2}')
         host=${h}${dom}
         [[ -z $fqdn ]] || break
     done
