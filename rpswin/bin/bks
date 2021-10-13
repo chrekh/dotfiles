@@ -1,13 +1,23 @@
 #! /bin/bash
 
-case $1 in
-    --sync)
-	sync=1
-	shift
-	;;
-esac
+declare -a hosts
+for arg in "$@"; do
+    case $arg in
+	--sync)
+	    sync=1
+	    ;;
+	-*)
+	    echo "invalid argument $arg" >&2
+	    exit 1
+	    ;;
+	*)
+	    hosts+=("$arg")
+	    ;;
+    esac
+done
+echo "${hosts[@]}"
 
-for h in "$@"; do
+for h in "${hosts[@]}"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
         # Use ping to find domain
         fqdn=$(ping -n 1 git 2>/dev/null | awk '/^Pinging/{print $2}')
