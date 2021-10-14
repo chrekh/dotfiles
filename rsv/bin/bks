@@ -120,12 +120,12 @@ sub dologin {
 
     my @cmd;
 
-    # rsync my dotfiles to hosts in *.rsv.se
-    if ( ( exists $opts{sync}
-           || (   $target =~ m{[.]rsvm?[.]se$} && !exists $syncdb{$target} )
-           )
+    # rsync my dotfiles
+    my $synctime = 60 * 60 * 24 * 90; # 90 days
+    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} + $synctime < time
+       )
          && ! ( exists $opts{t} || exists $opts{r} )
-        ) {
+     ) {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
         system(@cmd) unless ( exists $opts{n} );
