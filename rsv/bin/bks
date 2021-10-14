@@ -16,16 +16,16 @@ Getopt::Long::Configure('bundling');
 GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync' ) || die;
 
 # This is only supposed to be used from some specific hosts
-my %bkshosts = ( lx413553 => 1,  # homer
-                 u11338   => 1,
-                 u11340   => 1,
-	      );
+my %bkshosts = (
+    lx413553 => 1,    # homer
+    u11338   => 1,
+    u11340   => 1,
+);
 my $hostname = hostname;
 $hostname =~ s<[.].+><>;
 unless ( exists $bkshosts{$hostname} ) {
-    die "Can't run bks on $hostname, only on ",join(",",keys(%bkshosts));
+    die "Can't run bks on $hostname, only on ", join( ",", keys(%bkshosts) );
 }
-
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
@@ -98,7 +98,7 @@ sub dologin {
         }
     }
 
-    my $title = join("   ",map { s/[.].+$//;$_ } sort byhostname @names);
+    my $title = join( "   ", map { s/[.].+$//; $_ } sort byhostname @names );
 
     # Select color to use
     my %color = (
@@ -121,17 +121,16 @@ sub dologin {
     my @cmd;
 
     # rsync my dotfiles
-    my $synctime = 60 * 60 * 24 * 90; # 90 days
-    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} + $synctime < time
-       )
-         && ! ( exists $opts{t} || exists $opts{r} )
-     ) {
+    my $synctime = 60 * 60 * 24 * 90;    # 90 days
+    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} + $synctime < time )
+        && !( exists $opts{t} || exists $opts{r} ) ) {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
         system(@cmd) unless ( exists $opts{n} );
         unless ( $? == 0 ) {
             say "rsync failed, try tar & ssh instead";
-            my $cmd = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+            my $cmd
+                = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
             say "[$$] $cmd";
             system $cmd;
         }
@@ -241,7 +240,7 @@ sub readhostdb {
 sub byhostname {
     if ( $a =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
         if ( $b =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
-            return ($a cmp $b);
+            return ( $a cmp $b );
         }
         else {
             return -1;
@@ -251,6 +250,6 @@ sub byhostname {
         return 1;
     }
     else {
-        return ($a cmp $b);
+        return ( $a cmp $b );
     }
 }
