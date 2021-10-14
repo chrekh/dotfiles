@@ -143,7 +143,7 @@ sub dologin {
         '120x40', '-fg', $color{$cat}{fg}, '-bg',
         $color{$cat}{bg}
     );
-    push( @cmd, '-fn', '-*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*' )
+    push( @cmd, '-fn', '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*' )
         if ( exists $opts{big} );
     push( @cmd, '-e', 'ssh', '-t', $target );
     push( @cmd, '-l', 'root' )    if ( exists $opts{r} );

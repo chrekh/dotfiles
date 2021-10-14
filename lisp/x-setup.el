@@ -35,3 +35,15 @@
        ))
 
 (set-mouse-color "Black")
+
+(defun bigfont nil
+  "Change font"
+  (interactive)
+  (set-face-font 'default "-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*")
+  )
+
+(defun smallfont nil
+  "Reset font"
+  (interactive)
+  (set-face-font 'default "*-fixed-medium-r-normal-*-14-*-*-*-c-*-iso8859-*")
+  )

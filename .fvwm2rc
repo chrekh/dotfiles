@@ -117,10 +117,17 @@ Test (EnvMatch HOST jane) + "Huey"   Exec exec urxvt -bg "#ffeaff" -fg "#003000"
 Test (EnvMatch HOST jane) + "Dewey"  Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Dewey -e ssh dewey.incedo.org
 Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Louie -e ssh louie.incedo.org
 
+# Some big fonts
+# -fndry-fmly-wght-slant-swdth-adstyl-pxlsz-ptsz-resx-resy-spc-avgwdth-rgstry-encdng
+# -*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*
+# -*-lucida sans typewriter-medium-r-*-*-20-*-*-*-m-*-iso8859-1
+# -*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*
+
 AddToMenu misc	"Misc"		Title
 Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Hosts"		Popup hosts
 +		"Rxvt"		Exec exec urxvt -ls
++               "Rxvt (big)"    Exec exec urxvt -ls -fn '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*'
 +		"Xterm"		Exec exec xterm -ls
 + 		"Emacs"		Exec exec emacs -geometry 110x40 > ${HOME}/log/emacs 2>&1
 Test (EnvMatch HOST jane) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 114x49+739-22 > ${HOME}/log/emacs-koms 2>&1
