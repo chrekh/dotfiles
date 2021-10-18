@@ -263,7 +263,7 @@ sub find_newest_mtime {
         while(<F>) {
             chomp;
             my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
-                $atime,$mtime,$ctime,$blksize,$blocks) = stat($_);
+                $atime,$mtime,$ctime,$blksize,$blocks) = stat("$ENV{HOME}/$_");
             if ( defined $mtime ) {
                 $max = $mtime if ( $mtime > $max );
             }
