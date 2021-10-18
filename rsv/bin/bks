@@ -264,7 +264,12 @@ sub find_newest_mtime {
             chomp;
             my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
                 $atime,$mtime,$ctime,$blksize,$blocks) = stat($_);
-            $max = $mtime if ( defined $mtime && $mtime > $max );
+            if ( defined $mtime ) {
+                $max = $mtime if ( $mtime > $max );
+            }
+            else {
+                warn "stat $_ failed: $!";
+            }
         }
     }
     return $max;
