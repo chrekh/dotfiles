@@ -37,6 +37,8 @@ tie( %syncdb, 'GDBM_File', $syncdb, &GDBM_WRCREAT, 0640 ) || die "tie failed: $!
 
 my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
+my $changed = &find_newest_mtime($dotfilelist);
+
 our %hostdb;
 &readhostdb;
 my %groups = (
@@ -121,8 +123,7 @@ sub dologin {
     my @cmd;
 
     # rsync my dotfiles
-    my $synctime = 60 * 60 * 24 * 90;    # 90 days
-    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} + $synctime < time )
+    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} < $changed )
         && !( exists $opts{t} || exists $opts{r} ) ) {
         @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
         say "[$$] system @cmd";
@@ -252,4 +253,19 @@ sub byhostname {
     else {
         return ( $a cmp $b );
     }
+}
+
+sub find_newest_mtime {
+    my $filelist = shift;
+    my $max = 0;
+    if ( -r $filelist ) {
+        open(F,'<',$filelist) || die "open $filelist failed: $!";
+        while(<F>) {
+            chomp;
+            my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
+                $atime,$mtime,$ctime,$blksize,$blocks) = stat($_);
+            $max = $mtime if ( $mtime > $max );
+        }
+    }
+    return $max;
 }
