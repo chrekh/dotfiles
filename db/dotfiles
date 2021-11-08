@@ -17,3 +17,4 @@
 .ssh/authorized_keys
 .ssh/config.common
 tmp
+bin
