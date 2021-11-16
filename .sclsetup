@@ -10,4 +10,6 @@ if hash scl > /dev/null 2>&1; then
     git=$(scl --list | grep ^rh-git | sort -V | tail -n 1)
     [[ -r "/opt/rh/$git/enable" ]] && source "/opt/rh/$git/enable"
 fi
+
+# shellcheck disable=SC2034
 sclsetup=y
