@@ -110,14 +110,14 @@ else
         for d in "$@"; do
             if [[ $newpath ]]; then
                 [[ $newpath = "${d}" ]]  && continue # d is exactly $PATH 
-                [[ ${newpath##$d:*} ]]   || continue # d is first in $PATH
-                [[ ${newpath%%*:$d} ]]   || continue # d is last in $PATH
-                [[ ${newpath##*:$d:*} ]] || continue # d is in $PATH
+                [[ ${newpath##"${d}":*} ]]   || continue # d is first in $PATH
+                [[ ${newpath%%*:"${d}"} ]]   || continue # d is last in $PATH
+                [[ ${newpath##*:"${d}":*} ]] || continue # d is in $PATH
                 [[ -d $d ]]              || continue # d is not a directory
-                newpath=$newpath:$d
+                newpath=$newpath:"${d}"
             else
-                [[ -d $d ]] || continue
-                newpath=$d
+                [[ -d ${d} ]] || continue
+                newpath="${d}"
             fi
         done
         echo "$newpath"
