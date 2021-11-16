@@ -1,0 +1,13 @@
+# -*- mode: shell-script -*-
+
+# shellcheck shell=bash
+# shellcheck source=./.functions
+
+if hash scl > /dev/null 2>&1; then
+    # Setup Software Collection environment
+
+    # Find the "best" git, and use that
+    git=$(scl --list | grep ^rh-git | sort -V | tail -n 1)
+    [[ -r "/opt/rh/$git/enable" ]] && source "/opt/rh/$git/enable"
+fi
+sclsetup=y
