@@ -17,6 +17,13 @@ for arg in "$@"; do
 done
 echo "${hosts[@]}"
 
+syncdbfile=~/db/hostsync
+if [[ -r $syncdbfile ]]; then
+    . $syncdbfile
+else
+    declare -A syncdb
+fi
+
 for h in "${hosts[@]}"; do
     for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
         # Use ping to find domain
@@ -27,6 +34,9 @@ for h in "${hosts[@]}"; do
 
     user=u0043002
 
+    if [[ ! ${syncdb[${host}]} ]]; then
+	sync=1
+    fi
     if [[ $sync ]]; then
 	set -x
 	blink "${user}@${host}" date
@@ -34,8 +44,13 @@ for h in "${hosts[@]}"; do
 	  --files-from="${HOME}/db/dotfiles" \
 	  | blink "${user}@${host}" tar xf -
 	set +x
+	syncdb[${host}]=$(date +%s)
+	synced=1
     fi
 
+    if [[ ${synced} ]]; then
+	declare -p syncdb > $syncdbfile
+    fi
     echo bokssh "${user}@${host}"
     nohup bokssh "${user}@${host}" > /dev/null 2>&1 &
 done
