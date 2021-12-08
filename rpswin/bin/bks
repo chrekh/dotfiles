@@ -25,16 +25,19 @@ else
 fi
 
 for h in "${hosts[@]}"; do
-    for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
+    host="$h"
+    for dom in '' .dc.polisen.se .pki.polisen.se .mgmt.polisen.se .polisen.se; do
         # Use ping to find domain
-        fqdn=$(ping -n 1 git 2>/dev/null | awk '/^Pinging/{print $2}')
-        host=${h}${dom}
-        [[ -z $fqdn ]] || break
+        fqdn=$(ping -n 1 "${h}$dom" 2>/dev/null | awk '/^Pinging/{print $2}')
+        if [[ $fqdn ]]; then
+	    host="$fqdn"
+	    break
+	fi
     done
 
     user=u0043002
 
-    if [[ ! ${syncdb[${host}]} ]]; then
+    if [[ ! ${syncdb["${host}"]} ]]; then
 	sync=1
     fi
     if [[ $sync ]]; then
@@ -44,7 +47,7 @@ for h in "${hosts[@]}"; do
 	  --files-from="${HOME}/db/dotfiles" \
 	  | blink "${user}@${host}" tar xf -
 	set +x
-	syncdb[${host}]=$(date +%s)
+	syncdb["${host}"]=$(date +%s)
 	synced=1
     fi
 
