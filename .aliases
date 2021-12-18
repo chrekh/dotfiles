@@ -85,10 +85,10 @@ fi
 
 case $host in
     jane)
-        [[ $DISPLAY ]] || alias x='startx -- /usr/bin/X -listen tcp > ${HOME}/log/startx.log 2>&1'
+        [[ $DISPLAY ]] || alias x='startx -- /usr/libexec/Xorg.wrap -listen tcp > ${HOME}/log/startx.log 2>&1'
         ;;
     bean)
-        [[ $DISPLAY ]] || alias x='startx -- /usr/bin/X > ${HOME}/log/startx.log 2>&1'
+        [[ $DISPLAY ]] || alias x='startx -- /usr/libexec/Xorg.wrap > ${HOME}/log/startx.log 2>&1'
         ;;
     u11338)
         alias x='xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4" & ssh -o ControlMaster=no v10073.rsvm.se X11/xsession'
