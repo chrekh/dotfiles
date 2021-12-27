@@ -56,16 +56,38 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
         push @hosts, @{ $groups{$host} };
         next;
     }
-    push @hosts, $host;
+    push @hosts, &lookup($host);
+}
+
+for my $host (@hosts) {
+    if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
+        && !( exists $opts{t} || exists $opts{r} ) ) {
+	&sync($host);
+    }
 }
 
 for my $host (@hosts) {
     &dologin($host);
 }
 
+sub sync {
+    my $target = shift;
+    # rsync my dotfiles
+    my @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
+    say "[$$] system @cmd";
+    system(@cmd) unless ( exists $opts{n} );
+    unless ( $? == 0 ) {
+	say "rsync failed, try tar & ssh instead";
+	my $cmd
+	= qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+	say "[$$] $cmd";
+	system $cmd;
+    }
+    $syncdb{$target} = time;
+}
+
 sub dologin {
-    my $host   = shift;
-    my $target = &lookup($host);
+    my $target = shift;
 
     my $cat = 'linux';
     if ( exists $opts{c} && $opts{c} ne 'clear' ) {
@@ -120,25 +142,7 @@ sub dologin {
         exit 0;
     }
 
-    my @cmd;
-
-    # rsync my dotfiles
-    if ( ( exists $opts{sync} || !exists $syncdb{$target} || $syncdb{$target} < $changed )
-        && !( exists $opts{t} || exists $opts{r} ) ) {
-        @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
-        say "[$$] system @cmd";
-        system(@cmd) unless ( exists $opts{n} );
-        unless ( $? == 0 ) {
-            say "rsync failed, try tar & ssh instead";
-            my $cmd
-                = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
-            say "[$$] $cmd";
-            system $cmd;
-        }
-        $syncdb{$target} = time;
-    }
-
-    @cmd = (
+    my @cmd = (
         'urxvt',  '-T',  $title,           '-geometry',
         '120x40', '-fg', $color{$cat}{fg}, '-bg',
         $color{$cat}{bg}
