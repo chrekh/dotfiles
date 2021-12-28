@@ -6,6 +6,9 @@ for arg in "$@"; do
 	--sync)
 	    sync=1
 	    ;;
+	--run=*)
+	    runcmd=${arg##--run=}
+	    ;;
 	-*)
 	    echo "invalid argument $arg" >&2
 	    exit 1
@@ -37,6 +40,11 @@ for h in "${hosts[@]}"; do
 
     user=u0043002
 
+    if [[ $runcmd ]]; then
+	echo "${host}"
+	blink "${user}@${host}" "$runcmd"
+	continue;
+    fi
     if [[ ! ${syncdb["${host}"]} ]]; then
 	sync=1
     fi
