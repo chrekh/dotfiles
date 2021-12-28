@@ -1,9 +1,9 @@
 #! /bin/bash
 
 domain=$(dnsdomainname)
-[ $domain ] || domain=none
+[[ $domain ]] || domain=none
 
-if [ $domain = 'rsvm.se' ]; then
+if [[ $domain = 'rsvm.se' ]]; then
     # Only dump rsvm.se when in rsvm.se
     host -al rsvm.se > $HOME/db/all-hosts
     exit 0
