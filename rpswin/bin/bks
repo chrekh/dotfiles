@@ -26,7 +26,7 @@ fi
 
 for h in "${hosts[@]}"; do
     host="$h"
-    for dom in '' .dc.polisen.se .pki.polisen.se .mgmt.polisen.se .polisen.se; do
+    for dom in '' .polisen.se .dc.polisen.se .pki.polisen.se .mgmt.polisen.se .bd.polisen.se; do
         # Use ping to find domain
         fqdn=$(ping -n 1 "${h}$dom" 2>/dev/null | awk '/^Pinging/{print $2}')
         if [[ $fqdn ]]; then
