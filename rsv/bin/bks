@@ -72,7 +72,11 @@ for my $host (@hosts) {
 
 sub sync {
     my $target = shift;
-    # rsync my dotfiles
+    # don't sync to NFS
+    if ( qx<ssh -T $target stat -f -c %T .> eq "nfs\n" ) {
+	return;
+    }
+    # sync my dotfiles
     my @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
     say "[$$] system @cmd";
     system(@cmd) unless ( exists $opts{n} );
