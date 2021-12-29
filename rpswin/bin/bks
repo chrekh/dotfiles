@@ -6,6 +6,9 @@ for arg in "$@"; do
 	--sync)
 	    sync=1
 	    ;;
+	--run=*)
+	    runcmd=${arg##--run=}
+	    ;;
 	-*)
 	    echo "invalid argument $arg" >&2
 	    exit 1
@@ -17,24 +20,48 @@ for arg in "$@"; do
 done
 echo "${hosts[@]}"
 
+syncdbfile=~/db/hostsync
+if [[ -r $syncdbfile ]]; then
+    . $syncdbfile
+else
+    declare -A syncdb
+fi
+
 for h in "${hosts[@]}"; do
-    for dom in '' .dc.polisen.se .pki.polisen.se .polisen.se; do
+    host="$h"
+    for dom in '' .polisen.se .dc.polisen.se .pki.polisen.se .mgmt.polisen.se .bd.polisen.se; do
         # Use ping to find domain
-        fqdn=$(ping -n 1 git 2>/dev/null | awk '/^Pinging/{print $2}')
-        host=${h}${dom}
-        [[ -z $fqdn ]] || break
+        fqdn=$(ping -n 1 "${h}$dom" 2>/dev/null | awk '/^Pinging/{print $2}')
+        if [[ $fqdn ]]; then
+	    host="$fqdn"
+	    break
+	fi
     done
 
     user=u0043002
 
+    if [[ $runcmd ]]; then
+	echo "*** ${host}"
+	blink "${user}@${host}" "$runcmd"
+	continue;
+    fi
+    if [[ ! ${syncdb["${host}"]} ]]; then
+	sync=1
+    fi
     if [[ $sync ]]; then
 	set -x
+	blink "${user}@${host}" date
 	tar --create --file=- --directory="${HOME}" --no-recursion \
 	  --files-from="${HOME}/db/dotfiles" \
 	  | blink "${user}@${host}" tar xf -
 	set +x
+	syncdb["${host}"]=$(date +%s)
+	synced=1
     fi
 
+    if [[ ${synced} ]]; then
+	declare -p syncdb > $syncdbfile
+    fi
     echo bokssh "${user}@${host}"
     nohup bokssh "${user}@${host}" > /dev/null 2>&1 &
 done
