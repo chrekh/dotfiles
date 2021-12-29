@@ -74,6 +74,7 @@ sub sync {
     my $target = shift;
     # don't sync to NFS
     if ( qx<ssh -T $target stat -f -c %T .> eq "nfs\n" ) {
+	$syncdb{$target} = time;
 	return;
     }
     # sync my dotfiles
