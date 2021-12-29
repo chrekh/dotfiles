@@ -15,12 +15,14 @@ else
 fi
 if [[ -r ${home_candidate}/.functions ]]; then
     my_real_home=${home_candidate}
-elif [[ -r /home/196603089076/.functions ]]; then
-    my_real_home=/home/196603089076/
 elif [[ -r /home/u0043002/.functions ]]; then
     my_real_home=/home/u0043002
 elif [[ -r /home/jjri/.functions ]]; then
     my_real_home=/home/jjri
+fi
+
+if [[ -d /home/196603089076 ]]; then
+    echo "Warning! /home/196603089076 exists!" >&2
 fi
 
 [[ "$os" ]] || . $my_real_home/.functions
