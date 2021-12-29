@@ -266,15 +266,17 @@ sub find_newest_mtime {
         open(F,'<',$filelist) || die "open $filelist failed: $!";
         while(<F>) {
             chomp;
-            my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
-                $atime,$mtime,$ctime,$blksize,$blocks) = stat("$ENV{HOME}/$_");
-            if ( defined $mtime ) {
-                $max = $mtime if ( $mtime > $max );
-            }
-            else {
-                warn "stat $_ failed: $!";
-            }
-        }
+	    if ( -f "$ENV{HOME}/$_" ) {
+		my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
+		    $atime,$mtime,$ctime,$blksize,$blocks) = stat(_);
+		if ( defined $mtime ) {
+		    $max = $mtime if ( $mtime > $max );
+		}
+		else {
+		    warn "stat $_ failed: $!";
+		}
+	    }
+	}
     }
     return $max;
 }
