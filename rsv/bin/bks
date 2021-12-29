@@ -49,6 +49,7 @@ my %groups = (
     ],
 );
 
+my %unreachable;
 my @hosts;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
@@ -73,7 +74,14 @@ for my $host (@hosts) {
 sub sync {
     my $target = shift;
     # don't sync to NFS
-    if ( qx<ssh -T $target stat -f -c %T .> eq "nfs\n" ) {
+    my $hometype = qx<ssh -T $target stat -f -c %T .>;
+    if ( $? != 0 ) {
+	$unreachable{$target} = 1;
+	$syncdb{$target} = time;
+	return;
+    }
+    chomp $hometype;
+    if ( $hometype eq 'nfs' ) {
 	$syncdb{$target} = time;
 	return;
     }
@@ -93,6 +101,7 @@ sub sync {
 
 sub dologin {
     my $target = shift;
+    return if ( exists $unreachable{$target} );
 
     my $cat = 'linux';
     if ( exists $opts{c} && $opts{c} ne 'clear' ) {
