@@ -74,7 +74,9 @@ for my $host (@hosts) {
 sub sync {
     my $target = shift;
     # don't sync to NFS
+    $SIG{INT} = sub {};
     my $hometype = qx<ssh -T $target stat -f -c %T .>;
+    $SIG{INT} = 'DEFAULT';
     if ( $? != 0 ) {
 	$unreachable{$target} = 1;
 	$syncdb{$target} = time;
