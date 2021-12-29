@@ -4,6 +4,7 @@
  case-fold-search t
  fill-column 79
  ;; Intentation
+ indent-tabs-mode nil
  sh-basic-offset 2
  sh-indentation 2
  )
