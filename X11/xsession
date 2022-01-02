@@ -27,6 +27,9 @@ case $host in
         xmodmap ~/X11/xmodmap/pc
         xmodmap ~/X11/xmodmap/pc_kp
         xmodmap -e 'keycode 108 = Mode_switch'
+        # For some uknown reason xscreensaver doesn't set dpms settings from
+        # .xscreensaver at startup
+        xset dpms 6000 6600 7200
         ;;
     bean)
         xmodmap ~/X11/xmodmap/macbook
