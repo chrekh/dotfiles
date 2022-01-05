@@ -211,7 +211,8 @@ sub lookup {
     if ( exists $hostdb{$target} ) {
         return $hostdb{$target}{fqdn};
     }
-    die "Lookup $target failed!\n";
+    warn "Lookup $target failed!\n";
+    return $target;
 }
 
 sub readhostdb {
