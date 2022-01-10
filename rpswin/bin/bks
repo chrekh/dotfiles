@@ -27,11 +27,12 @@ else
     declare -A syncdb
 fi
 
-# Restart netid if not done within the last 20 minutes
-if [[ $(( $(stat --format %Y ~/tmp/netid) + 1200 )) < $(date +%s) ]]; then
+# Restart netid if not done within the last 10 minutes
+if [[ $(( $(stat --format %Y ~/tmp/netid) + 600 )) < $(date +%s) ]]; then
   echo Restart netid
   "C:\Program Files\Net iD\iid.exe" -restart
   touch ~/tmp/netid
+  sleep 1
 fi
 
 for h in "${hosts[@]}"; do
