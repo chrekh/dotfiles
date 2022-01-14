@@ -40,14 +40,23 @@ alias zl=zless
 alias llt='ll -tr'
 alias j=jobs
 f() {
-    if [[ -n "$*" ]]; then
-        printf "%-9s %s\n" "Login" "Name"
-        getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
-    elif hash pinky > /dev/null 2>&1; then
-        pinky
+  if [[ -n "$*" ]]; then
+    # Prefere finger over pinky
+    if hash finger > /dev/null 2>&1; then
+      finger -m "$@"
     else
-        finger -m
+      # pinky only looks at users logged in, so use getent
+      printf "%-9s %s\n" "Login" "Name"
+      getent passwd "$@" | awk -F: '{printf("%-9s %s\n",$1,$5)}'
     fi
+  else
+    # Prefer pinky over finger
+    if hash pinky > /dev/null 2>&1; then
+      pinky
+    else
+      finger
+    fi
+  fi
 }
 alias h='history'
 alias gzip='gzip --best'
