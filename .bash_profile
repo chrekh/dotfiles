@@ -46,6 +46,8 @@ if ! hash vi > /dev/null 2>&1; then
 fi
 export CHESSDIR=~/chess
 
+export BOKSRULE_DEFAULT_FIELDS='id,u,c,method,source,destination,program,target-user'
+
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
     for term in $TERM rxvt-unicode rxvt xterm vt100; do
