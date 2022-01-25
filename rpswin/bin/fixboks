@@ -6,6 +6,6 @@
 sleep 2
 for try in 1 2 3; do
     echo try $try
-    blink --load Linux git.dc.polisen.se date && break
+    blink -load Linux git.dc.polisen.se date && break
     sleep $try
 done
