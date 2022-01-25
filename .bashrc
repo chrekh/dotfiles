@@ -36,6 +36,7 @@ if tty -s; then
 
     # Use my keymap in polisen PROD
     if [[ $domain = appl.polisen.se || $domain = dc.polisen.se || $domain = dmz.polisen.se \
+        || $domain = pki.polisen.se || $domain = exkop.polisen.se \
         || $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
         || $host = NT330595 || $host = NT462792 ]]; then
         [[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
