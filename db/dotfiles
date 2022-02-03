@@ -19,3 +19,4 @@
 .ssh/config.common
 tmp
 bin
+contrib/completion/git-prompt.sh
