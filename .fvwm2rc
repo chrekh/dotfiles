@@ -93,6 +93,8 @@ AddToMenu modules	"FvwmModules"   Title
 
 # Menus
 AddToMenu General	"General"	Title
++                       "Mouse binding off" Mouse 1 W M
++                       "Mouse binding on"  Mouse 1 W M Move-or-Raise
 Test (EnvMatch HOST jane) + "ssh ON"	Exec exec ssh-add </dev/null > /dev/null 2>&1
 Test (EnvMatch HOST lx*)  + "ssh ON"	Exec exec ssh-add -t 2h </dev/null > /dev/null 2>&1
 +	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
