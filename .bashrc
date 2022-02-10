@@ -39,7 +39,15 @@ if tty -s; then
         || $domain = pki.polisen.se || $domain = exkop.polisen.se \
         || $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
         || $host = NT330595 || $host = NT462792 ]]; then
-        [[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
+        if [[ -r $my_real_home/.keymap-iso646 ]]; then
+          bind -f $my_real_home/.keymap-iso646
+          alias unswe="bind -f $my_real_home/.keymap-iso646"
+          swe() {
+            for c in å ä ö Å Ä Ö; do
+              bind -r "$c"
+            done
+          }
+        fi
     fi
 
     # prompt
