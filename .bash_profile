@@ -6,6 +6,7 @@ tty -s && echo sourcing .bash_profile
 PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /opt/puppetlabs/bin /opt/puppetlabs/puppet/bin \
     /opt/boksm/bin /opt/boksm/sbin /opt/boksm/lib \
+    '/c/Program Files (x86)/HelpSystems/BoKS SSH Client' \
     '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
     /bin /usr/bin /sbin /usr/sbin \
     /e/bokshack \
