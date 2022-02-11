@@ -33,12 +33,13 @@ for h in "${hosts[@]}"; do
         # Use ping to find domain
         fqdn=$(ping -n 1 "${h}$dom" 2>/dev/null | awk '/^Pinging/{print $2}')
         if [[ $fqdn ]]; then
-	    host="$fqdn"
-            domain=${fqdn##"${h}."}
+            domain=${fqdn#*.}
+            host=${host%%.*}
+            break
 	fi
     done
 
-    if [[ $domain == 'pki.polisen.se' ]]; then
+    if [[ $domain == 'pki.polisen.se' || $host == 'boksm' ]]; then
       session=Boks
       user=a0043002
     else
@@ -47,27 +48,27 @@ for h in "${hosts[@]}"; do
     fi
 
     if [[ $runcmd ]]; then
-	echo "*** ${host}"
-	blink -load "$session" "${user}@${host}" "$runcmd"
+	echo "*** ${}"
+	blink -load "$session" "${user}@${fqdn}" "$runcmd"
 	continue;
     fi
-    if [[ ! ${syncdb["${host}"]} ]]; then
+    if [[ ! ${syncdb["${fqdn}"]} ]]; then
 	sync=1
     fi
     if [[ $sync ]]; then
 	set -x
-	blink -load "$session" "${user}@${host}" date
+	blink -load "$session" "${user}@${fqdn}" date
 	tar --create --file=- --directory="${HOME}" --no-recursion \
 	  --files-from="${HOME}/db/dotfiles" \
-	  | blink -load "$session" "${user}@${host}" tar xf -
+	  | blink -load "$session" "${user}@${fqdn}" tar xf -
 	set +x
-	syncdb["${host}"]=$(date +%s)
+	syncdb["${fqdn}"]=$(date +%s)
 	synced=1
     fi
 
     if [[ ${synced} ]]; then
 	declare -p syncdb > $syncdbfile
     fi
-    echo bokssh -load "$session" "${user}@${host}"
-    nohup bokssh -load "$session" "${user}@${host}" > /dev/null 2>&1 &
+    echo bokssh -load "$session" "${user}@${fqdn}"
+    nohup bokssh -load "$session" "${user}@${fqdn}" > /dev/null 2>&1 &
 done
