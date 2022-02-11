@@ -51,7 +51,7 @@ fi
 [[ $domain ]] || domain=none
 
 case $domain in
-    ad.polisen.se)
+    ad.polisen.se | doris.polisen.se )
         site=rpswin
         ;;
     rsv.se | *.rsv.se | rsvm.se | *.rsvm.se)
