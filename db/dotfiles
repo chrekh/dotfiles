@@ -20,3 +20,6 @@
 tmp
 bin
 contrib/completion/git-prompt.sh
+db/dotfiles
+rpswin/bin/bks
+rpswin/bin/fixboks
