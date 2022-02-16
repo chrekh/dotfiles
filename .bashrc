@@ -36,10 +36,19 @@ if tty -s; then
 
     # Use my keymap in polisen PROD
     if [[ $domain = appl.polisen.se || $domain = dc.polisen.se || $domain = dmz.polisen.se \
-        || $domain = pki.polisen.se || $domain = exkop.polisen.se \
+        || $domain = pki.polisen.se || $domain = exkop.polisen.se || $domain = doris.polisen.se \
         || $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
+        || $domain = umad.utv.polisen.se \
         || $host = NT330595 || $host = NT462792 ]]; then
-        [[ -r $my_real_home ]] && bind -f $my_real_home/.keymap-polisen-prod
+        if [[ -r $my_real_home/.keymap-iso646 ]]; then
+          bind -f $my_real_home/.keymap-iso646
+          alias unswe="bind -f $my_real_home/.keymap-iso646"
+          swe() {
+            for c in å ä ö Å Ä Ö; do
+              bind -r "$c"
+            done
+          }
+        fi
     fi
 
     # prompt

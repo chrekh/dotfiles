@@ -9,7 +9,7 @@
 .gitignore
 .i18n
 .inputrc
-.keymap-polisen-prod
+.keymap-iso646
 .perltidyrc
 .profile
 .toprc
@@ -19,3 +19,7 @@
 .ssh/config.common
 tmp
 bin
+contrib/completion/git-prompt.sh
+db/dotfiles
+rpswin/bin/bks
+rpswin/bin/fixboks
