@@ -14,7 +14,7 @@ if [[ $os == Li ]]; then
     else
         alias free='free -mt'
     fi
-elif [[ $os == Da ]]; then
+elif [[ $os == Da || $os == Fr ]]; then
     alias df='df -h'
 elif [[ $os == HP ]]; then
     alias df=bdf
@@ -63,7 +63,7 @@ alias gzip='gzip --best'
 if [[ $dist == Suse && $rel_maj -lt 11 ]]; then
     :
 else
-    if [[ $os == Li ]]; then
+    if [[ $os == Li || $os == Fr ]]; then
         alias grep='grep --color=auto --exclude-dir=.git'
     else
         alias grep='grep --color=auto'
