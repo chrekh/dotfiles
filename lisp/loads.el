@@ -5,7 +5,9 @@
 (load "html" t)
 (load "calweek" t)
 (load "ext")
-(load "mu4erc" t)
+(condition-case nil
+    (load "mu4erc")
+  (error nil))
 (load "50magit.el" t)
 (load "bindings")
 (load "variables")
