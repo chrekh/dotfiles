@@ -25,6 +25,7 @@ rpswin/bin/bks
 rpswin/bin/fixboks
 lisp/emacs.el
 lisp/loads.el
+lisp/bindings.el
 lisp/perl.el
 lisp/ext.el
 lisp/variables.el
