@@ -4,13 +4,13 @@ tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
 PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
-    /opt/puppetlabs/bin /opt/puppetlabs/puppet/bin \
     /opt/boksm/bin /opt/boksm/sbin /opt/boksm/lib \
     '/c/Program Files (x86)/HelpSystems/BoKS SSH Client' \
     '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
     /bin /usr/bin /sbin /usr/sbin \
     /e/bokshack \
     ${PATH//:/ } \
+    /opt/puppetlabs/bin /opt/puppetlabs/puppet/bin \
     /usr/share/perl6/site/bin \
     /usr/lib/mit/bin \
     /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
