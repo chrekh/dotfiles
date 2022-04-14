@@ -65,6 +65,8 @@ if [[ $dist == Suse && $rel_maj -lt 11 ]]; then
 else
     if [[ $os == Li || $os == Fr ]]; then
         alias grep='grep --color=auto --exclude-dir=.git'
+    elif [[ $os == Su ]]; then
+        :
     else
         alias grep='grep --color=auto'
     fi
