@@ -142,3 +142,10 @@ if tty -s; then
         fi
     fi
 fi
+
+if tty -s; then
+  echo $(uname -s)
+  if hash facter > /dev/null 2>&1; then
+    echo $(facter os.family) $(facter os.name) $(facter os.distro.id)
+  fi
+fi
