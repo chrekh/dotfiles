@@ -19,6 +19,7 @@
 .ssh/config.common
 tmp
 bin
+bin/ssh-keyclean.bash
 contrib/completion/git-prompt.sh
 db/dotfiles
 rpswin/bin/bks
