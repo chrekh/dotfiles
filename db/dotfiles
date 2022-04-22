@@ -23,3 +23,11 @@ contrib/completion/git-prompt.sh
 db/dotfiles
 rpswin/bin/bks
 rpswin/bin/fixboks
+lisp/emacs.el
+lisp/loads.el
+lisp/bindings.el
+lisp/perl.el
+lisp/ext.el
+lisp/variables.el
+lisp/x-setup.el
+lisp/misc.el

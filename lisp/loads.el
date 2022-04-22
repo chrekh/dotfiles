@@ -2,18 +2,16 @@
 (load "default" t)
 (load "misc")
 (load "perl")
-(load "html")
-(load "calweek")
+(load "html" t)
+(load "calweek" t)
 (load "ext")
 (condition-case nil
     (load "mu4erc")
   (error nil))
-(condition-case nil
-    (load "50magit.el")
-  (error nil))
+(load "50magit.el" t)
 (load "bindings")
 (load "variables")
-(condition-case nil (load "clearcase") (error nil))
+(load "clearcase" t)
 (if window-system
     (progn
       (load "frame")
