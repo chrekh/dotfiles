@@ -143,8 +143,17 @@ if tty -s; then
 fi
 
 if tty -s; then
-  echo $(uname -s)
+  uname -s
   if hash facter > /dev/null 2>&1; then
-    echo "$(facter os.family)-$(facter os.release.major) $(facter os.name) $(facter os.distro.id)"
+    declare -A info
+    while read -r line; do
+      for key in family major name id; do
+        re="^${key}"' => "([^"]+)'
+        if [[ $line =~ $re ]]; then
+          info[$key]="${BASH_REMATCH[1]}"
+        fi
+      done
+    done < <(facter os)
+    echo "${info[family]}-${info[major]} ${info[name]} ${info[id]}"
   fi
 fi
