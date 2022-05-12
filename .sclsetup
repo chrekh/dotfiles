@@ -3,12 +3,17 @@
 # shellcheck shell=bash
 # shellcheck source=./.functions
 
-if hash scl > /dev/null 2>&1; then
-    # Setup Software Collection environment
+if [[ $dist == RedHat ]] && hash scl > /dev/null 2>&1; then
+  # Setup Software Collection environment
+  if [[ $rel_maj -gt 7 ]]; then
+    listopt=list-collections
+  else
+    listopt=--list
+  fi
 
-    # Find the "best" git, and use that
-    git=$(scl --list | grep ^rh-git | sort -V | tail -n 1)
-    [[ -r "/opt/rh/$git/enable" ]] && source "/opt/rh/$git/enable"
+  # Find the "best" git, and use that
+  git=$(scl $listopt | grep ^rh-git | sort -V | tail -n 1)
+  [[ -r "/opt/rh/$git/enable" ]] && source "/opt/rh/$git/enable"
 fi
 
 # shellcheck disable=SC2034
