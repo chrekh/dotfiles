@@ -153,6 +153,11 @@ case $domain in
 	fi
 esac
 
+# Toolservers
+if [[ $os = MI ]]; then
+  alias down='cd //tsclient/C/Users/u0043002/Downloads'
+fi
+
 # ClearCase
 if type cleartool > /dev/null 2>&1; then
     alias c=cleartool
