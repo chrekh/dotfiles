@@ -52,15 +52,19 @@ if tty -s; then
     fi
 
     # prompt
+    [[ $host == lx413553 && $domain == utv.polisen.se ]] && hinfo='(homer)'
+    [[ $host =~ ^boks[rm] && $domain == pki.polisen.se ]] && hinfo='(PROD)'
+    [[ $domain == dmz.polisen.se ]] && hinfo='(DMZ)'
+    [[ $domain == exkop.polisen.se ]] && hinfo='(EXKOP)'
     PROMPT_DIRTRIM=5
-    PS1='\[\e[28;1m\]\t \h:\w \$\[\e[0m\] '
+    PS1='\[\e[28;1m\]\t \h'"$hinfo"':\w \$\[\e[0m\] '
     if [[ -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
         # shellcheck disable=SC2034
         GIT_PS1_SHOWUPSTREAM="auto"
         # shellcheck disable=SC2034
         GIT_PS1_SHOWDIRTYSTATE=1
         . $my_real_home/contrib/completion/git-prompt.sh
-        PS1='\[\e[28;1m\]\t \h:\w$(__git_ps1) \$\[\e[0m\] '
+        PS1='\[\e[28;1m\]\t \h'"$hinfo"':\w$(__git_ps1) \$\[\e[0m\] '
     fi
 
     set -m # enable job controll
