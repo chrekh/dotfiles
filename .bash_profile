@@ -144,16 +144,19 @@ fi
 
 if tty -s; then
   uname -s
-  if hash facter > /dev/null 2>&1; then
-    declare -A info
-    while read -r line; do
-      for key in family major name id; do
-        re="^${key}"' => "([^"]+)'
-        if [[ $line =~ $re ]]; then
-          info[$key]="${BASH_REMATCH[1]}"
-        fi
-      done
-    done < <(facter os)
-    echo "${info[family]}-${info[major]} ${info[name]} ${info[id]}"
+  if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
+    # bash-4 have hashes
+    if hash facter > /dev/null 2>&1; then
+      declare -A info
+      while read -r line; do
+        for key in family major name id; do
+          re="^${key}"' => "([^"]+)'
+          if [[ $line =~ $re ]]; then
+            info[$key]="${BASH_REMATCH[1]}"
+          fi
+        done
+      done < <(facter os)
+      echo "${info[family]}-${info[major]} ${info[name]} ${info[id]}"
+    fi
   fi
 fi
