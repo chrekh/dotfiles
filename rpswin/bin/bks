@@ -9,10 +9,6 @@ for arg in "$@"; do
     --run=*)
       runcmd=${arg##--run=}
       ;;
-    --linux)
-      session=Linux
-      user=u0043002
-      ;;
     -*)
       echo "invalid argument $arg" >&2
       exit 1
@@ -43,14 +39,12 @@ for h in "${hosts[@]}"; do
     fi
   done
 
-  if [[ ! $session ]]; then
-    if [[ $domain == 'pki.polisen.se' || $host == 'boksm' ]]; then
-      session=Boks
-      user=a0043002
-    else
-      session=Linux
-      user=u0043002
-    fi
+  if [[ $domain == 'pki.polisen.se' || $host == 'boksm' ]]; then
+    session=Boks
+    user=a0043002
+  else
+    session=Linux
+    user=u0043002
   fi
 
   if [[ $runcmd ]]; then
