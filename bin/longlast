@@ -1,0 +1,41 @@
+#! /bin/bash
+
+os=$(uname -s| cut -c 1-2)
+dist=unknown
+if [ $os = Li ]; then
+    if [ -f /etc/SuSE-release ]; then
+	dist=Suse
+	maj=$(awk '/^VERSION/{print $NF}' /etc/SuSE-release)
+	min=$(awk '/^PATCHLEVEL/{print $NF}' /etc/SuSE-release)
+	rel="$maj.$min"
+    elif [ -f /etc/gentoo-release ]; then
+	dist=Gentoo
+    elif [ -f /etc/redhat-release ]; then
+	dist=RedHat
+	rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
+    fi
+fi
+
+lastargs=-Fw
+[[ $dist == Suse && $maj < 11 || ( $maj == 11 && $min < 4 ) ]] && lastargs=-F
+
+tmpfile=$(mktemp)
+for f in /var/log/wtmp-*; do
+    case $f in 
+	*.bz2)
+	    bzip2 -cd $f > $tmpfile
+	    last $lastargs -f $tmpfile | egrep -v '^(cmdb|nexpose|jenkins) ' | tac
+	    rm -f $tmpfile
+	    ;;
+	*.gz)
+	    bzip2 -cd $f > $tmpfile
+	    last $lastargs -f $tmpfile | egrep -v '^(cmdb|nexpose|jenkins) ' | tac
+	    rm -f $tmpfile
+	    ;;
+	*)
+	    last $lastargs -f $f | egrep -v '^(cmdb|nexpose|jenkins) ' | tac
+	    ;;
+    esac
+    last $lastargs | egrep -v '^(cmdb|nexpose) ' | tac
+    echo
+done

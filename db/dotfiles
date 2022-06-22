@@ -20,6 +20,7 @@
 tmp
 bin
 bin/ssh-keyclean.bash
+bin/longlast
 contrib/completion/git-prompt.sh
 db/dotfiles
 rpswin/bin/bks
