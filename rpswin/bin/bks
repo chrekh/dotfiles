@@ -39,6 +39,11 @@ for h in "${hosts[@]}"; do
     fi
   done
 
+  if [[ ! $domain ]]; then
+    echo "$host unknown host"
+    continue;
+  fi
+
   if [[ $domain == 'pki.polisen.se' || $host == 'boksm' ]]; then
     session=Boks
     user=a0043002
