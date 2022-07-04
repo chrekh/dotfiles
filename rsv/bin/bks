@@ -13,7 +13,7 @@ use Sys::Hostname;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync' ) || die;
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync','run=s' ) || die;
 
 # This is only supposed to be used from some specific hosts
 my %bkshosts = (
@@ -62,12 +62,20 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
 
 for my $host (@hosts) {
     if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
-        && !( exists $opts{t} || exists $opts{r} ) ) {
+        && !( exists $opts{t} || exists $opts{r} || exists $opts{run} ) ) {
 	&sync($host);
     }
 }
 
 for my $host (@hosts) {
+    if ( exists $opts{run} ) {
+        # Run command on host
+        my @cmd = ('ssh','-T',$host,$opts{run});
+        say "[$$] system @cmd";
+        system(@cmd);
+        next;
+    }
+
     &dologin($host);
 }
 
