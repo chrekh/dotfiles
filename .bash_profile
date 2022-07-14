@@ -88,9 +88,11 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [[ -n "$dist" ]] && title="[$dist]"
 [[ -n "$rel" ]] && title="[$dist $rel]"
 if [[ $(tput tsl) ]]; then
-    if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
-        aliases=$(cat /etc/hostaliases)
+    if [[ -e ~/.hostaliases && -s ~/.hostaliases ]]; then
+        aliases=$(cat ~/.hostaliases)
         echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
+    else
+        echo -n "$(tput tsl)$host $title$(tput fsl)" 
     fi
 fi
 
