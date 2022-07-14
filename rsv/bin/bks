@@ -51,13 +51,16 @@ my %groups = (
 
 my %unreachable;
 my @hosts;
+my %alias;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
     if ( exists $groups{$host} ) {
         push @hosts, @{ $groups{$host} };
         next;
     }
-    push @hosts, &lookup($host);
+    my $fqdn = &lookup($host);
+    push @hosts, $fqdn;
+    $alias{$fqdn} = $host unless ( $host eq $fqdn );
 }
 
 for my $host (@hosts) {
@@ -107,6 +110,11 @@ sub sync {
 	system $cmd;
     }
     $syncdb{$target} = time;
+    if ( exists $alias{$target} ) {
+        @cmd = ( 'ssh','-T',$target,qq[echo $alias{$target} > .hostaliases] );
+        say "[$$] system @cmd";
+        system(@cmd) unless ( exists $opts{n} );
+    }
 }
 
 sub dologin {
