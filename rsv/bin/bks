@@ -117,11 +117,6 @@ sub sync {
 	system $cmd;
     }
     $syncdb{$target} = time;
-    if ( exists $alias{$target} ) {
-        @cmd = ( 'ssh','-T',$target,qq[echo $alias{$target} > .hostaliases] );
-        say "[$$] system @cmd";
-        system(@cmd) unless ( exists $opts{n} );
-    }
 }
 
 sub dologin {
