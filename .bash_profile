@@ -85,18 +85,14 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [[ $dist = Suse ]] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-[[ -n "$dist" ]] && title="[$dist]"
-[[ -n "$rel" ]] && title="[$dist $rel]"
+[[ -n "$dist" ]] && title="$host [$dist]"
+[[ -n "$rel" ]] && title="$host [$dist $rel]"
+if [[ -e ~/db/aliases.bash ]]; then
+  . ~/db/aliases.bash
+  title+=' ('${hostaliases[$HOST]%%.*}')'
+fi
 if [[ $(tput tsl) ]]; then
-    if [[ -e ~/.hostaliases_"${host}" && -s ~/.hostaliases_"${host}" ]]; then
-        aliases=$(cat ~/.hostaliases_"${host}")
-        echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
-    elif [[ -e ~/.hostaliases && -s ~/.hostaliases ]]; then
-        aliases=$(cat ~/.hostaliases)
-        echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
-    else
-        echo -n "$(tput tsl)$host $title$(tput fsl)" 
-    fi
+  echo -n "$(tput tsl)$title$(tput fsl)" 
 fi
 
 if tty -s; then
