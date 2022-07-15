@@ -59,8 +59,10 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
         next;
     }
     my $fqdn = &lookup($host);
-    push @hosts, $fqdn;
-    $alias{$fqdn} = $host unless ( $host eq $fqdn );
+    if ( $fqdn ) {
+        push @hosts, $fqdn;
+        $alias{$fqdn} = $host unless ( $host eq $fqdn );
+    }
 }
 
 for my $host (@hosts) {
