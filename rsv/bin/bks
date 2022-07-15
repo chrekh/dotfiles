@@ -95,6 +95,13 @@ sub sync {
     }
     chomp $hometype;
     if ( $hometype eq 'nfs' ) {
+        my ($shortname) = split(q<[.]>,$target);
+        say $shortname;
+        if ( exists $alias{$target} ) {
+            open(AF,'>',"$ENV{HOME}/.hostaliases_${shortname}") || die "open failed: $!";
+            print AF "$alias{$target}\n";
+            close(AF);
+        }
 	$syncdb{$target} = time;
 	return;
     }
