@@ -51,7 +51,7 @@ sub getaliases {
     for my $rr ( @zone ) {
 	next unless $rr->type eq 'CNAME';
 	my $name = $rr->name;
-	$name =~ s/\.$//;
+	$name =~ s/\..*$//;
 	my $server = $rr->rdatastr;
 	$server =~ s/\.$//;
 	push(@{$alias{$server}},$name);
