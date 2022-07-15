@@ -23,6 +23,7 @@ bin/ssh-keyclean.bash
 bin/longlast
 contrib/completion/git-prompt.sh
 db/dotfiles
+db/aliases.bash
 rpswin/bin/bks
 rpswin/bin/fixboks
 lisp/emacs.el
