@@ -89,7 +89,9 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [[ -n "$rel" ]] && title="$host [$dist $rel]"
 if [[ -e ~/db/aliases.bash ]]; then
   . ~/db/aliases.bash
-  title+=' ('${hostaliases[$HOST]}')'
+  if [[ -n ${hostaliases[$HOST]} ]]; then
+    title+=' ('${hostaliases[$HOST]}')'
+  fi
 fi
 if [[ $(tput tsl) ]]; then
   echo -n "$(tput tsl)$title$(tput fsl)" 
