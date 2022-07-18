@@ -93,9 +93,7 @@ if [[ -e ~/db/aliases.bash ]]; then
     title+=' ('${hostaliases[$HOST]}')'
   fi
 fi
-if [[ $(tput tsl) ]]; then
-  echo -n "$(tput tsl)$title$(tput fsl)" 
-fi
+echo -n "]0;${title}" 
 
 if tty -s; then
     # Reuse or start new ssh-agent
