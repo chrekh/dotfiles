@@ -7,6 +7,9 @@ for rc in /etc/bash/bashrc /etc/bashrc; do
         break
     fi
 done
+# /etc/profile.d/vte.sh uses PROMPT_COMMAND to change window title, disabling
+# my chosen title.
+unset PROMPT_COMMAND
 
 if [[ -n "$SUDO_USER" ]]; then
     home_candidate=$(getent passwd "$SUDO_USER" | cut -d: -f6)
