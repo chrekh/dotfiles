@@ -48,6 +48,7 @@ fi
 export CHESSDIR=~/chess
 
 export BOKSRULE_DEFAULT_FIELDS='id,u,c,method,source,destination,program,target-user'
+export LVM_SUPPRESS_FD_WARNINGS=1
 
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
@@ -85,14 +86,15 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [[ $dist = Suse ]] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-[[ -n "$dist" ]] && title="[$dist]"
-[[ -n "$rel" ]] && title="[$dist $rel]"
-if [[ $(tput tsl) ]]; then
-    if [[ -e /etc/hostaliases && -s /etc/hostaliases ]]; then
-        aliases=$(cat /etc/hostaliases)
-        echo -n "$(tput tsl)$host $title ($aliases)$(tput fsl)"
-    fi
+[[ -n "$dist" ]] && title="$host [$dist]"
+[[ -n "$rel" ]] && title="$host [$dist $rel]"
+if [[ -e ~/db/aliases.bash ]]; then
+  . ~/db/aliases.bash
+  if [[ -n ${hostaliases[$HOST]} ]]; then
+    title+=' ('${hostaliases[$HOST]}')'
+  fi
 fi
+echo -n "]0;${title}" 
 
 if tty -s; then
     # Reuse or start new ssh-agent

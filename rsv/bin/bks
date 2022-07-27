@@ -13,7 +13,7 @@ use Sys::Hostname;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync' ) || die;
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync','run=s' ) || die;
 
 # This is only supposed to be used from some specific hosts
 my %bkshosts = (
@@ -51,23 +51,36 @@ my %groups = (
 
 my %unreachable;
 my @hosts;
+my %alias;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
     if ( exists $groups{$host} ) {
         push @hosts, @{ $groups{$host} };
         next;
     }
-    push @hosts, &lookup($host);
+    my $fqdn = &lookup($host);
+    if ( $fqdn ) {
+        push @hosts, $fqdn;
+        $alias{$fqdn} = $host unless ( $host eq $fqdn );
+    }
 }
 
 for my $host (@hosts) {
     if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
-        && !( exists $opts{t} || exists $opts{r} ) ) {
+        && !( exists $opts{t} || exists $opts{r} || exists $opts{run} ) ) {
 	&sync($host);
     }
 }
 
 for my $host (@hosts) {
+    if ( exists $opts{run} ) {
+        # Run command on host
+        my @cmd = ('ssh','-T',$host,$opts{run});
+        say "[$$] system @cmd";
+        system(@cmd);
+        next;
+    }
+
     &dologin($host);
 }
 
@@ -84,6 +97,13 @@ sub sync {
     }
     chomp $hometype;
     if ( $hometype eq 'nfs' ) {
+        my ($shortname) = split(q<[.]>,$target);
+        say $shortname;
+        if ( exists $alias{$target} ) {
+            open(AF,'>',"$ENV{HOME}/.hostaliases_${shortname}") || die "open failed: $!";
+            print AF "$alias{$target}\n";
+            close(AF);
+        }
 	$syncdb{$target} = time;
 	return;
     }
@@ -212,7 +232,7 @@ sub lookup {
         return $hostdb{$target}{fqdn};
     }
     warn "Lookup $target failed!\n";
-    return $target;
+    return;
 }
 
 sub readhostdb {
