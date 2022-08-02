@@ -1,5 +1,5 @@
-# shellcheck shell=bash
-# shellcheck source=./.functions
+# xshellcheck shell=bash
+# xshellcheck source=./.functions
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
@@ -88,7 +88,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 [[ -n "$dist" ]] && title="$host [$dist]"
 [[ -n "$rel" ]] && title="$host [$dist $rel]"
-if [[ -e ~/db/aliases.bash ]]; then
+if [[ -e ~/db/aliases.bash && ${BASH_VERSINFO[0]} -ge 4 ]]; then
   . ~/db/aliases.bash
   if [[ -n ${hostaliases[$HOST]} ]]; then
     title+=' ('${hostaliases[$HOST]}')'
