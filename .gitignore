@@ -7,7 +7,6 @@
 .cache
 .emacs*
 .gitk
-.gnupg
 .k5login
 .kshrc
 .mozilla/
