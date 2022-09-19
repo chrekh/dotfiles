@@ -1,5 +1,5 @@
-# shellcheck shell=bash
-# shellcheck source=./.functions
+# xshellcheck shell=bash
+# xshellcheck source=./.functions
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
@@ -47,7 +47,6 @@ if ! hash vi > /dev/null 2>&1; then
 fi
 export CHESSDIR=~/chess
 
-export BOKSRULE_DEFAULT_FIELDS='id,u,c,method,source,destination,program,target-user'
 export LVM_SUPPRESS_FD_WARNINGS=1
 
 # Find a working terminal-type, and start with current $TERM
@@ -88,7 +87,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 [[ -n "$dist" ]] && title="$host [$dist]"
 [[ -n "$rel" ]] && title="$host [$dist $rel]"
-if [[ -e ~/db/aliases.bash ]]; then
+if [[ -e ~/db/aliases.bash && ${BASH_VERSINFO[0]} -ge 4 ]]; then
   . ~/db/aliases.bash
   if [[ -n ${hostaliases[$HOST]} ]]; then
     title+=' ('${hostaliases[$HOST]}')'
