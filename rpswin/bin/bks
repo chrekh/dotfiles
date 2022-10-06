@@ -45,7 +45,8 @@ for h in "${hosts[@]}"; do
     continue;
   fi
 
-  if [[ $domain == 'pki.polisen.se' || $host =~ ^boks[mr] || $host == lx209901 ]]; then
+  if [[ $domain == 'pki.polisen.se' || $host =~ ^boks[mr] || $host == lx209901 \
+    || $host == lx325144 ]]; then
     session=Boks
     user=a0043002
   else
