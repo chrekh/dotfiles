@@ -54,8 +54,8 @@ for h in "${hosts[@]}"; do
     user=u0043002
   fi
 
-  # Override session for IDM hosts
-  if [[ $host =~ lx41408[0123] ]]; then
+  # Override session for some hosts
+  if [[ $host =~ lx41408[0123] || $host == lx390172 ]]; then
     session=Linux
     user=u0043002
   fi
