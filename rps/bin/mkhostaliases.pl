@@ -39,7 +39,7 @@ sub getaliases {
     my $domain = shift;
     my $res = Net::DNS::Resolver->new(tcp_timeout => 10, udp_timeout => 10);
     my $query = $res->query($domain,'NS');
-    die "DNS query NS for $domain failed" unless $query;
+    return unless $query;
     my @ns;
     for my $rr ( $query->answer ) {
 	next unless $rr->type eq 'NS';
