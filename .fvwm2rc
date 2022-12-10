@@ -200,6 +200,7 @@ Key	Pause	A	N	exec xscreensaver-command -lock
 Key	XF86PowerOff A  N	exec xscreensaver-command -lock
 Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
+Key     Tab     A       M
 
 ########################## Icon Manager ####################################
 *FvwmIconMan*background #ffb090
