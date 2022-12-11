@@ -5,6 +5,7 @@
 (load "html" t)
 (load "calweek" t)
 (load "ext")
+(load "orgext")
 (condition-case nil
     (load "mu4erc")
   (error nil))
