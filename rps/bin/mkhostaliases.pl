@@ -15,7 +15,7 @@ GetOptions( \%opts, 'repo=s','dest=s','branch=s' ) || die;
 
 # Byild alias-list for domain submitted as arg, or current domain.
 my $dom = hostdomain;
-my @domains = @ARGV ? @ARGV : ( $dom,"pki.$dom" );
+my @domains = @ARGV ? @ARGV : ( $dom,"pki.$dom",'polisen.se' );
 
 my %alias;
 for my $dom ( @domains ) {
