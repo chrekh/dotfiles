@@ -20,8 +20,8 @@ my @domains = @ARGV ? @ARGV : ( $dom,"pki.$dom" );
 my %alias;
 for my $dom ( @domains ) {
     &getaliases($dom);
-    &writebasharray;
 }
+&writebasharray;
 
 sub writebasharray {
     my $file = "$ENV{HOME}/db/aliases.bash";
