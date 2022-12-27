@@ -48,7 +48,10 @@ sub getaliases {
     die "Found no nameservers for $domain" unless @ns;
     $res->nameservers(@ns);
     my @zone = $res->axfr($domain);
-    die "Zonetransfer $domain failed" unless @zone;
+    unless ( @zone ){
+        warn "Zonetransfer $domain failed";
+        return;
+    }
     for my $rr ( @zone ) {
 	next unless $rr->type eq 'CNAME';
 	my $name = $rr->name;
