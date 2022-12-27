@@ -15,13 +15,13 @@ GetOptions( \%opts, 'repo=s','dest=s','branch=s' ) || die;
 
 # Byild alias-list for domain submitted as arg, or current domain.
 my $dom = hostdomain;
-my @domains = @ARGV ? @ARGV : ( $dom,"pki.$dom" );
+my @domains = @ARGV ? @ARGV : ( $dom,"pki.$dom",'polisen.se' );
 
 my %alias;
 for my $dom ( @domains ) {
     &getaliases($dom);
-    &writebasharray;
 }
+&writebasharray;
 
 sub writebasharray {
     my $file = "$ENV{HOME}/db/aliases.bash";
@@ -39,7 +39,7 @@ sub getaliases {
     my $domain = shift;
     my $res = Net::DNS::Resolver->new(tcp_timeout => 10, udp_timeout => 10);
     my $query = $res->query($domain,'NS');
-    die "DNS query NS for $domain failed" unless $query;
+    return unless $query;
     my @ns;
     for my $rr ( $query->answer ) {
 	next unless $rr->type eq 'NS';
@@ -48,7 +48,10 @@ sub getaliases {
     die "Found no nameservers for $domain" unless @ns;
     $res->nameservers(@ns);
     my @zone = $res->axfr($domain);
-    die "Zonetransfer $domain failed" unless @zone;
+    unless ( @zone ){
+        warn "Zonetransfer $domain failed";
+        return;
+    }
     for my $rr ( @zone ) {
 	next unless $rr->type eq 'CNAME';
 	my $name = $rr->name;
