@@ -17,9 +17,10 @@ GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync', 'run=s' ) || di
 
 # This is only supposed to be used from some specific hosts
 my %bkshosts = (
-    lx413553 => 1,    # homer
-    u11338   => 1,
-    u11340   => 1,
+    lxa140000155 => 1,    # che-fvwm
+    lx413553     => 1,    # homer
+    u11338       => 1,
+    u11340       => 1,
 );
 my $hostname = hostname;
 $hostname =~ s<[.].+><>;
