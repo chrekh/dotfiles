@@ -15,18 +15,6 @@ my %opts;
 Getopt::Long::Configure('bundling');
 GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync', 'run=s' ) || die;
 
-# This is only supposed to be used from some specific hosts
-my %bkshosts = (
-    lxa140000155 => 1,    # che-fvwm
-    lx413553     => 1,    # homer
-    u11338       => 1,
-    u11340       => 1,
-);
-my $hostname = hostname;
-$hostname =~ s<[.].+><>;
-unless ( exists $bkshosts{$hostname} ) {
-    die "Can't run bks on $hostname, only on ", join( ",", keys(%bkshosts) );
-}
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
