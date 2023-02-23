@@ -82,8 +82,10 @@ fi
 # BoKS
 if [[ -x /opt/boksm/bin/suexec ]]; then
     if [[ $host == boksm ]]; then
-      alias sbash='/usr/bin/sudo bash'
-      alias bkspnr='suexec /boks/pki_script/tools/boksrevision/bin/PNRUNRControl.pl'
+      alias bkspnr='sudo /boks/pki_script/tools/boksrevision/bin/PNRUNRControl.pl'
+    fi
+    if [[ -e ~/.bokssudo ]]; then
+      alias sbash='sudo bash'
     else
       alias sudo=/opt/boksm/bin/suexec
       alias sbash="suexec bash --rcfile ~/.bash_profile"
