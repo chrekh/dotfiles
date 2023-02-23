@@ -30,6 +30,28 @@ fi
 
 [[ "$os" ]] || . $my_real_home/.functions
 
+PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
+    /opt/boksm/bin /opt/boksm/sbin \
+    '/c/Program Files (x86)/HelpSystems/BoKS SSH Client' \
+    '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
+    /bin /usr/bin /sbin /usr/sbin \
+    /e/bokshack \
+    ${PATH//:/ } \
+    /opt/puppetlabs/bin /opt/puppetlabs/puppet/bin \
+    /opt/boksm/lib /usr/share/perl6/site/bin \
+    /usr/lib/mit/bin \
+    /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
+    /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
+)
+MANPATH=$(manpath 2>/dev/null)
+# shellcheck disable=SC2086
+MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
+    /usr/local/man /usr/local/share/man \
+    ${MANPATH//:/ } \
+    /opt/boksm/man \
+    /opt/umtool/man /opt/cfengine/cfe/man
+)
+
 if [[ "$dist" == "RedHat" ]]; then
     [[ "$sclsetup" ]] || . $my_real_home/.sclsetup
 fi
