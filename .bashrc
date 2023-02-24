@@ -40,6 +40,7 @@ PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/l
     /opt/puppetlabs/bin /opt/puppetlabs/puppet/bin \
     /opt/boksm/lib /usr/share/perl6/site/bin \
     /usr/lib/mit/bin \
+    /opt/cmclustser/bin \
     /opt/cfengine/cfe/sbin /opt/cfengine/cfe/bin /opt/samba/bin /usr/openv/netbackup/bin \
     /opt/rational/clearcase/bin /opt/rational/common/bin /opt/rational/clearcase/etc
 )
