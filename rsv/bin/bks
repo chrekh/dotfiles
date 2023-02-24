@@ -13,19 +13,8 @@ use Sys::Hostname;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync','run=s' ) || die;
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync', 'run=s' ) || die;
 
-# This is only supposed to be used from some specific hosts
-my %bkshosts = (
-    lx413553 => 1,    # homer
-    u11338   => 1,
-    u11340   => 1,
-);
-my $hostname = hostname;
-$hostname =~ s<[.].+><>;
-unless ( exists $bkshosts{$hostname} ) {
-    die "Can't run bks on $hostname, only on ", join( ",", keys(%bkshosts) );
-}
 
 my $catdb = "$ENV{HOME}/db/hostcat";
 my %catdb;
@@ -59,7 +48,7 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
         next;
     }
     my $fqdn = &lookup($host);
-    if ( $fqdn ) {
+    if ($fqdn) {
         push @hosts, $fqdn;
         $alias{$fqdn} = $host unless ( $host eq $fqdn );
     }
@@ -68,14 +57,15 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
 for my $host (@hosts) {
     if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
         && !( exists $opts{t} || exists $opts{r} || exists $opts{run} ) ) {
-	&sync($host);
+        &sync($host);
     }
 }
 
 for my $host (@hosts) {
     if ( exists $opts{run} ) {
+
         # Run command on host
-        my @cmd = ('ssh','-T',$host,$opts{run});
+        my @cmd = ( 'ssh', '-T', $host, $opts{run} );
         say "[$$] system @cmd";
         system(@cmd);
         next;
@@ -86,37 +76,39 @@ for my $host (@hosts) {
 
 sub sync {
     my $target = shift;
+
     # don't sync to NFS
-    $SIG{INT} = sub {};
+    $SIG{INT} = sub { };
     my $hometype = qx<ssh -T $target stat -f -c %T .>;
     $SIG{INT} = 'DEFAULT';
     if ( $? != 0 ) {
-	$unreachable{$target} = 1;
-	$syncdb{$target} = time;
-	return;
+        $unreachable{$target} = 1;
+        $syncdb{$target}      = time;
+        return;
     }
     chomp $hometype;
     if ( $hometype eq 'nfs' ) {
-        my ($shortname) = split(q<[.]>,$target);
+        my ($shortname) = split( q<[.]>, $target );
         say $shortname;
         if ( exists $alias{$target} ) {
-            open(AF,'>',"$ENV{HOME}/.hostaliases_${shortname}") || die "open failed: $!";
+            open( AF, '>', "$ENV{HOME}/.hostaliases_${shortname}" ) || die "open failed: $!";
             print AF "$alias{$target}\n";
             close(AF);
         }
-	$syncdb{$target} = time;
-	return;
+        $syncdb{$target} = time;
+        return;
     }
+
     # sync my dotfiles
     my @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
     say "[$$] system @cmd";
     system(@cmd) unless ( exists $opts{n} );
     unless ( $? == 0 ) {
-	say "rsync failed, try tar & ssh instead";
-	my $cmd
-	= qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
-	say "[$$] $cmd";
-	system $cmd;
+        say "rsync failed, try tar & ssh instead";
+        my $cmd
+            = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+        say "[$$] $cmd";
+        system $cmd;
     }
     $syncdb{$target} = time;
 }
@@ -298,22 +290,23 @@ sub byhostname {
 
 sub find_newest_mtime {
     my $filelist = shift;
-    my $max = 0;
+    my $max      = 0;
     if ( -r $filelist ) {
-        open(F,'<',$filelist) || die "open $filelist failed: $!";
-        while(<F>) {
+        open( F, '<', $filelist ) || die "open $filelist failed: $!";
+        while (<F>) {
             chomp;
-	    if ( -f "$ENV{HOME}/$_" ) {
-		my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
-		    $atime,$mtime,$ctime,$blksize,$blocks) = stat(_);
-		if ( defined $mtime ) {
-		    $max = $mtime if ( $mtime > $max );
-		}
-		else {
-		    warn "stat $_ failed: $!";
-		}
-	    }
-	}
+            if ( -f "$ENV{HOME}/$_" ) {
+                my ($dev,  $ino,   $mode,  $nlink, $uid,     $gid, $rdev,
+                    $size, $atime, $mtime, $ctime, $blksize, $blocks
+                ) = stat(_);
+                if ( defined $mtime ) {
+                    $max = $mtime if ( $mtime > $max );
+                }
+                else {
+                    warn "stat $_ failed: $!";
+                }
+            }
+        }
     }
     return $max;
 }
