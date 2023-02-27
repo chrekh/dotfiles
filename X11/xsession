@@ -12,6 +12,9 @@ case $host in
     vdx*)
         export LD_PRELOAD=/usr/lib64/libctxXrandrhook.so
         ;;
+    lxa*)
+        export LIBGL_ALWAYS_INDIRECT=1
+        ;;
 esac
 exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
 
