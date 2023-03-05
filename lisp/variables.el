@@ -49,7 +49,7 @@
                    (java-mode . "java")
                    (awk-mode . "awk")
                    (other . "gnu"))
- browse-url-browser-function 'browse-url-chromium
+ browse-url-browser-function 'browse-url-chrome
  )
 
 (add-hook 'mail-setup-hook
