@@ -26,7 +26,7 @@ if ! hash vi > /dev/null 2>&1; then
 fi
 export CHESSDIR=~/chess
 
-export BOKSRULE_DEFAULT_FIELDS=id,u,c,method,source,destination,program,target-user,from-user
+export BOKSRULE_DEFAULT_FIELDS=id,u,c,method,source,destination,program,target-user,file
 export LVM_SUPPRESS_FD_WARNINGS=1
 
 # Find a working terminal-type, and start with current $TERM
