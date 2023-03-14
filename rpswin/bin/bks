@@ -71,9 +71,11 @@ for h in "${hosts[@]}"; do
   if [[ $sync ]]; then
     set -x
     blink -load "$session" "${user}@${fqdn}" date
+    [[ $? == 0 ]] || exit 1
     tar --create --file=- --directory="${HOME}" --no-recursion \
       --files-from="${HOME}/db/dotfiles" \
       | blink -load "$session" "${user}@${fqdn}" tar xf -
+    [[ $? == 0 ]] || exit 1
     set +x
     syncdb["${fqdn}"]=$(date +%s)
     synced=1
