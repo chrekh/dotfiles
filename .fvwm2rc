@@ -27,7 +27,6 @@ Style "FvwmIconMan" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmPager"   !Title, Sticky, NeverFocus
 Style "XDaliClock"  !Title, Sticky, NeverFocus
 Style "XClock"      !Title, Sticky, NeverFocus
-Style "Xlogin"      !Title, Sticky, PositionPlacement UnderMouse
 Style "dclock"      !Title, Sticky
 Style "launchwindow" !Title, Sticky
 Style "XLoad"	    !Title, NeverFocus
@@ -128,7 +127,6 @@ Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000"
 # -*-lucidatypewriter-medium-r-normal-*-18-*-*-*-*-*-iso8859-*
 
 AddToMenu misc	"Misc"		Title
-Test (EnvMatch HOST lx*) + "Xlogin" Exec exec xlogin.pl
 +		"Hosts"		Popup hosts
 +		"Rxvt"		Exec exec urxvt -ls
 +               "Rxvt (big)"    Exec exec urxvt -ls -fn '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*'
