@@ -128,6 +128,7 @@ Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000"
 
 AddToMenu misc	"Misc"		Title
 +		"Hosts"		Popup hosts
+Test (EnvMatch HOST lxa*) + "Homer"  Exec urxvt -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
 +		"Rxvt"		Exec exec urxvt -ls
 +               "Rxvt (big)"    Exec exec urxvt -ls -fn '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*'
 +		"Xterm"		Exec exec xterm -ls
