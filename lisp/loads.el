@@ -18,6 +18,7 @@
       (load "frame")
       ))
 
+(autoload 'nftables-mode "nftables-mode" nil t)
 (autoload 'html-helper-mode "html-helper-mode" nil t)
 (autoload 'ruby-mode "ruby-mode" nil t)
 (autoload 'puppet-mode "puppet-mode" nil t)
