@@ -39,15 +39,17 @@
 (defun my-mu4e-mark-spam ()
   "Mark this mail as spam"
   (interactive)
-  (mu4e-view-pipe "/usr/bin/sa-learn --spam -"))
+  (mu4e-view-pipe "/usr/bin/sa-learn --spam -")
+  (delete-other-windows))
 
 (defun my-mu4e-mark-ham ()
   "Mark this mail as ham"
   (interactive)
-  (mu4e-view-pipe "/usr/bin/sa-learn --ham -"))
+  (mu4e-view-pipe "/usr/bin/sa-learn --ham -")
+  (delete-other-windows))
 
 (setq mu4e-spam-map (make-sparse-keymap))
-(define-key mu4e-headers-mode-map "O" mu4e-spam-map)
-(define-key mu4e-view-mode-map "O" mu4e-spam-map)
+(define-key mu4e-headers-mode-map "o" mu4e-spam-map)
+(define-key mu4e-view-mode-map "o" mu4e-spam-map)
 (define-key mu4e-spam-map "h" 'my-mu4e-mark-ham)
 (define-key mu4e-spam-map "s" 'my-mu4e-mark-spam)
