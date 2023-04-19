@@ -78,7 +78,7 @@ if tty -s; then
     fi
 
     # prompt
-    [[ $host == lx413553 && $domain == utv.polisen.se ]] && hinfo='(homer)'
+    [[ $host == lx413899 && $domain == utv.polisen.se ]] && hinfo='(homer)'
     [[ $host =~ ^boks[rm] && $domain == pki.polisen.se ]] && hinfo='(PROD)'
     [[ $domain == dmz.polisen.se ]] && hinfo='(DMZ)'
     [[ $domain == exkop.polisen.se ]] && hinfo='(EXKOP)'
