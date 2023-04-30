@@ -117,6 +117,7 @@ Test (EnvMatch HOST jane) + "vm05"   Exec xon vm05 'urxvt -bg "#e9ffcf" -fg "#00
 Test (EnvMatch HOST jane) + "vm06"   Exec xon vm06 'urxvt -bg "#e9ffcf" -fg "#003000" -ls -title vm06'
 Test (EnvMatch HOST jane) + "vm07"   Exec exec urxvt -bg "#e9ffcf" -fg "#003000" -title vm07 -e ssh vm07.chrekh.se
 Test (EnvMatch HOST jane) + "vm08"   Exec xon vm08 'urxvt -bg "#e9ffcf" -fg "#003000" -ls -title vm08'
+Test (EnvMatch HOST jane) + "vm09"   Exec xon vm09 'urxvt -bg "#e9ffcf" -fg "#003000" -ls -title vm09'
 Test (EnvMatch HOST jane) + "Wolverine"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Wolverine -e ssh wolverine.incedo.org
 Test (EnvMatch HOST jane) + "Huey"   Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Huey -e ssh huey.incedo.org
 Test (EnvMatch HOST jane) + "Dewey"  Exec exec urxvt -bg "#ffeaff" -fg "#003000" -title Dewey -e ssh dewey.incedo.org
