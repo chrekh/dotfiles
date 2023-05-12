@@ -22,3 +22,5 @@
 	patternType = perl
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main

@@ -35,3 +35,4 @@ lisp/variables.el
 lisp/x-setup.el
 lisp/misc.el
 lisp/swedkey.el
+lisp/orgext.el
