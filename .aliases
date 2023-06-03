@@ -3,11 +3,11 @@
 # shellcheck shell=bash
 # shellcheck source=./.functions
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
-alias ls='ls -F'
+unalias ls
 alias ll='ls -al'
 if [[ $os == Li ]]; then
     alias df='df -h'
-    alias ls='ls -vF'
+    alias ls='ls -v'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
     if free -V | grep -q procps-ng; then
         alias free='free -ht'
