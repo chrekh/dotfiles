@@ -8,17 +8,7 @@ export LC_MESSAGES=C
 [[ $os = Da ]] && exec quartz-wm
 
 # Faster repeat rate (default is 660 25)
-xset r rate 500 50
-
-# Disable repeat on character keys
-for keysym in {10..21} {79..89} {24..61}; do
-  xset -r $keysym
-done
-
-# Enable repeat for cursor movement and space
-for keysym in 22 113 114 111 116 65; do
-  xset r $keysym
-done
+xset r rate 500 35
 
 host=$(hostname -s)
 case $host in
