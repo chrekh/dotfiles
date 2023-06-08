@@ -45,15 +45,20 @@ for h in "${hosts[@]}"; do
     continue;
   fi
 
-  if [[ $domain == 'pki.polisen.se' || $host =~ ^boks[mr] || $host == lx209901 \
-    || $host == lx325144 ]]; then
-    session=Boks
-    user=a0043002
-  else
-    session=Linux
-    user=u0043002
-  fi
-
+  session=Linux
+  user=u0043002
+  case $domain in
+    pki.polisen.se)
+      session=Boks
+      user=a0043002
+      ;;
+  esac
+  case $host in
+    boks[mr]*|lx209901|lx325144|lx58603[89])
+      session=Boks
+      user=a0043002
+      ;;
+  esac
   # Override session for some hosts
   if [[ $host =~ lx41408[0123] || $host == lx390172 ]]; then
     session=Linux
