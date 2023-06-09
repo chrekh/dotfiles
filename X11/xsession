@@ -8,7 +8,7 @@ export LC_MESSAGES=C
 [[ $os = Da ]] && exec quartz-wm
 
 # Faster repeat rate (default is 660 25)
-xset r rate 500 50
+xset r rate 500 35
 
 host=$(hostname -s)
 case $host in
