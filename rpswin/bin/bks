@@ -53,17 +53,19 @@ for h in "${hosts[@]}"; do
       user=a0043002
       ;;
   esac
+  # Override to BoKS for some hosts
   case $host in
     boks[mr]*|lx209901|lx325144|lx58603[89])
       session=Boks
       user=a0043002
       ;;
   esac
-  # Override session for some hosts
-  if [[ $host =~ lx41408[0123] || $host == lx390172 ]]; then
+  # Override to Linux for some hosts
+  case $host in
+    lx41408[0123]|lx390172|lx50791[2345])
     session=Linux
     user=u0043002
-  fi
+  esac
 
   if [[ $runcmd ]]; then
     echo "*** ${fqdn}"
