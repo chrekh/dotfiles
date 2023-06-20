@@ -179,7 +179,7 @@ sub dologin {
         if ( exists $opts{big} );
     push( @cmd, '-e', 'ssh', '-t', $target );
     push( @cmd, '-l', 'root' )    if ( exists $opts{r} );
-    push( @cmd, '-l', 'tmpuser' ) if ( exists $opts{t} );
+    push( @cmd, '-l', 'laban' ) if ( exists $opts{t} );
 
     my $pid = fork;
     die "fork failed: $!" unless defined $pid;
