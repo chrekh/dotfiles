@@ -1,1 +1,312 @@
-../../rsv/bin/bks
+#! /usr/bin/perl
+
+use 5.016;
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use GDBM_File;
+use Socket;
+use Data::Dumper;
+use Sys::Hostname;
+
+my %opts;
+Getopt::Long::Configure('bundling');
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync', 'run=s' ) || die;
+
+
+my $catdb = "$ENV{HOME}/db/hostcat";
+my %catdb;
+tie( %catdb, 'GDBM_File', $catdb, &GDBM_WRCREAT, 0640 ) || die "tie failed: $!";
+
+my $syncdb = "$ENV{HOME}/db/hostsync";
+my %syncdb;
+tie( %syncdb, 'GDBM_File', $syncdb, &GDBM_WRCREAT, 0640 ) || die "tie failed: $!";
+
+my $dotfilelist = "$ENV{HOME}/db/dotfiles";
+
+my $changed = &find_newest_mtime($dotfilelist);
+
+our %hostdb;
+&readhostdb;
+my %groups = (
+    moms => [ 'prod-puppet-mom', 'dev-puppet-mom' ],
+    cms  => [
+        'prod-puppet-cm1', 'prod-puppet-cm2', 'prod-puppet-cm3', 'prod-puppet-cm4',
+        'prod-puppet-cm5',
+    ],
+);
+
+my %unreachable;
+my @hosts;
+my %alias;
+for my $host ( @ARGV ? @ARGV : <STDIN> ) {
+    chomp $host;
+    if ( exists $groups{$host} ) {
+        push @hosts, @{ $groups{$host} };
+        next;
+    }
+    my $fqdn = &lookup($host);
+    if ($fqdn) {
+        push @hosts, $fqdn;
+        $alias{$fqdn} = $host unless ( $host eq $fqdn );
+    }
+}
+
+for my $host (@hosts) {
+    if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
+        && !( exists $opts{t} || exists $opts{r} || exists $opts{run} ) ) {
+        &sync($host);
+    }
+}
+
+for my $host (@hosts) {
+    if ( exists $opts{run} ) {
+
+        # Run command on host
+        my @cmd = ( 'ssh', '-T', $host, $opts{run} );
+        say "[$$] system @cmd";
+        system(@cmd);
+        next;
+    }
+
+    &dologin($host);
+}
+
+sub sync {
+    my $target = shift;
+
+    # don't sync to NFS
+    $SIG{INT} = sub { };
+    my $hometype = qx<ssh -T $target stat -f -c %T .>;
+    $SIG{INT} = 'DEFAULT';
+    if ( $? != 0 ) {
+        $unreachable{$target} = 1;
+        $syncdb{$target}      = time;
+        return;
+    }
+    chomp $hometype;
+    if ( $hometype eq 'nfs' ) {
+        my ($shortname) = split( q<[.]>, $target );
+        say $shortname;
+        if ( exists $alias{$target} ) {
+            open( AF, '>', "$ENV{HOME}/.hostaliases_${shortname}" ) || die "open failed: $!";
+            print AF "$alias{$target}\n";
+            close(AF);
+        }
+        $syncdb{$target} = time;
+        return;
+    }
+
+    # sync my dotfiles
+    my @cmd = ( 'rsync', '-Havx', '--files-from', $dotfilelist, $ENV{HOME}, "${target}:" );
+    say "[$$] system @cmd";
+    system(@cmd) unless ( exists $opts{n} );
+    unless ( $? == 0 ) {
+        say "rsync failed, try tar & ssh instead";
+        my $cmd
+            = qq<tar --create --file=- --directory=$ENV{HOME} --no-recursion --files-from=$dotfilelist | ssh -T $target tar xf ->;
+        say "[$$] $cmd";
+        system $cmd;
+    }
+    $syncdb{$target} = time;
+}
+
+sub dologin {
+    my $target = shift;
+    return if ( exists $unreachable{$target} );
+
+    my $cat = 'linux';
+    if ( exists $opts{c} && $opts{c} ne 'clear' ) {
+        $cat = $opts{c};
+    }
+    else {
+        $cat = 'inas' if ( $target =~ /\.polisen\.se/ );
+        $cat = 'pia'  if ( $target =~ /^lxa/ );
+        $cat = 'sys'  if ( $target =~ /\.sys\.rsv\.se$/ );
+        $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
+        $cat = 'pm'   if ( $target =~ /^[^.]+\.pm\./ );
+        $cat = 'dmz'  if ( $target =~ /[.](test-)?dmz[.]/ );
+    }
+    my @names = ($target);
+    @names = keys %{ $hostdb{$target}{names} } if ( exists $hostdb{$target}{names} );
+
+    for (@names) {
+        if ( exists $opts{c} ) {
+            if ( $opts{c} eq 'clear' ) {
+                delete $catdb{$_};
+            }
+            else {
+                $cat = $opts{c};
+                $catdb{$_} = $cat;
+            }
+        }
+        else {
+            if ( exists $catdb{$_} ) {
+                $cat = $catdb{$_};
+                last;
+            }
+        }
+    }
+
+    my $title = join( "   ", map { s/[.].+$//; $_ } sort byhostname @names );
+
+    # Select color to use
+    my %color = (
+        'linux'  => { bg => '#ffffe0', fg => '#301010' },    # beige
+        'inas'   => { bg => '#daffea', fg => '#000030' },    # ljusare blå
+        'pia'    => { bg => '#e5e0b5', fg => '#151500' },    # gråbrun
+        'sys'    => { bg => '#c0ffff', fg => '#000000' },    # mörkare blå
+        'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },    # rosa
+        'umprod' => { bg => '#ffe0e0', fg => '#000000' },    # rosa
+        'pm'     => { bg => '#ccffcc', fg => '#300000' },    # grön
+        'dmz'    => { bg => '#e5e5ff', fg => '#300000' },    # lila
+    );
+    $cat = 'linux' unless ( exists $color{$cat} );
+
+    if ( exists $opts{list} ) {
+        print "$target - $title\n";
+        exit 0;
+    }
+
+    my @cmd = (
+        'urxvt',  '-T',  $title,           '-geometry',
+        '120x40', '-fg', $color{$cat}{fg}, '-bg',
+        $color{$cat}{bg}
+    );
+    push( @cmd, '-fn', '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*' )
+        if ( exists $opts{big} );
+    push( @cmd, '-e', 'ssh', '-t', $target );
+    push( @cmd, '-l', 'root' )    if ( exists $opts{r} );
+    push( @cmd, '-l', 'laban' ) if ( exists $opts{t} );
+
+    my $pid = fork;
+    die "fork failed: $!" unless defined $pid;
+    if ( $pid == 0 ) {
+
+        # Child
+        say "[$$] exec @cmd";
+        exit 0 if ( exists $opts{n} );
+        open( STDIN,  '<', '/dev/null' );
+        open( STDOUT, '>', '/dev/null' );
+        open( STDERR, '>', '/dev/null' );
+        exec @cmd;
+        die "exec failed: $!";
+    }
+}
+
+sub lookup {
+    my $target = shift;
+
+    $target =~ s/\.(cim|inas)$/.utv.polisen.se/;
+    $target =~ s/\.(pki)$/.pki.utv.polisen.se/;
+
+    my ($name) = gethostbyname($target);
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.utv.polisen.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.pki.utv.polisen.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.rsvm.se");
+    return $name if ( defined $name );
+    ($name) = gethostbyname("${target}.rsv.se");
+    return $name if ( defined $name );
+
+    for my $env (
+        qw<sys acc kap utv pro dmz test-dmz ocp
+        infra ipa labb lb meet ppx rel1 rex rsv>
+        ) {
+        ($name) = gethostbyname("${target}.${env}.rsv.se");
+        return $name if ( defined $name );
+    }
+    if ( exists $hostdb{$target} ) {
+        return $hostdb{$target}{fqdn};
+    }
+    warn "Lookup $target failed!\n";
+    return;
+}
+
+sub readhostdb {
+    our %hostdb;
+    open( DB, '<', "$ENV{HOME}/db/all-hosts" ) || return;
+    while (<DB>) {
+        chomp;
+        next if (/^;/);
+        if (my ( $host, $dom, $type, $val )
+            = /^
+	      ([^.]+)[.]      # host
+              (\S+)[.]\s+     # domain
+	      \d+\s+IN\s+     # skip
+              (A|CNAME)\s+    # type
+	      (\S+?)          # value
+	      [.]?            # top-domain dot
+	      $
+             /x
+            ) {
+            $hostdb{$host}{fqdn} = "${host}.${dom}";
+            if ( $type eq 'CNAME' ) {
+                $hostdb{$host}{names}{$val}                        = 1;
+                $hostdb{"${host}.${dom}"}{names}{$val}             = 1;
+                $hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
+                $hostdb{$val}{names}{$val}                         = 1;
+                $hostdb{$val}{names}{"$host.$dom"}                 = 1;
+            }
+            if ( $type eq 'A' ) {
+                next unless ( $val =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
+                $hostdb{$val}{names}{"${host}.${dom}"} = 1;
+            }
+            next;
+        }
+    }
+    for my $key ( keys %hostdb ) {
+        next unless ( $key =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
+        for my $nam1 ( keys %{ $hostdb{$key}{names} } ) {
+            for my $nam2 ( keys %{ $hostdb{$key}{names} } ) {
+                $hostdb{$nam1}{names}{$nam2} = 1;
+                $hostdb{$nam2}{names}{$nam1} = 1;
+            }
+        }
+    }
+    close(DB);
+}
+
+sub byhostname {
+    if ( $a =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+        if ( $b =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+            return ( $a cmp $b );
+        }
+        else {
+            return -1;
+        }
+    }
+    elsif ( $b =~ /^([uv]|lxa?)\d+([.]|$)/ ) {
+        return 1;
+    }
+    else {
+        return ( $a cmp $b );
+    }
+}
+
+sub find_newest_mtime {
+    my $filelist = shift;
+    my $max      = 0;
+    if ( -r $filelist ) {
+        open( F, '<', $filelist ) || die "open $filelist failed: $!";
+        while (<F>) {
+            chomp;
+            if ( -f "$ENV{HOME}/$_" ) {
+                my ($dev,  $ino,   $mode,  $nlink, $uid,     $gid, $rdev,
+                    $size, $atime, $mtime, $ctime, $blksize, $blocks
+                ) = stat(_);
+                if ( defined $mtime ) {
+                    $max = $mtime if ( $mtime > $max );
+                }
+                else {
+                    warn "stat $_ failed: $!";
+                }
+            }
+        }
+    }
+    return $max;
+}
