@@ -153,7 +153,7 @@ If given numerical prefix, decrease the N next groups."
 )
 
 (add-hook 'gnus-started-hook
-	  '(lambda ()
+	  (lambda ()
 	     (define-key gnus-summary-mode-map "n" 'gnus-summary-next-article)
 	     (define-key gnus-summary-mode-map "p" 'gnus-summary-prev-article)
 	     (define-key gnus-group-score-map "i" 'gnus-group-score-increase)
@@ -161,7 +161,7 @@ If given numerical prefix, decrease the N next groups."
 	     ))
 
 (setq gnus-select-group-hook
-      '(lambda ()
+      (lambda ()
          (cond ((string-match "^gwene"
                               gnus-newsgroup-name)
                 (setq gnus-treat-wash-html t))
@@ -170,7 +170,7 @@ If given numerical prefix, decrease the N next groups."
                )))
 
 (add-hook 'gnus-exit-group-hook
-	  '(lambda ()
+	  (lambda ()
 	     (gnus-summary-mark-below 0 "E")
 	     ))
 
