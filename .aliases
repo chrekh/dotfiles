@@ -7,7 +7,7 @@ unalias ls
 alias ll='ls -al'
 if [[ $os == Li ]]; then
     alias df='df -h'
-    alias ls='ls -v'
+    alias ls='ls -v --indicator-style=slash --quoting-style=literal'
     alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
     if free -V | grep -q procps-ng; then
         alias free='free -ht'
