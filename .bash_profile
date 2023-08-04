@@ -1,5 +1,7 @@
 # xshellcheck shell=bash
 # xshellcheck source=./.functions
+# Ensure i start at home
+cd
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
