@@ -20,7 +20,6 @@ db/
 extern/
 misc/
 puppet/
-tmp/
 xfer/
 xwin32/
 git/
