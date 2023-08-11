@@ -159,7 +159,7 @@ esac
 
 # Toolservers
 if [[ $os = MI ]]; then
-  alias down='cd //tsclient/C/Users/u0043002/Downloads'
+  alias down='cd //tsclient/C/Users/u0043002/tmp'
 fi
 
 # ClearCase
