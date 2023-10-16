@@ -6,10 +6,12 @@
 if alias ls > /dev/null 2>&1; then
   unalias ls
 fi
-alias ls='ls -v --indicator-style=slash --quoting-style=literal'
-alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
+alias ls='ls -v'
+alias ll='ls -halv'
 alias df='df -h'
 if [[ $os == Li ]]; then
+  alias ls='ls -v --indicator-style=slash --quoting-style=literal'
+  alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
     if free -V | grep -q procps-ng; then
         alias free='free -ht'
     else
