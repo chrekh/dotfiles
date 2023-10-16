@@ -3,7 +3,9 @@
 # shellcheck shell=bash
 # shellcheck source=./.functions
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
-unalias ls
+if alias ls > /dev/null 2>&1; then
+  unalias ls
+fi
 alias ls='ls -v --indicator-style=slash --quoting-style=literal'
 alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
 alias df='df -h'
