@@ -155,7 +155,7 @@ Test (EnvMatch HOST bean) + "slack"	    Exec slack
 Test (EnvMatch HOST jane) + "Virtmanager"   Exec virt-manager
 Test (EnvMatch HOST jane) + "Xboard -tc 30" Exec xboard -tc 30
 Test (EnvMatch HOST jane) + "Xboard -ncp"   Exec xboard -ncp
-Test (EnvMatch HOST jane) + "Spotify"	    Exec spotify
+Test (EnvMatch HOST jane) + "Spotify"	    Exec spotify > ${HOME}/log/spotify 2>&1
 
 AddToMenu winmenu	"Raise"		Raise
 +	  		"Move"		Move
