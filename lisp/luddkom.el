@@ -106,7 +106,7 @@
   (interactive)
   (condition-case nil (ludd) (error nil))
   (condition-case nil (lys) (error nil))
- ; (condition-case nil (snopp) (error nil))
+  (condition-case nil (snopp) (error nil))
   (condition-case nil (uppkom) (error nil))
  ; (condition-case nil (cdkom) (error nil))
  ; (condition-case nil (rydkom) (error nil))
