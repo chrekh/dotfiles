@@ -24,3 +24,6 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[rerere]
+	enabled = true
+	autoUpdate = true
