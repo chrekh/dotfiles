@@ -105,6 +105,8 @@ if [[ $os == Li ]]; then
     (( cu_ver[0] > 7 && cu_ver[1] > 6 )) && alias cp='cp --reflink=auto'
 fi
 
+alias uncolor='sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g"'
+
 case $host in
     jane)
         [[ $DISPLAY ]] || alias x='startx -- /usr/libexec/Xorg.wrap -listen tcp > ${HOME}/log/startx.log 2>&1'
