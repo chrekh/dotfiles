@@ -165,9 +165,3 @@ esac
 if [[ $os = MI ]]; then
   alias down='cd //tsclient/C/Users/u0043002/tmp'
 fi
-
-# ClearCase
-if type cleartool > /dev/null 2>&1; then
-    alias c=cleartool
-    alias sc='sudo cleartool'
-fi
