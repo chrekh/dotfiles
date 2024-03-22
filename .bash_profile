@@ -33,6 +33,8 @@ export LVM_SUPPRESS_FD_WARNINGS=1
 
 unset LS_COLORS
 
+export SYSTEMD_COLORS=false
+
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
     for term in $TERM rxvt-unicode rxvt xterm vt100; do
