@@ -60,7 +60,11 @@ else
     xsetroot -solid "#703000"
 fi
 
-HOST=$host fvwm
+if [ -e /bin/fvwm3 ]; then
+  HOST=$host fvwm3
+else
+  HOST=$host fvwm
+fi
 
 # Cleanup some processes that tend to be left after exiting, and that might
 # keep ssh X11 tunnel open preventing ssh from exiting
