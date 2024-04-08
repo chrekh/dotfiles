@@ -22,6 +22,25 @@ Test (EnvMatch HOST v1*) Style "*" !ResizeOpaque, HilightFore yellow, HilightBac
 Style * SloppyFocus, BorderWidth 5, !Handles , !Icon, Color black/#e08020
 Style * UsePPosition
 
+# Fvwm3 settings
+# ====================
+# Colorset Convention
+#
+#   0 - Default
+#   1 - Inactive Windows
+#   2 - Active Window
+#   3 - Inactive Windows Borders
+#   4 - Active Windows Borders
+#   5 - Menu - Inactive Item
+#   6 - Menu - Active Item
+#   7 - Menu - Grayed Item
+#   8 - Menu - Title
+
+Style * Colorset 1, HilightColorset 2
+Colorset 1  fg #000000, bg #e08020, hi, sh, Plain, NoShape
+Colorset 2  fg yellow, bg #853f5a, hi, sh, Plain, NoShape
+
+
 Style "FvwmWinList" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmIconMan" !Title, Sticky, WindowListSkip, NeverFocus
 Style "FvwmPager"   !Title, Sticky, NeverFocus
