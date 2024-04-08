@@ -1,5 +1,7 @@
 # xshellcheck shell=bash
 # xshellcheck source=./.functions
+# Ensure i start at home
+cd
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
@@ -28,6 +30,8 @@ export CHESSDIR=~/chess
 
 export BOKSRULE_DEFAULT_FIELDS=id,u,c,method,source,destination,program,target-user,file
 export LVM_SUPPRESS_FD_WARNINGS=1
+
+unset LS_COLORS
 
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then

@@ -58,6 +58,10 @@ sub getaliases {
 	$name =~ s/\..*$//;
 	my $server = $rr->rdatastr;
 	$server =~ s/\.$//;
+        if ( $server =~ /^[*]/ ) {
+            # Skip wildcard records
+            next;
+        }
 	push(@{$alias{$server}},$name);
     }
     # sort aliases

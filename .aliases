@@ -3,12 +3,15 @@
 # shellcheck shell=bash
 # shellcheck source=./.functions
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
-unalias ls
-alias ll='ls -al'
+if alias ls > /dev/null 2>&1; then
+  unalias ls
+fi
+alias ls='ls -v'
+alias ll='ls -halv'
+alias df='df -h'
 if [[ $os == Li ]]; then
-    alias df='df -h'
-    alias ls='ls -v --indicator-style=slash --quoting-style=literal'
-    alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
+  alias ls='ls -v --indicator-style=slash --quoting-style=literal'
+  alias ll='ls -halv --time-style="+%y-%m-%d %H:%M:%S"'
     if free -V | grep -q procps-ng; then
         alias free='free -ht'
     else
@@ -160,7 +163,7 @@ esac
 
 # Toolservers
 if [[ $os = MI ]]; then
-  alias down='cd //tsclient/C/Users/u0043002/Downloads'
+  alias down='cd //tsclient/C/Users/u0043002/tmp'
 fi
 
 # ClearCase
