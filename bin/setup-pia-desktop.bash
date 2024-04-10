@@ -1,18 +1,13 @@
 #! /bin/bash
 
-subscription-manager repos --enable rhel-7-server-optional-rpms
-
-cat > /etc/yum.repos.d/epel7.repo <<EOF
-[epel7]
-name=epel 7
-baseurl=http://satellite.appl.polisen.se/pulp/repos/Polisen/Library/custom/Extra_Packages_for_Enterprise_Linux/epel7-x86_64/
-enabled=1
+cat > /etc/yum.repos.d/epel8.repo <<EOF
+[epel8]
+name=epel 8
+baseurl=http://satellite.appl.polisen.se/pulp/repos/Polisen/Library/custom/Extra_Packages_for_Enterprise_Linux/EPEL_8/
+enabled=0
 gpgcheck=0
 EOF
 
-yum --enablerepo=epel7 install fvwm rxvt-unicode xmodmap xauth xev emacs \
-  xterm perltidy xloadimage xclock gitk ShellCheck perl-LDAP yamllint gitk \
-  perl-Tk perl-Sort-Versions
+subscription-manager repos --enable=codeready-builder-for-rhel-8-x86_64-rpms
 
-cd /
-#tar xf /home/u0043002/pkg/rxvt.tar
+yum --enablerepo=epel8 install ShellCheck emacs freetype-devel gcc gitk gitk libX11-devel libXcursor-devel libXft-devel libXpm-devel libXrandr-devel libXt-devel libevent-devel librsvg2-devel perl-LDAP perl-Sort-Versions perl-Tk perltidy readline-devel rxvt-unicode xauth xclock xev xloadimage xmodmap xterm yamllint
