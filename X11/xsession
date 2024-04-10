@@ -60,7 +60,7 @@ else
     xsetroot -solid "#703000"
 fi
 
-if [ -e /bin/fvwm3 ]; then
+if [[ -e /bin/fvwm3 || -e /usr/local/bin/fvwm3 ]]; then
   HOST=$host fvwm3
 else
   HOST=$host fvwm
