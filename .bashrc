@@ -20,8 +20,6 @@ if [[ -r ${home_candidate}/.functions ]]; then
     my_real_home=${home_candidate}
 elif [[ -r /home/u0043002/.functions ]]; then
     my_real_home=/home/u0043002
-elif [[ -r /home/jjri/.functions ]]; then
-    my_real_home=/home/jjri
 fi
 
 if [[ -d /home/196603089076 ]]; then

@@ -66,11 +66,7 @@ else
   HOST=$host fvwm
 fi
 
-# Cleanup some processes that tend to be left after exiting, and that might
-# keep ssh X11 tunnel open preventing ssh from exiting
-killall -u jjri -r -- dbus- -agent emacs
-
-# And kill all remaining X clients
+# Kill all remaining X clients
 xlsclients -al | awk '/^Window /{print $NF}' | sed -e 's/:$//' | while read -r id; do
     xkill -id "$id"
 done
