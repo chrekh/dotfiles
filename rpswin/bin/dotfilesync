@@ -1,0 +1,6 @@
+#! /bin/bash
+
+target=$1
+dotfilelist="${HOME}/db/dotfiles"
+
+tar --create --file=- --directory=${HOME} --no-recursion --files-from=${dotfilelist} | blink -T $target 'tar xf -'
