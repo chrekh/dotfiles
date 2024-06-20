@@ -24,7 +24,7 @@ export LESS=idQMX
 
 export EDITOR=vi
 if ! hash vi > /dev/null 2>&1; then
-	    hash vim > /dev/null 2>&1 && EDITOR=vim
+  hash vim > /dev/null 2>&1 && EDITOR=vim
 fi
 export CHESSDIR=~/chess
 
@@ -37,12 +37,12 @@ export SYSTEMD_COLORS=false
 
 # Find a working terminal-type, and start with current $TERM
 if tty -s; then
-    for term in $TERM rxvt-unicode rxvt xterm vt100; do
-        if tput -T "$term" cols >/dev/null 2>&1; then
-            TERM=$term;
-            break;
-        fi
-    done
+  for term in $TERM rxvt-unicode rxvt xterm vt100; do
+    if tput -T "$term" cols >/dev/null 2>&1; then
+      TERM=$term;
+      break;
+    fi
+  done
 fi
 
 umask 022
@@ -54,15 +54,15 @@ umask 022
 export GIT_AUTHOR_EMAIL=che@chrekh.se
 export GIT_AUTHOR_NAME='Christer Ekholm'
 case $domain in
-    *.polisen.se | *.police.se)
-        GIT_AUTHOR_EMAIL=Christer.Ekholm@polisen.se
-        ;;
-    *.rsv.se | rsv.se | *.rsvm.se | rsvm.se | *.skatteverket.se )
-        GIT_AUTHOR_EMAIL=Christer.Ekholm@skatteverket.se
-        ;;
-    *init.se)
-        GIT_AUTHOR_EMAIL=che@init.se
-        ;;
+  *.polisen.se | *.police.se)
+    GIT_AUTHOR_EMAIL=Christer.Ekholm@polisen.se
+    ;;
+  *.rsv.se | rsv.se | *.rsvm.se | rsvm.se | *.skatteverket.se )
+    GIT_AUTHOR_EMAIL=Christer.Ekholm@skatteverket.se
+    ;;
+  *init.se)
+    GIT_AUTHOR_EMAIL=che@init.se
+    ;;
 esac
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
@@ -82,51 +82,51 @@ fi
 echo -n "]0;${title}" 
 
 if tty -s; then
-    # Reuse or start new ssh-agent
+  # Reuse or start new ssh-agent
+  ssh-add -l > /dev/null 2>&1
+  if [[ $? -eq 2 ]]; then
+    # ssh-add is unable to contact the agent.
+    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
+      # Kill it.
+      eval "$(ssh-agent -k)"
+      unset SSH_AUTH_SOCK
+    fi
+    # Read stored agent info.
+    [[ -e ~/.ssh-agent ]] && . ~/.ssh-agent
     ssh-add -l > /dev/null 2>&1
     if [[ $? -eq 2 ]]; then
-        # ssh-add is unable to contact the agent.
-        if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
-            # Kill it.
-            eval "$(ssh-agent -k)"
-            unset SSH_AUTH_SOCK
-        fi
-        # Read stored agent info.
-        [[ -e ~/.ssh-agent ]] && . ~/.ssh-agent
-        ssh-add -l > /dev/null 2>&1
-        if [[ $? -eq 2 ]]; then
-            # ssh-add is still unable to contact the agent.
-            if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
-                # Kill it.
-                eval "$(ssh-agent -k)"
-                unset SSH_AUTH_SOCK
-            fi
-            echo "Start a new ssh-agent"
-            eval "$(ssh-agent)"
-            # Store the agent info for later shells to use.
-            : > ~/.ssh-agent
-            if [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
-                echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
-            fi
-            if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
-                echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
-            fi
-        else
-            # ssh-add is able to contact the agent from stored info.
-            if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
-                echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-            elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
-                echo "Use forwarded ssh-agent"
-            fi
-        fi
+      # ssh-add is still unable to contact the agent.
+      if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
+        # Kill it.
+        eval "$(ssh-agent -k)"
+        unset SSH_AUTH_SOCK
+      fi
+      echo "Start a new ssh-agent"
+      eval "$(ssh-agent)"
+      # Store the agent info for later shells to use.
+      : > ~/.ssh-agent
+      if [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
+        echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh-agent
+      fi
+      if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
+        echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh-agent
+      fi
     else
-        # ssh-add is able to contact the agent from current env.
-        if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
-            echo "Use existing ssh-agent ($SSH_AGENT_PID)"
-        elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
-            echo "Use forwarded ssh-agent"
-        fi
+      # ssh-add is able to contact the agent from stored info.
+      if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
+        echo "Use existing ssh-agent ($SSH_AGENT_PID)"
+      elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
+        echo "Use forwarded ssh-agent"
+      fi
     fi
+  else
+    # ssh-add is able to contact the agent from current env.
+    if [[ -n "$SSH_AGENT_PID" ]] && ps --no-headers -p "$SSH_AGENT_PID" >/dev/null 2>&1; then
+      echo "Use existing ssh-agent ($SSH_AGENT_PID)"
+    elif [[ -n "$SSH_AUTH_SOCK" && -r "$SSH_AUTH_SOCK" ]]; then
+      echo "Use forwarded ssh-agent"
+    fi
+  fi
 fi
 
 if tty -s; then
