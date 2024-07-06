@@ -18,7 +18,7 @@
 		       (:flags . 6)
 		       (:from-or-to . 22)
 		       (:subject))
- mu4e-maildir-shortcuts '( ("/inbox" . ?i)
+ mu4e-maildir-shortcuts '( ("/" . ?i)
 			   ("/sent" . ?s)
 			   ("/dmarc" . ?d)
 			   )
