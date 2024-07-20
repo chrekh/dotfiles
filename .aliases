@@ -21,6 +21,9 @@ elif [[ $os == Da || $os == Fr ]]; then
     alias df='df -h'
 elif [[ $os == HP ]]; then
     alias df=bdf
+elif [[ $os == Su ]]; then
+    unalias ls
+    alias ll='ls -hal --time-style="+%y-%m-%d %H:%M:%S"'
 fi
 
 # Some alias only for root
