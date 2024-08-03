@@ -60,6 +60,9 @@ else
     xsetroot -solid "#703000"
 fi
 
+# Needed for gnome-keyring
+dbus-update-activation-environment DISPLAY XAUTHORITY
+
 if [[ -e /bin/fvwm3 || -e /usr/local/bin/fvwm3 ]]; then
   HOST=$host fvwm3
 else
