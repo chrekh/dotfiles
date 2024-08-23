@@ -11,7 +11,7 @@
 [merge]
 	tool = meld
 [push]
-	default = matching
+	default = upstream
 [giggle]
 	main-window-maximized = false
 [color]
