@@ -7,6 +7,7 @@
  indent-tabs-mode nil
  sh-basic-offset 2
  sh-indentation 2
+ auto-revert-remote-files t
  )
 
 (custom-set-variables
