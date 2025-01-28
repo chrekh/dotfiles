@@ -1,0 +1,8 @@
+# shellcheck shell=bash
+
+# This is a workaround to avoid HOME/root
+if [[ $HOME == '/root' && -n "$SUDO_USER" ]]; then
+  HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+fi
+
+. ~/.bash_profile

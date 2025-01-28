@@ -15,6 +15,7 @@
 .toprc
 .vimrc
 .sclsetup
+.set-my-home
 .ssh/authorized_keys
 .ssh/config.common
 tmp

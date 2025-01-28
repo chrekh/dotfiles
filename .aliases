@@ -92,7 +92,7 @@ if [[ -x /opt/boksm/bin/suexec ]]; then
     fi
     if [[ -x /opt/boksm/sbin/boksconfig ]] && \
         /opt/boksm/sbin/boksconfig --test boks/sudo-control/enabled --value true; then
-      alias sbash='sudo bash'
+      alias sbash='sudo bash --rcfile ~/.set-my-home'
     else
       alias sudo=/opt/boksm/bin/suexec
       alias sbash="suexec bash --rcfile ~/.bash_profile"
