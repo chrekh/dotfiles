@@ -81,7 +81,7 @@ if [[ -e ~/db/aliases.bash && ${BASH_VERSINFO[0]} -ge 4 ]]; then
 fi
 echo -n "]0;${title}" 
 
-if tty -s; then
+if tty -s && [[ ${EUID} -ne 0 ]]; then
   # Reuse or start new ssh-agent
   ssh-add -l > /dev/null 2>&1
   if [[ $? -eq 2 ]]; then
