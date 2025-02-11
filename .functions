@@ -18,7 +18,12 @@ host=${host%%.*}
 dist=unknown
 uid=$(id -u)
 
-if [[ -f /etc/redhat-release ]]; then
+if [[ -f /etc/os-release ]]; then
+  dist=$(sed -nre '/^NAME=/ s/^NAME="?([^"]+)"?/\1/p' /etc/os-release)
+  rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
+  rel_maj=$(echo "$rel" | sed -re 's/[.].+$//')
+  rel_min=$(echo "$rel" | sed -re 's/^.+[.]//')
+elif [[ -f /etc/redhat-release ]]; then
   dist=RedHat
   rel=$(sed -re 's/^.*release ([.0-9]+) .+$/\1/' /etc/redhat-release)
 elif [[ -f /etc/SuSE-release ]]; then
@@ -28,11 +33,6 @@ elif [[ -f /etc/SuSE-release ]]; then
   rel="${rel_maj}.${rel_min}"
 elif [[ -f /etc/gentoo-release ]]; then
   dist=Gentoo
-elif [[ -f /etc/os-release ]]; then
-  dist=$(sed -nre '/^NAME=/ s/^NAME="?([^"]+)"?/\1/p' /etc/os-release)
-  rel=$(sed -nre '/^VERSION_ID=/ s/^VERSION_ID="([.0-9]+)"/\1/p' /etc/os-release)
-  rel_maj=$(echo "$rel" | sed -re 's/[.].+$//')
-  rel_min=$(echo "$rel" | sed -re 's/^.+[.]//')
 fi
 
 if [[ $os = Li ]]; then
