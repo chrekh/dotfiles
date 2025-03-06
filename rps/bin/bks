@@ -124,8 +124,6 @@ sub dologin {
     else {
         $cat = 'inas' if ( $target =~ /\.polisen\.se/ );
         $cat = 'pia'  if ( $target =~ /^lxa/ );
-        $cat = 'sys'  if ( $target =~ /\.sys\.rsv\.se$/ );
-        $cat = 'rsvm' if ( $target =~ /\.rsvm\.se$/ );
         $cat = 'pm'   if ( $target =~ /^[^.]+\.pm\./ );
         $cat = 'dmz'  if ( $target =~ /[.](test-)?dmz[.]/ );
     }
@@ -158,7 +156,6 @@ sub dologin {
         'inas'   => { bg => '#daffea', fg => '#000030' },    # ljusare blå
         'pia'    => { bg => '#e5e0b5', fg => '#151500' },    # gråbrun
         'sys'    => { bg => '#c0ffff', fg => '#000000' },    # mörkare blå
-        'rsvm'   => { bg => '#ffe0e0', fg => '#000000' },    # rosa
         'umprod' => { bg => '#ffe0e0', fg => '#000000' },    # rosa
         'pm'     => { bg => '#ccffcc', fg => '#300000' },    # grön
         'dmz'    => { bg => '#e5e5ff', fg => '#300000' },    # lila
@@ -208,18 +205,7 @@ sub lookup {
     return $name if ( defined $name );
     ($name) = gethostbyname("${target}.pki.utv.polisen.se");
     return $name if ( defined $name );
-    ($name) = gethostbyname("${target}.rsvm.se");
-    return $name if ( defined $name );
-    ($name) = gethostbyname("${target}.rsv.se");
-    return $name if ( defined $name );
 
-    for my $env (
-        qw<sys acc kap utv pro dmz test-dmz ocp
-        infra ipa labb lb meet ppx rel1 rex rsv>
-        ) {
-        ($name) = gethostbyname("${target}.${env}.rsv.se");
-        return $name if ( defined $name );
-    }
     if ( exists $hostdb{$target} ) {
         return $hostdb{$target}{fqdn};
     }
