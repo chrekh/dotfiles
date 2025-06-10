@@ -8,6 +8,7 @@
  sh-basic-offset 2
  sh-indentation 2
  auto-revert-remote-files t
+ auto-revert-use-notify nil
  )
 
 (custom-set-variables
