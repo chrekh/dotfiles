@@ -64,7 +64,9 @@ if tty -s; then
         || $domain = mgmt.polisen.se || $domain = rps.police.se || $domain = bd.polisen.se \
         || $domain = umad.utv.polisen.se \
         || $host = NT330595 || $host = NT462792 ]]; then
-        if [[ -r $my_real_home/.keymap-iso646 ]]; then
+        
+        # Use this in umad.polisen.se (VDI), but not in lxvdi
+        if [[ -r $my_real_home/.keymap-iso646 && ! $host =~ ^LXVDI ]]; then
           bind -f $my_real_home/.keymap-iso646
           alias unswe="bind -f $my_real_home/.keymap-iso646"
           swe() {
