@@ -1,9 +1,9 @@
 DeskTopSize 1x4
-Test (EnvMatch HOST vdx*) DeskTopSize 1x2
+Test (EnvMatch HOST LXVDI*) DeskTopSize 1x2
 Test (EnvMatch HOST bean) DeskTopSize 2x3
 EdgeScroll 100 100
 EdgeThickness 1
-Test (EnvMatch HOST vdx*) EdgeResistance 200 0
+Test (EnvMatch HOST LXVDI*) EdgeResistance 200 0
 
 ClickTime 750
 ColormapFocus FollowsFocus
@@ -68,12 +68,14 @@ AddToFunc InitFunction
 + I Exec exec fvwm-root ~/X11/rainlight.png
 + I Exec exec urxvt -ls -geometry 100x40+5-5
 Test (EnvMatch HOST lxa*) + I Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
-Test (EnvMatch HOST vdx*) + I Exec /opt/Citrix/VDA/bin/ctxclipboard
+Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxclipboard
+Test (EnvMatch HOST LXVDI*) + I Exec /usr/bin/diodon
 Test (EnvMatch HOST jane) + I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
 Test (EnvMatch HOST jane) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
 Test (EnvMatch HOST lx*)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
+Test (EnvMatch HOST LXVDI*)  + I Exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130-4+4
 Test (EnvMatch HOST lx*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
-Test (EnvMatch HOST vdx*)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
+Test (EnvMatch HOST LXVDI*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
 Test (EnvMatch HOST v10073)  + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
 Test (EnvMatch HOST bean) + I Exec LANG=sv_SE.iso88591 exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
 
@@ -150,6 +152,7 @@ Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000"
 AddToMenu misc	"Misc"		Title
 +		"Hosts"		Popup hosts
 Test (EnvMatch HOST lxa*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
+Test (EnvMatch HOST LXVDI*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
 +		"Rxvt"		Exec exec urxvt -ls
 +               "Rxvt (big)"    Exec exec urxvt -ls -fn '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*'
 +		"Xterm"		Exec exec xterm -ls
@@ -160,7 +163,7 @@ Test (EnvMatch HOST jane) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+7+13
 Test (EnvMatch HOST bean) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+5+10 > ${HOME}/log/emacs-gnus 2>&1
 Test (EnvMatch HOST jane) + "Chrome"	Exec exec google-chrome-stable  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
-Test (EnvMatch HOST vdx*) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST LXVDI*) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST jane) + "Strawberry"    Exec strawberry > ${HOME}/log/strawberry 2>&1
 Test (EnvMatch HOST jane) + "Evolution"     Exec evolution > ${HOME}/log/evolution 2>&1
 Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
