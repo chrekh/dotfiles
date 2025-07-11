@@ -70,21 +70,21 @@ AddToFunc InitFunction
 
 # polisen vcxsrv in VDI
 Test (EnvMatch HOST lx*) + I Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
-Test (EnvMatch HOST lx*) + I Exec nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
-Test (EnvMatch HOST lx*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
+Test (EnvMatch HOST lx*) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 xclock -d -strftime "%A %g-%m-%d %T" -update 1 -geometry -2+2
+Test (EnvMatch HOST lx*) + I Exec exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
 
 # polisen Linux VDI (ubuntu)
-Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxclipboard
-Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxusbsess
-Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxcdmmount
-Test (EnvMatch HOST LXVDI*) + I Exec /usr/bin/diodon
-Test (EnvMatch HOST LXVDI*) + I Exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 460x120-4+4
-Test (EnvMatch HOST LXVDI*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
+Test (EnvMatch HOST LXVDI*) + I Exec exec /opt/Citrix/VDA/bin/ctxclipboard
+Test (EnvMatch HOST LXVDI*) + I Exec exec /opt/Citrix/VDA/bin/ctxusbsess
+Test (EnvMatch HOST LXVDI*) + I Exec exec /opt/Citrix/VDA/bin/ctxcdmmount
+Test (EnvMatch HOST LXVDI*) + I Exec exec /usr/bin/diodon
+Test (EnvMatch HOST LXVDI*) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 460x120-4+4
+Test (EnvMatch HOST LXVDI*) + I Exec exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
 
 # home
-Test (EnvMatch HOST jane) + I Exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
-Test (EnvMatch HOST jane) + I Exec exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
-Test (EnvMatch HOST bean) + I Exec exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
+Test (EnvMatch HOST jane) + I Exec exec nice -n 5 xload -jumpscroll 10 -update 2 -geometry 1100x130-2+2
+Test (EnvMatch HOST jane) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 370x130+1700+2
+Test (EnvMatch HOST bean) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
 
 AddToFunc RestartFunction
 + I Module FvwmPager 0 0
