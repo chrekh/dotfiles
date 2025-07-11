@@ -76,6 +76,7 @@ Test (EnvMatch HOST lx*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2
 # polisen Linux VDI (ubuntu)
 Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxclipboard
 Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxusbsess
+Test (EnvMatch HOST LXVDI*) + I Exec /opt/Citrix/VDA/bin/ctxcdmmount
 Test (EnvMatch HOST LXVDI*) + I Exec /usr/bin/diodon
 Test (EnvMatch HOST LXVDI*) + I Exec nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 460x120-4+4
 Test (EnvMatch HOST LXVDI*) + I Exec xterm -name launchwindow -ls -geometry 80x15+2+2 -bg "#dbffd4"
