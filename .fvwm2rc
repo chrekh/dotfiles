@@ -163,12 +163,10 @@ Test (EnvMatch HOST jane) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+7+13
 Test (EnvMatch HOST bean) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+5+10 > ${HOME}/log/emacs-gnus 2>&1
 Test (EnvMatch HOST jane) + "Chrome"	Exec exec google-chrome-stable  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
-Test (EnvMatch HOST LXVDI*) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST LXVDI*) + "Edge"	Exec exec /usr/bin/microsoft-edge > /${HOME}/log/edge 2>&1
+Test (EnvMatch HOST LXVDI*) + "NetID"	Exec exec /usr/bin/netidapp > /${HOME}/log/netid 2>&1
 Test (EnvMatch HOST jane) + "Strawberry"    Exec strawberry > ${HOME}/log/strawberry 2>&1
 Test (EnvMatch HOST jane) + "Evolution"     Exec evolution > ${HOME}/log/evolution 2>&1
-Test (EnvMatch HOST lx*)  + "UmBasA"	    Exec exec vmware -X /localhome/chrekh/vmware/umbasa/umbasa.vmx > /dev/null 2>&1
-Test (EnvMatch HOST lx*)  + "Snake"	    Exec exec rdesktop -k sv -g 1280x1024 snake >/dev/null 2>&1
-Test (EnvMatch HOST lx*)  + "Vcum"	    Exec exec rdesktop -k sv -g 1280x1024 vcum >/dev/null 2>&1
 Test (EnvMatch HOST jane) + "Mu4e"	    Exec xon ender 'emacs -geometry 105x50+791+269 -f mu4e'&
 Test (EnvMatch HOST jane) + "Aumix"	    Exec aumix
 Test (EnvMatch HOST jane) + "slack"	    Exec slack
