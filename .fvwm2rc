@@ -13,8 +13,8 @@ Test (EnvMatch HOST v1*) OpaqueMoveSize 0
 
 IgnoreModifiers L2
 
-Style "*" Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
-MenuStyle * Font -adobe-times-medium-r-normal--18-180-75-75-p-94-iso8859-1/UTF-8
+Style "*" Font -adobe-times-medium-r-normal-*-*-180-75-75-*-*-*-*
+MenuStyle * Font -adobe-times-medium-r-normal-*-*-180-75-75-*-*-*-*
 
 Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
 Test (EnvMatch HOST lx*) Style "*" !ResizeOpaque, HilightFore yellow, HilightBack #853f5a
