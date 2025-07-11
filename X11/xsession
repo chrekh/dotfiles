@@ -61,13 +61,6 @@ case $host in
         ;;
 esac
 
-if hash -r xsetbg > /dev/null 2>&1 && [[ -f $HOME/X11/rainlight.gif ]]; then
-    # Let fvwm set the bg image
-    :
-else
-    xsetroot -solid "#703000"
-fi
-
 # Needed for gnome-keyring
 dbus-update-activation-environment DISPLAY XAUTHORITY
 
