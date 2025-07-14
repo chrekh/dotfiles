@@ -13,8 +13,13 @@ Test (EnvMatch HOST v1*) OpaqueMoveSize 0
 
 IgnoreModifiers L2
 
-Style "*" Font -adobe-times-medium-r-normal-*-*-180-75-75-*-*-*-*
-MenuStyle * Font -adobe-times-medium-r-normal-*-*-180-75-75-*-*-*-*
+# Some possible fonts for style (titles) and menus
+# -adobe-times-medium-r-normal-*-*-180-75-75-*-*-*-*
+# -bitstream-charter-medium-r-*-*-19-*-*-*-*-*-iso8859-*
+# -adobe-helvetica-medium-r-*-*-20-*-*-*-*-*-iso8859-*
+
+Style "*" Font -bitstream-charter-medium-r-*-*-25-*-100-100-*-*-*-*
+MenuStyle * Font -bitstream-charter-medium-r-*-*-25-*-100-100-*-*-*-*
 
 Style "*" ResizeOpaque, HilightFore yellow, HilightBack #853f5a
 Test (EnvMatch HOST lx*) Style "*" !ResizeOpaque, HilightFore yellow, HilightBack #853f5a
