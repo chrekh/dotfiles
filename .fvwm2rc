@@ -68,7 +68,7 @@ Style "aumix"	    Sticky
 # What to do at startup
 AddToFunc InitFunction
 + I Module FvwmWinList
-+ I Module FvwmPager
++ I Module FvwmPager 0 1
 + I Exec exec xscreensaver --no-splash --log ~/log/xscreensaver.log
 + I Exec exec fvwm-root ~/X11/rainlight.png
 + I Exec exec urxvt -ls -geometry 100x40+5-5
@@ -92,7 +92,7 @@ Test (EnvMatch HOST jane) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 dclock -seconds -
 Test (EnvMatch HOST bean) + I Exec LC_ALL=sv_SE.utf8 nice -n 5 dclock -seconds -smallsize 0.8 -miltime -tails -dateup -date '%A %y-%m-%d' -geometry 467x120-2+2
 
 AddToFunc RestartFunction
-+ I Module FvwmPager 0 0
++ I Module FvwmPager 0 1
 + I Module FvwmWinList
 
 # Complex functions
@@ -234,7 +234,7 @@ Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
 Key     XF86AudioRaiseVolume  A N exec amixer -c 0 set PCM 1db+
 Key     XF86AudioLowerVolume  A N exec amixer -c 0 set PCM 1db-
-Key     Tab     A       M
+Key     Tab     A       M     GotoDesk 1 0 1
 
 ########################## Icon Manager ####################################
 *FvwmIconMan*background #ffb090
