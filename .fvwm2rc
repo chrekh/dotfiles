@@ -166,6 +166,8 @@ AddToMenu misc	"Misc"		Title
 +		"Hosts"		Popup hosts
 Test (EnvMatch HOST lxa*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
 Test (EnvMatch HOST LXVDI*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
+Test (EnvMatch HOST LXVDI*) + "Lxmgmt"  Exec exec rxvt -geometry 126x36+12-12 -bg "#ffffef" -fg "#202000" -title Lxmgmt -e ssh lxmgmt
+
 +		"Rxvt"		Exec exec urxvt -ls
 +               "Rxvt (big)"    Exec exec urxvt -ls -fn '-*-*-medium-r-normal-*-20-*-*-*-*-*-iso8859-*'
 +		"Xterm"		Exec exec xterm -ls
