@@ -58,6 +58,7 @@ Style "XLoad"	    !Title, NeverFocus
 Style "Tint2"	    !Title, !Borders
 Style "Chrom*"      !Title
 Style "Google-chrome*" !Title
+Style "Microsoft-edge" !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
@@ -190,7 +191,7 @@ Test (EnvMatch HOST jane) + "Spotify"	    Exec spotify > ${HOME}/log/spotify 2>&
 
 AddToMenu winmenu	"Raise"		Raise
 +	  		"Move"		Move
-
++                       "Maxim toggle"      Maximize 100 100
 +			"Resize"	Resize
 +			"Iconify"	Iconify
 +			"Delete"	Delete
