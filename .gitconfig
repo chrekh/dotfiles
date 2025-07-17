@@ -29,3 +29,6 @@
 	autoUpdate = true
 [fetch]
 	prune = true
+[safe]
+        # Gitrepo for bastionadd on bastionserver
+	directory = /var/www/bastionadd.git
