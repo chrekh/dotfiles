@@ -24,7 +24,6 @@ bin/ssh-keyclean.bash
 bin/longlast
 contrib/completion/git-prompt.sh
 db/dotfiles
-db/aliases.bash
 lisp/emacs.el
 lisp/loads.el
 lisp/bindings.el

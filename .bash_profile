@@ -73,12 +73,6 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # Set terminal title to my prefered name for this host
 [[ -n "$dist" ]] && title="$host [$dist]"
 [[ -n "$rel" ]] && title="$host [$dist $rel]"
-if [[ -e ~/db/aliases.bash && ${BASH_VERSINFO[0]} -ge 4 ]]; then
-  . ~/db/aliases.bash
-  if [[ -n ${hostaliases[$HOST]} ]]; then
-    title+=' ('${hostaliases[$HOST]}')'
-  fi
-fi
 echo -n "]0;${title}" 
 
 if tty -s && [[ ${EUID} -ne 0 ]]; then
