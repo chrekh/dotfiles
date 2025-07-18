@@ -8,8 +8,9 @@ while [[ "$#" -gt 0 ]]; do
     --sync)
       sync=1
       ;;
-    --run=*)
-      runcmd=${arg##--run=}
+    --run)
+      runcmd=$2
+      shift
       ;;
     -*)
       echo "invalid argument $1" >&2
