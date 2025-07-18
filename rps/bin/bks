@@ -13,7 +13,7 @@ use Sys::Hostname;
 
 my %opts;
 Getopt::Long::Configure('bundling');
-GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 't', 'big', 'sync', 'run=s' ) || die;
+GetOptions( \%opts, 'c=s', 'n', 'list', 'r', 'test', 'big', 'sync', 'run=s' ) || die;
 
 
 my $catdb = "$ENV{HOME}/db/hostcat";
@@ -56,7 +56,7 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
 
 for my $host (@hosts) {
     if ( ( exists $opts{sync} || !exists $syncdb{$host} || $syncdb{$host} < $changed )
-        && !( exists $opts{t} || exists $opts{r} || exists $opts{run} ) ) {
+        && !( exists $opts{test} || exists $opts{r} || exists $opts{run} ) ) {
         &sync($host);
     }
 }
@@ -176,7 +176,7 @@ sub dologin {
         if ( exists $opts{big} );
     push( @cmd, '-e', 'ssh', '-t', $target );
     push( @cmd, '-l', 'root' )    if ( exists $opts{r} );
-    push( @cmd, '-l', 'laban' ) if ( exists $opts{t} );
+    push( @cmd, '-l', 'laban' ) if ( exists $opts{test} );
 
     my $pid = fork;
     die "fork failed: $!" unless defined $pid;
