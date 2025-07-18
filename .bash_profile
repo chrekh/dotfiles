@@ -71,12 +71,13 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 [[ $dist = Suse ]] && export MAN_POSIXLY_CORRECT=1
 
 # Set terminal title to my prefered name for this host
-if [[ -r ~/.termtitle.$host ]]; then
-  _title=$(head -n 1 ~/.termtitle.$host)
+_title=$host
+if [[ -d ~/.termtitle ]]; then
+  if [[ -r ~/.termtitle/$host ]]; then
+    _title=$(head -n 1 ~/.termtitle/$host)
+  fi
 elif [[ -r ~/.termtitle ]]; then
   _title=$(head -n 1 ~/.termtitle)
-else
-  _title=$host
 fi
 [[ -n "$dist" ]] && title="$_title [$dist]"
 [[ -n "$rel" ]] && title="$_title [$dist $rel]"
