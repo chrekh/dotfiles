@@ -1,8 +1,10 @@
 #! /bin/bash
 
 declare -a hosts
-for arg in "$@"; do
-  case $arg in
+
+# Option handling
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
     --sync)
       sync=1
       ;;
@@ -10,13 +12,14 @@ for arg in "$@"; do
       runcmd=${arg##--run=}
       ;;
     -*)
-      echo "invalid argument $arg" >&2
+      echo "invalid argument $1" >&2
       exit 1
       ;;
     *)
-      hosts+=("$arg")
+      hosts+=("$1")
       ;;
   esac
+  shift
 done
 echo "${hosts[@]}"
 
