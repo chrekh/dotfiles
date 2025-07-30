@@ -40,7 +40,6 @@ my %groups = (
 
 my %unreachable;
 my @hosts;
-my %alias;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
     if ( exists $groups{$host} ) {
@@ -50,7 +49,6 @@ for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     my $fqdn = &lookup($host);
     if ($fqdn) {
         push @hosts, $fqdn;
-        $alias{$fqdn} = $host unless ( $host eq $fqdn );
     }
 }
 
@@ -88,13 +86,6 @@ sub sync {
     }
     chomp $hometype;
     if ( $hometype eq 'nfs' ) {
-        my ($shortname) = split( q<[.]>, $target );
-        say $shortname;
-        if ( exists $alias{$target} ) {
-            open( AF, '>', "$ENV{HOME}/.hostaliases_${shortname}" ) || die "open failed: $!";
-            print AF "$alias{$target}\n";
-            close(AF);
-        }
         $syncdb{$target} = time;
         return;
     }
