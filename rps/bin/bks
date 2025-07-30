@@ -28,22 +28,10 @@ my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
 my $changed = &find_newest_mtime($dotfilelist);
 
-my %groups = (
-    moms => [ 'prod-puppet-mom', 'dev-puppet-mom' ],
-    cms  => [
-        'prod-puppet-cm1', 'prod-puppet-cm2', 'prod-puppet-cm3', 'prod-puppet-cm4',
-        'prod-puppet-cm5',
-    ],
-);
-
 my %unreachable;
 my @hosts;
 for my $host ( @ARGV ? @ARGV : <STDIN> ) {
     chomp $host;
-    if ( exists $groups{$host} ) {
-        push @hosts, @{ $groups{$host} };
-        next;
-    }
     my $fqdn = &lookup($host);
     if ($fqdn) {
         push @hosts, $fqdn;
