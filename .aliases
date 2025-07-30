@@ -85,6 +85,16 @@ if [[ "${TERM_PROGRAM}" == "iTerm.app" ]]; then
     }
 fi
 
+# Ubunto doesn't include cal from util-linux, use ncal instead
+case $dist in
+  Ubuntu)
+    alias cal='ncal -wMb'
+    ;;
+  *)
+    alias cal='cal -wm'
+    ;;
+esac
+
 # BoKS
 if [[ -x /opt/boksm/bin/suexec ]]; then
     if [[ $host == boksm ]]; then
