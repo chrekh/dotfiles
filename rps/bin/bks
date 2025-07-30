@@ -28,8 +28,6 @@ my $dotfilelist = "$ENV{HOME}/db/dotfiles";
 
 my $changed = &find_newest_mtime($dotfilelist);
 
-our %hostdb;
-&readhostdb;
 my %groups = (
     moms => [ 'prod-puppet-mom', 'dev-puppet-mom' ],
     cms  => [
@@ -119,7 +117,6 @@ sub dologin {
         $cat = 'dmz'  if ( $target =~ /[.](test-)?dmz[.]/ );
     }
     my @names = ($target);
-    @names = keys %{ $hostdb{$target}{names} } if ( exists $hostdb{$target}{names} );
 
     for (@names) {
         if ( exists $opts{c} ) {
@@ -197,55 +194,8 @@ sub lookup {
     ($name) = gethostbyname("${target}.pki.utv.polisen.se");
     return $name if ( defined $name );
 
-    if ( exists $hostdb{$target} ) {
-        return $hostdb{$target}{fqdn};
-    }
     warn "Lookup $target failed!\n";
     return;
-}
-
-sub readhostdb {
-    our %hostdb;
-    open( DB, '<', "$ENV{HOME}/db/all-hosts" ) || return;
-    while (<DB>) {
-        chomp;
-        next if (/^;/);
-        if (my ( $host, $dom, $type, $val )
-            = /^
-	      ([^.]+)[.]      # host
-              (\S+)[.]\s+     # domain
-	      \d+\s+IN\s+     # skip
-              (A|CNAME)\s+    # type
-	      (\S+?)          # value
-	      [.]?            # top-domain dot
-	      $
-             /x
-            ) {
-            $hostdb{$host}{fqdn} = "${host}.${dom}";
-            if ( $type eq 'CNAME' ) {
-                $hostdb{$host}{names}{$val}                        = 1;
-                $hostdb{"${host}.${dom}"}{names}{$val}             = 1;
-                $hostdb{"${host}.${dom}"}{names}{"${host}.${dom}"} = 1;
-                $hostdb{$val}{names}{$val}                         = 1;
-                $hostdb{$val}{names}{"$host.$dom"}                 = 1;
-            }
-            if ( $type eq 'A' ) {
-                next unless ( $val =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
-                $hostdb{$val}{names}{"${host}.${dom}"} = 1;
-            }
-            next;
-        }
-    }
-    for my $key ( keys %hostdb ) {
-        next unless ( $key =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/ );
-        for my $nam1 ( keys %{ $hostdb{$key}{names} } ) {
-            for my $nam2 ( keys %{ $hostdb{$key}{names} } ) {
-                $hostdb{$nam1}{names}{$nam2} = 1;
-                $hostdb{$nam2}{names}{$nam1} = 1;
-            }
-        }
-    }
-    close(DB);
 }
 
 sub byhostname {
