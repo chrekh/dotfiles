@@ -88,10 +88,10 @@ fi
 # Ubunto doesn't include cal from util-linux, use ncal instead
 case $dist in
   Ubuntu)
-    alias cal='ncal -wMb'
+    alias cal='LC_ALL=sv_SE.utf8 ncal -wb'
     ;;
   *)
-    alias cal='cal -wm'
+    alias cal='LC_ALL=sv_SE.utf8 cal -w'
     ;;
 esac
 
