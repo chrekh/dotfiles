@@ -9,15 +9,7 @@ tty -s && echo sourcing .bash_profile
 PERL5LIB=$(setpath ${PERL5LIB//:/ } ~/perllib)
 export PERL5LIB
 [[ -f ~/.bashrc ]] && . ~/.bashrc;
-
-export LANG=sv_SE.utf8
-[[ $os = CY ]] && LANG=sv_SE.ISO-8859-1
-[[ $os = HP ]] && LANG=sv_SE.iso88591
-[[ $os = Da || $os = Fr ]] && LANG=sv_SE.UTF-8
-[[ $host = lx310020 ]] && LANG=sv_SE.iso88591
-[[ $host = lx310021 ]] && LANG=sv_SE.iso88591
-export LC_CTYPE=$LANG
-export LC_MESSAGES=C
+[[ -f ~/.i18n ]] && . ~/.i18n
 
 export PAGER='less -idQMXsR'
 export LESS=idQMX
