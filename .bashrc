@@ -85,7 +85,7 @@ if tty -s; then
     [[ $domain == exkop.polisen.se ]] && hinfo='(EXKOP)'
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h'"$hinfo"':\w \$\[\e[0m\] '
-    if [[ -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
+    if [[ ${uid} != 0 && -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
         # shellcheck disable=SC2034
         GIT_PS1_SHOWUPSTREAM="auto"
         # shellcheck disable=SC2034
