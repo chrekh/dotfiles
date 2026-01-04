@@ -179,8 +179,8 @@ Test (EnvMatch HOST jane) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 1
 Test (EnvMatch HOST bean) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 109x49+5+10 > ${HOME}/log/emacs-koms 2>&1
 Test (EnvMatch HOST jane) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
 Test (EnvMatch HOST bean) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+5+10 > ${HOME}/log/emacs-gnus 2>&1
-Test (EnvMatch HOST jane) + "Chrome"	Exec exec google-chrome-stable  > /${HOME}/log/chrome 2>&1
-Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable --start-maximized  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST jane) + "Chrome"	Exec exec google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding --start-maximized  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST LXVDI*) + "Edge"	Exec exec /usr/bin/microsoft-edge > /${HOME}/log/edge 2>&1
 Test (EnvMatch HOST LXVDI*) + "NetID"	Exec exec /usr/bin/netidapp > /${HOME}/log/netid 2>&1
 Test (EnvMatch HOST jane) + "Strawberry"    Exec strawberry > ${HOME}/log/strawberry 2>&1
