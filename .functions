@@ -19,12 +19,14 @@ dist=unknown
 uid=$(id -u)
 
 if [[ -f /etc/os-release ]]; then
-  read -r dist rel < <(
-    . /etc/os-release
-    printf '%s %s\n' "$NAME" "$VERSION_ID"
-  )
   if [[ -f /etc/redhat-release ]]; then
     dist=RedHat
+    rel=$( . /etc/os-release; echo "$VERSION_ID")
+  else
+    read -r dist rel < <(
+      . /etc/os-release
+      printf '%s %s\n' "$NAME" "$VERSION_ID"
+    )
   fi
   rel_maj=${rel%%.*}
   rel_min=${rel#*.}
