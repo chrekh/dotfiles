@@ -9,7 +9,7 @@
 	abbrevCommit = true
 	decorate = true
 [merge]
-	tool = meld
+	tool = xxdiff
 [push]
 	default = upstream
 [giggle]
