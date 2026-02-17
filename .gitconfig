@@ -10,6 +10,7 @@
 	decorate = true
 [merge]
 	tool = xxdiff
+	conflictStyle = zdiff3
 [push]
 	default = upstream
 [giggle]
