@@ -9,7 +9,8 @@
 	abbrevCommit = true
 	decorate = true
 [merge]
-	tool = meld
+	tool = xxdiff
+	conflictStyle = zdiff3
 [push]
 	default = upstream
 [giggle]
