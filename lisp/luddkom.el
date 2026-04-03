@@ -104,7 +104,7 @@
 ; See https://sv.wikipedia.org/wiki/LysKOM
 (defun koms () ""
   (interactive)
- ; (condition-case nil (ludd) (error nil))
+  (condition-case nil (ludd) (error nil))
   (condition-case nil (lys) (error nil))
   (condition-case nil (snopp) (error nil))
   (condition-case nil (uppkom) (error nil))
