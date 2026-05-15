@@ -124,7 +124,7 @@ if tty -s && [[ ${EUID} -ne 0 ]]; then
 fi
 
 if tty -s; then
-  uname -s
+  uname -sr
   if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     # bash-4 have hashes
     if hash facter > /dev/null 2>&1; then
