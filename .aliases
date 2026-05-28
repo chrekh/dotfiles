@@ -170,5 +170,6 @@ esac
 
 # Toolservers
 if [[ $os = MI ]]; then
-  alias down='cd //tsclient/C/Users/u0043002/tmp'
+  alias C='cd //tsclient/C'
+  alias H='cd //tsclient/H'
 fi
