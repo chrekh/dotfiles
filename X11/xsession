@@ -30,9 +30,7 @@ xrdb -load "$HOME"/.Xresources
 case $host in
     jane)
         nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
-        xmodmap ~/X11/xmodmap/pc
-        xmodmap ~/X11/xmodmap/pc_kp
-        xmodmap -e 'keycode 108 = Mode_switch'
+        xkbcomp -I/home/che/.xkb/ /home/che/.xkb/keymap/che :0
         # For some uknown reason xscreensaver doesn't set dpms settings from
         # .xscreensaver at startup
         xset dpms 6000 6600 7200
