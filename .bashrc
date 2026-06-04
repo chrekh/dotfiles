@@ -83,6 +83,10 @@ if tty -s; then
     [[ $host =~ ^boks[rm] && $domain == pki.polisen.se ]] && hinfo='(PROD)'
     [[ $domain == dmz.polisen.se ]] && hinfo='(DMZ)'
     [[ $domain == exkop.polisen.se ]] && hinfo='(EXKOP)'
+    # Polisen verktygsservrar
+    [[ $host == NT130001056 ]] && hinfo=' (lxtool5)'
+    [[ $host == NT130001088 ]] && hinfo=' (lxtool6)'
+    [[ $host == NT130001142 ]] && hinfo=' (lxtool7)'
     PROMPT_DIRTRIM=5
     PS1='\[\e[28;1m\]\t \h'"$hinfo"':\w \$\[\e[0m\] '
     if [[ ${uid} != 0 && -r $my_real_home/contrib/completion/git-prompt.sh ]]; then
