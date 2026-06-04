@@ -1,0 +1,53 @@
+// Use
+// xkbcomp -xkb :0 -
+// to find XKB names (<AC11>) from keycode number reported by xev
+//     <AD11> = 34;
+
+partial alphanumeric_keys
+xkb_symbols "basic" {
+	
+    include "se(basic)"
+    include "ctrl(nocaps)"
+	
+    // § key -> Escape
+    key <TLDE> { [ Escape ] };
+    
+    // åöä
+    key <AD11> { [ braceright, bracketright, aring, Aring ] };
+    key <AC10> { [ bar, backslash, odiaeresis, Odiaeresis ] };
+    key <AC11> { [ braceleft, bracketleft, adiaeresis, Adiaeresis ] };
+    // ~^üÜ
+    key <AD12> { [ asciitilde, asciicircum, udiaeresis, Udiaeresis ] };
+    // `@éÉ
+    key <AE12> { [ grave, at, eacute, Eacute ] };
+    
+    // Number row
+    key <AE02> { [ 2, quotedbl ] };
+    key <AE04> { [ 4, dollar ] };
+    key <AE06> { [ 6, ampersand ] };
+    key <AE07> { [ 7, slash ] };
+    key <AE08> { [ 8, parenleft ] };
+    key <AE09> { [ 9, parenright ] };
+    key <AE10> { [ 0, equal ] };
+    key <AE11> { [ plus, question ] };
+
+    // Bottom row punctuations
+    key <AB08> { [ comma, semicolon, less, less ] };
+    key <AB09> { [ period, colon, greater, greater ] };
+    key <BKSL> { [ apostrophe, asterisk ] };
+    key <AB10> { [ minus, underscore ] };
+    key <LSGT> { [ less, greater ] };
+
+    // Numeric keypad
+    key <KP0>  { [ 0 ] };
+    key <KP1>  { [ 1 ] };
+    key <KP2>  { [ 2 ] };
+    key <KP3>  { [ 3 ] };
+    key <KP4>  { [ 4 ] };
+    key <KP5>  { [ 5 ] };
+    key <KP6>  { [ 6 ] };
+    key <KP7>  { [ 7 ] };
+    key <KP8>  { [ 8 ] };
+    key <KP9>  { [ 9 ] };
+    key <KPDL> { [ period ] };
+};
