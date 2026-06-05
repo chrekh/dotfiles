@@ -45,12 +45,10 @@ case $host in
         xmodmap -e 'keycode 113 = Mode_switch'
         ;;
     LXVDI*)
-        # For som unknown reason xmodmap settings dissapear in lxvdi if I don't
+        # For som unknown reason keymap settings dissapear in lxvdi if I don't
         # wait a bit first.
         sleep 5
-        xmodmap ~/X11/xmodmap/pc
-        xmodmap ~/X11/xmodmap/pc_kp
-        xmodmap -e 'keycode 108 = Mode_switch'
+        xkbcomp -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
         ;;
     *)
         xmodmap ~/X11/xmodmap/pc
