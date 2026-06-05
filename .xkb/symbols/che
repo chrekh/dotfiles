@@ -49,5 +49,5 @@ xkb_symbols "basic" {
     key <KP7>  { [ 7 ] };
     key <KP8>  { [ 8 ] };
     key <KP9>  { [ 9 ] };
-    key <KPDL> { [ period ] };
+    key <KPDL> { [ period, period ] };
 };
