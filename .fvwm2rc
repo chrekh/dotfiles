@@ -58,7 +58,6 @@ Style "XLoad"	    !Title, NeverFocus
 Style "Tint2"	    !Title, !Borders
 Style "Chrom*"      !Title
 Style "Google-chrome*" !Title
-Style "Microsoft-edge" !Title, !Borders
 Style "xcpustate"   !Title, Sticky, NeverFocus
 Style "XBiff"       !Title, Sticky, NeverFocus
 Style "XBuffy"      !Title, Sticky, NeverFocus
