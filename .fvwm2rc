@@ -195,6 +195,8 @@ Test (EnvMatch HOST jane) + "Spotify"	    Exec spotify > ${HOME}/log/spotify 2>&
 
 AddToMenu winmenu	"Raise"		Raise
 +	  		"Move"		Move
++                       "Send to desk 0" MoveToDesk 0 0
++                       "Send to desk 1" MoveToDesk 0 1
 +                       "Maxim toggle"      Maximize 100 100
 +			"Resize"	Resize
 +			"Iconify"	Iconify
