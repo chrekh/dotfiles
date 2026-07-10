@@ -158,6 +158,7 @@ Test (EnvMatch HOST jane) + "Louie"  Exec exec urxvt -bg "#ffeaff" -fg "#003000"
 # Polisen
 Test (EnvMatch HOST lxa*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
 Test (EnvMatch HOST LXVDI*) + "Homer"  Exec exec urxvt -geometry 126x36+12-12 -bg "#ffffff" -fg "#202000" -title Homer -e ssh homer
+Test (EnvMatch HOST LXVDI*) + "Boksm"  Exec exec urxvt -geometry 126x36+12-12 -bg "#e0f0ff" -fg "#202040" -title Boksm -e ssh boksm
 Test (EnvMatch HOST LXVDI*) + "Lxmgmt"  Exec exec rxvt -geometry 126x36+12-12 -bg "#ffffef" -fg "#202000" -title Lxmgmt -e ssh lxmgmt
 Test (EnvMatch HOST LXVDI*) + "Puppet"  Exec exec rxvt -geometry 126x36+12-12 -bg "#ffe0e0" -fg "#000000" -title Puppet -e ssh puppet-primary
 Test (EnvMatch HOST LXVDI*) + "Puppet (test)"  Exec exec rxvt -geometry 126x36+12-12 -bg "#ffe0e0" -fg "#000000" -title "Puppet (test)" -e ssh puppet-test-primary
