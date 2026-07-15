@@ -26,11 +26,6 @@ elif [[ $os == Su ]]; then
     alias ll='ls -hal --time-style="+%y-%m-%d %H:%M:%S"'
 fi
 
-# Some alias only for root
-if [[ $UID == 0 ]]; then
-    alias z='suspend -f'
-fi
-
 # Remove alias vi (if set by /etc/profile)
 alias vi >/dev/null 2>&1 && unalias vi
 # But add it if vi is not available, but vim is.
