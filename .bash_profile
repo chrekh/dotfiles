@@ -1,7 +1,6 @@
 # xshellcheck shell=bash
 # xshellcheck source=./.functions
-# Ensure i start at home
-cd
+
 tty -s && echo sourcing .bash_profile
 [[ -r ~/.functions && ! "$os" ]] && . ~/.functions
 # shellcheck disable=SC2086
@@ -125,6 +124,9 @@ fi
 
 if tty -s; then
   uname -sr
+  if [[ $os = MI && $PWD = / ]]; then
+    cd
+  fi
   if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     # bash-4 have hashes
     if hash facter > /dev/null 2>&1; then
