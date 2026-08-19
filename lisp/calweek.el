@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (add-hook 'calendar-load-hook
 	  (lambda ()
 	    (copy-face font-lock-constant-face 'calendar-iso-week-face)

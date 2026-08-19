@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (setq-default
  indicate-empty-lines t
  indicate-unused-lines t

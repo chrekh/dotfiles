@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (menu-bar-mode -1)
 (set-scroll-bar-mode 'right)
 (toggle-scroll-bar 1)

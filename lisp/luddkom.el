@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 ;; Set variables before loading lyskom. To prevent them to be loaded from user-area
 (setq-default
    kom-mercial "Starting KOM" ; placeholder until we can set the real value
@@ -104,7 +106,7 @@
 ; See https://sv.wikipedia.org/wiki/LysKOM
 (defun koms () ""
   (interactive)
-  (condition-case nil (ludd) (error nil))
+ ; (condition-case nil (ludd) (error nil))
   (condition-case nil (lys) (error nil))
   (condition-case nil (snopp) (error nil))
   (condition-case nil (uppkom) (error nil))

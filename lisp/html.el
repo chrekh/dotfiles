@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (defvar html-timestamp-start "<!-- hhmts start --> ")
 (defvar html-timestamp-end "<!-- hhmts end -->" )
 

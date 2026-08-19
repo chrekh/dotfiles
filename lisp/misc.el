@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (defun alist-substitute-value (alist old new)
   "Return a new alist in which all (key . OLD) is replaced with (key . NEW)"
   (mapcar (lambda (pair)
