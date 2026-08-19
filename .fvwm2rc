@@ -235,8 +235,8 @@ Mouse 1		1	A	Menu winmenu
 Mouse 1		2	A	Maximize 100 100
 
 # Key bindings
-Key	Pause	A	N	exec xscreensaver-command -lock
-Key	XF86PowerOff A  N	exec xscreensaver-command -lock
+Key	Pause	A	N	exec xscreensaver-command -activate
+Key	XF86PowerOff A  N	exec xscreensaver-command -activate
 Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
 Key     XF86AudioRaiseVolume  A N exec amixer -c 0 set PCM 1db+
