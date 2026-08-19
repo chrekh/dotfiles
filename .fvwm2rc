@@ -129,7 +129,6 @@ AddToMenu modules	"FvwmModules"   Title
 AddToMenu General	"General"	Title
 +                       "Mouse binding off" Mouse 1 W M
 +                       "Mouse binding on"  Mouse 1 W M Move-or-Raise
-+	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
 +			"Modules"	Popup modules
 Test (EnvMatch HOST jane) + "xbiff"       Exec xon ender "xbiff -geometry 83x70+1603+3"
 Test (EnvMatch HOST jane) + "ender xload" Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
