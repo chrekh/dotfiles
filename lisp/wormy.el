@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 ;;; Wormy worm game.
 ;; Originally written by Christer Ekholm, che@ludd.luth.se
 ;;
