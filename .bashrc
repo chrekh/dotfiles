@@ -28,7 +28,7 @@ fi
 
 [[ "$os" ]] || . $my_real_home/.functions
 
-PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
+PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.local/bin ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /opt/boksm/bin /opt/boksm/sbin \
     '/c/Program Files (x86)/HelpSystems/BoKS SSH Client' \
     '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
