@@ -28,10 +28,11 @@ fi
 
 [[ "$os" ]] || . $my_real_home/.functions
 
-PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
+PATH=$(setpath ~/${site}/bin ~/bin ~/perl ~/.npm-global/bin ~/.perl6/bin /usr/local/adm/bin /usr/local/bin \
     /opt/boksm/bin /opt/boksm/sbin \
     '/c/Program Files (x86)/HelpSystems/BoKS SSH Client' \
     '/c/Program Files (x86)/Fox Technologies/BoKS SSH Client' \
+    /snap/bin \
     /bin /usr/bin /sbin /usr/sbin \
     /e/bokshack \
     ${PATH//:/ } \
@@ -53,6 +54,11 @@ MANPATH=$(setpath /usr/local/adm/man /opt/puppet/share/ma1n \
 
 if [[ "$dist" == "RedHat" ]]; then
     [[ "$sclsetup" ]] || . $my_real_home/.sclsetup
+fi
+
+if [[ $host =~ ^LXVDI ]]; then
+   NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+   OPENCODE_DISABLE_DEFAULT_PLUGINS=1
 fi
 
 if tty -s; then
