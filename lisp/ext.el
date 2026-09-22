@@ -5,6 +5,7 @@
 				("\\.pp$" . puppet-mode)
 				("Puppetfile$" . puppetfile-mode)
 				("Jenkinsfile" . javascript-mode)
+				("opencode\\.jsonc\\'" . js-json-mode)
 				("\\.ya?ml$" . yaml-mode)
 				("\\.eml$" . text-mode)
 				("\\.\\(pm?\\|pod\\|t\\)6$" . perl6-mode)
