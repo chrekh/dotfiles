@@ -42,6 +42,7 @@ umask 022
 [[ $domain = utv.polisen.se ]] && export LDAP_BASEDN='dc=utv,dc=polisen,dc=se';
 
 # Git configurations depending on where I am
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=0
 export GIT_AUTHOR_EMAIL=che@chrekh.se
 export GIT_AUTHOR_NAME='Christer Ekholm'
 case $domain in
