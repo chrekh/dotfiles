@@ -1,25 +1,182 @@
-.Xauthority
-.hostname
-.lesshst
-.viminfo
+# =============================================================================
+# SHELL & TERMINAL
+# =============================================================================
 .bash_history
 .bash_logout
-.cache
+.lesshst
+.kshrc
+.Xauthority
+.hostname
+
+# =============================================================================
+# EDITORS & IDE
+# =============================================================================
+# Emacs
 .emacs*
 .gitk
-.k5login
-.kshrc
-.mozilla/
+
+# Editors
+.viminfo
+*~
+.#*
+*.swp
+*.swo
+
+# IDEs
+.idea/
+.vscode/
+.eclipse/
+
+# User directories
+.config/
+
+# =============================================================================
+# SSH & SECURITY
+# =============================================================================
+# SSH agent
 .ssh-agent
+
+# SSH keys and config (keep public keys if needed)
 .ssh/authorized_keys
 .ssh/config
 .ssh/id_*
 .ssh/known_hosts
+.ssh/known_hosts.old
+
+# Kerberos
+.k5login
 .vas_*
+
+# GPG - sensitive files (pubring may be tracked if needed)
+.gnupg/openpgp-revocs.d/
+.gnupg/private-keys-v1.d/
+.gnupg/pubring.kbx
+.gnupg/pubring.kbx~
+.gnupg/random_seed
+.gnupg/tofu.db
+.gnupg/trustdb.gpg
+
+# PKI and certificates
+.pki/
+
+# NetID
+.netid/
+
+# =============================================================================
+# BROWSERS & APPLICATIONS
+# =============================================================================
+.mozilla/
+.cache/
+
+# =============================================================================
+# DEVELOPMENT ENVIRONMENTS
+# =============================================================================
+# Node.js
+.npm/
+.npm-global/
+node_modules/
+
+# Java/Maven
+.m2/
+
+# .NET/Mono
+.mono/
+
+# Perl
+.perl5/
+.local/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+
+# Ruby
+.bundle/
+vendor/bundle/
+
+# =============================================================================
+# PUPPET & CONFIG MANAGEMENT
+# =============================================================================
+.puppetlabs/
+puppet/
+hiera/
+puppet/modules/
+r10k/
+pdk/
+
+# =============================================================================
+# LARGE DIRECTORIES & MOUNTS
+# =============================================================================
+# Git repositories directory
+git/
+
+# Download directory
+Downloads/
+
+# Network mounts
+H
+
+# Snap packages
+snap/
+
+# =============================================================================
+# PROJECT DIRECTORIES (local development)
+# =============================================================================
 db/
 extern/
 misc/
-puppet/
-xfer/
-xwin32/
-git/
+boks/
+
+# =============================================================================
+# CITRIX
+# =============================================================================
+.CtxlpProfile*
+.ctxdconfprofile
+.ctxgconf3
+ctxmnt/
+
+# =============================================================================
+# WINDOW MANAGER & X11
+# =============================================================================
+.fvwm/
+.xsession
+.xsession-errors*
+.xsessionlog
+.xinitrc
+.Xresources
+
+# X11 images (backgrounds etc)
+X11/*.png
+X11/*.gif
+X11/*.jpg
+
+# =============================================================================
+# HISTORY & RECENT FILES
+# =============================================================================
+.kpcli-history
+.recently-used
+.wget-hsts
+.editorconfig
+.termtitle
+.npmrc
+
+# =============================================================================
+# TEMPORARY FILES & LOGS
+# =============================================================================
+*.log
+*.tmp
+tmp/
+log/
+
+# =============================================================================
+# BUILD ARTIFACTS
+# =============================================================================
+*.o
+*.a
+*.so
+*.jar
+*.war
+*.ear
