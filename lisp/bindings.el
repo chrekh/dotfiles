@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 ;; Exchange bindings for "RETURN" and "LINEFEED" to support indentation.
 (define-key global-map "\C-j" 'newline)
 (define-key global-map "\C-m" 'reindent-then-newline-and-indent)

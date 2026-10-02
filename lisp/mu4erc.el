@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (load-library "mu4e")
 
 (setq

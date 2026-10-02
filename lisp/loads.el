@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (setq inhibit-default-init t)
 (load "default" t)
 (load "misc")

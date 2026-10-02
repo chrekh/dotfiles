@@ -129,7 +129,6 @@ AddToMenu modules	"FvwmModules"   Title
 AddToMenu General	"General"	Title
 +                       "Mouse binding off" Mouse 1 W M
 +                       "Mouse binding on"  Mouse 1 W M Move-or-Raise
-+	  		"ssh OFF"	Exec exec ssh-add -D </dev/null > /dev/null 2>&1
 +			"Modules"	Popup modules
 Test (EnvMatch HOST jane) + "xbiff"       Exec xon ender "xbiff -geometry 83x70+1603+3"
 Test (EnvMatch HOST jane) + "ender xload" Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
@@ -236,8 +235,8 @@ Mouse 1		1	A	Menu winmenu
 Mouse 1		2	A	Maximize 100 100
 
 # Key bindings
-Key	Pause	A	N	exec xscreensaver-command -lock
-Key	XF86PowerOff A  N	exec xscreensaver-command -lock
+Key	Pause	A	N	exec xscreensaver-command -activate
+Key	XF86PowerOff A  N	exec xscreensaver-command -activate
 Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
 Key     XF86AudioRaiseVolume  A N exec amixer -c 0 set PCM 1db+

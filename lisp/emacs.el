@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 (dolist (dir '("~u0043002/extern/lisp" "~u0043002/lisp"
 	       "~chrekh/extern/lisp" "~chrekh/lisp"
 	       "~che/extern/lisp" "~che/lisp"

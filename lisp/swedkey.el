@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 ;;; swedkey.el
 
 ;;; Commentary:

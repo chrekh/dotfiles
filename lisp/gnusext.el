@@ -1,4 +1,6 @@
-; gus as maillist-reader
+;;; ...  -*- lexical-binding: t -*-
+
+; gnus as maillist-reader
 (setq gnus-select-method
       '(nntp "news.gmane.io")
       )
