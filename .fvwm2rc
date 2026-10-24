@@ -239,8 +239,8 @@ Key	Pause	A	N	exec xscreensaver-command -activate
 Key	XF86PowerOff A  N	exec xscreensaver-command -activate
 Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
-Key     XF86AudioRaiseVolume  A N exec amixer -c 0 set PCM 1db+
-Key     XF86AudioLowerVolume  A N exec amixer -c 0 set PCM 1db-
+Key     XF86AudioRaiseVolume  A N exec amixer -q -c 0 set PCM 1db+
+Key     XF86AudioLowerVolume  A N exec amixer -q -c 0 set PCM 1db-
 Key     Tab     A       M     GotoDesk 1 0 1
 
 ########################## Icon Manager ####################################
