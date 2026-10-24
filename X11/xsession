@@ -44,7 +44,7 @@ xkbcomp -w 0 -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
 # Needed for gnome-keyring
 dbus-update-activation-environment DISPLAY XAUTHORITY
 
-if [[ -e /bin/fvwm3 || -e /usr/local/bin/fvwm3 ]]; then
+if command -v fvwm3 >/dev/null; then
   HOST=$host fvwm3
 else
   HOST=$host fvwm
