@@ -106,6 +106,22 @@ AddToFunc Lower-or-Resize	"C" Lower
 AddToFunc Quit-Gracefully	I All Delete
 +				I Schedule 5000 Quit
 
+# Copy of /usr/share/fvwm3/FvwmForm-QuitVerify that uses Quit-Gracefully
+DestroyModuleConfig QuitVerify: *
+*QuitVerify: GrabServer
+*QuitVerify: WarpPointer
+*QuitVerify: Command	Beep
+*QuitVerify: Line	center
+*QuitVerify: Text	"Do you really want to logout?"
+*QuitVerify: Line	expand
+*QuitVerify: Button	quit "Logout" ^M
+*QuitVerify: Command	Quit-Gracefully
+*QuitVerify: Button	restart "Restart" ^R
+*QuitVerify: Command	Restart
+*QuitVerify: Button	quit "Cancel" ^[
+*QuitVerify: Command	Nop
+*QuitVerify: Timeout	20 Quit-Gracefully "Automatic logout will occur in %% seconds."
+
 AddToMenu modules	"FvwmModules"   Title
 +			"FvwmConsole"   Module  FvwmConsole -terminal urxvt
 +                       "RootCursor"    Module  FvwmForm RootCursor
