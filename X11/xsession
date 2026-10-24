@@ -39,7 +39,7 @@ case $host in
 esac
 
 # My keymap
-xkbcomp -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
+xkbcomp -w 0 -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
 
 # Needed for gnome-keyring
 dbus-update-activation-environment DISPLAY XAUTHORITY
