@@ -19,7 +19,7 @@ case $host in
         export LIBGL_ALWAYS_INDIRECT=1
         ;;
 esac
-exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
+exec >"$HOME"/.xsessionlog 2>&1
 
 # shellcheck source=../.bash_profile
 test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
