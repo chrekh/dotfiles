@@ -29,7 +29,7 @@ xrdb -load "$HOME"/.Xresources
 
 case $host in
     jane)
-        nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
+        nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310+1380+5 &
         ;;
     LXVDI*)
         # For som unknown reason keymap settings dissapear in lxvdi if I don't
