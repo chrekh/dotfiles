@@ -102,6 +102,10 @@ AddToFunc Move-or-Raise         "M" Move
 AddToFunc Lower-or-Resize	"C" Lower
 +	  			"M" Resize
 
+# Ask all windows to close before quitting, the rest are killed by xsession
+AddToFunc Quit-Gracefully	I All Delete
++				I Schedule 5000 Quit
+
 AddToMenu modules	"FvwmModules"   Title
 +			"FvwmConsole"   Module  FvwmConsole -terminal urxvt
 +                       "RootCursor"    Module  FvwmForm RootCursor
@@ -134,7 +138,7 @@ Test (EnvMatch HOST jane) + "xbiff"       Exec xon ender "xbiff -geometry 83x70+
 Test (EnvMatch HOST jane) + "ender xload" Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
 +			"Refresh"	Refresh
 +                       "Restart"       Restart
-+			"Quit X"	Quit
++			"Quit X"	Quit-Gracefully
 
 AddToMenu hosts
 # Home
