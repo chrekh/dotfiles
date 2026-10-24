@@ -12,9 +12,10 @@ case $DISPLAY in
 	;;
 esac	
 
-# Put xauth information to remote
+# Put xauth information to remote. Send it on stdin so that the cookie
+# isn't visible in the process list on the remote.
 kaka=$(xauth list "${DISPLAY}"|awk '{print $NF}')
-ssh  -f "${remote}" xauth add "${disp}" . "${kaka}"
+echo "add ${disp} . ${kaka}" | ssh "${remote}" xauth source -
 
 # execute command remote
 ssh -T -f -o 'ForwardX11 no' -o 'ForwardX11Trusted no' -o 'ForwardAgent no' \
