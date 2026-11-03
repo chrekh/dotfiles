@@ -69,7 +69,7 @@ Style "aumix"	    Sticky
 AddToFunc InitFunction
 + I Module FvwmWinList
 + I Module FvwmPager 0 1
-+ I Exec exec xscreensaver --no-splash --log ~/log/xscreensaver.log
++ I Exec exec xscreensaver --no-splash
 + I Exec exec fvwm-root ~/X11/rainlight.png
 + I Exec exec urxvt -ls -geometry 100x40+5-5
 
@@ -101,6 +101,26 @@ AddToFunc Move-or-Raise         "M" Move
 
 AddToFunc Lower-or-Resize	"C" Lower
 +	  			"M" Resize
+
+# Ask all windows to close before quitting, the rest are killed by xsession
+AddToFunc Quit-Gracefully	I All Delete
++				I Schedule 5000 Quit
+
+# Copy of /usr/share/fvwm3/FvwmForm-QuitVerify that uses Quit-Gracefully
+DestroyModuleConfig QuitVerify: *
+*QuitVerify: GrabServer
+*QuitVerify: WarpPointer
+*QuitVerify: Command	Beep
+*QuitVerify: Line	center
+*QuitVerify: Text	"Do you really want to logout?"
+*QuitVerify: Line	expand
+*QuitVerify: Button	quit "Logout" ^M
+*QuitVerify: Command	Quit-Gracefully
+*QuitVerify: Button	restart "Restart" ^R
+*QuitVerify: Command	Restart
+*QuitVerify: Button	quit "Cancel" ^[
+*QuitVerify: Command	Nop
+*QuitVerify: Timeout	20 Quit-Gracefully "Automatic logout will occur in %% seconds."
 
 AddToMenu modules	"FvwmModules"   Title
 +			"FvwmConsole"   Module  FvwmConsole -terminal urxvt
@@ -134,7 +154,7 @@ Test (EnvMatch HOST jane) + "xbiff"       Exec xon ender "xbiff -geometry 83x70+
 Test (EnvMatch HOST jane) + "ender xload" Exec xon ender "nice -n 5 xload -xrm '*Page: 0 0 1' -jumpscroll 10 -update 2 -geometry 1100x130-2+2"
 +			"Refresh"	Refresh
 +                       "Restart"       Restart
-+			"Quit X"	Quit
++			"Quit X"	Quit-Gracefully
 
 AddToMenu hosts
 # Home
@@ -178,8 +198,8 @@ Test (EnvMatch HOST jane) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 1
 Test (EnvMatch HOST bean) + "Koms"	Exec exec emacs -f koms-with-wait -geometry 109x49+5+10 > ${HOME}/log/emacs-koms 2>&1
 Test (EnvMatch HOST jane) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+7+132 > ${HOME}/log/emacs-gnus 2>&1
 Test (EnvMatch HOST bean) + "Gnus"	Exec exec emacs -f gnus -geometry 109x49+5+10 > ${HOME}/log/emacs-gnus 2>&1
-Test (EnvMatch HOST jane) + "Chrome"	Exec exec google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding  > /${HOME}/log/chrome 2>&1
-Test (EnvMatch HOST bean) + "Chrome"	Exec exec google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding --start-maximized  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST jane) + "Chrome"	Exec exec env LANGUAGE=en_US:en LC_MESSAGES=en_US.utf8 google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding  > /${HOME}/log/chrome 2>&1
+Test (EnvMatch HOST bean) + "Chrome"	Exec exec env LANGUAGE=en_US:en LC_MESSAGES=en_US.utf8 google-chrome-stable -password-store=basic --disable-features=PasswordManagerOnboarding --start-maximized  > /${HOME}/log/chrome 2>&1
 Test (EnvMatch HOST LXVDI*) + "Edge"	Exec exec /usr/bin/microsoft-edge -password-store=basic --disable-features=PasswordManagerOnboarding > /${HOME}/log/edge 2>&1
 Test (EnvMatch HOST LXVDI*) + "NetID"	Exec exec /usr/bin/netidapp > /${HOME}/log/netid 2>&1
 Test (EnvMatch HOST jane) + "Strawberry"    Exec strawberry > ${HOME}/log/strawberry 2>&1
@@ -239,8 +259,8 @@ Key	Pause	A	N	exec xscreensaver-command -activate
 Key	XF86PowerOff A  N	exec xscreensaver-command -activate
 Key	XF86MonBrightnessDown A N exec xbacklight -dec 5
 Key	XF86MonBrightnessUp   A N exec xbacklight -inc 5
-Key     XF86AudioRaiseVolume  A N exec amixer -c 0 set PCM 1db+
-Key     XF86AudioLowerVolume  A N exec amixer -c 0 set PCM 1db-
+Key     XF86AudioRaiseVolume  A N exec $HOME/bin/volume-osd.bash 1db+
+Key     XF86AudioLowerVolume  A N exec $HOME/bin/volume-osd.bash 1db-
 Key     Tab     A       M     GotoDesk 1 0 1
 
 ########################## Icon Manager ####################################

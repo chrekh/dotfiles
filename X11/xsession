@@ -19,7 +19,7 @@ case $host in
         export LIBGL_ALWAYS_INDIRECT=1
         ;;
 esac
-exec >"$HOME"/.xsessionlog 2>"$HOME"/.xsessionlog
+exec >"$HOME"/.xsessionlog 2>&1
 
 # shellcheck source=../.bash_profile
 test -r "$HOME"/.bash_profile && . "$HOME"/.bash_profile
@@ -29,10 +29,7 @@ xrdb -load "$HOME"/.Xresources
 
 case $host in
     jane)
-        nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310-1602+2 &
-        # For some uknown reason xscreensaver doesn't set dpms settings from
-        # .xscreensaver at startup
-        xset dpms 6000 6600 7200
+        nice -n 5 xmm -usedcolor "#009900" -activecolor "#0000ff" -inactivecolor "#00cc99" -freecolor "#ffffcc" -swapcolor red -nolabel -jumpscroll 10 -geometry 520x310+1380+5 &
         ;;
     LXVDI*)
         # For som unknown reason keymap settings dissapear in lxvdi if I don't
@@ -42,12 +39,12 @@ case $host in
 esac
 
 # My keymap
-xkbcomp -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
+xkbcomp -w 0 -I"$HOME"/.xkb/ "$HOME"/.xkb/keymap/che "$DISPLAY"
 
 # Needed for gnome-keyring
 dbus-update-activation-environment DISPLAY XAUTHORITY
 
-if [[ -e /bin/fvwm3 || -e /usr/local/bin/fvwm3 ]]; then
+if command -v fvwm3 >/dev/null; then
   HOST=$host fvwm3
 else
   HOST=$host fvwm
